@@ -1,0 +1,36 @@
+{
+    "name": "dermato",
+    "version": "1.0.0",
+    "description": "Dermato - Dermatology & Aesthetic Clinic Tailwind CSS Template",
+    "main": "index.js",
+    "type": "module",
+    "private": true,
+    "author": "Unifato",
+    "website": "https://unifato.com",
+    "scripts": {
+        "dev": "vite --host",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "@iconify/json": "^2.2.467",
+        "@iconify/tailwind4": "^1.2.3",
+        "@tailwindcss/forms": "^0.5.11",
+        "@tailwindcss/typography": "^0.5.19",
+        "@tailwindcss/vite": "^4.2.4",
+        "glob": "^13.0.3",
+        "path": "^0.12.7",
+        "postcss": "^8.5.12",
+        "vite": "^8.0.10",
+        "vite-plugin-handlebars": "^2.0.3"
+    },
+    "dependencies": {
+        "gumshoejs": "^5.1.2",
+        "lightgallery": "^2.9.0",
+        "playwright": "^1.62.1",
+        "preline": "4.0.1",
+        "smoothscroll-for-websites": "^1.5.1",
+        "swiper": "^12.1.1",
+        "tailwindcss": "^4.2.4"
+    }
+}

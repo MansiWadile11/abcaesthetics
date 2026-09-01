@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {{> title-meta title="Contact" }} {{> head-css}}
+</head>
+
+<body>
+
+    {{> navbar }}
+
+    <!-- Contact Section -->
+    <section class="band band-blush lg:pt-24 md:pt-20 pt-14">
+        <div class="container">
+            <!-- Header -->
+            <div class="flex flex-col items-center text-center mx-auto lg:mb-15 mb-12.5">
+                <h1 class="text-[42px] md:text-7xl lg:text-[90px] font-heading font-medium text-primary-3 tracking-tight">Get in touch</h1>
+            </div>
+
+            <!-- Main Container -->
+            <div class="bg-primary-5 rounded-4xl lg:p-12.5 md:p-8 p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-15 items-center">
+
+                    <!-- Left Column: Form -->
+                    <div class="flex flex-col">
+                        <h2 class="text-3xl md:text-4xl lg:text-[46px] font-heading font-medium text-primary-3 md:mb-10 mb-7.5">We're here to help you</h2>
+
+                        <form class="flex flex-col gap-5">
+                            <!-- Row 1 -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Name*</label>
+                                    <input type="text" placeholder="Your name" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Email*</label>
+                                    <input type="email" placeholder="Email address" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                </div>
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Phone*</label>
+                                    <input type="tel" placeholder="Phone number" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Treatment of Interest*</label>
+                                    <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                        <option value="">Select</option>
+                                        <option value="Aesthetic Injectables">Aesthetic Injectables</option>
+                                        <option value="Advanced Skin &amp; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
+                                        <option value="Regenerative Aesthetics">Regenerative Aesthetics</option>
+                                        <option value="Hair Restoration">Hair Restoration</option>
+                                        <option value="Hormone &amp; Metabolic Wellness">Hormone &amp; Metabolic Wellness</option>
+                                        <option value="Women&#39;s Wellness">Women&rsquo;s Wellness</option>
+                                        <option value="Men&#39;s Wellness">Men&rsquo;s Wellness</option>
+                                        <option value="Sexual Wellness">Sexual Wellness</option>
+                                        <option value="Wellness Products">Wellness Products</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Preferred Contact Method*</label>
+                                    <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                        <option value="">Select</option>
+                                        <option value="Phone call">Phone call</option>
+                                        <option value="Text message">Text message</option>
+                                        <option value="Email">Email</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 3 -->
+                            <div>
+                                <label class="text-sm font-medium text-primary-2 mb-2.5 block">How we can help?</label>
+                                <textarea rows="4" placeholder="Type here" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none"></textarea>
+                            </div>
+
+                            <!-- Checkbox -->
+                            <div class="flex items-start gap-3 mt-1">
+                                <input type="checkbox" id="updates" class="size-5 rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 bg-white cursor-pointer accent-primary-1">
+                                <label for="updates" class="text-xs md:text-sm font-medium text-primary-2 cursor-pointer mt-0.5">
+                                    I agree to allow the clinic to contact me regarding my enquiry.
+                                </label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="w-full bg-primary-1 hover:bg-white hover:text-primary-1 border border-transparent hover:border-primary-3 text-white font-medium py-2.5 px-5 text-sm rounded-full transition-all">
+                                Submit
+                            </button>
+                        </form>
+
+                        <div class="contact-next">
+                          <h3 class="svc-h3">What happens next?</h3>
+                          <ol class="contact-steps mt-5">
+                            <li>
+                              <span class="contact-step-num">1</span>
+                              <div><strong>We read your message</strong><p class="svc-p mt-1.5">Tell us what you are considering and how you would prefer to be contacted. Nothing sensitive is needed at this stage.</p></div>
+                            </li>
+                            <li>
+                              <span class="contact-step-num">2</span>
+                              <div><strong>We reply to arrange a consultation</strong><p class="svc-p mt-1.5">A consultation is where your goals, relevant history and suitability are discussed &mdash; in person, with Dr.&nbsp;Qneibi.</p></div>
+                            </li>
+                            <li>
+                              <span class="contact-step-num">3</span>
+                              <div><strong>A plan is built around you</strong><p class="svc-p mt-1.5">Treatment recommendations, eligibility, frequency and product selection are individualized following that assessment. Results vary, and no specific outcome is guaranteed.</p></div>
+                            </li>
+                          </ol>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image & Overlay -->
+                    <div class="relative w-full h-full min-h-[400px] lg:min-h-132 rounded-2xl overflow-hidden group">
+                        <!-- Background Image -->
+                        <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal M. Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover">
+
+                        <!-- Glassmorphism Clinic Hours Overlay -->
+                        <div class="absolute bottom-3 inset-x-3 lg:bottom-5 lg:inset-x-5">
+                            <!-- Overlay with dark brown/black gradient and blur -->
+                            <div class="bg-primary-1/60 backdrop-blur-sm border border-white/10 rounded-2xl lg:p-7.5 md:p-5 p-3 shadow-2xl">
+                                <h3 class="text-xl md:text-2xl font-heading font-medium text-white md:mb-6 mb-2.5">Clinic hours</h3>
+
+                                <div class="flex flex-col md:gap-5 gap-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white text-sm md:text-base font-medium">Monday</span>
+                                        <span class="text-white text-sm md:text-base font-medium text-right">8:00 AM - 8:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white text-sm md:text-base font-medium">Tuesday - Thursday</span>
+                                        <span class="text-white text-sm md:text-base font-medium text-right">5:00 PM - 10:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white text-sm md:text-base font-medium">Friday</span>
+                                        <span class="text-white text-sm md:text-base font-medium text-right">8:00 AM - 8:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white text-sm md:text-base font-medium">Saturday</span>
+                                        <span class="text-white text-sm md:text-base font-medium text-right">8:00 AM - 8:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white text-sm md:text-base font-medium">Sunday</span>
+                                        <span class="text-white text-sm md:text-base font-medium text-right">Closed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why get in touch - dark strip, so the page alternates like the others -->
+    <section class="band band-green">
+        <div class="container">
+            <div class="cl-item" data-collapse-solo>
+                <div class="reference-eyebrow uppercase">Before you visit</div>
+                <h2 class="svc-h2 mt-3.5"><button type="button" class="cl-toggle">A consultation first, always<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h2>
+                <div class="cl-panel"><div>
+                <p class="svc-lead mt-5">Treatment recommendations, eligibility, treatment frequency and product selection are individualized following consultation and assessment. Nothing is decided before we have met.</p>
+
+            <div class="contact-reasons lg:mt-10 mt-8">
+                <div class="contact-reason">
+                    <span class="contact-reason-icon"><i class="iconify lucide--messages-square size-5"></i></span>
+                    <h3 class="svc-h3">Ask a question</h3>
+                    <p class="svc-p mt-3">If you are not sure which treatment fits what you have in mind, describe the change you want and we will talk you through the options.</p>
+                </div>
+                <div class="contact-reason">
+                    <span class="contact-reason-icon"><i class="iconify lucide--calendar-days size-5"></i></span>
+                    <h3 class="svc-h3">Book a consultation</h3>
+                    <p class="svc-p mt-3">An unhurried appointment with Dr.&nbsp;Qneibi covering your goals, relevant medical history and whether a treatment is appropriate for you.</p>
+                </div>
+                <div class="contact-reason">
+                    <span class="contact-reason-icon"><i class="iconify lucide--shield-check size-5"></i></span>
+                    <h3 class="svc-h3">Understand the risks</h3>
+                    <p class="svc-p mt-3">Potential risks and side effects are discussed before treatment so you can make an informed decision. Results vary, and no specific outcome is guaranteed.</p>
+                </div>
+            </div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="band band-cream">
+        <div class="container-medium">
+            <!-- Header -->
+            <div class="flex flex-col items-center text-center mx-auto mb-10 lg:mb-15">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-heading font-medium text-primary-3 mb-2.5 tracking-tight">Find our clinic</h2>
+                <p class="text-primary-2 text-lg font-medium">16240 Parker Road, Lake Oswego, Oregon</p>
+            </div>
+
+            <!-- Location -->
+            <div class="max-w-3xl mx-auto">
+                <div class="relative w-full rounded-3xl lg:rounded-2xl overflow-hidden group min-h-75 lg:min-h-135">
+                    <img src="/images/abc/room-3.webp" alt="ABC Aesthetics &amp; Wellness" class="absolute inset-0 w-full h-full object-cover">
+
+                    <div class="absolute bottom-4 inset-x-4 lg:bottom-5 lg:inset-x-5">
+                        <div class="bg-linear-to-b from-transparent to-primary-1/85 backdrop-blur-md border border-white/5 rounded-2xl p-3 md:p-5 lg:p-7.5 flex flex-col md:gap-7.5 gap-2.5">
+
+                            <div class="lg:flex items-center justify-between">
+                                <h3 class="text-xl font-heading font-medium text-white">ABC Aesthetics &amp; Wellness</h3>
+                                <a href="https://maps.google.com/?q=16240+Parker+Road,+Lake+Oswego,+Oregon" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-white hover:underline font-medium">
+                                    View on map
+                                    <div class="flex items-center justify-center size-5 bg-white rounded-full text-primary-1">
+                                        <i class="iconify lucide--arrow-right size-3.5"></i>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="flex flex-col md:gap-4 gap-2.5">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="bg-white rounded-lg lg:size-12 md:size-10 size-9 flex items-center justify-center shrink-0">
+                                        <i class="iconify lucide--map-pin text-primary-1 lg:size-6 size-5"></i>
+                                    </div>
+                                    <p class="text-white font-medium lg:text-base text-sm leading-relaxed">
+                                        16240 Parker Road, Lake Oswego, Oregon
+                                    </p>
+                                </div>
+                                <a href="tel:9719787840" class="flex items-center gap-2.5">
+                                    <div class="bg-white rounded-lg lg:size-12 md:size-10 size-9 flex items-center justify-center shrink-0">
+                                        <i class="iconify lucide--phone text-primary-1 lg:size-6 size-5"></i>
+                                    </div>
+                                    <p class="text-white font-medium lg:text-base text-sm">971-978-7840</p>
+                                </a>
+                                <a href="mailto:abcaestheticsllc@gmail.com" class="flex items-center gap-2.5">
+                                    <div class="bg-white rounded-lg lg:size-12 md:size-10 size-9 flex items-center justify-center shrink-0">
+                                        <i class="iconify lucide--mail text-primary-1 lg:size-6 size-5"></i>
+                                    </div>
+                                    <p class="text-white font-medium lg:text-base text-sm">abcaestheticsllc@gmail.com</p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="band band-gold">
+        <div class="container">
+            <div class="max-w-3xl mx-auto">
+                <!-- Header -->
+                <div class="flex flex-col items-center text-center lg:mb-15 mb-10">
+                    <h2 class="text-3xl md:text-6xl font-heading font-medium text-primary-3 tracking-tight">Quick ways to connect</h2>
+                </div>
+
+                <!-- Accordion Group -->
+                <div class="hs-accordion-group flex flex-col gap-5 w-full">
+
+                    <!-- Item 1 -->
+                    <div class="hs-accordion active bg-white hs-accordion-active:bg-primary-5 rounded-2xl p-5 transition-colors" id="faq-1">
+                        <button class="hs-accordion-toggle inline-flex items-center justify-between w-full font-medium text-primary-3 md:text-xl font-heading transition text-left" aria-controls="faq-collapse-1">
+                            How do I book my first appointment?
+                            <span class="size-8 shrink-0 flex justify-center items-center text-primary-1 hs-accordion-active:bg-white rounded-full transition-colors">
+                                <i class="iconify lucide--plus size-5 hs-accordion-active:rotate-135 transition-all duration-500"></i>
+                            </span>
+                        </button>
+                        <div id="faq-collapse-1" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" aria-labelledby="faq-1">
+                            <p class="text-primary-2 mt-5 text-sm md:text-base leading-[1.4] max-w-2xl font-medium">
+                                We begin with a detailed consultation to understand your concerns, skin history, and long-term goals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="hs-accordion bg-white hs-accordion-active:bg-primary-5 rounded-2xl p-5 transition-colors" id="faq-2">
+                        <button class="hs-accordion-toggle inline-flex items-center justify-between w-full font-medium text-primary-3 md:text-xl font-heading transition text-left" aria-controls="faq-collapse-2">
+                            Do you offer free consultations?
+                            <span class="size-8 shrink-0 flex justify-center items-center text-primary-1 hs-accordion-active:bg-white rounded-full transition-colors">
+                                <i class="iconify lucide--plus size-5 hs-accordion-active:rotate-135 transition-all duration-500"></i>
+                            </span>
+                        </button>
+                        <div id="faq-collapse-2" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="faq-2">
+                            <p class="text-primary-2 mt-5 text-sm md:text-base leading-[1.4] max-w-2xl font-medium">
+                                We offer introductory consultations to determine your skincare needs. Please contact our front desk for more details on pricing and availability.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="hs-accordion bg-white hs-accordion-active:bg-primary-5 rounded-2xl p-5 transition-colors" id="faq-3">
+                        <button class="hs-accordion-toggle inline-flex items-center justify-between w-full font-medium text-primary-3 md:text-xl font-heading transition text-left" aria-controls="faq-collapse-3">
+                            What should I bring to my appointment?
+                            <span class="size-8 shrink-0 flex justify-center items-center text-primary-1 hs-accordion-active:bg-white rounded-full transition-colors">
+                                <i class="iconify lucide--plus size-5 hs-accordion-active:rotate-135 transition-all duration-500"></i>
+                            </span>
+                        </button>
+                        <div id="faq-collapse-3" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="faq-3">
+                            <p class="text-primary-2 mt-5 text-sm md:text-base leading-[1.4] max-w-2xl font-medium">
+                                Please bring a list of your current skincare products, any relevant medical history, and a valid ID to help us better assist you.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="hs-accordion bg-white hs-accordion-active:bg-primary-5 rounded-2xl p-5 transition-colors" id="faq-4">
+                        <button class="hs-accordion-toggle inline-flex items-center justify-between w-full font-medium text-primary-3 md:text-xl font-heading transition text-left" aria-controls="faq-collapse-4">
+                            Are the procedures painful?
+                            <span class="size-8 shrink-0 flex justify-center items-center text-primary-1 hs-accordion-active:bg-white rounded-full transition-colors">
+                                <i class="iconify lucide--plus size-5 hs-accordion-active:rotate-135 transition-all duration-500"></i>
+                            </span>
+                        </button>
+                        <div id="faq-collapse-4" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="faq-4">
+                            <p class="text-primary-2 mt-5 text-sm md:text-base leading-[1.4] max-w-2xl font-medium">
+                                Most procedures are minimally invasive and involve little to no pain. We prioritize your comfort and use topical numbing agents when necessary.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{> footer }}
+
+</body>
+
+</html>

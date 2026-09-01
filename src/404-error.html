@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {{> title-meta title="Not Found" }} {{> head-css}}
+</head>
+
+<body>
+    {{> navbar }}
+
+    <section class="md:pt-50 md:pb-27.5 pt-30 pb-15 w-full">
+        <div class="container">
+            <div class="mx-auto text-center flex flex-col items-center justify-center">
+                <!-- 404 Number -->
+                <h1 class="text-[120px] md:text-[200px] font-heading font-medium text-primary-3 leading-none tracking-normal md:mb-2.5 mb-1.5 selection:bg-primary-1 selection:text-white">
+                    404
+                </h1>
+
+                <!-- Subtitle -->
+                <h2 class="text-2xl md:text-3xl font-heading font-medium text-primary-3 tracking-tight md:mb-2.5 mb-1.5">
+                    Page not found
+                </h2>
+
+                <!-- Description -->
+                <p class="text-primary-2 text-base md:mb-15 mb-7.5 leading-relaxed">
+                    The page you are looking for doesn't exist or has been moved.
+                </p>
+
+                <!-- Button -->
+                <div class="inline-block shrink-0">
+                    <a href="index.html" class="flex items-center gap-2.5 bg-primary-1 hover:bg-[#835933] transition-colors rounded-full ps-2.5 py-2.5 pe-5 text-sm font-medium group text-white">
+                        <div class="flex items-center justify-center size-6 bg-white rounded-full">
+                            <img src="/images/icons/icon-1.svg" alt="Icon" class="transition-transform duration-300 group-hover:rotate-180">
+                        </div>
+                        Back to home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{> footer }}
+
+</body>
+
+</html>

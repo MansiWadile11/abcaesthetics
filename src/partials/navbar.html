@@ -1,0 +1,92 @@
+<!-- Navbar - sticks to the top of the viewport on scroll -->
+<header class="reference-nav-shell sticky top-0 w-full z-50">
+  <!-- Container -->
+  <div class="container">
+    <!-- Navbar Pill -->
+    <div id="navbar" class="relative bg-reference-surface flex items-center justify-between py-3.5 md:px-7 px-4 rounded-full w-full max-w-[87.5rem] mx-auto">
+
+      <!-- Grid Layout mimicking the Webflow grid-nav -->
+      <div class="flex items-center justify-between w-full relative">
+
+        <!-- Left Nav Menu -->
+        <nav class="hidden lg:flex items-center gap-8 z-10 font-reference-body">
+          <a href="index.html#home" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">Home</a>
+          <a href="about.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">About</a>
+          <div class="nav-dd">
+            <a href="service-aesthetic-injectables.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors inline-flex items-center gap-1.5">
+              Treatments
+              <i class="iconify lucide--chevron-down size-3.5 nav-dd-caret"></i>
+            </a>
+            <div class="nav-dd-panel">
+              <ul class="flex flex-col">
+            <li><a href="service-aesthetic-injectables.html" class="nav-dd-link">Aesthetic Injectables</a></li>
+            <li><a href="service-skin-energy.html" class="nav-dd-link">Advanced Skin &amp; Energy-Based Treatments</a></li>
+            <li><a href="service-regenerative-aesthetics.html" class="nav-dd-link">Regenerative Aesthetics</a></li>
+            <li><a href="service-hair-restoration.html" class="nav-dd-link">Hair Restoration</a></li>
+            <li><a href="service-hormone-metabolic-wellness.html" class="nav-dd-link">Hormone &amp; Metabolic Wellness</a></li>
+            <li><a href="service-womens-wellness.html" class="nav-dd-link">Women&rsquo;s Wellness</a></li>
+            <li><a href="service-mens-wellness.html" class="nav-dd-link">Men&rsquo;s Wellness</a></li>
+            <li><a href="service-sexual-wellness.html" class="nav-dd-link">Sexual Wellness</a></li>
+            <li><a href="service-wellness-products.html" class="nav-dd-link">Wellness Products</a></li>
+              </ul>
+            </div>
+          </div>
+          <a href="results.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">Results</a>
+          <a href="contact.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">Contact</a>
+        </nav>
+
+        <!-- Center Logo -->
+        <a href="index.html#home" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center z-10" aria-label="Home">
+          <span class="reference-logo-mark" aria-hidden="true">
+            <img src="/images/logo.png" alt="ABC Aesthetics MedSpa" class="reference-logo-image">
+          </span>
+        </a>
+
+        <!-- Right Button — ms-auto keeps it right-aligned below lg, where the
+             nav links are display:none and justify-between would otherwise
+             pull the only in-flow child to the left. -->
+        <div class="flex items-center gap-4 z-10 ms-auto">
+          <a href="index.html#appointment" class="reference-nav-cta btn-glow hidden md:flex items-center gap-2 bg-reference-green hover:bg-reference-green-dark text-white transition-colors rounded-full group font-reference-body">
+            <img src="/images/icons/icon-1.svg" alt="" class="size-3.5 brightness-0 invert transition-transform duration-300 group-hover:rotate-180">
+            Book Appointment
+          </a>
+
+          <!-- Mobile Hamburger Button -->
+          <button type="button" class="lg:hidden flex items-center justify-center size-11 bg-reference-green hover:bg-reference-green-dark rounded-full text-white transition-colors" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="iconify tabler--menu-2 size-5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu — absolute inside the header so it travels with the nav
+       now that the header is no longer fixed to the viewport. -->
+  <div id="mobile-menu" class="mobile-drawer absolute inset-x-0 top-full z-50 md:mx-5 mx-4 mt-2 rounded-3xl overflow-y-auto bg-white shadow-2xl max-h-[70vh] lg:hidden" role="dialog" tabindex="-1" aria-labelledby="mobile-menu-label">
+    <div class="flex flex-col overflow-y-auto p-5 space-y-2">
+      <a href="index.html#home" class="hover:text-reference-green text-base font-medium w-full transition-colors">Home</a>
+      <a href="about.html" class="hover:text-reference-green text-base font-medium w-full transition-colors">About</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-toggle hover:text-reference-green text-base font-medium w-full transition-colors" aria-expanded="false" aria-controls="nav-treatments">
+          Treatments
+          <span class="nav-group-icon"><i class="iconify lucide--chevron-down size-4"></i></span>
+        </button>
+        <div class="nav-sub" id="nav-treatments">
+          <div class="nav-sub-inner">
+          <a href="service-aesthetic-injectables.html">Aesthetic Injectables</a>
+          <a href="service-skin-energy.html">Advanced Skin &amp; Energy-Based Treatments</a>
+          <a href="service-regenerative-aesthetics.html">Regenerative Aesthetics</a>
+          <a href="service-hair-restoration.html">Hair Restoration</a>
+          <a href="service-hormone-metabolic-wellness.html">Hormone &amp; Metabolic Wellness</a>
+          <a href="service-womens-wellness.html">Women&rsquo;s Wellness</a>
+          <a href="service-mens-wellness.html">Men&rsquo;s Wellness</a>
+          <a href="service-sexual-wellness.html">Sexual Wellness</a>
+          <a href="service-wellness-products.html">Wellness Products</a>
+          </div>
+        </div>
+      </div>
+      <a href="results.html" class="hover:text-reference-green text-base font-medium w-full transition-colors">Results</a>
+      <a href="contact.html" class="hover:text-reference-green text-base font-medium w-full transition-colors">Contact</a>
+    </div>
+  </div>
+</header>

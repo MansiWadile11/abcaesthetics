@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {{> title-meta title="Appointment" }} {{> head-css}}
+</head>
+
+<body>
+
+    {{> navbar }}
+
+    <section class="md:pt-48 pt-30 lg:pb-50 md:pb-32.5 pb-25">
+        <div class="container">
+            <div class="text-center lg:mb-15 md:mb-12.5 mb-10">
+                <!-- Tag -->
+                <div class="inline-flex items-center gap-2 bg-primary-1/5 text-primary-1 text-xs font-medium uppercase px-3 py-1.5 rounded-full md:mb-5 mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary-1"></span>
+                    Book your visit
+                </div>
+
+                <!-- Title -->
+                <h1 class="text-[42px] md:text-7xl lg:text-[90px] font-heading font-medium text-primary-3 tracking-tight leading-[1.1] md:mb-6 mb-4 md:w-xl mx-auto">
+                    Schedule an appointment
+                </h1>
+            </div>
+
+            <!-- Form Card -->
+            <div class="bg-primary-5 p-6 md:p-10 rounded-3xl md:max-w-3xl mx-auto">
+                <form class="flex flex-col">
+                    <!-- Row 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Name*</label>
+                            <input type="text" placeholder="Your name" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Email*</label>
+                            <input type="email" placeholder="Email address" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Phone*</label>
+                            <input type="tel" placeholder="Phone number" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Treatment of Interest*</label>
+                            <div class="relative w-full">
+                                <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                    <option value="">Select</option>
+                                    <option value="Aesthetic Injectables">Aesthetic Injectables</option>
+                                    <option value="Advanced Skin &#39; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
+                                    <option value="Regenerative Aesthetics">Regenerative Aesthetics</option>
+                                    <option value="Hair Restoration">Hair Restoration</option>
+                                    <option value="Hormone &#39; Metabolic Wellness">Hormone &amp; Metabolic Wellness</option>
+                                    <option value="Women&#39;s Wellness">Women&rsquo;s Wellness</option>
+                                    <option value="Men&#39;s Wellness">Men&rsquo;s Wellness</option>
+                                    <option value="Sexual Wellness">Sexual Wellness</option>
+                                    <option value="Wellness Products">Wellness Products</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Date*</label>
+                            <input type="date" placeholder="Date" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-sm font-medium text-primary-2 mb-2.5">Time*</label>
+                            <input type="time" placeholder="--:--" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                        </div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="flex flex-col mb-5">
+                        <label class="text-sm font-medium text-primary-2 mb-2.5">Notes</label>
+                        <textarea placeholder="Additional notes" rows="4" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none resize-none text-primary-3"></textarea>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="flex items-center gap-3 mb-5">
+                        <input type="checkbox" id="agree" class="rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 size-5 cursor-pointer mt-0.5">
+                        <label for="agree" class="text-xs md:text-sm text-primary-2 cursor-pointer select-none font-medium leading-tight">
+                            I agree to allow the clinic to contact me regarding my appointment.
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit" class="inline-flex items-center justify-center bg-primary-1 hover:bg-white text-white hover:text-primary-1 border border-transparent hover:border-primary-1 py-2.5 px-5 rounded-full font-semibold transition-colors text-sm text-nowrap">
+                            Book an appointment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="overflow-hidden">
+        <div class="container">
+            <div class="text-center lg:mb-15 md:mb-12.5 mb-10">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-heading font-medium text-primary-3 tracking-tight mb-2.5">
+                    What our patients say
+                </h2>
+                <p class="text-primary-2 text-sm md:text-base">
+                    Real experiences from real people who trusted us with their skin health
+                </p>
+            </div>
+
+            <div class="w-full relative overflow-hidden">
+                <div class="flex flex-row gap-5 w-max animate-marquee-horizontal hover:[animation-play-state:paused] cursor-pointer py-2">
+                    <!-- Group 1 -->
+                    <div class="flex flex-row gap-5 shrink-0">
+                        <!-- Card 1 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Came in for Micro-needling without any prior knowledge, and couldn&rsquo;t be happier with my results! Nawal was so incredibly nice and informative of what she was doing. Couldn&rsquo;t recommend her more!
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">SH</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Sam Haugen</div>
+                                    <div class="text-primary-2 text-sm">Microneedling &middot; Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    A pleasant experience. AMAZING results. I have and will continue to recommend ABC Aesthetics.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">DB</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Dominique Butler</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Nawal was great! Super warm and welcoming, definitely see myself coming back in again :)
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">HR</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Hannah Rhodes</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Great place for friendly honest superior service. Thank you Nawal. We heart you.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">KD</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Kristy Dias</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Group 2 (identical duplicate to enable seamless marquee looping) -->
+                    <div class="flex flex-row gap-5 shrink-0">
+                        <!-- Card 1 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Came in for Micro-needling without any prior knowledge, and couldn&rsquo;t be happier with my results! Nawal was so incredibly nice and informative of what she was doing. Couldn&rsquo;t recommend her more!
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">SH</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Sam Haugen</div>
+                                    <div class="text-primary-2 text-sm">Microneedling &middot; Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    A pleasant experience. AMAZING results. I have and will continue to recommend ABC Aesthetics.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">DB</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Dominique Butler</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Nawal was great! Super warm and welcoming, definitely see myself coming back in again :)
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">HR</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Hannah Rhodes</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
+                            <div class="md:mb-19 mb-12">
+                                <div class="flex items-center mb-1.5 text-primary-1">
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                    <i class="iconify tabler--star-filled size-4"></i>
+                                </div>
+                                <p class="text-base leading-[1.2]">
+                                    Great place for friendly honest superior service. Thank you Nawal. We heart you.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="reference-review-initials size-10 md:size-11 text-[13px]" aria-hidden="true">KD</span>
+                                <div>
+                                    <div class="font-semibold text-sm">Kristy Dias</div>
+                                    <div class="text-primary-2 text-sm">Google review</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fade overlay left/right to replicate the infinite slider cut-off effect -->
+                <div class="absolute inset-y-0 inset-s-0 w-10 md:w-32 lg:w-58 bg-linear-to-r from-primary-4 to-primary-4/0 z-10 pointer-events-none"></div>
+                <div class="absolute inset-y-0 inset-e-0 w-10 md:w-32 lg:w-58 bg-linear-to-l from-primary-4 to-primary-4/0 z-10 pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Questions Before Appointment Section -->
+    <section class="lg:py-50 md:py-32.5 py-25">
+        <div class="container">
+            <div class="lg:w-4xl mx-auto">
+                <div class="bg-primary-5 rounded-4xl md:p-10 p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-heading font-medium text-primary-3 leading-tight mb-2.5">
+                            Questions before appointment
+                        </h3>
+                        <p class="text-primary-2 text-sm md:text-base w-xs">
+                            Contact us first to get the right advice before booking your appointment.
+                        </p>
+                    </div>
+                    <div class="inline-block">
+                        <a href="contact.html" class="flex items-center gap-2.5 bg-primary-1 transition-colors rounded-full ps-2.5 py-2.5 pe-5 text-sm font-medium group text-white">
+                            <div class="flex items-center justify-center size-6 bg-white rounded-full">
+                                <img src="/images/icons/icon-1.svg" alt="Icon" class="transition-transform duration-300 group-hover:rotate-180">
+                            </div>
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {{> footer }}
+
+</body>
+
+</html>

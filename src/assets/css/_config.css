@@ -1,0 +1,78 @@
+/* Themes Config */
+@theme {
+
+    /* Typography - the reference site's pairing (brown-wolf).
+       Both families ship real weights, so heading weight utilities
+       (font-medium/semibold/bold) map to actual cuts rather than synthesised
+       bold. Loaded in partials/head-css.html - keep the weights there in sync:
+       Playfair Display 500/600/700, Poppins 400/500/600. */
+    --font-body: "Poppins", sans-serif;
+    --font-heading: "Playfair Display", serif;
+
+    /* Retargeted onto the reference palette so every page inherits it.
+       primary-1 is the GOLD accent (eyebrow text, dots, tinted pills); CTA
+       buttons that use bg-primary-1 are re-pointed to green in _general.css,
+       because the reference uses gold for accents and green for actions. */
+    --color-primary-1:#b79572;
+    --color-primary-2:#8b7c6e;
+    --color-primary-3:#6e4a2e;
+    --color-primary-4:#fdf8f1;
+    --color-primary-5:#fbf3e7;
+    /* the client's green, confirmed 31 Aug. 7.71:1 on white, so button labels
+       still clear AA comfortably; the hover shade keeps the same darkening
+       step the pair had before. */
+    --color-reference-green:#315b49;
+    --color-reference-green-dark:#264638;
+    --color-reference-surface:#fffdf9;
+    --color-reference-ink:#3a332c;
+    --color-reference-gold:#f1e1c6;
+    --color-reference-gold-ink:#a9744c;
+    --color-reference-feature:#fbf3e7;
+    --color-reference-muted:#8b7c6e;
+    --color-reference-heading:#4a3b2e;
+
+    /* Reference site palette */
+    --color-reference-page:#fbeadd;        /* page background */
+    --color-reference-card:#fdf8f1;        /* badge / stat / float cards */
+    --color-reference-nav-ink:#5b4e43;     /* nav links + marquee pills */
+    --color-reference-badge:#2b2621;       /* badge headline */
+    --color-reference-subtle:#9a8c7d;      /* small caption text */
+    --color-reference-stat:#6e6155;        /* stat card label */
+    --color-reference-line:rgba(60,40,20,0.10);
+    --color-reference-hairline:rgba(60,40,20,0.08);
+
+    --color-reference-eyebrow:#b79572;     /* SERVICES / section eyebrows */
+    --color-reference-title:#6e4a2e;       /* section h2 */
+    --color-reference-cocoa:#3a2a1c;       /* card headings */
+    --color-reference-check:#f1cba0;       /* service checklist bullet */
+    --color-reference-check-ink:#6b4226;
+    --color-reference-dark:#3b2e22;        /* dark pill / arrow button */
+    --color-reference-dark-hover:#2a2018;
+    --color-reference-star:#d9a968;        /* review stars */
+    --color-reference-role:#b08a63;        /* reviewer role line */
+    --color-reference-insight:#fbeedd;     /* featured insight card */
+    --color-reference-tag:#8a5a2e;         /* article tag text */
+    --color-reference-form:#f1e4ce;        /* appointment panel */
+    --color-reference-field:#fbf6ec;       /* form inputs */
+    --color-reference-faq-icon:#f4eee3;    /* collapsed FAQ icon */
+    --color-reference-footer:#1f3b31;      /* footer ground */
+    --color-reference-cta-alt-hover:#f1ddc8;
+
+    --shadow-reference-nav:0 10px 30px rgba(60,40,20,0.06);
+    --shadow-reference-card:0 8px 24px rgba(60,40,20,0.05);
+    --shadow-reference-float:0 12px 30px rgba(60,40,20,0.12);
+
+    --color-default-50: var(--color-zinc-50);
+    --color-default-100: var(--color-zinc-100);
+    --color-default-200: var(--color-zinc-200);
+    --color-default-300: var(--color-zinc-300);
+    --color-default-400: var(--color-zinc-400);
+    --color-default-500: var(--color-zinc-500);
+    --color-default-600: var(--color-zinc-600);
+    --color-default-700: var(--color-zinc-700);
+    --color-default-800: var(--color-zinc-800);
+    --color-default-900: var(--color-zinc-900);
+    --color-default-950: var(--color-zinc-950);
+
+    --text-md:15px;
+}

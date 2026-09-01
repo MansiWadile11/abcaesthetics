@@ -1,0 +1,33 @@
+/*
+Template Name: Dermato - Coworking Space Website TailwindCSS 4 Template
+Version: 1.0.0
+Author: Unifato
+Website: https://unifato.com/
+Email: unifato.themes@gmail.com
+File: Style CSS File
+*/
+
+/* TailwindCSS */
+@import "tailwindcss";
+
+/* Preline UI */
+@import "preline/variants.css";
+@source "preline/dist/*.js";
+
+/* Plugin CSS */
+@import "swiper/swiper-bundle.css";
+/* @import "aos/dist/aos.css"; */
+
+/* Tailwind Plugin */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+
+/* Iconify Icons */
+@plugin "@iconify/tailwind4" {
+    prefixes: tabler, lucide;
+}
+
+@import "./_config.css";
+@import "./_swiper.css";
+@import "./_general.css";

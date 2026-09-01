@@ -1,0 +1,4152 @@
+/* _general.css */
+
+
+@layer base {
+    html {
+        @apply w-full scroll-smooth overflow-x-clip;
+    }
+
+    body {
+        @apply font-body bg-reference-page text-base text-primary-2 leading-[1.3em] font-medium overflow-x-clip;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-heading leading-[1.3] font-semibold text-default-900;
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        @apply cursor-pointer;
+    }
+}
+
+select,
+input,
+textarea {
+    @apply transition-all duration-200 focus:ring-0 focus:outline-0;
+}
+
+.container {
+    @apply lg:px-7.5 md:px-5 px-3.75 lg:max-w-365 mx-auto;
+}
+
+.container-medium {
+    @apply mx-auto max-w-340 lg:px-7.5 md:px-5 px-3.75;
+}
+
+/* Hero top row — reference uses a 3-up flex row (badge / headline / stat),
+   not a 12-col grid, so the side cards keep their intrinsic pill width. */
+.hero-top-grid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: clamp(14px, 3vw, 32px);
+}
+
+.font-reference-body {
+    font-family: var(--font-body);
+    font-weight: 400;
+}
+
+.font-reference-body.font-medium {
+    font-weight: 500;
+}
+
+.font-reference-heading {
+    font-family: var(--font-heading);
+}
+
+/* ---- Reference navbar: pill in normal flow (scrolls away, not fixed) ---- */
+.reference-nav-shell {
+    padding-top: 28px;
+}
+
+#navbar {
+    box-shadow: var(--shadow-reference-nav);
+}
+
+/* The navbar sits in the document flow, so the first section no longer needs
+   padding to clear a fixed bar — the template's pt-* on it was purely that
+   offset. Reference gap between nav and the first row is 56px. */
+header ~ section:first-of-type {
+    padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    header ~ section:first-of-type {
+        padding-top: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    header ~ section:first-of-type {
+        padding-top: 3.5rem;
+    }
+}
+
+/* Anchor targets get a little breathing room when jumped to */
+section[id],
+[id="contact"] {
+    scroll-margin-top: 1.5rem;
+}
+
+.reference-nav-link {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.reference-nav-cta {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 26px;
+}
+
+/* logo.png is cropped to its artwork (375x308), so this height is the mark's
+   real height - the old 92px box was mostly transparent padding and rendered a
+   ~54px mark. These values are that visual size, scaled up ~15%. */
+.reference-logo-mark {
+    height: clamp(2.25rem, 4.3vw, 3.875rem); /* 36px -> 62px */
+    display: block;
+    flex-shrink: 0;
+}
+
+.reference-logo-image {
+    width: auto;
+    height: 100%;
+    max-width: none;
+}
+
+/* ---- Hero ---- */
+.hero-certification-area {
+    flex: 0 1 240px;
+    min-width: 170px;
+    margin-top: 36px;
+}
+
+.hero-center-content {
+    flex: 1 1 320px;
+    min-width: 260px;
+    padding: 0 8px;
+}
+
+.hero-stat-area {
+    flex: 0 1 300px;
+    min-width: 210px;
+    margin-top: 12px;
+}
+
+.hero-certification {
+    width: 100%;
+    gap: 10px;
+    padding: 12px 18px 12px 12px;
+    box-shadow: var(--shadow-reference-card);
+}
+
+.hero-certification-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.hero-certification h6 {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.hero-certification p {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.hero-center-content h1 {
+    font-size: clamp(30px, 4.4vw, 58px);
+    line-height: 1.15;
+}
+
+.hero-center-content p {
+    font-size: clamp(13px, 1.3vw, 17px);
+    line-height: 1.6;
+    max-width: 560px;
+    margin-top: 22px;
+}
+
+.hero-stat-card {
+    width: 100%;
+    padding: 24px;
+    box-shadow: var(--shadow-reference-card);
+}
+
+.hero-stat-value {
+    font-size: clamp(2rem, 3.4vw, 3rem); /* 48px */
+    line-height: 1;
+}
+
+.hero-stat-title {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.hero-stat-copy {
+    font-size: 13px;
+}
+
+/* Hero portrait + floating "Explore" pill */
+.hero-portrait {
+    height: min(56vw, 680px);
+    border-radius: 40px;
+}
+
+.hero-explore-pill {
+    box-shadow: var(--shadow-reference-float);
+}
+
+@media (max-width: 767px) {
+    /* Nav sits flush to the top edge once the shell's desktop inset is gone */
+    .reference-nav-shell {
+        padding-top: 0;
+    }
+
+    .hero-top-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Stacked order: Board Certified badge, then the headline, then the stat.
+       (No `order` overrides — this is plain DOM order.) */
+    .hero-certification-area {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .hero-certification {
+        width: auto;
+    }
+
+    .hero-center-content {
+        flex-basis: 100%;
+        margin-top: 24px;
+    }
+
+    .hero-stat-area {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-top: 24px;
+    }
+
+    .hero-stat-card {
+        width: auto;
+        min-width: 17.5rem;
+    }
+}
+
+/* ---- Reference section header ---- */
+.reference-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    color: var(--color-reference-eyebrow);
+}
+
+.reference-section-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(30px, 3.8vw, 48px);
+    line-height: 1.25;
+    color: var(--color-reference-title);
+}
+
+.reference-section-copy {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-reference-muted);
+    max-width: 460px;
+}
+
+/* ---- Services accordion: five panels, one open, four collapsed spines ----
+   The open panel is chosen by JS, which writes --svc-cols on the grid. Each
+   panel stacks a full-bleed trigger (the spine) over its body; opening
+   cross-fades between them while the grid animates the column widths. */
+.reference-services-grid {
+    --svc-cols: 11fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: var(--svc-cols);
+    gap: 20px;
+    height: 480px;
+    transition: grid-template-columns 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svc-panel {
+    position: relative;
+    border-radius: 32px;
+    overflow: hidden;
+    background: var(--color-reference-card);
+    min-width: 0;
+    transition: box-shadow 0.4s ease;
+}
+
+.svc-panel.is-open {
+    box-shadow: var(--shadow-reference-nav);
+}
+
+/* Collapsed spine — also the click target */
+.svc-trigger {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    display: block;
+    text-align: initial;
+    background: var(--svc-fill);
+    transition: opacity 0.35s ease;
+}
+
+/* Green wash over each spine's own gradient */
+.svc-trigger::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, rgba(45, 74, 62, 0.4), rgba(24, 44, 37, 0.75));
+}
+
+/* Lift content above the wash — children are already absolutely positioned,
+   so only z-index is needed (setting `position` here would beat Tailwind's
+   `absolute` utility and break the layout). */
+.svc-trigger > * {
+    z-index: 1;
+}
+
+.svc-panel.is-open .svc-trigger {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Region the rotated label centres in. Its usable length is the region's
+   HEIGHT, since the text is turned 90° — keep it longer than the longest
+   label or the text gets clipped by the panel's overflow. */
+.reference-service-spine-body {
+    top: 64px;
+    bottom: 70px;
+}
+
+.reference-service-spine-label {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    color: #fff;
+}
+
+.reference-service-spine-number {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+/* Expanded body */
+.svc-body {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.svc-panel.is-open .svc-body {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.4s ease 0.18s;
+}
+
+.svc-body-media {
+    width: 38%;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Keep the text column from reflowing while the panel is still narrow.
+   26rem was comfortable with five panels; nine leave the open panel narrower,
+   and the floor has to fit inside it or the content spills out. */
+.svc-body-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 22rem;
+}
+
+@media (max-width: 1279px) {
+    .reference-services-grid {
+        height: 440px;
+    }
+
+    .svc-body-content {
+        min-width: 21rem;
+    }
+}
+
+/* Below lg the row can't hold five panels — the open one takes a full row of
+   its own and the rest stay as spines beneath it. Same JS, same states. */
+@media (max-width: 767px) {
+    .reference-services-grid {
+        grid-template-columns: repeat(4, 1fr);
+        height: auto;
+        transition: none;
+    }
+
+    .svc-panel:not(.is-open) {
+        height: 320px;
+    }
+
+    .svc-panel.is-open {
+        grid-column: 1 / -1;
+        height: auto;
+    }
+
+    .svc-panel.is-open .svc-body {
+        position: static;
+    }
+
+    .svc-body-content {
+        min-width: 0;
+    }
+
+    .reference-service-spine-body {
+        top: 56px;
+        bottom: 56px;
+    }
+}
+
+@media (max-width: 639px) {
+    .reference-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .svc-panel.is-open .svc-body {
+        flex-direction: column;
+    }
+
+    .svc-body-media {
+        width: 100%;
+        height: 240px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reference-services-grid,
+    .svc-trigger,
+    .svc-body {
+        transition: none;
+    }
+}
+
+/* ---- Clinic intro (Dr. Nawal Qneibi) ---- */
+.reference-clinic-portrait {
+    aspect-ratio: 1 / 1;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+}
+
+.reference-clinic-caption {
+    background: rgba(253, 248, 241, 0.92);
+    border-radius: 20px;
+}
+
+.reference-clinic-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.25;
+    color: var(--color-reference-title);
+}
+
+/* ---- Testimonials ---- */
+.reference-testimonial-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(32px, 4vw, 50px);
+    line-height: 1.2;
+    color: var(--color-reference-title);
+}
+
+.reference-testimonial-nav {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-reference-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(60, 40, 20, 0.06);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reference-testimonial-nav:hover {
+    background: var(--color-reference-green);
+    color: #fff;
+}
+
+.reference-review-card {
+    height: 100%;
+    background: #fff;
+    border-radius: 24px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-reference-card);
+}
+
+.reference-rating-card {
+    position: relative;
+    min-height: 480px;
+    border-radius: 36px;
+    overflow: hidden;
+}
+
+.reference-rating-scrim {
+    background: linear-gradient(0deg, rgba(40, 25, 15, 0.55), rgba(40, 25, 15, 0) 55%);
+}
+
+@media (max-width: 767px) {
+    .reference-rating-card {
+        flex-basis: 100%;
+        min-height: 360px;
+    }
+}
+
+/* ---- Shared eyebrow pill (Insights, FAQs) ---- */
+.reference-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-reference-card);
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-reference-eyebrow);
+}
+
+/* ---- Insights ---- */
+.reference-tag {
+    background: var(--color-reference-gold);
+    color: var(--color-reference-tag);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+
+/* ---- Appointment form ---- */
+.reference-form-pad {
+    padding: 48px clamp(24px, 4vw, 56px);
+}
+
+.reference-form-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(28px, 3vw, 38px);
+    color: var(--color-reference-title);
+}
+
+.reference-form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-reference-stat);
+    margin-bottom: 6px;
+}
+
+.reference-input {
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: var(--color-reference-field);
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--color-reference-ink);
+}
+
+.reference-input::placeholder {
+    color: var(--color-reference-subtle);
+}
+
+.reference-input:focus {
+    outline: 2px solid var(--color-reference-green);
+    outline-offset: -1px;
+}
+
+.reference-inquiry-card {
+    background: rgba(80, 58, 36, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---- FAQ ---- */
+.reference-faq-card {
+    background: rgba(35, 24, 15, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Padding lives on the toggle, not the card, so the whole header row is a tap
+   target rather than a 32px-tall strip inside a padded box. */
+.reference-faq-item {
+    background: #fff;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.reference-faq-item.active {
+    background: var(--color-reference-green);
+}
+
+.reference-faq-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 24px;
+    text-align: left;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-reference-cocoa);
+}
+
+.reference-faq-item.active .reference-faq-toggle {
+    color: #fff;
+}
+
+.reference-faq-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-reference-faq-icon);
+    color: var(--color-reference-title);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reference-faq-item.active .reference-faq-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.reference-faq-answer {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0 24px 24px;
+    margin-top: -6px;
+}
+
+/* ---- CTA bar + footer ---- */
+.reference-cta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    background: var(--color-reference-surface);
+    border-radius: 100px;
+    padding: 16px 16px 16px 32px;
+    box-shadow: var(--shadow-reference-nav);
+}
+
+.reference-cta-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(18px, 2vw, 24px);
+    color: var(--color-reference-green);
+}
+
+.reference-cta-btn {
+    display: flex;
+    align-items: center;
+    /* block-level flex, so it fills its container when used on its own -
+       centre the label rather than leaving it against the left edge */
+    justify-content: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 26px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.reference-footer {
+    background: var(--color-reference-footer);
+}
+
+.reference-footer-heading {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.reference-footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+}
+
+.reference-footer-link:hover {
+    color: #fff;
+}
+
+.reference-social {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+}
+
+.reference-social:hover {
+    background: rgba(255, 255, 255, 0.24);
+    color: #fff;
+}
+
+/* The CTA bar's pill shape only reads well on one line — square it off once
+   the content wraps to a stacked block. */
+@media (max-width: 767px) {
+    .reference-cta-bar {
+        border-radius: 28px;
+        padding: 24px;
+    }
+}
+
+/* ---- Site-wide button retarget --------------------------------------------
+   The template paints every CTA with bg-primary-1, but primary-1 is now the
+   reference's GOLD accent (used by eyebrow dots and tinted pills, which should
+   stay gold). Scoping to a/button hits the actual actions and leaves the
+   decorative spans/divs alone. These are unlayered rules, so they win over
+   Tailwind's utilities by design. */
+a.bg-primary-1,
+button.bg-primary-1 {
+    background-color: var(--color-reference-green);
+}
+
+/* …but leave buttons that declare their own hover background (e.g. the
+   hover:bg-white inversions) to do their thing. */
+a.bg-primary-1:not([class*="hover:bg-"]):hover,
+button.bg-primary-1:not([class*="hover:bg-"]):hover {
+    background-color: var(--color-reference-green-dark);
+}
+
+/* Outline / ghost buttons */
+a.border-primary-1,
+button.border-primary-1 {
+    border-color: var(--color-reference-green);
+    color: var(--color-reference-green);
+}
+
+a.border-primary-1:not([class*="hover:bg-"]):hover,
+button.border-primary-1:not([class*="hover:bg-"]):hover {
+    background-color: var(--color-reference-green);
+    color: #fff;
+}
+
+/* Buttons that invert to white on hover need the green back, not gold */
+a.hover\:text-primary-1:hover,
+button.hover\:text-primary-1:hover {
+    color: var(--color-reference-green);
+}
+
+a.hover\:border-primary-1:hover,
+button.hover\:border-primary-1:hover {
+    border-color: var(--color-reference-green);
+}
+
+/* Navbar Active Link — nav links only, never the CTA (green-on-green) */
+#navbar a.reference-nav-link.active {
+    @apply text-reference-green;
+}
+
+/* Hero Section Avatar Wheel */
+.hero-avatar-wheel {
+    animation: hero-spin 60s linear infinite;
+}
+
+/* Spin via the standalone `rotate` property, not `transform` — that leaves
+   `transform` free for the responsive scale applied further down. */
+@keyframes hero-spin {
+    from { rotate: 0deg; }
+    to { rotate: 360deg; }
+}
+
+.avatar-category {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: left center;
+}
+
+
+/* Bento Review Marquee */
+.animate-marquee-vertical {
+    animation: marquee-vertical 25s linear infinite;
+}
+
+@keyframes marquee-vertical {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+.animate-marquee-horizontal {
+    animation: marquee-horizontal 60s linear infinite;
+}
+
+@keyframes marquee-horizontal {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Bento Avatar Revolve */
+@keyframes revolve {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes counter-revolve {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-revolve {
+  animation: revolve 30s linear infinite;
+}
+.animate-counter-revolve {
+  animation: counter-revolve 30s linear infinite;
+}
+
+
+
+/* ==========================================================================
+   Mobile refinements + CTA glow
+   ========================================================================== */
+
+/* ---- Animated primary CTA ----
+   Two loops running together, both 2.4s: a ring that pulses outward from the
+   button edge, and a skewed highlight that sweeps across the face. Hovering
+   stops both and lifts the button, so the motion never fights a deliberate
+   interaction. Modelled on the rethinkingweb.com nav button. */
+.btn-glow {
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    animation: btn-ring 2.4s ease-out infinite;
+}
+
+.btn-glow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    inset-inline-start: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+    transform: skewX(-20deg);
+    animation: btn-shimmer 2.4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.btn-glow:hover {
+    transform: translateY(-2px);
+    animation: none;
+    box-shadow: 0 10px 32px rgba(46, 90, 75, 0.35);
+}
+
+.btn-glow:hover::before {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes btn-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(46, 90, 75, 0.5); }
+    60%  { box-shadow: 0 0 0 9px rgba(46, 90, 75, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 90, 75, 0); }
+}
+
+@keyframes btn-shimmer {
+    0%   { inset-inline-start: -75%; opacity: 0; }
+    25%  { opacity: 1; }
+    55%  { inset-inline-start: 130%; opacity: 0; }
+    100% { inset-inline-start: 130%; opacity: 0; }
+}
+
+/* Light buttons on the cream ground need a warmer ring and a darker sweep */
+.btn-glow-gold {
+    animation-name: btn-ring-gold;
+}
+
+.btn-glow-gold::before {
+    background: linear-gradient(120deg, transparent, rgba(110, 74, 46, 0.16), transparent);
+}
+
+.btn-glow-gold:hover {
+    box-shadow: 0 10px 32px rgba(110, 74, 46, 0.24);
+}
+
+@keyframes btn-ring-gold {
+    0%   { box-shadow: 0 0 0 0 rgba(183, 149, 114, 0.55); }
+    60%  { box-shadow: 0 0 0 9px rgba(183, 149, 114, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(183, 149, 114, 0); }
+}
+
+/* ---- Insight cards: image hover ----
+   The images already zoom on hover; add the card lift and a warm wash so the
+   whole card responds, not just the crop. */
+.insight-media {
+    position: relative;
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.insight-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(45, 74, 62, 0) 45%, rgba(45, 74, 62, 0.42));
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+}
+
+.group:hover .insight-media::after {
+    opacity: 1;
+}
+
+.group:hover .insight-media {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(60, 40, 20, 0.16);
+}
+
+.group:hover .insight-title {
+    color: var(--color-reference-green);
+}
+
+.insight-title {
+    transition: color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-glow,
+    .btn-glow::before,
+    .insight-media,
+    .insight-media::after {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* ---- Mobile (<= 767px) ---------------------------------------------------
+   These rules sit in an unlayered stylesheet, so they win over Tailwind's
+   layered utilities without needing !important. */
+@media (max-width: 767px) {
+
+    /* 1. The "Board Certified" badge is desktop-only chrome — the same claim
+          is repeated in the footer, so hiding it costs no information. */
+    .hero-certification-area {
+        display: none;
+    }
+
+    .hero-center-content {
+        margin-top: 0;
+    }
+
+    /* 2. Hero portrait. The source is 1820 x 788 (2.31); a slightly tighter
+          21:10 box trades ~4% off each side — hair and backdrop only, no
+          subject — for a meaningfully taller band. */
+    .hero-portrait {
+        height: auto;
+        aspect-ratio: 3 / 2;
+        border-radius: 24px;
+    }
+
+    /* Rotating treatment wheel. The pills ride a 320px-radius circle centred
+       120px below the image's bottom edge; scaling both together reproduces
+       the desktop arc at mobile size instead of letting full-size pills
+       swamp the photo. */
+    .hero-avatar-wheel {
+        --wheel-scale: 0.39;
+        display: flex;
+        transform: scale(var(--wheel-scale));
+        transform-origin: center;
+        bottom: calc(-120px * var(--wheel-scale));
+    }
+
+    /* The cutout holding "Explore our treatments" is a rounded arch sized for
+       desktop; let it shrink so the label stops being clipped. */
+    .hero-explore-cutout {
+        padding-inline: 18px;
+        border-top-left-radius: 999px;
+        border-top-right-radius: 999px;
+    }
+
+    .hero-explore-cutout span {
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    /* 3. Services: collapse the vertical spines into full-width horizontal
+          bars, the same shape as the FAQ accordion below it. */
+    .reference-services-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        height: auto;
+        /* the panels stack here, so animate their height rather than columns */
+        transition: none;
+    }
+
+    /* Keep the open/close motion on mobile, matched to the desktop timing */
+    .svc-panel {
+        transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.4s ease;
+    }
+
+    .svc-panel {
+        border-radius: 20px;
+    }
+
+    .svc-panel:not(.is-open) {
+        height: 66px;
+    }
+
+    .svc-panel.is-open {
+        grid-column: auto;
+        height: auto;
+        border-radius: 24px;
+    }
+
+    /* Label region spans the bar and reads left-to-right */
+    .svc-trigger .reference-service-spine-body {
+        top: 0;
+        bottom: 0;
+        inset-inline: 0;
+        justify-content: flex-start;
+        padding-inline-start: 58px;
+        padding-inline-end: 58px;
+    }
+
+    .reference-service-spine-label {
+        transform: none;
+        rotate: none;
+        font-size: 15.5px;
+        line-height: 1.2;
+        white-space: normal;
+        text-align: start;
+    }
+
+    /* Number moves to the left gutter, vertically centred */
+    .svc-trigger .reference-service-spine-number {
+        inset-inline-start: 16px;
+        top: 50%;
+        bottom: auto;
+        translate: none;
+        transform: translateY(-50%);
+        font-size: 19px;
+    }
+
+    /* Arrow chip moves to the right end, like the FAQ +/x control */
+    .svc-trigger > span:first-child {
+        top: 50%;
+        inset-inline-start: auto;
+        inset-inline-end: 14px;
+        translate: none;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .svc-panel.is-open .svc-body {
+        position: static;
+        flex-direction: column;
+    }
+
+    .svc-body-media {
+        width: 100%;
+        height: 210px;
+    }
+
+    .svc-body-content {
+        min-width: 0;
+    }
+
+    /* 4. Dr. Qneibi's portrait is a 593 x 890 upright photo forced into a
+          1:1 box, which cut off the top of the frame. Use its own ratio. */
+    .reference-clinic-portrait {
+        aspect-ratio: 593 / 890;
+    }
+}
+
+/* The band's height tracks the viewport width (fixed aspect ratio), so the
+   wheel needs to grow with it to keep the arc proportionate. */
+
+/* ==========================================================================
+   Service detail page
+   Layout follows the ClinicMaster service-detail template (banner, 8/4 split
+   with a sticky sidebar); every colour comes from the reference palette.
+   ========================================================================== */
+
+/* ---- Page banner ---- */
+.svc-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 32px;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.svc-banner-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(31, 59, 49, 0.15), rgba(31, 59, 49, 0.82));
+}
+
+.svc-banner-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.15;
+    color: #fff;
+}
+
+.svc-crumb {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.svc-crumb a:hover {
+    color: #fff;
+}
+
+/* ---- Two-column shell ---- */
+.svc-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: 40px;
+    align-items: start;
+}
+
+.svc-sidebar {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---- Prose blocks in the main column ---- */
+.svc-h2 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.2;
+    color: var(--color-reference-title);
+}
+
+.svc-h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(21px, 2.2vw, 28px);
+    line-height: 1.3;
+    color: var(--color-reference-cocoa);
+}
+
+.svc-lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-reference-nav-ink);
+}
+
+.svc-p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--color-reference-muted);
+}
+
+/* ---- Benefit list (title + description rows) ---- */
+.svc-benefit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.svc-benefit-list li {
+    display: flex;
+    gap: 14px;
+}
+
+.svc-benefit-mark {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--color-reference-check);
+    color: var(--color-reference-check-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.svc-benefit-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--color-reference-cocoa);
+}
+
+/* ---- Treatment + pricing rows ---- */
+.svc-treatment {
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 20px;
+    padding: 20px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.svc-treatment:hover {
+    border-color: var(--color-reference-check);
+    box-shadow: var(--shadow-reference-card);
+}
+
+.svc-treatment-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--color-reference-cocoa);
+}
+
+.svc-treatment-meta {
+    font-size: 13px;
+    color: var(--color-reference-subtle);
+    margin-top: 3px;
+}
+
+.svc-treatment-price {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--color-reference-green);
+    white-space: nowrap;
+}
+
+/* ---- Sidebar widgets ---- */
+.svc-widget {
+    background: var(--color-reference-card);
+    border-radius: 28px;
+    padding: 26px;
+    box-shadow: var(--shadow-reference-card);
+}
+
+.svc-widget-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--color-reference-cocoa);
+    margin-bottom: 16px;
+}
+
+.svc-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 14.5px;
+    color: var(--color-reference-nav-ink);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.svc-nav-link:hover {
+    background: var(--color-reference-page);
+    color: var(--color-reference-green);
+}
+
+.svc-nav-link.is-active {
+    background: var(--color-reference-green);
+    color: #fff;
+    font-weight: 500;
+}
+
+.svc-nav-link.is-active:hover {
+    background: var(--color-reference-green-dark);
+    color: #fff;
+}
+
+/* ---- Contact widget (dark card) ---- */
+.svc-help {
+    background: var(--color-reference-footer);
+    border-radius: 28px;
+    padding: 28px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.svc-help-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.3;
+}
+
+.svc-help-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.86);
+    transition: color 0.2s ease;
+}
+
+.svc-help-row:hover {
+    color: #fff;
+}
+
+.svc-help-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.svc-help-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: #fff;
+    color: var(--color-reference-footer);
+    font-weight: 600;
+    font-size: 14.5px;
+    border-radius: 100px;
+    padding: 13px 24px;
+    transition: background-color 0.25s ease;
+}
+
+.svc-help-btn:hover {
+    background: var(--color-reference-gold);
+}
+
+/* ---- Notes / callout ---- */
+.svc-note {
+    background: var(--color-reference-feature);
+    border-inline-start: 3px solid var(--color-reference-check);
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--color-reference-nav-ink);
+}
+
+@media (max-width: 1023px) {
+    .svc-detail-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 44px;
+    }
+
+    .svc-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 767px) {
+    .svc-banner {
+        min-height: 240px;
+        border-radius: 22px;
+    }
+
+    .svc-widget,
+    .svc-help {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .svc-treatment {
+        padding: 16px 18px;
+    }
+}
+
+/* ---- Service detail: brief-driven additions ---- */
+.svc-subhead {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-reference-eyebrow);
+}
+
+/* Treatment entry: name + plain-language description, no pricing */
+.svc-item {
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 18px;
+    padding: 18px 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.svc-item:hover {
+    border-color: var(--color-reference-check);
+    box-shadow: var(--shadow-reference-card);
+}
+
+.svc-item-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--color-reference-cocoa);
+}
+
+.svc-item-copy {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--color-reference-muted);
+    margin-top: 5px;
+}
+
+/* Numbered "what to expect" steps */
+.svc-step-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-reference-green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Required clinical / compliance statement */
+.svc-disclaimer {
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-line);
+    border-radius: 20px;
+    padding: 22px 24px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--color-reference-muted);
+}
+
+.svc-disclaimer strong {
+    color: var(--color-reference-cocoa);
+    font-weight: 600;
+}
+
+.svc-hours-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.78);
+    padding: 5px 0;
+}
+
+.svc-hours-row + .svc-hours-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Reviewer initials — used instead of a stock portrait, so a real named
+   Google reviewer is never shown next to a stranger's face. */
+.reference-review-initials {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-reference-gold);
+    color: var(--color-reference-gold-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+}
+
+/* ---- Services index: category blocks ---- */
+.svc-cat + .svc-cat {
+    margin-top: 3.5rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid var(--color-reference-line);
+}
+
+.svc-cat-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.svc-cat-num {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-reference-eyebrow);
+    letter-spacing: 1px;
+}
+
+.svc-cat-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-reference-green);
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 100px;
+    padding: 10px 18px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.svc-cat-link:hover {
+    background: var(--color-reference-green);
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .svc-cat + .svc-cat {
+        margin-top: 2.5rem;
+        padding-top: 2.5rem;
+    }
+}
+
+
+
+/* ==========================================================================
+   Service page - "detail 2" layout
+   Split hero, step timeline, media/info split, centred FAQ card, CTA band.
+   ========================================================================== */
+
+/* ---- Split hero ---- */
+/* A strip of page colour so the floating nav pill still has ground under it,
+   then the band runs edge to edge underneath. */
+.sd2-hero-band { padding-top: 24px; }
+
+.sd2-hero {
+    position: relative;
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    /* the solid block the card sits against - the photo covers the rest */
+    background: var(--color-reference-footer);
+}
+
+.sd2-hero-media {
+    position: absolute;
+    inset: 0;
+    inset-inline-start: 40%;
+}
+
+.sd2-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sd2-hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.sd2-card {
+    background: var(--color-reference-card);
+    border-radius: 20px;
+    padding: 50px;
+    /* wide enough to cross the seam and overlap the photo, as the reference does */
+    max-width: 635px;
+}
+
+.sd2-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(30px, 3.4vw, 45px);
+    line-height: 1.2;
+    color: var(--color-reference-title);
+}
+
+/* Trailing arrow disc, matching the reference's primary hero button */
+.sd2-btn-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-inline-start: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.sd2-hero-btn:hover .sd2-btn-arrow {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(3px);
+}
+
+.sd2-card-copy {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-reference-muted);
+    margin-top: 14px;
+}
+
+.sd2-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.sd2-contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sd2-contact-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-reference-gold);
+    color: var(--color-reference-gold-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sd2-contact-label {
+    font-size: 12px;
+    color: var(--color-reference-subtle);
+}
+
+.sd2-contact-value {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-reference-cocoa);
+}
+
+/* ---- Step timeline ---- */
+.sd2-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 26px;
+}
+
+.sd2-step-num {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-reference-green);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-inline: auto;
+}
+
+.sd2-step-rule {
+    position: relative;
+    height: 1px;
+    background: var(--color-reference-line);
+    margin: 18px 0 16px;
+}
+
+.sd2-step-rule::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 50%;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-reference-check);
+    transform: translateX(-50%);
+}
+
+.sd2-step-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16.5px;
+    color: var(--color-reference-cocoa);
+    text-align: center;
+}
+
+.sd2-step-copy {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-reference-muted);
+    text-align: center;
+    margin-top: 7px;
+}
+
+/* ---- Media / info split ---- */
+.sd2-split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px;
+    align-items: center;
+}
+
+.sd2-split-media {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+}
+
+.sd2-split-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Where the checklist beside the picture is short, a square frame leaves a
+   band of empty page above and below it. Shorten the frame and let the list
+   spread to meet it. */
+.sd2-split-even .sd2-split-media { aspect-ratio: 5 / 4; }
+
+@media (min-width: 1024px) {
+    .sd2-split-even .svc-benefit-list {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+}
+
+/* ---- FAQ card ---- */
+.sd2-faq-card {
+    background: var(--color-reference-card);
+    border-radius: 34px;
+    padding: 46px;
+    max-width: 62rem;
+    margin-inline: auto;
+    box-shadow: var(--shadow-reference-card);
+}
+
+/* ---- Closing CTA band ---- */
+.sd2-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+    background: var(--color-reference-feature);
+    border-radius: 34px;
+    overflow: hidden;
+}
+
+.sd2-cta-media {
+    position: relative;
+    min-height: 320px;
+}
+
+.sd2-cta-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sd2-cta-body {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 1023px) {
+    .sd2-split {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+    }
+
+    .sd2-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sd2-steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+    }
+
+    .sd2-faq-card {
+        padding: 26px 20px;
+        border-radius: 24px;
+    }
+
+    .sd2-cta {
+        grid-template-columns: minmax(0, 1fr);
+        border-radius: 24px;
+    }
+
+    .sd2-cta-media {
+        min-height: 220px;
+    }
+
+    .sd2-cta-body {
+        padding: 28px 22px;
+    }
+}
+
+/* ---- Navbar services dropdown ---- */
+.nav-dd {
+    position: relative;
+}
+
+.nav-dd-panel {
+    position: absolute;
+    top: calc(100% + 14px);
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 20rem;
+    background: var(--color-reference-card);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: var(--shadow-reference-float);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+    z-index: 60;
+}
+
+/* A hover bridge keeps the panel open while the pointer crosses the gap */
+.nav-dd::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    height: 16px;
+}
+
+.nav-dd:hover .nav-dd-panel,
+.nav-dd:focus-within .nav-dd-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dd-link {
+    display: block;
+    padding: 9px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--color-reference-nav-ink);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-dd-link:hover,
+.nav-dd-link.is-active {
+    background: var(--color-reference-page);
+    color: var(--color-reference-green);
+}
+
+.nav-dd-caret {
+    transition: transform 0.22s ease;
+}
+
+.nav-dd:hover .nav-dd-caret {
+    transform: rotate(180deg);
+}
+
+/* The desktop link for the current page, and its parent */
+.reference-nav-link.is-current {
+    color: var(--color-reference-green);
+    font-weight: 600;
+}
+
+/* Mobile: nested list inside the slide-down menu.
+   The nine treatment links used to sit permanently open, which pushed Contact
+   off the bottom of a 70vh sheet. The group is a collapsible now - shut by
+   default, opened automatically when the current page is one of its links. */
+.nav-group-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-align: start;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+}
+
+.nav-group-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-inline-start: auto;
+    border-radius: 50%;
+    background: var(--color-reference-faq-icon);
+    color: var(--color-reference-title);
+    transition: transform 0.3s ease, background-color 0.25s ease;
+}
+
+.nav-group.is-open > .nav-group-toggle .nav-group-icon {
+    transform: rotate(180deg);
+    background: var(--color-reference-check);
+}
+
+.nav-sub {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-sub > .nav-sub-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    min-height: 0;
+    padding-inline-start: 14px;
+    border-inline-start: 2px solid var(--color-reference-line);
+}
+
+.nav-group.is-open > .nav-sub { grid-template-rows: 1fr; }
+
+/* the first and last rows need the breathing room the wrapper cannot carry
+   while it is collapsed to zero */
+.nav-group.is-open > .nav-sub > .nav-sub-inner { margin-block: 6px; }
+
+.nav-sub a {
+    font-size: 14px;
+    color: var(--color-reference-nav-ink);
+    padding: 6px 0;
+    transition: color 0.2s ease;
+}
+
+.nav-sub a:hover,
+.nav-sub a.is-active {
+    color: var(--color-reference-green);
+    font-weight: 600;
+}
+
+/* ---- Services mega-menu (grouped by category) ---- */
+.nav-mega-panel {
+    min-width: min(64rem, calc(100vw - 40px));
+    padding: 22px 24px 24px;
+    border-radius: 24px;
+    max-height: min(74vh, 640px);
+    overflow-y: auto;
+}
+
+.nav-mega-top {
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--color-reference-line);
+}
+
+.nav-mega-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+}
+
+.nav-mega-all:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.nav-mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px 26px;
+}
+
+.nav-mega-head {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14.5px;
+    line-height: 1.3;
+    color: var(--color-reference-cocoa);
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--color-reference-hairline);
+    transition: color 0.2s ease;
+}
+
+.nav-mega-head:hover {
+    color: var(--color-reference-green);
+}
+
+.nav-mega-link {
+    display: block;
+    padding: 5px 8px;
+    margin-inline-start: -8px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--color-reference-nav-ink);
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.nav-mega-link:hover {
+    background: var(--color-reference-page);
+    color: var(--color-reference-green);
+}
+
+@media (max-width: 1279px) {
+    .nav-mega-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile nested groups */
+.nav-sub-group + .nav-sub-group {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-reference-hairline);
+}
+
+.nav-sub-head {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--color-reference-cocoa);
+    padding: 2px 0 4px;
+}
+
+/* The mega panel is far wider than its trigger, so centring it on the trigger
+   pushes it off-screen. Anchor it to the navbar row instead: going static
+   makes the navbar's own relative wrapper the containing block, so the panel
+   spans exactly the nav width and can never overflow the viewport. */
+.nav-dd-mega {
+    position: static;
+}
+
+.nav-mega-panel {
+    inset-inline: 0;
+    min-width: 0;
+    transform: translateY(-6px);
+}
+
+.nav-dd-mega:hover .nav-mega-panel,
+.nav-dd-mega:focus-within .nav-mega-panel {
+    transform: translateY(0);
+}
+
+/* ---- Homepage: highlights + differentiators ---- */
+.home-highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.home-highlight {
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 20px;
+    padding: 22px;
+}
+
+.home-highlight-value {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--color-reference-green);
+}
+
+.home-highlight-label {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-reference-muted);
+    margin-top: 9px;
+}
+
+.home-diff {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--color-reference-nav-ink);
+}
+
+/* ==========================================================================
+   Motion + interaction pass, matched to the design reference
+   (scroll fade-up, media zoom on hover, lift on interactive cards)
+   ========================================================================== */
+
+/* ---- Scroll reveal ---- */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.31, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.31, 1);
+}
+
+[data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---- Media zoom on hover ----
+   The reference scales its media to 1.15; that is heavy on a full-bleed
+   hero, so the large blocks get a gentler figure and the small cards the
+   full one. */
+.sd2-hero-media,
+.sd2-split-media,
+.sd2-cta-media,
+.reference-clinic-portrait {
+    overflow: hidden;
+}
+
+.sd2-hero-media img,
+.sd2-split-media img,
+.sd2-cta-media img,
+.reference-clinic-portrait img,
+.svc-banner img {
+    transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.31, 1);
+}
+
+.sd2-hero:hover .sd2-hero-media img,
+.sd2-split:hover .sd2-split-media img,
+.sd2-cta:hover .sd2-cta-media img,
+.reference-clinic-portrait:hover img,
+.svc-banner:hover img {
+    transform: scale(1.06);
+}
+
+/* ---- Cards lift ---- */
+.svc-item {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.svc-item:hover {
+    transform: translateY(-3px);
+}
+
+.home-highlight {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.home-highlight:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-reference-check);
+    box-shadow: var(--shadow-reference-card);
+}
+
+.reference-review-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reference-review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-reference-float);
+}
+
+/* ---- Step timeline ---- */
+.sd2-steps > div {
+    transition: transform 0.3s ease;
+}
+
+.sd2-steps > div:hover {
+    transform: translateY(-3px);
+}
+
+.sd2-step-num {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sd2-steps > div:hover .sd2-step-num {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(46, 90, 75, 0.28);
+}
+
+/* ---- FAQ rows ---- */
+.reference-faq-item {
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reference-faq-item:not(.active):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-reference-card);
+}
+
+/* ---- Section rhythm, matched to the reference (70px top / 40px bottom) ---- */
+@media (min-width: 1024px) {
+    .sd2-rhythm {
+        padding-bottom: 6.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal],
+    [data-reveal="in"] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .sd2-hero-media img,
+    .sd2-split-media img,
+    .sd2-cta-media img,
+    .svc-item,
+    .home-highlight,
+    .reference-review-card,
+    .sd2-steps > div {
+        transition: none;
+    }
+}
+
+/* The wheel's furthest pill sits (320 + 96) x scale from its centre, so the
+   scale has to fall as the band narrows or the arc is clipped at the sides.
+   These steps keep that reach inside half the band width at every size. */
+/* Tablet: the band is padded and still narrower than the full-size wheel */
+@media (min-width: 768px) and (max-width: 899px) {
+    .hero-avatar-wheel {
+        --wheel-scale: 0.82;
+        transform: scale(var(--wheel-scale));
+        transform-origin: center;
+        bottom: calc(-120px * var(--wheel-scale));
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1023px) {
+    .hero-avatar-wheel {
+        --wheel-scale: 0.92;
+        transform: scale(var(--wheel-scale));
+        transform-origin: center;
+        bottom: calc(-120px * var(--wheel-scale));
+    }
+}
+
+
+/* The wheel should occupy the same share of the band as it does on desktop
+   (~43% of the height), so its scale has to track the band, which is itself
+   a 3:2 slice of the viewport. These steps follow that ratio; every one also
+   keeps the arc's 416 x scale reach inside half the band width. */
+@media (max-width: 359px) {
+    .hero-avatar-wheel { --wheel-scale: 0.34; }
+}
+
+@media (min-width: 430px) and (max-width: 519px) {
+    .hero-avatar-wheel { --wheel-scale: 0.46; }
+}
+
+@media (min-width: 520px) and (max-width: 639px) {
+    .hero-avatar-wheel { --wheel-scale: 0.56; }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+    .hero-avatar-wheel { --wheel-scale: 0.68; }
+}
+
+
+/* ==========================================================================
+   Section bands ("monotony gap")
+   Every page used to sit on one flat #fbeadd, so long pages read as a single
+   undifferentiated wash. The reference (elevatedwithelana.com) breaks that by
+   running full-bleed colour bands between content: a base tint, a soft tint,
+   an accent, and one strong dark band. These are the same four steps built
+   from the brownwolf palette we already ship, so nothing new is introduced.
+   ========================================================================== */
+
+.band {
+    /* Once a section carries its own background it needs symmetric padding -
+       the bottom-only rhythm the flat layout used would jam content against
+       the top edge of the colour. */
+    padding-block: clamp(52px, 6.2vw, 104px);
+    position: relative;
+}
+
+.band-blush { background: var(--color-reference-page); }
+.band-cream { background: var(--color-reference-card); }
+.band-gold  { background: var(--color-reference-gold); }   /* #f1e1c6 */
+
+/* The strong break. Text and surfaces invert against the deep green. */
+.band-green { background: var(--color-reference-footer); }
+
+.band-green .svc-h2,
+.band-green .svc-h3,
+.band-green .sd2-step-title,
+.band-green .reference-clinic-title { color: #f7ede1; }
+
+.band-green .svc-p,
+.band-green .svc-lead,
+.band-green .sd2-step-copy { color: rgba(247, 237, 225, 0.72); }
+
+.band-green .reference-eyebrow { color: var(--color-reference-check); }
+
+.band-green .sd2-step-num {
+    background: rgba(247, 237, 225, 0.1);
+    color: var(--color-reference-check);
+    border-color: rgba(247, 237, 225, 0.22);
+}
+
+.band-green .sd2-step-rule { background: rgba(247, 237, 225, 0.2); }
+
+/* Bands sit edge to edge, so consecutive bands of the same colour would read
+   as one block with a double gap in the middle. Collapse the seam. */
+.band + .band { padding-block-start: clamp(52px, 6.2vw, 104px); }
+
+/* ==========================================================================
+   Treatment grid
+   The treatment lists were a single column inside a max-w-4xl, which left the
+   right half of the page empty on desktop. These are flex rows that grow, so
+   a row always fills the full width - four short cards across, or three wider
+   ones - and a short final row stretches instead of leaving a hole.
+   ========================================================================== */
+
+.svc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.svc-grid > * {
+    /* --svc-basis tunes how many land per row: ~280px gives 4, ~380px gives 3,
+       ~500px gives 2. flex-grow then absorbs whatever width is left over. */
+    flex: 1 1 min(var(--svc-basis, 280px), 100%);
+    min-width: 0;
+}
+
+/* Card with a heading image on top */
+.svc-item-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    /* a two-up row makes each card ~680px wide, where 16/10 would give a
+       425px-tall photo that swamps the copy underneath */
+    max-height: 240px;
+    border-radius: 13px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background: var(--color-reference-feature);
+}
+
+.svc-item-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.31, 1);
+}
+
+.svc-item:hover .svc-item-media img { transform: scale(1.06); }
+
+.svc-ba-frame img,
+.svc-ba-half img { transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.31, 1); }
+.svc-ba-card:hover .svc-ba-frame img,
+.svc-ba-card:hover .svc-ba-half img { transform: scale(1.04); }
+
+.svc-item { display: flex; flex-direction: column; }
+
+/* Group heading with its own related image */
+.svc-group-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.svc-group-head-media {
+    position: relative;
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.svc-group-head-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   Provider portrait - shown uncropped
+   dr-nawal.webp is 593x890. The portrait frame was forced to 1/1 with
+   object-fit: cover, which cut roughly a third off the top and bottom of the
+   frame. Matching the frame to the file's own ratio means cover has nothing
+   left to crop, and capping the column keeps the resulting height sane
+   alongside the text beside it.
+   ========================================================================== */
+.reference-clinic-portrait {
+    /* the file's own ratio, so object-fit: cover has nothing to crop */
+    aspect-ratio: 593 / 890;
+    /* 330 x 495 lines the portrait up with the height of the copy beside it,
+       instead of running ~170px past the end of the text */
+    max-width: 330px;
+}
+
+/* Below 1024 the two columns wrap, so the photo sits on its own row - centre
+   it rather than leaving it hard against the left edge with a wide gap. */
+@media (max-width: 1023px) {
+    .reference-clinic-portrait { margin-inline: auto; }
+}
+
+@media (max-width: 767px) {
+    .reference-clinic-portrait { max-width: 260px; }
+}
+
+/* Home page's highlights block is the strong dark band there. It carries card
+   surfaces and a check list, so both need to come up off the green. */
+.band-green .home-highlight {
+    background: rgba(247, 237, 225, 0.06);
+    border-color: rgba(247, 237, 225, 0.16);
+}
+
+.band-green .home-highlight-value { color: var(--color-reference-check); }
+.band-green .home-highlight-label { color: rgba(247, 237, 225, 0.68); }
+.band-green .home-diff { color: rgba(247, 237, 225, 0.86); }
+
+.band-green .svc-benefit-mark {
+    background: rgba(247, 237, 225, 0.14);
+    color: var(--color-reference-check);
+}
+
+.band-green .svc-benefit-title { color: #f7ede1; }
+
+/* Value / treatment cards on the dark band */
+.band-green .svc-item,
+.band-green .svc-widget,
+.band-green .svc-disclaimer {
+    background: rgba(247, 237, 225, 0.06);
+    border-color: rgba(247, 237, 225, 0.16);
+}
+
+.band-green .svc-item-name,
+.band-green .svc-disclaimer strong { color: #f7ede1; }
+
+.band-green .svc-item-copy,
+.band-green .svc-disclaimer { color: rgba(247, 237, 225, 0.68); }
+
+.band-green .svc-item:hover {
+    border-color: rgba(241, 203, 160, 0.45);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* --svc-basis is tuned for the full-width desktop row. Below that it has to
+   be clamped by percentage instead, or a group whose basis is 380px drops
+   straight from three columns to one on a tablet while a 280px group beside
+   it still manages two. */
+@media (max-width: 639px) {
+    .svc-grid > * { flex-basis: 100%; }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .svc-grid > * { flex-basis: calc(50% - 8px); }
+}
+
+
+/* ==========================================================================
+   Before / after results carousel
+   Follows the ClinicMaster "Patient Skin Success Stories" section: heading on
+   the left, prev/next on the right, rounded media sliding underneath. Colours
+   come from the reference palette, and each slide is an explicit before|after
+   pair rather than a single photo, so nothing is left to interpretation.
+   ========================================================================== */
+
+.svc-ba-card {
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 24px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.svc-ba-card:hover {
+    border-color: var(--color-reference-check);
+    box-shadow: var(--shadow-reference-float);
+    transform: translateY(-4px);
+}
+
+.svc-ba-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--color-reference-line);
+    /* same overall frame as a composite slide, so every card in the row
+       ends up the same height */
+    aspect-ratio: 3 / 4;
+    max-height: 26rem;
+}
+
+.svc-ba-half {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    background: var(--color-reference-feature);
+}
+
+.svc-ba-half img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.svc-ba-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    /* on a wide screen a 3:4 slide is taller than the viewport, so cap it -
+       the ratio still governs every width below that */
+    max-height: 26rem;
+    overflow: hidden;
+    background: var(--color-reference-feature);
+}
+
+/* Every frame keeps the same ratio so the cards in a row match; a composite
+   that does not fit it is contained rather than cropped (rule above). */
+
+.svc-ba-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* A composite that stacks the two photographs vertically does not survive a
+   landscape frame - the crop lands on the seam. Show the whole thing. */
+.svc-ba-frame-stack,
+.svc-ba-frame-wide {
+    background: var(--color-reference-card);
+}
+
+.svc-ba-frame-stack img,
+.svc-ba-frame-wide img {
+    object-fit: contain;
+}
+
+/* On a composite the pills sit over each half of the single image. */
+.svc-ba-frame .svc-ba-tag { inset-inline-start: 10px; }
+.svc-ba-frame .svc-ba-tag-after {
+    inset-inline-start: auto;
+    inset-inline-end: 10px;
+}
+
+.svc-ba-tag {
+    position: absolute;
+    inset-block-end: 10px;
+    inset-inline-start: 10px;
+    z-index: 2;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 100px;
+    background: rgba(253, 248, 241, 0.92);
+    color: var(--color-reference-cocoa);
+}
+
+.svc-ba-tag-after {
+    background: var(--color-reference-green);
+    color: #fff;
+}
+
+.svc-ba-body { padding: 18px 20px 20px; }
+
+.svc-ba-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--color-reference-cocoa);
+}
+
+.svc-ba-copy {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-reference-muted);
+    margin-top: 6px;
+}
+
+/* Standing note: these are the template's stock photographs, not patients.
+   It stays on the page until real consented photography replaces them. */
+.svc-ba-placeholder {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(185, 149, 114, 0.13);
+    border: 1px dashed var(--color-reference-eyebrow);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--color-reference-title);
+}
+
+.compareSwiper { overflow: hidden; }
+.compareSwiper .swiper-slide { height: auto; }
+
+
+/* ---- Priced treatment card (injectables) ---- */
+.svc-offer-tag {
+    display: inline-block;
+    /* .svc-item is a column flexbox, so an inline-block child still stretches
+       to the full card width unless it is told not to */
+    align-self: flex-start;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--color-reference-check-ink);
+    background: var(--color-reference-check);
+    border-radius: 100px;
+    padding: 5px 11px;
+}
+
+.svc-offer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-reference-hairline);
+}
+
+.svc-offer-meta > div { min-width: 0; }
+
+.svc-offer-meta dt {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--color-reference-subtle);
+}
+
+.svc-offer-meta dd {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+    margin: 3px 0 0;
+}
+
+/* the description should push the meta row to the bottom of the card */
+.svc-item .svc-item-copy { margin-bottom: 14px; }
+
+/* ---- Pull quote on the dark band ---- */
+.svc-quote {
+    max-width: 52rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.svc-quote-mark {
+    font-family: var(--font-heading);
+    font-size: 72px;
+    line-height: 0.6;
+    color: var(--color-reference-check);
+}
+
+.svc-quote-text {
+    font-family: var(--font-heading);
+    font-size: clamp(19px, 2.1vw, 27px);
+    line-height: 1.5;
+    color: #f7ede1;
+    margin: 22px 0 0;
+}
+
+.svc-quote-by {
+    font-size: 13px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--color-reference-check);
+    margin-top: 22px;
+}
+
+/* ---- Benefit ticks in the closing CTA ---- */
+.svc-cta-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 22px;
+}
+
+.svc-cta-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--color-reference-nav-ink);
+}
+
+.svc-cta-benefits i { color: var(--color-reference-green); flex-shrink: 0; }
+
+
+/* The split hero is a desktop layout. Below 1024 the 635px card would cover
+   almost the whole photo, so the band stacks instead: photo on top, card
+   lifting over its lower edge with the colour block showing behind. */
+@media (max-width: 1023px) {
+    .sd2-hero-band { padding-top: 16px; }
+
+    .sd2-hero {
+        display: block;
+        min-height: 0;
+    }
+
+    /* Below the split layout the photo is shown whole rather than cropped
+       to a fixed band height - the sources are portraits and a 300px cover
+       crop was cutting the subject's face off. */
+    .sd2-hero-media {
+        position: relative;
+        inset: auto;
+        height: auto;
+    }
+
+    .sd2-hero-media img {
+        position: static;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+    }
+
+    .sd2-hero-inner { padding-bottom: 30px; }
+
+    .sd2-card {
+        max-width: none;
+        padding: 30px 26px;
+        margin-top: -38px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sd2-card { padding: 26px 22px; margin-top: -34px; }
+}
+
+/* The dark-band text overrides invert everything inside .band-green, but the
+   FAQ card keeps its own cream ground - so its heading and eyebrow were being
+   painted near-white on near-white. Put them back to the light-ground colours
+   inside any card that carries its own background. */
+.band-green .sd2-faq-card .svc-h2,
+.band-green .sd2-faq-card .svc-h3 { color: var(--color-reference-title); }
+
+.band-green .sd2-faq-card .reference-eyebrow { color: var(--color-reference-eyebrow); }
+
+.band-green .sd2-faq-card .svc-p,
+.band-green .sd2-faq-card .svc-lead { color: var(--color-reference-muted); }
+
+
+/* ==========================================================================
+   Service pages: green runs up behind the header
+   The hero's dark block used to start below the navbar, leaving a strip of
+   page blush between them. On these pages the header sits on the same green,
+   with the nav pill floating on it.
+   ========================================================================== */
+.svc-page .reference-nav-shell {
+    background: var(--color-reference-footer);
+    padding-bottom: 24px;
+}
+
+.svc-page .sd2-hero-band { padding-top: 0; }
+
+@media (max-width: 1023px) {
+    .svc-page .reference-nav-shell { padding-top: 18px; padding-bottom: 18px; }
+}
+
+/* the mobile menu drops onto the green, so give it its own edge */
+.svc-page #mobile-menu { box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28); }
+
+/* ==========================================================================
+   Collapsibles (mobile only)
+   Panels animate on grid-template-rows rather than max-height, so the height
+   is the content's real height and nothing has to be measured in JS. Above
+   the breakpoint the panel is a plain block and the toggle is inert.
+   ========================================================================== */
+.cl-icon { display: none; }
+
+/* A toggle that IS the heading has to look like the heading at every width -
+   the .cl-toggle reset below is mobile-only, so on desktop the bare <button>
+   would otherwise render with browser chrome. `font: inherit` takes the h2's
+   own type, which is exactly what is wanted here; the generic .cl-toggle rule
+   is deliberately left alone so .sd2-step-title keeps its own sizing. */
+h2 > .cl-toggle,
+h3 > .cl-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+}
+
+@media (max-width: 1023px) {
+    h2 > .cl-toggle,
+    h3 > .cl-toggle { cursor: pointer; }
+}
+
+@media (max-width: 1023px) {
+    .cl-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cl-panel > * { overflow: hidden; min-height: 0; }
+
+    .cl-item.is-open > .cl-panel { grid-template-rows: 1fr; }
+
+    .cl-toggle {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        text-align: start;
+        cursor: pointer;
+        background: none;
+        border: 0;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+    }
+
+    .cl-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        margin-inline-start: auto;
+        border-radius: 50%;
+        background: var(--color-reference-faq-icon);
+        color: var(--color-reference-title);
+        transition: transform 0.35s ease, background-color 0.25s ease;
+    }
+
+    /* `> * >` reaches the heading-wrapped variant and nothing deeper: a
+       nested .cl-item's toggle is at least three levels down. */
+    .cl-item.is-open > .cl-toggle .cl-icon,
+    .cl-item.is-open > * > .cl-toggle .cl-icon {
+        transform: rotate(135deg);
+        background: var(--color-reference-check);
+    }
+
+    /* step cards read as rows once they collapse */
+    .sd2-steps .cl-item {
+        background: var(--color-reference-card);
+        border: 1px solid var(--color-reference-hairline);
+        border-radius: 16px;
+        padding: 16px 18px;
+    }
+
+    .sd2-steps .sd2-step-num { margin-inline: 0; width: 30px; height: 30px; font-size: 13px; }
+    .sd2-steps .sd2-step-rule { display: none; }
+    .sd2-steps .sd2-step-title { text-align: start; font-size: 15.5px; }
+    .sd2-steps .sd2-step-copy { text-align: start; padding-top: 10px; }
+
+    .sd2-steps .cl-toggle { margin-top: 10px; }
+
+    /* treatment group heading behaves as the accordion row */
+    .svc-group-head.cl-toggle {
+        background: var(--color-reference-card);
+        border: 1px solid var(--color-reference-hairline);
+        border-radius: 16px;
+        padding: 12px 14px;
+    }
+
+    .svc-item .cl-toggle { margin-top: 2px; }
+    .svc-item .svc-item-copy { margin-top: 0; padding-top: 8px; }
+}
+
+/* ==========================================================================
+   Mobile density
+   Every band carried desktop-sized padding down to 390px, which is most of
+   why the pages read as stretched on a phone.
+   ========================================================================== */
+@media (max-width: 767px) {
+    .band { padding-block: 40px; }
+    .sd2-card { padding: 26px 22px; }
+    .svc-grid { gap: 12px; }
+    .sd2-steps { gap: 12px; }
+    .sd2-faq-card { padding: 24px 18px; border-radius: 24px; }
+    .svc-ba-body { padding: 14px 16px 16px; }
+}
+
+/* Two images were setting the height of their whole section on a phone: the
+   provider portrait at its full 593/890, and the overview split media. */
+@media (max-width: 767px) {
+    /* C. the overview photo spans the same width as the copy under it */
+    .sd2-split-media {
+        width: 100%;
+        aspect-ratio: 16 / 11;
+        max-height: none;
+    }
+
+    .sd2-split-media img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* D. Section headings centre on a phone, along with the copy that introduces
+   them. Only the intro block - lists, cards and the accordions stay left
+   aligned, where centring would hurt readability. */
+@media (max-width: 767px) {
+    .svc-page .band > .container > .max-w-2xl,
+    .svc-page .band > .container > .max-w-3xl,
+    .svc-page .band > .container > .max-w-4xl,
+    .svc-page .band .sd2-split > div > .reference-eyebrow,
+    .svc-page .band .sd2-split > div > .svc-h2,
+    .svc-page .band .sd2-split > div > .svc-lead,
+    .svc-page .band .sd2-split > div > .svc-p {
+        text-align: center;
+    }
+
+    .svc-page .band > .container > .flex-wrap > .max-w-2xl { text-align: center; }
+
+    /* the results header stacks, so its arrows centre under the title */
+    .svc-page .band .items-end.justify-between { justify-content: center; }
+}
+
+/* the provider block is a two-column flex rather than a .max-w-* intro, so it
+   needs its own rule to centre with the rest */
+@media (max-width: 767px) {
+    div:has(> .reference-clinic-title) { text-align: center; }
+
+    /* the tick list keeps its left edge - centred rows with icons read badly */
+    div:has(> .reference-clinic-title) .flex-col > div { text-align: start; }
+}
+
+/* The step title is a <button> now, and a button shrink-wraps: it was sitting
+   215px wide in a 326px column, so its centred text landed left of the number
+   above it. Filling the column puts the two on the same axis. */
+@media (min-width: 1024px) {
+    .sd2-step-title {
+        display: block;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* The portrait column was flex-1, so the photo sat in a 658px column and
+       left a hole before the copy. Sizing the column to the photo makes the gap
+       the flex gap alone, and the copy gets the width back.
+       Unscoped from `.band` deliberately: the home page's provider section
+       carries the same markup without that class and had the same hole.
+
+       Width is driven by height, not the other way round: at the file's own
+       593/890 ratio a 440px-wide photo stands 660px tall next to ~490px of
+       copy, so it overran the text by ~170px and left dead space under the
+       button. Fixing the height to the copy's height (and letting width
+       follow) keeps both columns ending together with no crop. */
+    .flex-wrap > div:has(> .reference-clinic-portrait) {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 0;
+    }
+
+    .reference-clinic-portrait {
+        height: 30.625rem; /* 490px - matches the copy column */
+        width: auto;
+        max-width: none;
+    }
+
+    /* With the photo sized to the copy's height the pair is ~1000px wide, so on
+       a 1400px container it left a void down the right. Capping the row and
+       centring it keeps the two columns reading as one block; the copy also
+       gets a comfortable measure instead of a 1000px line length. */
+    .flex-wrap:has(> div > .reference-clinic-portrait) {
+        max-width: 62rem;
+        margin-inline: auto;
+    }
+
+    .flex-wrap:has(> div > .reference-clinic-portrait) p {
+        max-width: none;
+    }
+}
+
+/* ==========================================================================
+   Trust bar
+   The strip of practice credentials that closes the hero block. Deliberately
+   NOT .band-green: it belongs to the hero, not to the alternating bands, and
+   the band-green overrides would repaint text they do not own.
+   ========================================================================== */
+.svc-trustbar {
+    background: var(--color-reference-footer);
+    padding-block: 22px;
+}
+
+.svc-trustbar-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 28px;
+}
+
+.svc-trust {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    color: rgba(247, 237, 225, 0.88);
+}
+
+.svc-trust-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(241, 203, 160, 0.16);
+    color: var(--color-reference-check);
+}
+
+@media (max-width: 767px) {
+    .svc-trustbar { padding-block: 16px; }
+
+    /* four across is unreadable on a phone, so they pair up */
+    .svc-trustbar-row { justify-content: flex-start; gap: 12px 16px; }
+    .svc-trust { flex: 1 1 calc(50% - 8px); font-size: 12.5px; gap: 8px; }
+    .svc-trust-mark { width: 22px; height: 22px; }
+}
+
+/* ==========================================================================
+   Benefits, now a band of its own
+   The list used to sit in the overview's text column, where a single stack was
+   right. Full width it would run to one very long line, so it wraps into
+   columns - .svc-benefit-list sets flex-column, hence the doubled class.
+   ========================================================================== */
+@media (min-width: 768px) {
+    .svc-benefit-list.svc-benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 26px 44px;
+        align-items: start;
+    }
+}
+
+/* ==========================================================================
+   Patient reviews under the before/after carousel
+   ========================================================================== */
+.svc-review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 20px;
+    align-items: stretch;
+}
+
+@media (max-width: 767px) {
+    .svc-reviews { text-align: center; }
+
+    /* the quotes themselves stay left aligned - centred body copy reads badly */
+    .svc-review-grid { text-align: start; }
+}
+
+/* ==========================================================================
+   Services accordion: the four categories the brief lists but the panel row
+   never carried (Women's, Men's, Sexual Wellness, Wellness Products).
+   Nine panels need roughly 1300px - eight spines plus an open panel wide
+   enough to read. Below that they become full-width bars, which is the shape
+   the phone layout already used and which takes any number of panels.
+   ========================================================================== */
+@media (max-width: 1279px) {
+    .reference-services-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        height: auto;
+        transition: none;
+    }
+
+    .svc-panel {
+        border-radius: 20px;
+        transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    }
+
+    .svc-panel:not(.is-open) { height: 66px; }
+
+    .svc-panel.is-open {
+        grid-column: auto;
+        height: auto;
+        border-radius: 24px;
+    }
+
+    .svc-panel.is-open .svc-body { position: static; }
+    .svc-body-content { min-width: 0; }
+
+    /* the spine label unrotates and reads as a bar */
+    .svc-trigger .reference-service-spine-body {
+        top: 0;
+        bottom: 0;
+        inset-inline: 0;
+        justify-content: flex-start;
+        padding-inline-start: 72px;
+        padding-inline-end: 58px;
+    }
+
+    .reference-service-spine-label {
+        transform: none;
+        rotate: none;
+        font-size: 15.5px;
+        line-height: 1.2;
+        white-space: normal;
+        text-align: start;
+    }
+
+    /* The number and the arrow chip are placed for a vertical spine - centred
+       across its width, sitting at its foot. In bar form they belong at the
+       two ends, and the label has to clear both. */
+    .svc-trigger .reference-service-spine-number {
+        inset-inline-start: 16px;
+        top: 50%;
+        bottom: auto;
+        translate: none;
+        transform: translateY(-50%);
+        font-size: 19px;
+    }
+
+    .svc-trigger > span:first-child {
+        top: 50%;
+        inset-inline-start: auto;
+        inset-inline-end: 14px;
+        translate: none;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+/* between the phone layout and the panel row the media still sits beside the
+   copy - only below 768px does it go above it */
+@media (min-width: 768px) and (max-width: 1279px) {
+    .svc-panel.is-open .svc-body { flex-direction: row; }
+    .svc-body-media { width: 38%; height: auto; }
+}
+
+/* ==========================================================================
+   Provider block - the one section that repeats on the home page and all nine
+   treatment pages, so it carries most of the site's impression of the practice.
+
+   It was correct but sparse: capped at 62rem and centred, it floated in the
+   middle of a 1440px band with the photo at 326px. Widening the cap and the
+   photo fills the band, and the copy gets a deliberate measure and rhythm
+   rather than running the full column width.
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .flex-wrap:has(> div > .reference-clinic-portrait) {
+        max-width: 72rem;
+        gap: clamp(48px, 5vw, 76px);
+    }
+
+    /* taller photo, width follows the 593/890 ratio (540 -> ~360px) */
+    .reference-clinic-portrait { height: 33.75rem; }
+
+    /* a measure, not a column width - ~66 characters */
+    .flex-wrap:has(> div > .reference-clinic-portrait) p { max-width: 34rem; }
+}
+
+/* Vertical rhythm, every width. The block is eyebrow / title / copy / proof /
+   action, and each step reads better with its own interval than with the
+   utility margins the template applied one by one. */
+.reference-clinic-title { margin-top: 14px; }
+
+div:has(> .reference-clinic-title) > p { margin-top: 20px; }
+
+/* the proof rows share the paragraph's measure - run to the full column they
+   read as stretched boxes around three short lines */
+div:has(> .reference-clinic-title) .flex-col {
+    margin-top: 30px;
+    gap: 14px;
+    max-width: 34rem;
+}
+
+/* the credential rows carry the practice's proof, so give them a little more
+   presence than a plain bulleted line */
+div:has(> .reference-clinic-title) .flex-col > div {
+    padding: 11px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--color-reference-hairline);
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+div:has(> .reference-clinic-title) .flex-col > div:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(3px);
+}
+
+/* a hairline sets the action apart from the proof above it */
+div:has(> .reference-clinic-title) > a {
+    margin-top: 34px;
+    border-top: 0;
+}
+
+.reference-clinic-portrait {
+    border-radius: 26px;
+    box-shadow: var(--shadow-reference-card);
+}
+
+/* ==========================================================================
+   Benefits cards
+   The list was three ticks on a flat band. As its own section it needs to hold
+   the width, so each benefit becomes a card with the mark leading it.
+   ========================================================================== */
+.svc-benefit-list.svc-benefit-grid > li {
+    flex-direction: column;
+    gap: 14px;
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 22px;
+    padding: clamp(20px, 2.2vw, 28px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.svc-benefit-list.svc-benefit-grid > li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-reference-float);
+}
+
+.svc-benefit-list.svc-benefit-grid > li .svc-benefit-mark {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.svc-benefit-list.svc-benefit-grid > li .svc-benefit-title { font-size: 18px; }
+
+/* ==========================================================================
+   Treatment group heading - room for a line of copy under the name
+   ========================================================================== */
+.svc-group-intro {
+    max-width: 46rem;
+    margin-top: 14px;
+}
+
+@media (max-width: 1023px) {
+    /* inside the collapsible panel the intro leads the list */
+    .cl-panel .svc-group-intro { margin-top: 0; padding-top: 12px; }
+}
+
+/* ==========================================================================
+   Sticky navbar
+   The header used to scroll away. It sticks now, so the pill needs to sit on
+   its own ground once content passes underneath it - on the service pages the
+   shell is already the green block the hero pulls up into, and elsewhere it
+   inherits the page background rather than letting copy show through.
+   ========================================================================== */
+.reference-nav-shell {
+    /* At rest the shell keeps whatever ground the page gives it - the service
+       pages need their green band so the hero can pull up behind the header.
+       Once it sticks, the ground drops away and only the pill floats. */
+    background: var(--color-reference-page);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.reference-nav-shell.is-stuck,
+.svc-page .reference-nav-shell.is-stuck {
+    background: transparent;
+}
+
+.reference-nav-shell.is-stuck { box-shadow: none; }
+
+.reference-nav-shell.is-stuck #navbar {
+    box-shadow: 0 12px 34px rgba(60, 40, 20, 0.16);
+}
+
+.svc-page .reference-nav-shell.is-stuck #navbar {
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   Floating actions - WhatsApp and back to top
+   ========================================================================== */
+.floating-actions {
+    position: fixed;
+    inset-inline-end: clamp(14px, 2vw, 26px);
+    bottom: clamp(14px, 2vw, 26px);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.floating-btn {
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(60, 40, 20, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease,
+                opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.floating-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(60, 40, 20, 0.3);
+}
+
+/* WhatsApp's own green, so the button reads as WhatsApp rather than as the
+   site's brand green */
+.floating-whatsapp {
+    background: #25d366;
+    color: #fff;
+}
+
+.floating-whatsapp:hover { background: #1fb457; }
+
+/* Follows the site's own circular-control convention (.reference-testimonial-nav,
+   .reference-faq-icon): a light face with a gold ring, filling in on hover.
+   Dark green sat heavily beside the WhatsApp green and matched none of the
+   bands it travels over; cream reads on all of them - the blush, cream and
+   gold bands as well as the dark green footer. */
+.floating-top {
+    background: #fff;
+    color: var(--color-reference-cocoa);
+    /* A white face on a cream or gold band is ~1.1:1, so the ring is what makes
+       the button findable - and it travels over blush, cream, gold AND the dark
+       green footer. gold-ink is the only palette colour that clears 3:1 on all
+       four (3.76 / 3.09 / 3.39 / 3.06); every other candidate falls to ~1.2 on
+       the green. */
+    border: 1.5px solid var(--color-reference-gold-ink);
+    /* hidden until there is somewhere to scroll back to */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+}
+
+.floating-top:hover {
+    background: var(--color-reference-green);
+    border-color: var(--color-reference-green);
+    color: #fff;
+}
+
+.floating-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+@media (max-width: 639px) {
+    .floating-btn { width: 46px; height: 46px; }
+    .floating-actions { gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floating-btn,
+    .reference-nav-shell { transition: none; }
+}
+
+/* ==========================================================================
+   Mobile drawer
+   Driven by a class rather than Preline's overlay, which locked the body and
+   lost the scroll position on every open.
+   ========================================================================== */
+.mobile-drawer {
+    display: none;
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.mobile-drawer.is-mounted { display: block; }
+.mobile-drawer.is-open { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+    .mobile-drawer { transition: none; }
+}
+
+/* ==========================================================================
+   Standalone collapsibles (Benefits, closing CTA, Safety)
+   Long supporting sections that fold on a phone. Each keeps its heading as
+   the toggle, and above the breakpoint they are plain sections again.
+   ========================================================================== */
+@media (max-width: 1023px) {
+    .cl-item[data-collapse-solo] > h2 > .cl-toggle,
+    .cl-item[data-collapse-solo] > h3 > .cl-toggle {
+        padding: 2px 0;
+    }
+
+    /* the CTA folds under its heading, so the photo beside it would otherwise
+       stand alone at full height */
+    .sd2-cta-body[data-collapse-solo]:not(.is-open) { padding-bottom: 18px; }
+}
+
+/* ==========================================================================
+   Hero treatment wheel
+   Eighteen 48x192 pills on a 320px radius - about 830px across. On a phone the
+   hero clips it and the labels read as sliced. Scaling the whole wheel keeps
+   the arc intact and brings the visible pills fully inside the frame.
+   ========================================================================== */
+/* 640-767: scaled down, and anchored to the foot of the arc so the pills that
+   do show sit fully inside the frame rather than being sliced by it. */
+@media (min-width: 640px) and (max-width: 767px) {
+    .hero-avatar-wheel {
+        transform: scale(0.7);
+        transform-origin: 50% 100%;
+    }
+}
+
+/* Under 640 there is no width for it at any scale: the wheel's own radius puts
+   the pills across the image edge, so the labels read as sliced text. The
+   "Explore our treatments" cutout carries the same idea on its own. */
+@media (max-width: 639px) {
+    .hero-avatar-wheel { display: none; }
+}
+
+/* ==========================================================================
+   About - get in touch block
+   ========================================================================== */
+.about-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--color-reference-nav-ink);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+a.about-link:hover {
+    color: var(--color-reference-green);
+    transform: translateX(3px);
+}
+
+.about-link-static { color: var(--color-reference-muted); }
+
+.about-hours {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 16px;
+    font-size: 15px;
+}
+
+.about-hours dt { color: var(--color-reference-nav-ink); }
+.about-hours dd { color: var(--color-reference-muted); text-align: end; margin: 0; }
+
+/* ==========================================================================
+   Contact - what happens next
+   ========================================================================== */
+.contact-next {
+    margin-top: 34px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-reference-line);
+}
+
+.contact-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.contact-steps strong {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--color-reference-cocoa);
+}
+
+.contact-step-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-reference-check);
+    color: var(--color-reference-check-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 1px;
+}
+
+/* ==========================================================================
+   About - company highlights strip
+   Breaks the run of pale bands directly under the banner, and puts the brief's
+   Company Highlights on the page they belong to.
+   ========================================================================== */
+.about-stats-band { padding-block: clamp(34px, 4vw, 60px); }
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: clamp(22px, 3vw, 44px);
+}
+
+.about-stat { position: relative; }
+
+.about-stat + .about-stat::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: clamp(-22px, -1.5vw, -11px);
+    top: 4px;
+    bottom: 4px;
+    width: 1px;
+    background: rgba(241, 203, 160, 0.28);
+}
+
+.about-stat-value {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(34px, 3.4vw, 46px);
+    line-height: 1;
+    color: var(--color-reference-check);
+    font-variant-numeric: tabular-nums;
+}
+
+.about-stat-label {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(247, 237, 225, 0.74);
+    margin-top: 12px;
+    max-width: 26ch;
+}
+
+@media (max-width: 639px) {
+    .about-stat + .about-stat::before { display: none; }
+    .about-stats { gap: 22px; }
+}
+
+/* ==========================================================================
+   About - founder feature
+   Was a 120px thumbnail in a card with a wall of space beside it.
+   ========================================================================== */
+.about-founder {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(28px, 4vw, 64px);
+}
+
+.about-founder-media {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(360px, 100%);
+    aspect-ratio: 593 / 890;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: var(--shadow-reference-card);
+}
+
+.about-founder-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.about-founder-media:hover img { transform: scale(1.04); }
+
+.about-founder-badge {
+    position: absolute;
+    inset-inline: 18px;
+    bottom: 18px;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: rgba(253, 248, 241, 0.92);
+    backdrop-filter: blur(6px);
+}
+
+.about-founder-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--color-reference-cocoa);
+}
+
+.about-founder-role {
+    font-size: 13px;
+    color: var(--color-reference-subtle);
+    margin-top: 2px;
+}
+
+.about-founder > .min-w-0 { flex: 1 1 380px; }
+
+.about-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.about-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    border-radius: 999px;
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    font-size: 13.5px;
+    color: var(--color-reference-nav-ink);
+}
+
+.about-chip i { color: var(--color-reference-gold-ink); }
+
+@media (max-width: 767px) {
+    .about-founder-media { margin-inline: auto; width: min(280px, 100%); }
+    .about-founder { text-align: center; }
+    .about-chips { justify-content: center; }
+    .about-founder .svc-lead,
+    .about-founder .svc-p { text-align: center; }
+}
+
+/* ==========================================================================
+   About - values
+   ========================================================================== */
+.about-value { position: relative; overflow: hidden; padding-top: 26px; }
+
+.about-value-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(241, 203, 160, 0.16);
+    color: var(--color-reference-check);
+    margin-bottom: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.about-value-num {
+    position: absolute;
+    top: 14px;
+    inset-inline-end: 18px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1;
+    color: rgba(241, 203, 160, 0.18);
+    transition: color 0.3s ease;
+}
+
+.about-value {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.about-value:hover { transform: translateY(-4px); }
+.about-value:hover .about-value-icon { background: rgba(241, 203, 160, 0.28); transform: rotate(-6deg); }
+.about-value:hover .about-value-num { color: rgba(241, 203, 160, 0.34); }
+
+@media (prefers-reduced-motion: reduce) {
+    .about-founder-media img,
+    .about-value,
+    .about-value-icon,
+    .about-value-num { transition: none; }
+}
+
+/* ==========================================================================
+   Contact - reasons strip
+   ========================================================================== */
+.contact-reasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(20px, 2.4vw, 34px);
+}
+
+.contact-reason {
+    background: rgba(247, 237, 225, 0.06);
+    border: 1px solid rgba(241, 203, 160, 0.16);
+    border-radius: 22px;
+    padding: clamp(22px, 2.4vw, 30px);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.contact-reason:hover {
+    transform: translateY(-4px);
+    background: rgba(247, 237, 225, 0.1);
+}
+
+.contact-reason-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: rgba(241, 203, 160, 0.16);
+    color: var(--color-reference-check);
+    margin-bottom: 18px;
+    transition: transform 0.3s ease;
+}
+
+.contact-reason:hover .contact-reason-icon { transform: rotate(-6deg); }
+
+@media (prefers-reduced-motion: reduce) {
+    .contact-reason,
+    .contact-reason-icon { transition: none; }
+}
+
+/* ==========================================================================
+   Alternating splits
+   Consecutive sections that all lead with the photograph read as a column of
+   the same block. Flipping every other one gives the page a rhythm - the same
+   thing the Dermato reference about page does.
+   ========================================================================== */
+@media (min-width: 768px) {
+    .sd2-split-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .sd2-split-flip > .sd2-split-media { order: 2; }
+}
+
+/* ==========================================================================
+   Results gallery
+   A few results stay on each treatment page; the rest live here, grouped by
+   treatment, reached by the View all button on those pages.
+   ========================================================================== */
+.results-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.results-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: rgba(247, 237, 225, 0.86);
+    background: rgba(247, 237, 225, 0.07);
+    border: 1px solid rgba(241, 203, 160, 0.2);
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.results-chip:hover {
+    background: var(--color-reference-check);
+    border-color: var(--color-reference-check);
+    color: var(--color-reference-check-ink);
+    transform: translateY(-2px);
+}
+
+/* the anchors land under the sticky navbar without it covering the heading */
+.results-nav-band ~ section[id] { scroll-margin-top: 104px; }
+[id="hair"], [id="wellness"], [id="skin-energy-cat"] { scroll-margin-top: 104px; }
+
+.results-back {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+    white-space: nowrap;
+}
+
+.results-back:hover { text-decoration: underline; }
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(18px, 2vw, 26px);
+    align-items: stretch;
+}
+
+/* a category with no authorized photographs yet says so rather than being
+   padded out with stock */
+.results-pending {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-reference-card);
+    border: 1px dashed var(--color-reference-gold);
+    border-radius: 22px;
+    padding: clamp(22px, 2.4vw, 30px);
+}
+
+.results-pending-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--color-reference-gold);
+    color: var(--color-reference-gold-ink);
+    margin-bottom: 18px;
+}
+
+a.results-pending-link {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+a.results-pending-link:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-reference-gold-ink);
+}
+
+.results-pending-cta {
+    margin-top: auto;
+    padding-top: 18px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+}
+
+.results-viewall { display: flex; justify-content: center; }
+
+@media (prefers-reduced-motion: reduce) {
+    .results-chip,
+    a.results-pending-link { transition: none; }
+}
+
+/* ==========================================================================
+   About - get in touch, now two cards rather than three
+   ========================================================================== */
+.about-touch {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(20px, 2.4vw, 32px);
+}
+
+.about-touch-card {
+    background: var(--color-reference-page);
+    border: 1px solid var(--color-reference-gold);
+    border-radius: 24px;
+    padding: clamp(24px, 2.6vw, 34px);
+}
+
+/* the connect card is the action, so it carries the dark ground */
+.about-touch-card-dark {
+    background: var(--color-reference-footer);
+    border-color: rgba(241, 203, 160, 0.24);
+}
+
+.about-touch-card-dark .svc-h3 { color: #f7ede1; }
+.about-touch-card-dark .about-link { color: rgba(247, 237, 225, 0.88); }
+.about-touch-card-dark a.about-link:hover { color: var(--color-reference-check); }
+.about-touch-card-dark .about-link-static { color: rgba(247, 237, 225, 0.66); }
+.about-touch-card-dark .about-link i { color: var(--color-reference-check); }
+
+.about-touch-card .about-hours dt { color: var(--color-reference-cocoa); }
+.about-touch-card .about-hours dd { color: var(--color-reference-muted); }
+
+/* ==========================================================================
+   "View all results" now sits in the section header, beside the arrows,
+   instead of stranded below the patient reviews.
+   ========================================================================== */
+.results-viewall-link {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.results-viewall-link:hover { text-decoration: underline; }
+
+@media (max-width: 767px) {
+    .results-viewall-link { font-size: 14px; }
+}
+
+/* treatment card thumbnails all match */
+.svc-item-media img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+
+/* treatment card thumbnails all match */
+.svc-item-media img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+
+/* ==========================================================================
+   Results gallery - masonry
+   The photographs come in two shapes: tall Instagram exports (about 1:2) and
+   wide composites (about 3:2). A fixed frame either letterboxes half of them
+   or crops a before/after, and neither is acceptable. Flowing them down
+   columns lets every card keep its own height, fully filled, and the grid
+   still reads as a grid.
+   ========================================================================== */
+.results-grid {
+    display: block;
+    columns: 4;
+    column-gap: clamp(16px, 1.6vw, 24px);
+}
+
+.results-grid > * {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin-bottom: clamp(16px, 1.6vw, 24px);
+    display: block;
+}
+
+.results-grid .svc-ba-frame,
+.results-pair .svc-ba-frame {
+    aspect-ratio: auto;
+    height: auto;
+    background: var(--color-reference-card);
+}
+
+/* the base rule pins the image absolutely inside a ratio box; here the image
+   sets the height instead, so nothing is cropped or letterboxed */
+.results-grid .svc-ba-frame img,
+.results-pair .svc-ba-frame img {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+@media (max-width: 1279px) { .results-grid { columns: 3; } }
+@media (max-width: 900px)  { .results-grid { columns: 2; } }
+@media (max-width: 560px)  { .results-grid { columns: 1; } }
+
+/* the two single-case categories share one band */
+.results-pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(28px, 3.4vw, 56px);
+    align-items: start;
+}
+
+.results-pair-note {
+    margin-top: clamp(24px, 2.6vw, 36px);
+    padding-top: 20px;
+    border-top: 1px solid var(--color-reference-line);
+    max-width: 48rem;
+}
+
+/* ==========================================================================
+   Mobile density on the gallery
+   ========================================================================== */
+@media (max-width: 767px) {
+    .results-band-tight { padding-block: 34px; }
+    .results-nav { gap: 8px; }
+    .results-chip { padding: 8px 14px; font-size: 13px; }
+    .results-viewall-link { font-size: 13.5px; }
+    .svc-ba-body { padding: 14px 16px 16px; }
+}
+
+/* treatment card thumbnails all match */
+.svc-item-media img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+
+/* ==========================================================================
+   Results gallery - filter chips, uniform tiles, lightbox
+   The photographs are two very different shapes, so the tile is a uniform
+   crop and the lightbox shows the whole frame. Nothing is lost, and the grid
+   stays even - the way the reference gallery handles the same problem.
+   ========================================================================== */
+.gal-filters { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.gal-chip {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--color-reference-gold);
+    background: transparent;
+    color: var(--color-reference-nav-ink);
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color .22s ease, color .22s ease, border-color .22s ease;
+}
+
+.gal-chip:hover { background: var(--color-reference-gold); }
+
+.gal-chip.is-active {
+    background: var(--color-reference-footer);
+    border-color: var(--color-reference-footer);
+    color: #f7ede1;
+}
+
+.gal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: clamp(14px, 1.5vw, 20px);
+}
+
+.gal-tile {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    cursor: pointer;
+    background: var(--color-reference-card);
+    box-shadow: var(--shadow-reference-card);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.gal-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s cubic-bezier(.22,.61,.31,1);
+}
+
+.gal-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-reference-float); }
+.gal-tile:hover img { transform: scale(1.05); }
+.gal-tile:focus-visible { outline: 2px solid var(--color-reference-green); outline-offset: 3px; }
+
+.gal-tile-label {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 26px 16px 14px;
+    text-align: start;
+    font-size: 13.5px;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(to top, rgba(20,14,8,.82), rgba(20,14,8,0));
+}
+
+.gal-empty { margin-top: 28px; color: var(--color-reference-muted); }
+
+.gal-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.gal-links a { font-size: 14.5px; font-weight: 500; color: var(--color-reference-green); }
+.gal-links a:hover { text-decoration: underline; }
+
+/* ---- lightbox ---- */
+.gal-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(16, 11, 6, .93);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 48px);
+}
+
+.gal-figure { margin: 0; max-width: min(1000px, 100%); max-height: 100%; display: flex; flex-direction: column; gap: 14px; }
+
+.gal-figure img {
+    max-width: 100%;
+    max-height: 74vh;
+    width: auto;
+    height: auto;
+    margin-inline: auto;
+    border-radius: 14px;
+    /* the whole photograph, never a crop */
+    object-fit: contain;
+}
+
+.gal-figure figcaption { text-align: center; color: rgba(247,237,225,.9); }
+.gal-fig-title { display: block; font-family: var(--font-heading); font-weight: 600; font-size: 17px; }
+.gal-fig-caption { display: block; font-size: 14px; opacity: .78; margin-top: 5px; max-width: 46rem; margin-inline: auto; }
+
+.gal-close, .gal-nav {
+    position: absolute;
+    background: rgba(247,237,225,.12);
+    border: 0;
+    color: #f7ede1;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 46px; height: 46px;
+    font-size: 26px;
+    line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background-color .2s ease;
+}
+
+.gal-close:hover, .gal-nav:hover { background: rgba(247,237,225,.26); }
+.gal-close { top: clamp(12px,2vw,24px); inset-inline-end: clamp(12px,2vw,24px); }
+.gal-nav { top: 50%; transform: translateY(-50%); }
+.gal-prev { inset-inline-start: clamp(8px,2vw,24px); }
+.gal-next { inset-inline-end: clamp(8px,2vw,24px); }
+
+.nav-dd-panel-sm { min-width: 13rem; }
+
+@media (max-width: 639px) {
+    .gal-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .gal-tile-label { font-size: 12px; padding: 20px 11px 10px; }
+    .gal-chip { padding: 8px 14px; font-size: 13px; }
+    .gal-nav { width: 38px; height: 38px; font-size: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gal-tile, .gal-tile img, .gal-chip { transition: none; }
+}
+
+/* a dropdown held open by a click, not just hover */
+.nav-dd.is-open > .nav-dd-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dd.is-open > .reference-nav-link .nav-dd-caret { transform: rotate(180deg); }

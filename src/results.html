@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  {{> title-meta title="Results &amp; Before / After" }} {{> head-css}}
+</head>
+
+<body>
+
+  {{> navbar }}
+
+  <!-- Page Banner -->
+  <section class="lg:pt-6 pt-4 lg:pb-16 md:pb-12 pb-10">
+    <div class="container">
+      <div class="svc-banner">
+        <img src="/images/abc/provider-treating.webp" alt="Dr. Nawal M. Qneibi treating a patient" class="absolute inset-0 w-full h-full object-cover">
+        <div class="svc-banner-scrim"></div>
+        <div class="relative z-10 w-full lg:p-12 md:p-9 p-6">
+          <nav class="svc-crumb flex flex-wrap items-center gap-2">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span class="text-white">Results</span>
+          </nav>
+          <h1 class="svc-banner-title mt-3">ABC Aesthetics results</h1>
+          <p class="text-white/75 text-[15px] mt-2.5 max-w-xl">Individual patient experiences, published with authorization. Results vary, and no specific outcome is guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="band band-cream">
+    <div class="container">
+      <div class="max-w-2xl">
+        <div class="reference-eyebrow uppercase">Before &amp; after</div>
+        <h2 class="svc-h2 mt-3">Every result we can currently show</h2>
+        <p class="svc-p mt-4">Select a treatment to filter, or tap any photograph to see it in full.</p>
+      </div>
+
+      <div class="gal-filters lg:mt-9 mt-7" role="tablist" aria-label="Filter results by treatment">
+        <button type="button" class="gal-chip is-active" data-filter="all">All results</button>
+        <button type="button" class="gal-chip" data-filter="neuro">Neuromodulators</button>
+        <button type="button" class="gal-chip" data-filter="fillers">Dermal fillers</button>
+        <button type="button" class="gal-chip" data-filter="lips">Lips</button>
+        <button type="button" class="gal-chip" data-filter="regen">Regenerative</button>
+        <button type="button" class="gal-chip" data-filter="hair">Hair restoration</button>
+        <button type="button" class="gal-chip" data-filter="skin">Skin &amp; body</button>
+        <button type="button" class="gal-chip" data-filter="clinic">In the clinic</button>
+      </div>
+
+      <div class="gal-grid lg:mt-8 mt-6" id="gallery">
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/hand-mapping.webp" data-title="Hand rejuvenation &mdash; treatment mapping" data-caption="The treatment area is mapped before injection.">
+          <img src="/images/abc/hand-mapping.webp" alt="Hand rejuvenation &mdash; treatment mapping" loading="lazy">
+          <span class="gal-tile-label">Hand rejuvenation &mdash; treatment mapping</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/underarm-mapping.webp" data-title="Hyperhidrosis &mdash; treatment mapping" data-caption="The underarm is mapped into a grid so injections are evenly spaced.">
+          <img src="/images/abc/underarm-mapping.webp" alt="Hyperhidrosis &mdash; treatment mapping" loading="lazy">
+          <span class="gal-tile-label">Hyperhidrosis &mdash; treatment mapping</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/decollete-mapping.webp" data-title="Treatment mapping" data-caption="Mapping the treatment area before injection.">
+          <img src="/images/abc/decollete-mapping.webp" alt="Treatment mapping" loading="lazy">
+          <span class="gal-tile-label">Treatment mapping</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/hyperhidrosis.webp" data-title="Hyperhidrosis treatment" data-caption="Underarm treatment in progress.">
+          <img src="/images/abc/hyperhidrosis.webp" alt="Hyperhidrosis treatment" loading="lazy">
+          <span class="gal-tile-label">Hyperhidrosis treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/knee-treatment.webp" data-title="Injection technique" data-caption="A treatment in progress in the clinic.">
+          <img src="/images/abc/knee-treatment.webp" alt="Injection technique" loading="lazy">
+          <span class="gal-tile-label">Injection technique</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/lip-injection-2.webp" data-title="Lip filler treatment" data-caption="Lip filler being placed during a treatment.">
+          <img src="/images/abc/lip-injection-2.webp" alt="Lip filler treatment" loading="lazy">
+          <span class="gal-tile-label">Lip filler treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/lip-chin-filler-2.webp" data-title="Lip and chin filler" data-caption="Lip and chin filler during treatment.">
+          <img src="/images/abc/lip-chin-filler-2.webp" alt="Lip and chin filler" loading="lazy">
+          <span class="gal-tile-label">Lip and chin filler</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="clinic" data-full="/images/abc/lip-stages.webp" data-title="Lip augmentation, stage by stage" data-caption="The stages of a lip augmentation treatment.">
+          <img src="/images/abc/lip-stages.webp" alt="Lip augmentation, stage by stage" loading="lazy">
+          <span class="gal-tile-label">Lip augmentation, stage by stage</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lip-filler-procedure.jpg" data-title="Lip filler &mdash; before, during and after" data-caption="The same patient photographed through a lip filler treatment.">
+          <img src="/images/abc/lip-filler-procedure.jpg" alt="Lip filler &mdash; before, during and after" loading="lazy">
+          <span class="gal-tile-label">Lip filler &mdash; before, during and after</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/patient-before-side.webp" data-title="Upper face, profile &mdash; before" data-caption="Photographed before treatment.">
+          <img src="/images/abc/patient-before-side.webp" alt="Upper face, profile &mdash; before" loading="lazy">
+          <span class="gal-tile-label">Upper face, profile &mdash; before</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/patient-after-side.webp" data-title="Upper face, profile &mdash; after" data-caption="The same patient after treatment.">
+          <img src="/images/abc/patient-after-side.webp" alt="Upper face, profile &mdash; after" loading="lazy">
+          <span class="gal-tile-label">Upper face, profile &mdash; after</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/gummy-smile-ba.webp" data-title="Gummy smile treatment" data-caption="Neuromodulator treatment of a gummy smile, before and after.">
+          <img src="/images/abc/gummy-smile-ba.webp" alt="Gummy smile treatment" loading="lazy">
+          <span class="gal-tile-label">Gummy smile treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="skin" data-full="/images/abc/hand-ba.webp" data-title="Hand treatment" data-caption="Photographed before and after treatment to the hands.">
+          <img src="/images/abc/hand-ba.webp" alt="Hand treatment" loading="lazy">
+          <span class="gal-tile-label">Hand treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/patient-before-front.webp" data-title="Upper face &mdash; before" data-caption="Photographed before treatment.">
+          <img src="/images/abc/patient-before-front.webp" alt="Upper face &mdash; before" loading="lazy">
+          <span class="gal-tile-label">Upper face &mdash; before</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/patient-after-front.webp" data-title="Upper face &mdash; after" data-caption="The same patient after treatment.">
+          <img src="/images/abc/patient-after-front.webp" alt="Upper face &mdash; after" loading="lazy">
+          <span class="gal-tile-label">Upper face &mdash; after</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/upperface-botox-ba.webp" data-title="Upper-face treatment &mdash; 14 days" data-caption="Photographed fourteen days after upper-face neuromodulator treatment.">
+          <img src="/images/abc/upperface-botox-ba.webp" alt="Upper-face treatment &mdash; 14 days" loading="lazy">
+          <span class="gal-tile-label">Upper-face treatment &mdash; 14 days</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/chin-filler-ba.webp" data-title="Chin filler &mdash; receding chin" data-caption="Structural support to the chin using dermal filler.">
+          <img src="/images/abc/chin-filler-ba.webp" alt="Chin filler &mdash; receding chin" loading="lazy">
+          <span class="gal-tile-label">Chin filler &mdash; receding chin</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="skin" data-full="/images/abc/acne-exosome-ba.webp" data-title="Acne &mdash; exosome treatment" data-caption="Photographed before and after a course of treatment.">
+          <img src="/images/abc/acne-exosome-ba.webp" alt="Acne &mdash; exosome treatment" loading="lazy">
+          <span class="gal-tile-label">Acne &mdash; exosome treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lip-ba-2.webp" data-title="Lip treatment" data-caption="Photographed before and after treatment.">
+          <img src="/images/abc/lip-ba-2.webp" alt="Lip treatment" loading="lazy">
+          <span class="gal-tile-label">Lip treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/mature-before.webp" data-title="Upper-face treatment" data-caption="Photographed before treatment.">
+          <img src="/images/abc/mature-before.webp" alt="Upper-face treatment" loading="lazy">
+          <span class="gal-tile-label">Upper-face treatment</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/mature-after.webp" data-title="Upper-face treatment &mdash; after" data-caption="The same patient after treatment.">
+          <img src="/images/abc/mature-after.webp" alt="Upper-face treatment &mdash; after" loading="lazy">
+          <span class="gal-tile-label">Upper-face treatment &mdash; after</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/hijab-before.webp" data-title="Facial balancing &mdash; before" data-caption="Photographed before treatment.">
+          <img src="/images/abc/hijab-before.webp" alt="Facial balancing &mdash; before" loading="lazy">
+          <span class="gal-tile-label">Facial balancing &mdash; before</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/hijab-after.webp" data-title="Facial balancing &mdash; after" data-caption="The same patient after treatment.">
+          <img src="/images/abc/hijab-after.webp" alt="Facial balancing &mdash; after" loading="lazy">
+          <span class="gal-tile-label">Facial balancing &mdash; after</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/dermal-filler-before-after-2.jpg" data-title="Dermal filler &mdash; facial balancing" data-caption="Volume restored across the midface and lips in a single individualized plan.">
+          <img src="/images/abc/dermal-filler-before-after-2.jpg" alt="Dermal filler &mdash; facial balancing" loading="lazy">
+          <span class="gal-tile-label">Dermal filler &mdash; facial balancing</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/dermal-filler-before-after-1.jpg" data-title="Dermal filler &mdash; midface &amp; jawline" data-caption="Under-eye hollowing, nasolabial folds and jawline contour addressed together.">
+          <img src="/images/abc/dermal-filler-before-after-1.jpg" alt="Dermal filler &mdash; midface &amp; jawline" loading="lazy">
+          <span class="gal-tile-label">Dermal filler &mdash; midface &amp; jawline</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/rha-before.webp" data-title="RHA<sup>&reg;</sup> filler &amp; neuromodulator" data-caption="Combined treatment, photographed at rest.">
+          <img src="/images/abc/rha-before.webp" alt="RHA&reg; filler &amp; neuromodulator" loading="lazy">
+          <span class="gal-tile-label">RHA<sup>&reg;</sup> filler &amp; neuromodulator</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/rha-before-2.webp" data-title="RHA<sup>&reg;</sup> filler &mdash; in animation" data-caption="The same patient photographed with the face animated.">
+          <img src="/images/abc/rha-before-2.webp" alt="RHA&reg; filler &mdash; in animation" loading="lazy">
+          <span class="gal-tile-label">RHA<sup>&reg;</sup> filler &mdash; in animation</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="fillers" data-full="/images/abc/profile-balancing-ba.webp" data-title="Profile balancing &mdash; nose &amp; chin" data-caption="Structural modification using dermal fillers.">
+          <img src="/images/abc/profile-balancing-ba.webp" alt="Profile balancing &mdash; nose &amp; chin" loading="lazy">
+          <span class="gal-tile-label">Profile balancing &mdash; nose &amp; chin</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lip-filler-ba.webp" data-title="Lip filler &mdash; volume &amp; definition" data-caption="Photographed before and after treatment to the lip and perioral area.">
+          <img src="/images/abc/lip-filler-ba.webp" alt="Lip filler &mdash; volume &amp; definition" loading="lazy">
+          <span class="gal-tile-label">Lip filler &mdash; volume &amp; definition</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lips-ba.webp" data-title="Lip treatment &mdash; proportion &amp; symmetry" data-caption="Better proportion, hydration and symmetry.">
+          <img src="/images/abc/lips-ba.webp" alt="Lip treatment &mdash; proportion &amp; symmetry" loading="lazy">
+          <span class="gal-tile-label">Lip treatment &mdash; proportion &amp; symmetry</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lip-booster-ba.webp" data-title="Lip boosters" data-caption="Injected like a filler, but a booster hydrates rather than altering shape. Photographed immediately after, so the lips are swollen.">
+          <img src="/images/abc/lip-booster-ba.webp" alt="Lip boosters" loading="lazy">
+          <span class="gal-tile-label">Lip boosters</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="lips" data-full="/images/abc/lip-skinbooster-ba.webp" data-title="Skin boosters to the lips" data-caption="Boosters used to hydrate and plump, without altering the shape.">
+          <img src="/images/abc/lip-skinbooster-ba.webp" alt="Skin boosters to the lips" loading="lazy">
+          <span class="gal-tile-label">Skin boosters to the lips</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/daxxify-frown-lines.webp" data-title="Neuromodulator &mdash; frown lines" data-caption="Softening of the vertical lines between the brows.">
+          <img src="/images/abc/daxxify-frown-lines.webp" alt="Neuromodulator &mdash; frown lines" loading="lazy">
+          <span class="gal-tile-label">Neuromodulator &mdash; frown lines</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/forehead-lines-ba.webp" data-title="Neuromodulator &mdash; forehead lines" data-caption="Softening of horizontal lines across the forehead.">
+          <img src="/images/abc/forehead-lines-ba.webp" alt="Neuromodulator &mdash; forehead lines" loading="lazy">
+          <span class="gal-tile-label">Neuromodulator &mdash; forehead lines</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/crows-feet-ba.webp" data-title="Neuromodulator &mdash; crow&rsquo;s feet" data-caption="Softening of the lines at the outer corner of the eye.">
+          <img src="/images/abc/crows-feet-ba.webp" alt="Neuromodulator &mdash; crow&rsquo;s feet" loading="lazy">
+          <span class="gal-tile-label">Neuromodulator &mdash; crow&rsquo;s feet</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/frown-lines-ba.webp" data-title="Neuromodulator &mdash; glabellar lines" data-caption="Softening of the vertical lines between the brows.">
+          <img src="/images/abc/frown-lines-ba.webp" alt="Neuromodulator &mdash; glabellar lines" loading="lazy">
+          <span class="gal-tile-label">Neuromodulator &mdash; glabellar lines</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="neuro" data-full="/images/abc/mens-botox-ba.webp" data-title="Neuromodulator &mdash; forehead, male patient" data-caption="Softening of horizontal forehead lines.">
+          <img src="/images/abc/mens-botox-ba.webp" alt="Neuromodulator &mdash; forehead, male patient" loading="lazy">
+          <span class="gal-tile-label">Neuromodulator &mdash; forehead, male patient</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="regen" data-full="/images/abc/under-eye-before-after.webp" data-title="Under-eye rejuvenation" data-caption="PRF treatment of the under-eye area, photographed before and one week afterwards.">
+          <img src="/images/abc/under-eye-before-after.webp" alt="Under-eye rejuvenation" loading="lazy">
+          <span class="gal-tile-label">Under-eye rejuvenation</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="hair" data-full="/images/abc/prp-hair-ba.webp" data-title="PRP hair restoration" data-caption="Photographed before treatment and after two PRP sessions.">
+          <img src="/images/abc/prp-hair-ba.webp" alt="PRP hair restoration" loading="lazy">
+          <span class="gal-tile-label">PRP hair restoration</span>
+        </button>
+        <button type="button" class="gal-tile" data-cat="skin" data-full="/images/abc/knee-laxity-ba.webp" data-title="Skin laxity above the knee" data-caption="Hyperdiluted Radiesse<sup>&reg;</sup> for skin quality and laxity in a selected area.">
+          <img src="/images/abc/knee-laxity-ba.webp" alt="Skin laxity above the knee" loading="lazy">
+          <span class="gal-tile-label">Skin laxity above the knee</span>
+        </button>
+      </div>
+
+      <p class="gal-empty" hidden>No results published in this category yet &mdash; the treatment pages carry full information in the meantime.</p>
+    </div>
+  </section>
+
+  <!-- Categories still awaiting photography -->
+  <section class="band band-gold">
+    <div class="container">
+      <div class="cl-item" data-collapse-solo>
+        <div class="reference-eyebrow uppercase">Also offered</div>
+        <h2 class="svc-h2 mt-3"><button type="button" class="cl-toggle">Categories without published photographs<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h2>
+        <div class="cl-panel"><div>
+          <p class="svc-p mt-4 max-w-2xl">These treatments do not yet have authorized before-and-after photographs published. Dr.&nbsp;Qneibi can discuss what is realistic for you at consultation.</p>
+          <div class="gal-links lg:mt-7 mt-6">
+            <a href="service-skin-energy.html">Advanced Skin &amp; Energy-Based Treatments &#8599;</a>
+            <a href="service-hormone-metabolic-wellness.html">Hormone &amp; Metabolic Wellness &#8599;</a>
+            <a href="service-womens-wellness.html">Women&rsquo;s Wellness &#8599;</a>
+            <a href="service-mens-wellness.html">Men&rsquo;s Wellness &#8599;</a>
+            <a href="service-sexual-wellness.html">Sexual Wellness &#8599;</a>
+            <a href="service-wellness-products.html">Wellness Products &#8599;</a>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consent note -->
+  <section class="band band-blush">
+    <div class="container">
+      <div class="cl-item" data-collapse-solo>
+        <h3 class="svc-h3"><button type="button" class="cl-toggle">About these photographs<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h3>
+        <div class="cl-panel"><div>
+          <div class="flex flex-wrap items-start lg:gap-14 gap-8 pt-4">
+            <div class="flex-1 basis-95 min-w-70">
+              <p class="svc-p">Before-and-after photographs are published only where patient authorization has been given. They show individual patient experiences and are not presented as a guarantee of similar results.</p>
+            </div>
+            <div class="flex-1 basis-95 min-w-70">
+              <div class="svc-disclaimer"><strong>Please note:</strong> Treatment recommendations, eligibility, treatment frequency, product selection, and clinical protocols are individualized following consultation and assessment. Results vary by individual, and no specific outcome is guaranteed.</div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="gal-lightbox" id="lightbox" hidden>
+    <button type="button" class="gal-close" aria-label="Close">&times;</button>
+    <button type="button" class="gal-nav gal-prev" aria-label="Previous">&#8249;</button>
+    <button type="button" class="gal-nav gal-next" aria-label="Next">&#8250;</button>
+    <figure class="gal-figure">
+      <figcaption>
+        <span class="gal-fig-title"></span>
+        <span class="gal-fig-caption"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  {{> footer }}
+
+</body>
+
+</html>
