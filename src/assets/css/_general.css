@@ -2364,15 +2364,16 @@ button.hover\:border-primary-1:hover {
    ========================================================================== */
 
 .svc-grid {
-    display: flex;
-    flex-wrap: wrap;
+    /* Grid, not flex: with flex-grow the last row shared out the leftover
+       width, so a row holding a single card stretched it to the full width of
+       the section while its siblings above stayed a quarter of that. Equal
+       tracks keep every card in a section the same size. */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--svc-basis, 280px), 100%), 1fr));
     gap: 16px;
 }
 
 .svc-grid > * {
-    /* --svc-basis tunes how many land per row: ~280px gives 4, ~380px gives 3,
-       ~500px gives 2. flex-grow then absorbs whatever width is left over. */
-    flex: 1 1 min(var(--svc-basis, 280px), 100%);
     min-width: 0;
 }
 
@@ -2501,11 +2502,11 @@ button.hover\:border-primary-1:hover {
    straight from three columns to one on a tablet while a 280px group beside
    it still manages two. */
 @media (max-width: 639px) {
-    .svc-grid > * { flex-basis: 100%; }
+    .svc-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
-    .svc-grid > * { flex-basis: calc(50% - 8px); }
+    .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 
