@@ -728,10 +728,43 @@ section[id],
     color: #fff;
 }
 
+/* The footer columns stack on a phone, and stacked left-aligned columns read
+   as three loose fragments rather than one block. The container is itself the
+   flex row - there is no inner wrapper to hang this on. */
+@media (max-width: 767px) {
+    .reference-footer > .container {
+        text-align: center;
+    }
+
+    /* the logo lockup and the badge row are flex, so they need the axis too */
+    .reference-footer > .container > div > a,
+    .reference-footer > .container > div > .flex {
+        justify-content: center;
+    }
+
+    /* address, phone and email keep their icon beside the text and centre as
+       a pair, rather than each line centring on its own */
+    .reference-footer #contact > div > :is(a, div) {
+        display: inline-flex;
+        text-align: start;
+    }
+
+    .reference-footer #contact > div {
+        align-items: center;
+    }
+
+}
+
 /* Two columns of four, in that order (Home..Treatments down the left,
    Insights..Appointment down the right) at every width - a fixed row count
    plus column-first auto-flow, rather than the browser packing left-to-right
    and splitting the set of 8 wherever it lands. */
+/* the heading spans two columns of links, so it centres over them rather than
+   ranging left against the first one */
+.reference-footer > .container > div:has(> .footer-links) > .reference-footer-heading {
+    text-align: center;
+}
+
 .footer-links {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -739,6 +772,10 @@ section[id],
     grid-auto-flow: column;
     column-gap: 28px;
     row-gap: 10px;
+    /* each link shrinks to its own text and centres in its track - stretched
+       to the full track, the text ranged left and the centred heading above
+       looked offset against it */
+    justify-items: center;
 }
 
 .reference-footer-link {
@@ -834,6 +871,27 @@ button.hover\:border-primary-1:hover {
 @keyframes hero-spin {
     from { rotate: 0deg; }
     to { rotate: 360deg; }
+}
+
+/* Keeping the treatment labels the right way up.
+   Each pill points outward from a hub, so its label turns with the wheel and
+   spends half of every revolution upside down. The markup flipped nine of the
+   eighteen, which is correct only at the instant the page loads - once the
+   wheel turns, those nine drift into the half where they read the wrong way
+   and the other nine drift out of it, which is the "half up, half down" you
+   see at any given moment.
+
+   So the flip has to follow the rotation rather than the markup order. This
+   runs on the wheel's own 60s period, and each label carries a negative
+   animation-delay matching its arm angle, so all eighteen flip at the point in
+   the turn where they cross the bottom - below the photo, out of sight. */
+@keyframes hero-label-flip {
+    0%,   49.999% { rotate: 180deg; }
+    50%,  100%    { rotate: 0deg; }
+}
+
+.hero-pill-label {
+    animation: hero-label-flip 60s linear infinite;
 }
 
 .avatar-category {
@@ -3006,22 +3064,61 @@ h3 > .cl-toggle {
 
 /* D. Section headings centre on a phone, along with the copy that introduces
    them. Only the intro block - lists, cards and the accordions stay left
-   aligned, where centring would hurt readability. */
+   aligned, where centring would hurt readability.
+
+   This was scoped to .svc-page, which left About, the home page and the blog
+   left aligned while the nine treatment pages centred. The band colour classes
+   are in the list because the home page sections carry only those, not .band. */
 @media (max-width: 767px) {
-    .svc-page .band > .container > .max-w-2xl,
-    .svc-page .band > .container > .max-w-3xl,
-    .svc-page .band > .container > .max-w-4xl,
-    .svc-page .band .sd2-split > div > .reference-eyebrow,
-    .svc-page .band .sd2-split > div > .svc-h2,
-    .svc-page .band .sd2-split > div > .svc-lead,
-    .svc-page .band .sd2-split > div > .svc-p {
-        text-align: center;
+    :is(.band, .band-cream, .band-gold, .band-blush, .band-green) {
+        /* intro blocks that sit straight in the container */
+        & > .container > :is(.max-w-2xl, .max-w-3xl, .max-w-4xl),
+        & > .container > .flex-wrap > .max-w-2xl,
+        & > .container > :is(.reference-eyebrow, .svc-h2, .svc-h3, .svc-lead, .svc-p),
+
+        /* the text column of a photo/copy split */
+        & .sd2-split > div > :is(.reference-eyebrow, .svc-h2, .svc-h3, .svc-lead, .svc-p),
+
+        /* a section whose heading is a collapsible: Benefits, Our values,
+           Company highlights, Safety notes */
+        & .cl-item > :is(.reference-eyebrow, .svc-h2, .svc-h3),
+        & .cl-item > .cl-panel > div > :is(.svc-p, .svc-lead),
+
+        /* treatment groups on the service pages */
+        & .svc-group-intro {
+            text-align: center;
+        }
+
+        /* A collapsible heading is a flex row ending in its +/x control, and a
+           treatment group head starts with a thumbnail. Centre the label and
+           take the control out of the flow, or it drags the text off axis. */
+        & :is(.cl-toggle, .svc-group-head) {
+            position: relative;
+            justify-content: center;
+            padding-inline-end: 28px;
+        }
+
+        & :is(.cl-toggle, .svc-group-head) > .cl-icon {
+            position: absolute;
+            inset-inline-end: 0;
+        }
+
+        /* a group label that wraps to two lines would otherwise centre its
+           block but leave the lines themselves ranged left */
+        & .svc-group-head > .svc-subhead { text-align: center; }
+
+        /* the results header stacks, so its arrows centre under the title */
+        & .items-end.justify-between { justify-content: center; }
     }
+}
 
-    .svc-page .band > .container > .flex-wrap > .max-w-2xl { text-align: center; }
-
-    /* the results header stacks, so its arrows centre under the title */
-    .svc-page .band .items-end.justify-between { justify-content: center; }
+/* .reference-cta-btn is a block-level flex, so w-fit shrinks it and leaves it
+   against the left edge of a block that is otherwise centred. */
+@media (max-width: 767px) {
+    .band .reference-cta-btn.w-fit,
+    :is(.band-cream, .band-gold, .band-blush, .band-green) .reference-cta-btn.w-fit {
+        margin-inline: auto;
+    }
 }
 
 /* the provider block is a two-column flex rather than a .max-w-* intro, so it
@@ -3125,10 +3222,24 @@ h3 > .cl-toggle {
 @media (max-width: 767px) {
     .svc-trustbar { padding-block: 16px; }
 
-    /* four across is unreadable on a phone, so they pair up */
-    .svc-trustbar-row { justify-content: flex-start; gap: 12px 16px; }
+    /* four across is unreadable on a phone, so they pair up - centred, to sit
+       under a hero card that is centred itself */
+    .svc-trustbar-row { justify-content: center; gap: 12px 16px; }
     .svc-trust { flex: 1 1 calc(50% - 8px); font-size: 12.5px; gap: 8px; }
     .svc-trust-mark { width: 22px; height: 22px; }
+}
+
+/* The hero card: title and copy centre with the rest of the page on a phone,
+   and the button and phone number line up on the same axis under them. */
+@media (max-width: 767px) {
+    .sd2-card { text-align: center; }
+
+    .sd2-card-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sd2-contact { text-align: start; }
 }
 
 /* ==========================================================================
@@ -3910,6 +4021,11 @@ a.about-link:hover {
 @media (max-width: 639px) {
     .about-stat + .about-stat::before { display: none; }
     .about-stats { gap: 22px; }
+
+    /* it centred from 640 up but not below, so a phone was the one width that
+       still read left-aligned */
+    .about-stat { text-align: center; }
+    .about-stat-label { margin-inline: auto; }
 }
 
 /* At iPad width auto-fit's 210px minimum lands on three columns, so the
