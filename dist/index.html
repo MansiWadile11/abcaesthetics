@@ -50,7 +50,18 @@
           <!-- Left Nav Menu -->
           <nav class="hidden lg:flex items-center gap-8 z-10 font-reference-body">
             <a href="index.html#home" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">Home</a>
-            <a href="about.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">About</a>
+            <div class="nav-dd">
+              <a href="about.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors inline-flex items-center gap-1.5">
+                About
+                <i class="iconify lucide--chevron-down size-3.5 nav-dd-caret"></i>
+              </a>
+              <div class="nav-dd-panel">
+                <ul class="flex flex-col">
+                  <li><a href="about.html" class="nav-dd-link">About Us</a></li>
+                  <li><a href="blog.html" class="nav-dd-link">Blog</a></li>
+                </ul>
+              </div>
+            </div>
             <div class="nav-dd">
               <a href="service-aesthetic-injectables.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors inline-flex items-center gap-1.5">
                 Treatments
@@ -104,7 +115,18 @@
     <div id="mobile-menu" class="mobile-drawer absolute inset-x-0 top-full z-50 md:mx-5 mx-4 mt-2 rounded-3xl overflow-y-auto bg-white shadow-2xl max-h-[70vh] lg:hidden" role="dialog" tabindex="-1" aria-labelledby="mobile-menu-label">
       <div class="flex flex-col overflow-y-auto p-5 space-y-2">
         <a href="index.html#home" class="hover:text-reference-green text-base font-medium w-full transition-colors">Home</a>
-        <a href="about.html" class="hover:text-reference-green text-base font-medium w-full transition-colors">About</a>
+        <div class="nav-group">
+          <button type="button" class="nav-group-toggle hover:text-reference-green text-base font-medium w-full transition-colors" aria-expanded="false" aria-controls="nav-about">
+            About
+            <span class="nav-group-icon"><i class="iconify lucide--chevron-down size-4"></i></span>
+          </button>
+          <div class="nav-sub" id="nav-about">
+            <div class="nav-sub-inner">
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+            </div>
+          </div>
+        </div>
         <div class="nav-group">
           <button type="button" class="nav-group-toggle hover:text-reference-green text-base font-medium w-full transition-colors" aria-expanded="false" aria-controls="nav-treatments">
             Treatments
@@ -1478,13 +1500,17 @@
           Aesthetic &amp; Wellness Insights
         </div>
         <h2 class="reference-testimonial-title mt-4.5">Helpful tips and<br class="hidden sm:block"> expert advice</h2>
+        <a href="blog.html" class="inline-flex items-center gap-2 mt-4 text-sm font-medium text-reference-green hover:text-reference-green-dark transition-colors">
+          View all insights
+          <i class="iconify lucide--arrow-right size-3.5"></i>
+        </a>
       </div>
 
       <!-- Insights Grid -->
       <div class="flex flex-wrap items-stretch gap-6 mt-12">
 
         <!-- Featured Post -->
-        <a href="service-skin-energy.html" class="group flex-1 basis-105 min-w-75 bg-reference-insight rounded-[32px] p-5">
+        <a href="blog-skin-energy.html" class="group flex-1 basis-105 min-w-75 bg-reference-insight rounded-[32px] p-5">
           <div class="insight-media rounded-[20px] overflow-hidden relative w-full h-85">
             <img src="/images/abc/provider-room.webp" alt="A BBL treatment in progress" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
@@ -1498,7 +1524,7 @@
         <div class="flex-1 basis-115 min-w-75 flex flex-col gap-5">
 
           <!-- Post 1 -->
-          <a href="service-aesthetic-injectables.html" class="group flex items-center gap-5">
+          <a href="blog-injectables.html" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
               <img src="/images/abc/injectables-treatment.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             </div>
@@ -1511,20 +1537,20 @@
           </a>
 
           <!-- Post 2 -->
-          <a href="service-skin-energy.html" class="group flex items-center gap-5">
+          <a href="blog-skinpen.html" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/patient-after.webp" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+              <img src="/images/abc/skinpen-microneedling.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
-                <span class="reference-tag">Skin Health</span>
+                <span class="reference-tag">Advanced Skin &amp; Energy</span>
               </div>
-              <h4 class="insight-title font-reference-heading font-semibold text-[17px] text-reference-cocoa leading-[1.35] mt-2.5">How BBL<sup>&reg;</sup> &amp; SkinTyte<sup>&reg;</sup> support skin rejuvenation</h4>
+              <h4 class="insight-title font-reference-heading font-semibold text-[17px] text-reference-cocoa leading-[1.35] mt-2.5">What SkinPen<sup>&reg;</sup> microneedling is cleared to treat</h4>
             </div>
           </a>
 
           <!-- Post 3 -->
-          <a href="service-regenerative-aesthetics.html" class="group flex items-center gap-5">
+          <a href="blog-prp-prf.html" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
               <img src="/images/abc/prp-tubes.webp" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             </div>
@@ -1739,7 +1765,7 @@
 
   <!-- CTA bar. Service pages already close with their own full CTA block,
        so they pass hideCta=true rather than stacking two of them. -->
-  <div class="container">
+  <div class="container reference-cta-wrap">
     <div class="reference-cta-bar">
       <div>
         <div class="reference-cta-title">Transform your skin with us</div>
@@ -1786,30 +1812,22 @@
       </div>
   
       <!-- Quick links -->
-      <div class="basis-35 min-w-30 grow-0">
+      <div class="flex-1 basis-55 min-w-52">
         <h3 class="reference-footer-heading">Quick links</h3>
-        <div class="flex flex-col gap-2.5 mt-4 text-[13px]">
+        <div class="footer-links mt-4 text-[13px]">
           <a href="index.html#home" class="reference-footer-link">Home</a>
-          <a href="about.html" class="reference-footer-link">About</a><a href="results.html" class="reference-footer-link">Results</a>
+          <a href="about.html" class="reference-footer-link">About</a>
+          <a href="results.html" class="reference-footer-link">Results</a>
           <a href="service-aesthetic-injectables.html" class="reference-footer-link">Treatments</a>
-          <a href="index.html#insights" class="reference-footer-link">Insights</a>
+          <a href="blog.html" class="reference-footer-link">Insights</a>
           <a href="index.html#faq" class="reference-footer-link">FAQs</a>
           <a href="contact.html" class="reference-footer-link">Contact</a>
           <a href="index.html#appointment" class="reference-footer-link">Appointment</a>
         </div>
       </div>
   
-      <!-- Utility links -->
-      <div class="basis-35 min-w-30 grow-0">
-        <h3 class="reference-footer-heading">Utility links</h3>
-        <div class="flex flex-col gap-2.5 mt-4 text-[13px]">
-          <a href="privacy-policy.html" class="reference-footer-link">Privacy Policy</a>
-          <a href="404-error.html" class="reference-footer-link">Error 404</a>
-        </div>
-      </div>
-  
       <!-- Get in touch — target of the "Contact" nav/footer links -->
-      <div id="contact" class="flex-1 basis-60 min-w-55 scroll-mt-6">
+      <div id="contact" class="flex-1 basis-55 min-w-50 scroll-mt-6">
         <h3 class="reference-footer-heading">Get in touch</h3>
         <div class="flex flex-col gap-3 mt-4 text-[13px] text-white/70 font-normal">
           <div class="flex gap-2.5">
@@ -1824,15 +1842,6 @@
             <i class="iconify lucide--mail size-4 shrink-0 mt-0.5 text-reference-star"></i>
             <span>abcaestheticsllc@gmail.com</span>
           </a>
-          <div class="flex gap-2.5">
-            <i class="iconify lucide--clock size-4 shrink-0 mt-0.5 text-reference-star"></i>
-            <span class="leading-[1.6]">
-              Mon 8:00 AM &ndash; 8:00 PM<br>
-              Tue &ndash; Thu 5:00 PM &ndash; 10:00 PM<br>
-              Fri &ndash; Sat 8:00 AM &ndash; 8:00 PM<br>
-              Sun Closed
-            </span>
-          </div>
         </div>
       </div>
     </div>
@@ -1850,7 +1859,7 @@
     <!-- Bottom line -->
     <div class="container relative z-10">
       <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-2.5 border-t border-white/10 pt-6 pb-6 text-[13px] text-white/55 font-normal text-center">
-        <p>Designed by <a href="https://unifato.com/" class="text-reference-star hover:text-white transition-colors">Unifato</a></p>
+        <p>Designed by <a href="https://unifato.com/" class="text-reference-star hover:text-white transition-colors">Unifato</a> &middot; <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></p>
         <p>© 2026 ABC Aesthetics &amp; Wellness. All rights reserved</p>
       </div>
     </div>

@@ -64,10 +64,19 @@ textarea {
 
 /* ---- Reference navbar: pill in normal flow (scrolls away, not fixed) ---- */
 .reference-nav-shell {
-    padding-top: 28px;
+    padding-top: 16px;
 }
 
 #navbar {
+    /* One appearance, scrolled or not: the pill carries its own ground and
+       shadow from the top of the page, so nothing pops in on first scroll. */
+    background: var(--color-reference-surface);
+    box-shadow: 0 12px 34px rgba(60, 40, 20, 0.16);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.svc-page #navbar {
+    background: var(--color-reference-surface);
     box-shadow: var(--shadow-reference-nav);
 }
 
@@ -75,7 +84,7 @@ textarea {
    padding to clear a fixed bar — the template's pt-* on it was purely that
    offset. Reference gap between nav and the first row is 56px. */
 header ~ section:first-of-type {
-    padding-top: 2rem;
+    padding-top: 1.25rem;
 }
 
 @media (min-width: 768px) {
@@ -346,6 +355,11 @@ section[id],
 }
 
 .reference-service-spine-number {
+    /* markup places it bottom-left (left-4); centred under the rotated
+       label reads better at the width this format is actually used - the
+       tablet/mobile bar layout below resets this to the bar's left edge. */
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--font-heading);
     font-size: 40px;
     line-height: 1;
@@ -661,7 +675,14 @@ section[id],
     margin-top: -6px;
 }
 
-/* ---- CTA bar + footer ---- */
+/* ---- CTA bar + footer ----
+   The bar's own wrapper carried no top spacing, so it sat flush against
+   whatever section came before it - a page ending in FAQs, for example, ran
+   straight into "Transform your skin with us" with no seam at all. */
+.reference-cta-wrap {
+    margin-top: clamp(40px, 5.5vw, 88px);
+}
+
 .reference-cta-bar {
     display: flex;
     align-items: center;
@@ -705,6 +726,19 @@ section[id],
     font-size: 15px;
     font-weight: 600;
     color: #fff;
+}
+
+/* Two columns of four, in that order (Home..Treatments down the left,
+   Insights..Appointment down the right) at every width - a fixed row count
+   plus column-first auto-flow, rather than the browser packing left-to-right
+   and splitting the set of 8 wherever it lands. */
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    column-gap: 28px;
+    row-gap: 10px;
 }
 
 .reference-footer-link {
@@ -1815,12 +1849,22 @@ button.hover\:border-primary-1:hover {
     justify-content: center;
 }
 
-@media (max-width: 1023px) {
+/* Below 1024 this used to drop straight to one column, so an iPad in
+   portrait - which has the width to spare - stacked the photo full-width
+   above the text instead of running them side by side. Only true phone
+   widths need the single column now. */
+@media (max-width: 767px) {
     .sd2-split {
         grid-template-columns: minmax(0, 1fr);
         gap: 32px;
     }
+}
 
+@media (min-width: 768px) and (max-width: 1023px) {
+    .sd2-split { gap: 32px; }
+}
+
+@media (max-width: 1023px) {
     .sd2-steps {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 30px 24px;
@@ -3313,10 +3357,11 @@ div:has(> .reference-clinic-title) > a {
    inherits the page background rather than letting copy show through.
    ========================================================================== */
 .reference-nav-shell {
-    /* At rest the shell keeps whatever ground the page gives it - the service
-       pages need their green band so the hero can pull up behind the header.
-       Once it sticks, the ground drops away and only the pill floats. */
-    background: var(--color-reference-page);
+    /* Transparent at rest and once stuck alike. The service pages already
+       override this to their own green band further up the cascade (higher
+       specificity, ".svc-page .reference-nav-shell"), so the hero there still
+       pulls up behind the header exactly as before. */
+    background: transparent;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
@@ -3326,10 +3371,6 @@ div:has(> .reference-clinic-title) > a {
 }
 
 .reference-nav-shell.is-stuck { box-shadow: none; }
-
-.reference-nav-shell.is-stuck #navbar {
-    box-shadow: 0 12px 34px rgba(60, 40, 20, 0.16);
-}
 
 .svc-page .reference-nav-shell.is-stuck #navbar {
     box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
@@ -3469,11 +3510,283 @@ div:has(> .reference-clinic-title) > a {
     }
 }
 
-/* Under 640 there is no width for it at any scale: the wheel's own radius puts
-   the pills across the image edge, so the labels read as sliced text. The
-   "Explore our treatments" cutout carries the same idea on its own. */
+/* ==========================================================================
+   Treatment wheel on a phone
+   Scaling the wheel shrinks the radius AND the pills together, which is what
+   made the labels 5px tall. Here the two are separated: the wheel scale sets
+   the radius small enough to fit the photo's width, then each pill is scaled
+   back up about its outer tip so it stays readable and grows inward, where
+   there is room. The photo is taller on a phone to give the arc a band to
+   live in.
+   ========================================================================== */
 @media (max-width: 639px) {
-    .hero-avatar-wheel { display: none; }
+    /* a little taller than the 3:2 it had, for the arc to sit in - but not so
+       tall that a 2.3:1 photograph crops down to a slice of neck */
+    .hero-portrait {
+        aspect-ratio: 5 / 4;
+    }
+
+    /* the face sits in the right third of the source, so a centre crop loses it */
+    .hero-portrait > img {
+        object-position: 68% 35%;
+    }
+
+    .hero-avatar-wheel {
+        --wheel-scale: 0.5;
+        --pill-grow: 1.6;
+        display: flex;
+        transform: scale(var(--wheel-scale));
+        transform-origin: center;
+        /* raised so the labels clear the cutout arch: at -40 every label was
+           half-hidden behind it, at +50 nine of them read in full */
+        bottom: 15px;
+    }
+
+    /* grow from the rim inward: the outer tip stays on the circle, so the
+       arc's reach is unchanged and nothing is clipped by the photo edge */
+    .hero-avatar-wheel > div > div {
+        scale: var(--pill-grow);
+        transform-origin: 50% 0%;
+    }
+
+    .hero-avatar-wheel [style*="writing-mode"] {
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-avatar-wheel .rounded-full.border {
+        background: rgba(58, 42, 28, 0.4);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* the pills sweep across the cutout; the call to action stays on top */
+    .hero-explore-cutout { z-index: 30; }
+
+    /* Spinning pills are spread evenly around the full circle, so whatever
+       rotation the wheel is at, some pill is always straddling the photo's
+       hard bottom edge and gets sliced mid-word. A soft vignette there turns
+       that seam into a deliberate fade instead of a visible cut line. */
+    .hero-portrait::after {
+        content: "";
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        height: 46%;
+        /* fully opaque by the bottom, in the page's own blush tone - the cut
+           pills disappear into it rather than being merely darkened */
+        background: linear-gradient(to bottom, transparent, var(--color-reference-page) 78%);
+        pointer-events: none;
+        z-index: 25;
+    }
+}
+
+/* 320px leaves only 160px of half-width for the arc */
+@media (max-width: 359px) {
+    .hero-avatar-wheel { --wheel-scale: 0.45; }
+}
+
+/* ==========================================================================
+   Blog: listing grid, article body, pull-quote, "more from the practice" rail
+   ========================================================================== */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+}
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-reference-card);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 38px rgba(60, 40, 20, 0.14);
+}
+
+.blog-card-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.blog-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.blog-card:hover .blog-card-media img {
+    transform: scale(1.05);
+}
+
+.blog-card-body {
+    padding: 20px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.blog-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: var(--color-reference-muted);
+}
+
+.blog-card-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.35;
+    color: var(--color-reference-cocoa);
+    margin-top: 12px;
+}
+
+.blog-card-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-reference-green);
+}
+
+.blog-card:hover .blog-card-more i { transform: translateX(3px); }
+.blog-card-more i { transition: transform 0.3s ease; }
+
+/* Article layout: prose column + a narrower rail */
+.article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 56px);
+}
+
+@media (min-width: 1024px) {
+    .article-layout { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); }
+}
+
+.article-body h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(19px, 1.6vw, 23px);
+    color: var(--color-reference-cocoa);
+    margin-top: 34px;
+}
+
+.article-body p {
+    margin-top: 14px;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--color-reference-muted);
+}
+
+.article-body ul {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.article-body li {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-reference-muted);
+    padding-inline-start: 22px;
+    position: relative;
+}
+
+.article-body li::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-reference-gold-ink);
+}
+
+.article-body strong { color: var(--color-reference-cocoa); font-weight: 600; }
+
+.article-quote {
+    margin-top: 34px;
+    padding: clamp(22px, 2.4vw, 32px);
+    border-radius: 20px;
+    background: var(--color-reference-blush, var(--color-reference-page));
+    border-inline-start: 4px solid var(--color-reference-green);
+}
+
+.article-quote p {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.55;
+    color: var(--color-reference-cocoa);
+    font-weight: 500;
+}
+
+/* Sidebar */
+.blog-rail-card {
+    background: var(--color-reference-card);
+    border-radius: 20px;
+    padding: 22px;
+}
+
+.blog-rail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-block: 12px;
+    border-top: 1px solid var(--color-reference-line, rgba(0,0,0,0.06));
+}
+
+.blog-rail-item:first-of-type { border-top: none; padding-top: 4px; }
+
+.blog-rail-media {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.blog-rail-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.blog-rail-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-reference-cocoa);
+}
+
+.article-cta-card {
+    margin-top: 20px;
+    padding: 24px;
+    border-radius: 20px;
+    background: var(--color-reference-footer);
+    color: #f7ede1;
+}
+
+.article-cta-card h4 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.article-cta-card p {
+    margin-top: 8px;
+    font-size: 13.5px;
+    color: rgba(247, 237, 225, 0.75);
 }
 
 /* ==========================================================================
@@ -3597,6 +3910,20 @@ a.about-link:hover {
 @media (max-width: 639px) {
     .about-stat + .about-stat::before { display: none; }
     .about-stats { gap: 22px; }
+}
+
+/* At iPad width auto-fit's 210px minimum lands on three columns, so the
+   fourth stat wraps alone onto its own row, flush left with empty space
+   beside it. A fixed 2x2 avoids the orphan row and reads more deliberate. */
+@media (min-width: 640px) and (max-width: 1023px) {
+    .about-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 32px;
+    }
+
+    .about-stat { text-align: center; }
+    .about-stat-label { margin-inline: auto; }
+    .about-stat + .about-stat::before { display: none; }
 }
 
 /* ==========================================================================

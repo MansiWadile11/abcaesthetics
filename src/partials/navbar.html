@@ -11,7 +11,18 @@
         <!-- Left Nav Menu -->
         <nav class="hidden lg:flex items-center gap-8 z-10 font-reference-body">
           <a href="index.html#home" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">Home</a>
-          <a href="about.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors">About</a>
+          <div class="nav-dd">
+            <a href="about.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors inline-flex items-center gap-1.5">
+              About
+              <i class="iconify lucide--chevron-down size-3.5 nav-dd-caret"></i>
+            </a>
+            <div class="nav-dd-panel">
+              <ul class="flex flex-col">
+                <li><a href="about.html" class="nav-dd-link">About Us</a></li>
+                <li><a href="blog.html" class="nav-dd-link">Blog</a></li>
+              </ul>
+            </div>
+          </div>
           <div class="nav-dd">
             <a href="service-aesthetic-injectables.html" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors inline-flex items-center gap-1.5">
               Treatments
@@ -65,7 +76,18 @@
   <div id="mobile-menu" class="mobile-drawer absolute inset-x-0 top-full z-50 md:mx-5 mx-4 mt-2 rounded-3xl overflow-y-auto bg-white shadow-2xl max-h-[70vh] lg:hidden" role="dialog" tabindex="-1" aria-labelledby="mobile-menu-label">
     <div class="flex flex-col overflow-y-auto p-5 space-y-2">
       <a href="index.html#home" class="hover:text-reference-green text-base font-medium w-full transition-colors">Home</a>
-      <a href="about.html" class="hover:text-reference-green text-base font-medium w-full transition-colors">About</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-toggle hover:text-reference-green text-base font-medium w-full transition-colors" aria-expanded="false" aria-controls="nav-about">
+          About
+          <span class="nav-group-icon"><i class="iconify lucide--chevron-down size-4"></i></span>
+        </button>
+        <div class="nav-sub" id="nav-about">
+          <div class="nav-sub-inner">
+          <a href="about.html">About Us</a>
+          <a href="blog.html">Blog</a>
+          </div>
+        </div>
+      </div>
       <div class="nav-group">
         <button type="button" class="nav-group-toggle hover:text-reference-green text-base font-medium w-full transition-colors" aria-expanded="false" aria-controls="nav-treatments">
           Treatments

@@ -1,7 +1,7 @@
 <!-- CTA bar. Service pages already close with their own full CTA block,
      so they pass hideCta=true rather than stacking two of them. -->
 {{#unless hideCta}}
-<div class="container">
+<div class="container reference-cta-wrap">
   <div class="reference-cta-bar">
     <div>
       <div class="reference-cta-title">Transform your skin with us</div>
@@ -49,30 +49,22 @@
     </div>
 
     <!-- Quick links -->
-    <div class="basis-35 min-w-30 grow-0">
+    <div class="flex-1 basis-55 min-w-52">
       <h3 class="reference-footer-heading">Quick links</h3>
-      <div class="flex flex-col gap-2.5 mt-4 text-[13px]">
+      <div class="footer-links mt-4 text-[13px]">
         <a href="index.html#home" class="reference-footer-link">Home</a>
-        <a href="about.html" class="reference-footer-link">About</a><a href="results.html" class="reference-footer-link">Results</a>
+        <a href="about.html" class="reference-footer-link">About</a>
+        <a href="results.html" class="reference-footer-link">Results</a>
         <a href="service-aesthetic-injectables.html" class="reference-footer-link">Treatments</a>
-        <a href="index.html#insights" class="reference-footer-link">Insights</a>
+        <a href="blog.html" class="reference-footer-link">Insights</a>
         <a href="index.html#faq" class="reference-footer-link">FAQs</a>
         <a href="contact.html" class="reference-footer-link">Contact</a>
         <a href="index.html#appointment" class="reference-footer-link">Appointment</a>
       </div>
     </div>
 
-    <!-- Utility links -->
-    <div class="basis-35 min-w-30 grow-0">
-      <h3 class="reference-footer-heading">Utility links</h3>
-      <div class="flex flex-col gap-2.5 mt-4 text-[13px]">
-        <a href="privacy-policy.html" class="reference-footer-link">Privacy Policy</a>
-        <a href="404-error.html" class="reference-footer-link">Error 404</a>
-      </div>
-    </div>
-
     <!-- Get in touch — target of the "Contact" nav/footer links -->
-    <div id="contact" class="flex-1 basis-60 min-w-55 scroll-mt-6">
+    <div id="contact" class="flex-1 basis-55 min-w-50 scroll-mt-6">
       <h3 class="reference-footer-heading">Get in touch</h3>
       <div class="flex flex-col gap-3 mt-4 text-[13px] text-white/70 font-normal">
         <div class="flex gap-2.5">
@@ -87,15 +79,6 @@
           <i class="iconify lucide--mail size-4 shrink-0 mt-0.5 text-reference-star"></i>
           <span>abcaestheticsllc@gmail.com</span>
         </a>
-        <div class="flex gap-2.5">
-          <i class="iconify lucide--clock size-4 shrink-0 mt-0.5 text-reference-star"></i>
-          <span class="leading-[1.6]">
-            Mon 8:00 AM &ndash; 8:00 PM<br>
-            Tue &ndash; Thu 5:00 PM &ndash; 10:00 PM<br>
-            Fri &ndash; Sat 8:00 AM &ndash; 8:00 PM<br>
-            Sun Closed
-          </span>
-        </div>
       </div>
     </div>
   </div>
@@ -113,7 +96,7 @@
   <!-- Bottom line -->
   <div class="container relative z-10">
     <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-2.5 border-t border-white/10 pt-6 pb-6 text-[13px] text-white/55 font-normal text-center">
-      <p>Designed by <a href="https://unifato.com/" class="text-reference-star hover:text-white transition-colors">Unifato</a></p>
+      <p>Designed by <a href="https://unifato.com/" class="text-reference-star hover:text-white transition-colors">Unifato</a> &middot; <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></p>
       <p>© 2026 ABC Aesthetics &amp; Wellness. All rights reserved</p>
     </div>
   </div>

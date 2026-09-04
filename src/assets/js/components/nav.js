@@ -23,21 +23,26 @@ function setup() {
     const current = pageName(window.location.pathname) || "index.html"
 
     // --- 2. mark the current page in both menus -------------------------
-    let onTreatment = false
-
     document.querySelectorAll(".nav-dd-link, .nav-sub a").forEach((link) => {
-        if (pageName(link.getAttribute("href")) !== current) return
-        link.classList.add("is-active")
-        link.setAttribute("aria-current", "page")
-        onTreatment = true
-    })
+        const target = pageName(link.getAttribute("href"))
+        const exact = target === current
+        // an article has no menu entry of its own, so it marks the Blog one -
+        // otherwise the whole trail reads as "nowhere" while you are reading
+        const inSection = target === "blog.html" && current.indexOf("blog-") === 0
+        if (!exact && !inSection) return
 
-    // the parent item too, so the trail is visible before the menu is opened
-    if (onTreatment) {
-        document.querySelectorAll(".nav-dd > .reference-nav-link").forEach((link) => {
-            link.classList.add("is-current")
-        })
-    }
+        link.classList.add("is-active")
+        // only the page itself is aria-current="page"; an article is merely
+        // inside that section
+        if (exact) link.setAttribute("aria-current", "page")
+
+        // the parent item too, so the trail is visible before the menu is
+        // opened - but only this link's own dropdown. There are two now, and
+        // marking every .nav-dd would light up Treatments on a blog page.
+        const dd = link.closest(".nav-dd")
+        const parent = dd && dd.querySelector(":scope > .reference-nav-link")
+        if (parent) parent.classList.add("is-current")
+    })
 
     document.querySelectorAll("nav .reference-nav-link").forEach((link) => {
         const href = link.getAttribute("href")
