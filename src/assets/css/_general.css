@@ -99,10 +99,14 @@ header ~ section:first-of-type {
     }
 }
 
-/* Anchor targets get a little breathing room when jumped to */
+/* Anchor targets clear the sticky header when jumped to. At 1.5rem the offset
+   was smaller than the header itself (72px on a phone, 93px on desktop), so
+   following a menu link tucked the top of the target under the nav - most
+   visibly on "Home", which landed ~50-70px down the hero instead of at the
+   top of the page. Larger than the header, so #home clamps to 0. */
 section[id],
 [id="contact"] {
-    scroll-margin-top: 1.5rem;
+    scroll-margin-top: 104px;
 }
 
 .reference-nav-link {
@@ -3060,6 +3064,12 @@ h3 > .cl-toggle {
     }
 
     .sd2-split-media img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* A square photograph in a 16/11 frame loses a third of its height, and a
+       centre crop takes that off the top - which on the overview picture is
+       the provider's head. Weighted up so the face stays in frame; the source
+       is square everywhere else, so this only ever applies here. */
+    .sd2-media-top img { object-position: 50% 12%; }
 }
 
 /* D. Section headings centre on a phone, along with the copy that introduces
