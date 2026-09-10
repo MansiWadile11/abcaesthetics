@@ -120,7 +120,7 @@ section[id],
     padding: 14px 26px;
 }
 
-/* logo.png is cropped to its artwork (375x308), so this height is the mark's
+/* logo.webp is cropped to its artwork (750x616), so this height is the mark's
    real height - the old 92px box was mostly transparent padding and rendered a
    ~54px mark. These values are that visual size, scaled up ~15%. */
 .reference-logo-mark {
@@ -569,7 +569,98 @@ section[id],
     font-size: 12px;
 }
 
+/* ---- Thank-you page ---- */
+.ty-card {
+    max-width: 680px;
+    margin-inline: auto;
+    text-align: center;
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 32px;
+    padding: clamp(28px, 5vw, 56px);
+}
+
+.ty-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: var(--color-reference-gold);
+    color: var(--color-reference-green);
+}
+
+.ty-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+    color: var(--color-reference-green);
+    margin-top: 22px;
+}
+
+.ty-lead {
+    font-size: 15.5px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--color-reference-muted);
+    margin-top: 14px;
+}
+
+/* the steps below read as a list, so they range left inside a centred card */
+.ty-next {
+    text-align: start;
+    margin-top: clamp(26px, 4vw, 40px);
+    padding-top: clamp(24px, 4vw, 34px);
+    border-top: 1px solid var(--color-reference-hairline);
+}
+
+.ty-urgent {
+    margin-top: 26px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-reference-muted);
+}
+
+.ty-urgent a {
+    color: var(--color-reference-green);
+    font-weight: 600;
+}
+
+.ty-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 26px;
+}
+
 /* ---- Appointment form ---- */
+/* The honeypot has to be in the form and reachable by a bot, but never seen
+   or tabbed into by a person - so it is moved off-screen rather than hidden,
+   which some bots check for. */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* One line under each form for whatever the submit had to say. It takes no
+   room until it has something. */
+.form-status {
+    margin-top: 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+.form-status:empty { display: none; }
+.form-status[data-state="warn"] { color: var(--color-reference-gold-ink); }
+.form-status[data-state="error"] { color: #b4442e; }
+
 .reference-form-pad {
     padding: 48px clamp(24px, 4vw, 56px);
 }
@@ -721,65 +812,152 @@ section[id],
     transition: background-color 0.2s ease;
 }
 
+/* ==========================================================================
+   Footer
+   Four columns to the client's reference: brand, Quick Links, Explore, Get in
+   Touch, over a bottom line of legal links. Below 1024 it folds to two
+   columns and the dividers come off; below 768 it is a single centred column.
+   ========================================================================== */
 .reference-footer {
     background: var(--color-reference-footer);
 }
 
-.reference-footer-heading {
+.ft-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(0, 1.02fr) minmax(0, 1.35fr);
+    padding-block: clamp(44px, 5vw, 66px) clamp(30px, 3.5vw, 48px);
+}
+
+/* the divider belongs to the column that follows it, so the first has none */
+.ft-col + .ft-col {
+    border-inline-start: 1px solid rgba(255, 255, 255, 0.1);
+    padding-inline-start: clamp(22px, 3vw, 46px);
+}
+
+.ft-col + .ft-col + .ft-col,
+.ft-col:last-child {
+    padding-inline-end: 0;
+}
+
+.ft-lockup {
+    display: block;
     font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.ft-lockup-abc {
+    display: block;
+    font-size: clamp(28px, 2.6vw, 36px);
+    color: var(--color-reference-star);
+    letter-spacing: 0.01em;
+}
+
+.ft-lockup-name {
+    display: block;
+    font-size: clamp(20px, 1.9vw, 27px);
     color: #fff;
 }
 
-/* The footer columns stack on a phone, and stacked left-aligned columns read
-   as three loose fragments rather than one block. The container is itself the
-   flex row - there is no inner wrapper to hang this on. */
-@media (max-width: 767px) {
-    .reference-footer > .container {
-        text-align: center;
-    }
-
-    /* the logo lockup and the badge row are flex, so they need the axis too */
-    .reference-footer > .container > div > a,
-    .reference-footer > .container > div > .flex {
-        justify-content: center;
-    }
-
-    /* address, phone and email keep their icon beside the text and centre as
-       a pair, rather than each line centring on its own */
-    .reference-footer #contact > div > :is(a, div) {
-        display: inline-flex;
-        text-align: start;
-    }
-
-    .reference-footer #contact > div {
-        align-items: center;
-    }
-
+.ft-blurb {
+    margin-top: 16px;
+    max-width: 34ch;
+    font-size: 13.5px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.65);
 }
 
-/* Two columns of four, in that order (Home..Treatments down the left,
-   Insights..Appointment down the right) at every width - a fixed row count
-   plus column-first auto-flow, rather than the browser packing left-to-right
-   and splitting the set of 8 wherever it lands. */
-/* the heading spans two columns of links, so it centres over them rather than
-   ranging left against the first one */
-.reference-footer > .container > div:has(> .footer-links) > .reference-footer-heading {
-    text-align: center;
+.ft-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: clamp(20px, 3vw, 36px);
 }
 
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(4, auto);
-    grid-auto-flow: column;
-    column-gap: 28px;
-    row-gap: 10px;
-    /* each link shrinks to its own text and centres in its track - stretched
-       to the full track, the text ranged left and the centred heading above
-       looked offset against it */
-    justify-items: center;
+.ft-heading {
+    font-family: var(--font-heading);
+    font-size: clamp(18px, 1.5vw, 21px);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+}
+
+/* the short gold rule under each heading in the reference */
+.ft-heading::after {
+    content: "";
+    display: block;
+    width: 46px;
+    height: 2px;
+    margin-top: 10px;
+    border-radius: 2px;
+    background: var(--color-reference-star);
+}
+
+.ft-list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.ft-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.ft-contact > li {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    line-height: 1.5;
+}
+
+.ft-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-reference-star);
+    color: var(--color-reference-star);
+}
+
+/* the address is the one line that cannot be shortened to fit a phone */
+.ft-email {
+    word-break: break-word;
+}
+
+.ft-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding: 13px 26px;
+    border-radius: 100px;
+    background: linear-gradient(180deg, #eccd8f 0%, #d7a95c 100%);
+    color: var(--color-reference-green-dark);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* the label is the button - let it set the width rather than fold in half */
+.ft-book { white-space: nowrap; }
+
+.ft-book:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
 }
 
 .reference-footer-link {
@@ -792,10 +970,10 @@ section[id],
 }
 
 .reference-social {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
     display: flex;
     align-items: center;
@@ -805,8 +983,89 @@ section[id],
 }
 
 .reference-social:hover {
-    background: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.22);
     color: #fff;
+}
+
+.ft-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0 26px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.ft-legal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ft-legal a {
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s ease;
+}
+
+.ft-legal a:hover { color: #fff; }
+.ft-legal span { color: rgba(255, 255, 255, 0.25); }
+
+/* The floating WhatsApp / back-to-top stack is fixed over the bottom-right
+   corner - 52px wide, up to 26px in - which is exactly where this row ends.
+   Reserve the corner so the legal links are never sitting under a button. */
+@media (min-width: 768px) {
+    .ft-bottom { padding-inline-end: 86px; }
+}
+
+@media (max-width: 767px) {
+    .ft-bottom { padding-bottom: 84px; }
+}
+
+/* Four columns still fit a 1024 tablet - the longest Explore label wraps to
+   two lines and nothing else moves - so the fold to two waits until the
+   layout breakpoint proper. */
+@media (max-width: 1023px) {
+    .ft-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(30px, 5vw, 46px);
+    }
+
+    /* a divider only reads between columns on the same row; once they wrap it
+       lands under the column above and looks like a stray rule */
+    .ft-col + .ft-col {
+        border-inline-start: 0;
+        padding-inline-start: 0;
+    }
+}
+
+/* One centred column on a phone: stacked left-ranged blocks read as loose
+   fragments rather than as one footer. */
+@media (max-width: 767px) {
+    .ft-grid {
+        grid-template-columns: minmax(0, 1fr);
+        text-align: center;
+    }
+
+    .ft-blurb { margin-inline: auto; }
+    .ft-heading::after { margin-inline: auto; }
+    .ft-socials { justify-content: center; }
+    .ft-book { margin-inline: auto; }
+
+    /* icon and text centre as a pair, rather than each line centring alone */
+    .ft-contact > li {
+        justify-content: center;
+        text-align: start;
+    }
+
+    .ft-bottom {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 /* The CTA bar's pill shape only reads well on one line — square it off once
@@ -2435,6 +2694,22 @@ button.hover\:border-primary-1:hover {
 .band-cream { background: var(--color-reference-card); }
 .band-gold  { background: var(--color-reference-gold); }   /* #f1e1c6 */
 
+/* The insight rows sit straight on the gold band, and .reference-tag's own
+   ground is that same gold - an invisible pill whose only remaining effect is
+   to indent its label 12px past the heading beneath it. Beside a thumbnail on
+   a phone that reads as two text blocks that do not line up. Where the pill
+   cannot be seen, drop the pill; the featured card keeps its, because its
+   lighter ground still shows it. */
+#insights .reference-tag {
+    background: none;
+    padding-inline: 0;
+}
+
+#insights .bg-reference-insight .reference-tag {
+    background: var(--color-reference-gold);
+    padding-inline: 12px;
+}
+
 /* The strong break. Text and surfaces invert against the deep green. */
 .band-green { background: var(--color-reference-footer); }
 
@@ -3022,10 +3297,30 @@ h3 > .cl-toggle {
 
     .sd2-steps .sd2-step-num { margin-inline: 0; width: 30px; height: 30px; font-size: 13px; }
     .sd2-steps .sd2-step-rule { display: none; }
-    .sd2-steps .sd2-step-title { text-align: start; font-size: 15.5px; }
     .sd2-steps .sd2-step-copy { text-align: start; padding-top: 10px; }
 
-    .sd2-steps .cl-toggle { margin-top: 10px; }
+    /* The badge sat on its own line with the title centred in the space left
+       beside it, so every title started at a different x and the four rows
+       read as ragged. Badge and title share a row, the title ranges from a
+       single left edge, and the +/x holds the far end. The `> ` beats the
+       phone-width rule that centres every other .cl-toggle - a step title is
+       a row label, not a section heading. */
+    .sd2-steps .cl-item {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: 12px;
+        align-items: center;
+    }
+
+    .sd2-steps .cl-item > .cl-panel { grid-column: 1 / -1; }
+
+    .sd2-steps .cl-item > .cl-toggle {
+        margin-top: 0;
+        justify-content: flex-start;
+        text-align: start;
+        font-size: 15.5px;
+        padding-inline-end: 34px;
+    }
 
     /* treatment group heading behaves as the accordion row */
     .svc-group-head.cl-toggle {
@@ -3606,9 +3901,12 @@ div:has(> .reference-clinic-title) > a {
    the toggle, and above the breakpoint they are plain sections again.
    ========================================================================== */
 @media (max-width: 1023px) {
+    /* The control is absolutely placed at the end of the row, so a heading
+       that fills the width runs straight into it. Reserve the space on both
+       sides, so the label clears the +/x and a centred one stays centred. */
     .cl-item[data-collapse-solo] > h2 > .cl-toggle,
     .cl-item[data-collapse-solo] > h3 > .cl-toggle {
-        padding: 2px 0;
+        padding: 2px 34px;
     }
 
     /* the CTA folds under its heading, so the photo beside it would otherwise
@@ -3856,6 +4154,14 @@ div:has(> .reference-clinic-title) > a {
 }
 
 /* Sidebar */
+/* the "More from the practice" heading over an article's rail */
+.blog-rail-heading {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-reference-cocoa);
+}
+
 .blog-rail-card {
     background: var(--color-reference-card);
     border-radius: 20px;

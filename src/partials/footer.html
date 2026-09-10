@@ -21,83 +21,101 @@
 </div>
 {{/unless}}
 
-<!-- Footer -->
+<!-- Footer — four columns, per the client's reference: brand, Quick Links,
+     Explore, Get in Touch, over a bottom line of legal links. -->
 <footer class="reference-footer mt-16 relative overflow-hidden">
-  <img src="/images/icons/leaf.png" alt="" class="absolute -right-15 -bottom-10 w-85 opacity-10 brightness-300 rotate-15 pointer-events-none z-0">
+  <img src="/images/icons/leaf.webp" alt="" class="absolute -right-15 -bottom-10 w-85 opacity-10 brightness-300 rotate-15 pointer-events-none z-0">
 
-  <div class="container relative z-10 flex flex-wrap lg:gap-12 gap-10 lg:pt-16 pt-12 lg:pb-12 pb-10">
+  <div class="container relative z-10 ft-grid">
 
-    <!-- About / Logo -->
-    <div class="flex-1 basis-65 min-w-55">
+    <!-- Brand -->
+    <div class="ft-col ft-brand">
       <!-- Text lockup rather than the mark: the logo's fine sub-text is
            illegible once inverted onto the dark ground. -->
-      <a href="index.html" class="inline-flex items-center gap-1.5" aria-label="Home">
-        <span class="font-reference-heading font-bold text-[22px] text-reference-star">ABC</span>
-        <span class="font-reference-heading font-bold text-[22px] text-white">Aesthetics &amp; Wellness</span>
+      <a href="index.html" class="ft-lockup" aria-label="Home">
+        <span class="ft-lockup-abc">ABC</span>
+        <span class="ft-lockup-name">Aesthetics &amp; Wellness</span>
       </a>
-      <p class="text-[13px] text-white/65 font-normal leading-[1.6] mt-4">Personalized medical aesthetics and wellness care combining clinical expertise with aesthetic medicine experience since 2016.</p>
-      <div class="flex flex-wrap gap-x-4.5 gap-y-2 mt-4 text-xs text-white/75 font-normal">
-        <span class="flex items-center gap-1.5">
-          <i class="iconify lucide--badge-check size-4 text-reference-star"></i>
-          FDA Approved
-        </span>
-        <span class="flex items-center gap-1.5">
-          <i class="iconify lucide--trophy size-4 text-reference-star"></i>
-          Board Certified
-        </span>
+      <p class="ft-blurb">Personalized medical aesthetics and wellness care combining clinical expertise with aesthetic medicine experience since 2016.</p>
+      <div class="ft-socials">
+        <a href="https://www.instagram.com/abcaestheticsllc/" target="_blank" rel="noopener" aria-label="Instagram" class="reference-social">
+          <i class="iconify tabler--brand-instagram size-4.5"></i>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="reference-social">
+          <i class="iconify tabler--brand-facebook size-4.5"></i>
+        </a>
       </div>
     </div>
 
     <!-- Quick links -->
-    <div class="flex-1 basis-55 min-w-52">
-      <h3 class="reference-footer-heading">Quick links</h3>
-      <div class="footer-links mt-4 text-[13px]">
-        <a href="index.html#home" class="reference-footer-link">Home</a>
-        <a href="about.html" class="reference-footer-link">About</a>
-        <a href="results.html" class="reference-footer-link">Results</a>
-        <a href="service-aesthetic-injectables.html" class="reference-footer-link">Treatments</a>
-        <a href="blog.html" class="reference-footer-link">Insights</a>
-        <a href="index.html#faq" class="reference-footer-link">FAQs</a>
-        <a href="contact.html" class="reference-footer-link">Contact</a>
-        <a href="index.html#appointment" class="reference-footer-link">Appointment</a>
-      </div>
+    <div class="ft-col">
+      <h3 class="ft-heading">Quick Links</h3>
+      <ul class="ft-list">
+        <li><a href="index.html#home" class="reference-footer-link">Home</a></li>
+        <li><a href="about.html" class="reference-footer-link">About</a></li>
+        <li><a href="service-aesthetic-injectables.html" class="reference-footer-link">Treatments</a></li>
+        <li><a href="results.html" class="reference-footer-link">Results</a></li>
+        <li><a href="index.html#faq" class="reference-footer-link">FAQs</a></li>
+        <li><a href="contact.html" class="reference-footer-link">Contact</a></li>
+        <li><a href="index.html#appointment" class="reference-footer-link">Appointment</a></li>
+      </ul>
+    </div>
+
+    <!-- Explore — the nine treatment pages -->
+    <div class="ft-col">
+      <h3 class="ft-heading">Explore</h3>
+      <ul class="ft-list">
+        <li><a href="service-aesthetic-injectables.html" class="reference-footer-link">Injectables</a></li>
+        <li><a href="service-skin-energy.html" class="reference-footer-link">Skin &amp; Energy</a></li>
+        <li><a href="service-regenerative-aesthetics.html" class="reference-footer-link">Regenerative Aesthetics</a></li>
+        <li><a href="service-hair-restoration.html" class="reference-footer-link">Hair Restoration</a></li>
+        <li><a href="service-hormone-metabolic-wellness.html" class="reference-footer-link">Hormone &amp; Metabolic Wellness</a></li>
+        <li><a href="service-womens-wellness.html" class="reference-footer-link">Women&rsquo;s Wellness</a></li>
+        <li><a href="service-mens-wellness.html" class="reference-footer-link">Men&rsquo;s Wellness</a></li>
+        <li><a href="service-sexual-wellness.html" class="reference-footer-link">Sexual Wellness</a></li>
+        <li><a href="service-wellness-products.html" class="reference-footer-link">Wellness Products</a></li>
+      </ul>
     </div>
 
     <!-- Get in touch — target of the "Contact" nav/footer links -->
-    <div id="contact" class="flex-1 basis-55 min-w-50 scroll-mt-6">
-      <h3 class="reference-footer-heading">Get in touch</h3>
-      <div class="flex flex-col gap-3 mt-4 text-[13px] text-white/70 font-normal">
-        <div class="flex gap-2.5">
-          <i class="iconify lucide--map-pin size-4 shrink-0 mt-0.5 text-reference-star"></i>
-          <span class="leading-[1.5]">16240 Parker Road<br>Lake Oswego, Oregon</span>
-        </div>
-        <a href="tel:9719787840" class="flex gap-2.5 hover:text-white transition-colors">
-          <i class="iconify lucide--phone size-4 shrink-0 mt-0.5 text-reference-star"></i>
-          <span>971-978-7840</span>
-        </a>
-        <a href="mailto:abcaestheticsllc@gmail.com" class="flex gap-2.5 hover:text-white transition-colors">
-          <i class="iconify lucide--mail size-4 shrink-0 mt-0.5 text-reference-star"></i>
-          <span>abcaestheticsllc@gmail.com</span>
-        </a>
-      </div>
+    <div id="contact" class="ft-col scroll-mt-6">
+      <h3 class="ft-heading">Get in Touch</h3>
+      <ul class="ft-contact">
+        <li>
+          <span class="ft-icon" aria-hidden="true"><i class="iconify lucide--map-pin size-4"></i></span>
+          <span>16240 Parker Road<br>Lake Oswego, Oregon</span>
+        </li>
+        <li>
+          <span class="ft-icon" aria-hidden="true"><i class="iconify lucide--phone size-4"></i></span>
+          <a href="tel:9719787840" class="reference-footer-link">971-978-7840</a>
+        </li>
+        <li>
+          <span class="ft-icon" aria-hidden="true"><i class="iconify lucide--mail size-4"></i></span>
+          <a href="mailto:abcaestheticsllc@gmail.com" class="reference-footer-link ft-email">abcaestheticsllc@gmail.com</a>
+        </li>
+        <li>
+          <span class="ft-icon" aria-hidden="true"><i class="iconify lucide--clock size-4"></i></span>
+          <span>Mon &ndash; Fri: 9:00 AM &ndash; 5:00 PM<br>By Appointment Only</span>
+        </li>
+      </ul>
+      <a href="index.html#appointment" class="ft-book">
+        Book an Appointment
+        <i class="iconify lucide--arrow-right size-4"></i>
+      </a>
     </div>
-  </div>
-
-  <!-- Socials -->
-  <div class="container relative z-10 flex items-center justify-center gap-3.5 pb-8">
-    <a href="https://www.instagram.com/abcaestheticsllc/" target="_blank" rel="noopener" aria-label="Instagram" class="reference-social">
-      <i class="iconify tabler--brand-instagram size-4.5"></i>
-    </a>
-    <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="reference-social">
-      <i class="iconify tabler--brand-facebook size-4.5"></i>
-    </a>
   </div>
 
   <!-- Bottom line -->
   <div class="container relative z-10">
-    <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-2.5 border-t border-white/10 pt-6 pb-6 text-[13px] text-white/55 font-normal text-center">
-      <p>Designed by <a href="https://unifato.com/" class="text-reference-star hover:text-white transition-colors">Unifato</a> &middot; <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></p>
-      <p>© 2026 ABC Aesthetics &amp; Wellness. All rights reserved</p>
+    <div class="ft-bottom">
+      <p>© 2026 ABC Aesthetics &amp; Wellness. All rights reserved.</p>
+      <nav class="ft-legal" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span aria-hidden="true">|</span>
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+        <span aria-hidden="true">|</span>
+        <a href="accessibility.html">Accessibility</a>
+      </nav>
     </div>
   </div>
 </footer>

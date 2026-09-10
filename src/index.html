@@ -27,14 +27,14 @@
         </div>
         <!-- Center -->
         <div class="hero-center-content text-center">
-          <div class="md:hidden mb-7">
+          <h1 class="text-reference-green font-semibold tracking-tight font-reference-heading">Personalized aesthetics &amp; wellness care</h1>
+          <p class="text-reference-muted font-normal mx-auto">Individualized aesthetic medicine, skin health, and wellness care from Dr. Nawal M. Qneibi, DNP-BC — founder of ABC Aesthetics &amp; Wellness.</p>
+          <div class="md:hidden mt-7">
             <a href="index.html#appointment" class="reference-cta-btn btn-glow bg-reference-green hover:bg-reference-green-dark text-white">
               <img src="/images/icons/icon-1.svg" alt="" class="size-3.5 brightness-0 invert">
               Book Appointment
             </a>
           </div>
-          <h1 class="text-reference-green font-semibold tracking-tight font-reference-heading">Personalized aesthetics &amp; wellness care</h1>
-          <p class="text-reference-muted font-normal mx-auto">Individualized aesthetic medicine, skin health, and wellness care from Dr. Nawal M. Qneibi, DNP-BC — founder of ABC Aesthetics &amp; Wellness.</p>
         </div>
         <!-- Right -->
         <div class="hero-stat-area flex justify-end">
@@ -246,7 +246,7 @@
             <!-- Divider -->
             <div class="absolute inset-y-0 w-0.5 bg-white pointer-events-none z-10" style="left: var(--pos); transform: translateX(-50%);">
               <div class="absolute top-1/2 inset-s-1/2 -translate-x-1/2 -translate-y-1/2 size-10 bg-white rounded-full flex items-center justify-center text-primary-2 shadow-lg">
-                <i class="iconify lucide--code size-5 rotate-90 text-primary-1"></i>
+                <i class="iconify lucide--code size-5 text-primary-1"></i>
               </div>
             </div>
 
@@ -377,7 +377,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(135deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-135deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/cheek-injection.jpg" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none">
+                          <img src="/images/abc/cheek-injection.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none">
                         </div>
                       </div>
                     </div>
@@ -670,7 +670,7 @@
 
           <div class="svc-body" id="svc-body-1">
             <div class="svc-body-media">
-              <img src="/images/abc/dermal-filler-procedure.jpg" alt="Injectable treatment" class="absolute inset-0 w-full h-full object-cover">
+              <img src="/images/abc/dermal-filler-procedure.webp" alt="Injectable treatment" class="absolute inset-0 w-full h-full object-cover">
               <a href="index.html#appointment" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="" class="size-3.5 shrink-0">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -756,7 +756,7 @@
 
           <div class="svc-body" id="svc-body-3">
             <div class="svc-body-media">
-              <img src="/images/abc/prf-injection.jpg" alt="Regenerative aesthetics result" class="absolute inset-0 w-full h-full object-cover">
+              <img src="/images/abc/prf-injection.webp" alt="Regenerative aesthetics result" class="absolute inset-0 w-full h-full object-cover">
               <a href="index.html#appointment" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="" class="size-3.5 shrink-0">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -1383,7 +1383,7 @@
           <!-- Post 1 -->
           <a href="blog-injectables.html" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/injectables-treatment.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+              <img src="/images/abc/injectables-treatment.webp" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
@@ -1396,7 +1396,7 @@
           <!-- Post 2 -->
           <a href="blog-skinpen.html" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/skinpen-microneedling.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+              <img src="/images/abc/skinpen-microneedling.webp" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
@@ -1455,23 +1455,23 @@
           <h2 class="reference-form-title">Request an appointment</h2>
           <p class="text-sm text-reference-muted font-normal mt-3">Fill out the form below, and we'll contact you shortly.</p>
 
-          <form class="mt-7">
+          <form class="mt-7" data-form="appointment-home" data-form-title="Appointment request (home page)">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label for="ap-name" class="reference-form-label">Name*</label>
-                <input id="ap-name" type="text" placeholder="Your name" class="reference-input">
+                <input id="ap-name" name="name" type="text" placeholder="Your name" required class="reference-input">
               </div>
               <div>
                 <label for="ap-email" class="reference-form-label">Email*</label>
-                <input id="ap-email" type="email" placeholder="Email address" class="reference-input">
+                <input id="ap-email" name="email" type="email" placeholder="Email address" required class="reference-input">
               </div>
               <div>
                 <label for="ap-phone" class="reference-form-label">Phone*</label>
-                <input id="ap-phone" type="tel" placeholder="Phone number" class="reference-input">
+                <input id="ap-phone" name="phone" type="tel" placeholder="Phone number" required class="reference-input">
               </div>
               <div>
                 <label for="ap-service" class="reference-form-label">Treatment of Interest*</label>
-                <select id="ap-service" class="reference-input appearance-none cursor-pointer">
+                <select id="ap-service" name="treatment" required class="reference-input appearance-none cursor-pointer">
                   <option value="">Select</option>
                   <option>Aesthetic Injectables</option>
                   <option>Advanced Skin &amp; Energy-Based Treatments</option>
@@ -1488,7 +1488,7 @@
 
             <div class="mt-4">
               <label for="ap-contact-method" class="reference-form-label">Preferred Contact Method*</label>
-              <select id="ap-contact-method" class="reference-input appearance-none cursor-pointer">
+              <select id="ap-contact-method" name="contact_method" required class="reference-input appearance-none cursor-pointer">
                 <option value="">Select</option>
                 <option>Phone call</option>
                 <option>Text message</option>
@@ -1498,11 +1498,11 @@
 
             <div class="mt-4">
               <label for="ap-message" class="reference-form-label">How we can help?</label>
-              <textarea id="ap-message" placeholder="Type here" rows="4" class="reference-input resize-none"></textarea>
+              <textarea id="ap-message" name="message" placeholder="Type here" rows="4" class="reference-input resize-none"></textarea>
             </div>
 
             <div class="flex items-center gap-2.5 mt-4.5">
-              <input type="checkbox" id="agree" class="rounded border-reference-line text-reference-green focus:ring-reference-green size-4 cursor-pointer">
+              <input type="checkbox" id="agree" name="consent" value="yes" required class="rounded border-reference-line text-reference-green focus:ring-reference-green size-4 cursor-pointer">
               <label for="agree" class="text-[13px] text-reference-stat font-normal cursor-pointer select-none">I agree to allow the clinic to contact me regarding my appointment.</label>
             </div>
 
@@ -1510,6 +1510,10 @@
               <button type="submit" class="btn-glow bg-reference-green hover:bg-reference-green-dark text-white text-[15px] font-semibold rounded-full px-6.5 py-3.5 transition-colors">Book an appointment</button>
               <span class="text-[13px] text-reference-subtle font-normal">We'll reply within 24–48h.</span>
             </div>
+
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            <!-- bots fill everything; people never see this -->
+            <p class="hp-field" aria-hidden="true"><label>Leave this field empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
           </form>
         </div>
 

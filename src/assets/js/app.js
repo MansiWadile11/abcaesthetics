@@ -20,12 +20,12 @@ import './components/swiper';
 import './components/services-accordion';
 import './components/reveal';
 import './components/collapse';
-import './components/faq-accordion';
 import './components/section-nav';
 import './components/nav';
 import './components/floating';
 import './components/count';
 import './components/gallery';
+import './components/forms';
 
 var stickyNav = document.querySelector(".nav-sticky")
 

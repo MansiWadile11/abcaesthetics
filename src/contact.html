@@ -25,16 +25,16 @@
                     <div class="flex flex-col">
                         <h2 class="text-3xl md:text-4xl lg:text-[46px] font-heading font-medium text-primary-3 md:mb-10 mb-7.5">We're here to help you</h2>
 
-                        <form class="flex flex-col gap-5">
+                        <form class="flex flex-col gap-5" data-form="contact" data-form-title="Contact enquiry">
                             <!-- Row 1 -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="text-sm font-medium text-primary-2 mb-2.5 block">Name*</label>
-                                    <input type="text" placeholder="Your name" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                    <input type="text" name="name" placeholder="Your name" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
                                 </div>
                                 <div>
                                     <label class="text-sm font-medium text-primary-2 mb-2.5 block">Email*</label>
-                                    <input type="email" placeholder="Email address" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                    <input type="email" name="email" placeholder="Email address" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
                                 </div>
                             </div>
 
@@ -42,11 +42,11 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="text-sm font-medium text-primary-2 mb-2.5 block">Phone*</label>
-                                    <input type="tel" placeholder="Phone number" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
+                                    <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
                                 </div>
                                 <div>
                                     <label class="text-sm font-medium text-primary-2 mb-2.5 block">Treatment of Interest*</label>
-                                    <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                    <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         <option value="Aesthetic Injectables">Aesthetic Injectables</option>
                                         <option value="Advanced Skin &amp; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div>
                                     <label class="text-sm font-medium text-primary-2 mb-2.5 block">Preferred Contact Method*</label>
-                                    <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                    <select name="contact_method" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
                                         <option value="">Select</option>
                                         <option value="Phone call">Phone call</option>
                                         <option value="Text message">Text message</option>
@@ -73,12 +73,12 @@
                             <!-- Row 3 -->
                             <div>
                                 <label class="text-sm font-medium text-primary-2 mb-2.5 block">How we can help?</label>
-                                <textarea rows="4" placeholder="Type here" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none"></textarea>
+                                <textarea name="message" rows="4" placeholder="Type here" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none"></textarea>
                             </div>
 
                             <!-- Checkbox -->
                             <div class="flex items-start gap-3 mt-1">
-                                <input type="checkbox" id="updates" class="size-5 rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 bg-white cursor-pointer accent-primary-1">
+                                <input type="checkbox" id="updates" name="consent" value="yes" required class="size-5 rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 bg-white cursor-pointer accent-primary-1">
                                 <label for="updates" class="text-xs md:text-sm font-medium text-primary-2 cursor-pointer mt-0.5">
                                     I agree to allow the clinic to contact me regarding my enquiry.
                                 </label>
@@ -88,6 +88,10 @@
                             <button type="submit" class="w-full bg-primary-1 hover:bg-white hover:text-primary-1 border border-transparent hover:border-primary-3 text-white font-medium py-2.5 px-5 text-sm rounded-full transition-all">
                                 Submit
                             </button>
+
+                            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+                            <!-- bots fill everything; people never see this -->
+                            <p class="hp-field" aria-hidden="true"><label>Leave this field empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
                         </form>
 
                         <div class="contact-next">

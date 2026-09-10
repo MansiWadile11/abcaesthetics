@@ -56,6 +56,14 @@ function setup() {
         if (first) first.classList.add("is-open")
     })
 
+    // A standalone section is not a list of choices, it is one section that
+    // happens to fold. Starting it shut made its content read as missing
+    // rather than collapsed - the Benefits list on a phone showed a heading
+    // and nothing else. It opens, and the toggle is there to shut it.
+    document.querySelectorAll(".cl-item[data-collapse-solo]").forEach((item) => {
+        item.classList.add("is-open")
+    })
+
     apply()
     mq.addEventListener("change", apply)
 }

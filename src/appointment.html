@@ -26,16 +26,16 @@
 
             <!-- Form Card -->
             <div class="bg-primary-5 p-6 md:p-10 rounded-3xl md:max-w-3xl mx-auto">
-                <form class="flex flex-col">
+                <form class="flex flex-col" data-form="appointment" data-form-title="Appointment request">
                     <!-- Row 1 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Name*</label>
-                            <input type="text" placeholder="Your name" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <input type="text" name="name" placeholder="Your name" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Email*</label>
-                            <input type="email" placeholder="Email address" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <input type="email" name="email" placeholder="Email address" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                     </div>
 
@@ -43,12 +43,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Phone*</label>
-                            <input type="tel" placeholder="Phone number" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Treatment of Interest*</label>
                             <div class="relative w-full">
-                                <select class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
                                     <option value="">Select</option>
                                     <option value="Aesthetic Injectables">Aesthetic Injectables</option>
                                     <option value="Advanced Skin &#39; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
@@ -68,23 +68,23 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Date*</label>
-                            <input type="date" placeholder="Date" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <input type="date" name="preferred_date" placeholder="Date" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                         <div class="flex flex-col">
                             <label class="text-sm font-medium text-primary-2 mb-2.5">Time*</label>
-                            <input type="time" placeholder="--:--" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <input type="time" name="preferred_time" placeholder="--:--" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                     </div>
 
                     <!-- Row 4 -->
                     <div class="flex flex-col mb-5">
                         <label class="text-sm font-medium text-primary-2 mb-2.5">Notes</label>
-                        <textarea placeholder="Additional notes" rows="4" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none resize-none text-primary-3"></textarea>
+                        <textarea name="message" placeholder="Additional notes" rows="4" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none resize-none text-primary-3"></textarea>
                     </div>
 
                     <!-- Checkbox -->
                     <div class="flex items-center gap-3 mb-5">
-                        <input type="checkbox" id="agree" class="rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 size-5 cursor-pointer mt-0.5">
+                        <input type="checkbox" id="agree" name="consent" value="yes" required class="rounded border border-primary-2/30 text-primary-1 focus:ring-primary-1 size-5 cursor-pointer mt-0.5">
                         <label for="agree" class="text-xs md:text-sm text-primary-2 cursor-pointer select-none font-medium leading-tight">
                             I agree to allow the clinic to contact me regarding my appointment.
                         </label>
@@ -96,6 +96,10 @@
                             Book an appointment
                         </button>
                     </div>
+
+                    <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+                    <!-- bots fill everything; people never see this -->
+                    <p class="hp-field" aria-hidden="true"><label>Leave this field empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></p>
                 </form>
             </div>
         </div>
