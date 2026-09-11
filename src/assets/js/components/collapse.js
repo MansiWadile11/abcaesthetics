@@ -6,6 +6,8 @@ animation itself is CSS (grid-template-rows), so nothing here measures
 heights or fights a resize.
 */
 
+import { fitAfterOpen } from "./fit-open"
+
 const MOBILE = "(max-width: 1023px)"
 
 // The toggle is normally a direct child, but a section that must keep its
@@ -45,6 +47,9 @@ function setup() {
             if (!mq.matches) return
             const open = item.classList.toggle("is-open")
             toggle.setAttribute("aria-expanded", open ? "true" : "false")
+            // a row opened near the foot of the screen would otherwise put its
+            // content below the fold, and read as having done nothing
+            if (open) fitAfterOpen(item, item.querySelector(":scope > .cl-panel"))
         })
     })
 

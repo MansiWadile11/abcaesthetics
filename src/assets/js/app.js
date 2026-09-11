@@ -26,6 +26,8 @@ import './components/floating';
 import './components/count';
 import './components/gallery';
 import './components/forms';
+import './components/faq-fit';
+import './components/book-dock';
 
 var stickyNav = document.querySelector(".nav-sticky")
 

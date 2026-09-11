@@ -219,11 +219,6 @@ section[id],
 }
 
 @media (max-width: 767px) {
-    /* Nav sits flush to the top edge once the shell's desktop inset is gone */
-    .reference-nav-shell {
-        padding-top: 0;
-    }
-
     .hero-top-grid {
         flex-wrap: wrap;
         justify-content: center;
@@ -243,19 +238,27 @@ section[id],
 
     .hero-center-content {
         flex-basis: 100%;
-        margin-top: 24px;
+        margin-top: 18px;
     }
 
     .hero-stat-area {
         flex-basis: 100%;
         justify-content: center;
-        margin-top: 24px;
+        margin-top: 18px;
     }
 
     .hero-stat-card {
         width: auto;
         min-width: 17.5rem;
     }
+
+    /* The hero is the part of the page most people see, and it was the
+       loosest: four stacked blocks each with its own desktop-sized run-up,
+       so the badge, the headline, the button and the stat filled a screen
+       and a half before the photograph started. */
+    .hero-center-content > .md\:hidden { margin-top: 18px; }
+    #home { padding-bottom: 22px; }
+    #home > .relative.lg\:mt-12 { margin-top: 20px; }
 }
 
 /* ---- Reference section header ---- */
@@ -3340,12 +3343,43 @@ h3 > .cl-toggle {
    why the pages read as stretched on a phone.
    ========================================================================== */
 @media (max-width: 767px) {
-    .band { padding-block: 40px; }
-    .sd2-card { padding: 26px 22px; }
-    .svc-grid { gap: 12px; }
-    .sd2-steps { gap: 12px; }
-    .sd2-faq-card { padding: 24px 18px; border-radius: 24px; }
+    /* One inset for every coloured band, whatever pt-/pb- utility the page
+       happens to carry - these ranged from 32px to 64px, so the pages read as
+       unevenly airy as well as long. `.band + .band` is listed because its own
+       padding-block-start has no media query of its own and would otherwise
+       put the 52px top back. */
+    section:is(.band, .band-cream, .band-gold, .band-blush, .band-green),
+    .band + .band {
+        padding-block: 30px;
+    }
+
+    .sd2-card { padding: 22px 18px; }
+    .svc-grid { gap: 10px; }
+    .sd2-steps { gap: 10px; }
+    .sd2-faq-card { padding: 20px 16px; border-radius: 22px; }
     .svc-ba-body { padding: 14px 16px 16px; }
+
+    /* Inside a band: the drop from a heading block to the content under it,
+       and the space between stacked cards. Scoped to bands so the navbar,
+       the drawer and the forms keep their own spacing. */
+    :is(.band, .band-cream, .band-gold, .band-blush, .band-green) {
+        & :is(.mt-12, .mt-11, .mt-10, .mt-9) { margin-top: 20px; }
+        & :is(.mt-8, .mt-7\.5, .mt-7) { margin-top: 16px; }
+        & :is(.gap-6, .gap-5\.5, .gap-5) { gap: 16px; }
+        & .space-y-7\.5 > * + * { margin-top: 16px; }
+    }
+
+    /* the closing CTA bar had a desktop-sized run-up to it */
+    .reference-cta-wrap { margin-top: 30px; }
+
+    /* the four footer columns stack, so the gap between them is read as four
+       separate pauses rather than one */
+    .ft-grid { gap: 26px; padding-block: 34px 26px; }
+    .ft-list { gap: 8px; margin-top: 14px; }
+    .ft-contact { gap: 12px; margin-top: 14px; }
+    .ft-blurb { margin-top: 12px; }
+    .ft-socials { margin-top: 16px; }
+    .ft-book { margin-top: 18px; }
 }
 
 /* Two images were setting the height of their whole section on a phone: the
@@ -3793,12 +3827,82 @@ div:has(> .reference-clinic-title) > a {
 }
 
 /* ==========================================================================
+   Booking dock
+   Phones only: at that width the nav pill has room for the mark and the menu
+   and nothing else, so the Book Appointment button that lives in the desktop
+   navbar has nowhere to be. It docks to the foot of the screen instead, out
+   of the flow, and stands down over the appointment form, the closing CTA and
+   the footer - every place the page is already offering the same action.
+   ========================================================================== */
+.book-dock {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 55;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--color-reference-page) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-reference-hairline);
+    transform: translateY(115%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    /* the bar is only ever a backdrop for its button */
+    pointer-events: none;
+}
+
+.book-dock.is-up {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.book-dock-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 22px;
+    border-radius: 100px;
+    background: var(--color-reference-green);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 10px 28px rgba(49, 91, 73, 0.3);
+    transition: background-color 0.2s ease;
+}
+
+.book-dock-btn:active { background: var(--color-reference-green-dark); }
+
+/* The drawer owns the screen while it is open, and the menu it shows already
+   ends in Book an Appointment. Higher specificity than .book-dock.is-up, so
+   it wins wherever the scroll position would otherwise have raised the dock. */
+html:has(.mobile-drawer.is-open) .book-dock {
+    transform: translateY(115%);
+    pointer-events: none;
+}
+
+/* Above the phone breakpoint the navbar carries the button itself. */
+@media (min-width: 768px) {
+    .book-dock { display: none; }
+}
+
+/* The WhatsApp and back-to-top buttons own the same corner, so they step up
+   over the dock rather than sitting on it. */
+@media (max-width: 767px) {
+    html.dock-up .floating-actions { bottom: 82px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book-dock { transition: none; }
+}
+
+/* ==========================================================================
    Floating actions - WhatsApp and back to top
    ========================================================================== */
 .floating-actions {
     position: fixed;
     inset-inline-end: clamp(14px, 2vw, 26px);
     bottom: clamp(14px, 2vw, 26px);
+    transition: bottom 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 60;
     display: flex;
     flex-direction: column;
