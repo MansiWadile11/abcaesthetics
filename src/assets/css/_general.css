@@ -120,7 +120,7 @@ section[id],
     padding: 14px 26px;
 }
 
-/* logo.webp is cropped to its artwork (750x616), so this height is the mark's
+/* logo.webp is cropped to its artwork (700x549), so this height is the mark's
    real height - the old 92px box was mostly transparent padding and rendered a
    ~54px mark. These values are that visual size, scaled up ~15%. */
 .reference-logo-mark {
