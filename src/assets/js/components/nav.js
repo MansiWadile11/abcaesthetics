@@ -11,24 +11,30 @@ The panel animates on grid-template-rows, same as the page collapsibles, so
 no height is ever measured here.
 */
 
-function pageName(href) {
+// A page's identity is its whole path, not its file name: the articles live at
+// /blog/<slug>/, so the last segment alone distinguishes nothing useful.
+// "/" and "/index.html" are the same page and normalise to the same string.
+function pagePath(href) {
     if (!href) return ""
-    // strip any origin, query, hash and trailing slash, then keep the file name
-    const path = href.split("#")[0].split("?")[0].replace(/\/$/, "")
-    const last = path.split("/").pop()
-    return last || "index.html"
+    let path = href.split("#")[0].split("?")[0]
+    if (!path.startsWith("/")) path = "/" + path
+    if (path.endsWith("/index.html")) path = path.slice(0, -10)
+    if (path === "/") path = "/index.html"
+    return path
 }
 
+const BLOG = "/blog/"
+
 function setup() {
-    const current = pageName(window.location.pathname) || "index.html"
+    const current = pagePath(window.location.pathname)
 
     // --- 2. mark the current page in both menus -------------------------
     document.querySelectorAll(".nav-dd-link, .nav-sub a").forEach((link) => {
-        const target = pageName(link.getAttribute("href"))
+        const target = pagePath(link.getAttribute("href"))
         const exact = target === current
         // an article has no menu entry of its own, so it marks the Blog one -
         // otherwise the whole trail reads as "nowhere" while you are reading
-        const inSection = target === "blog.html" && current.indexOf("blog-") === 0
+        const inSection = target === BLOG && current.indexOf(BLOG) === 0
         if (!exact && !inSection) return
 
         link.classList.add("is-active")
@@ -48,7 +54,7 @@ function setup() {
         const href = link.getAttribute("href")
         if (!href || link.closest(".nav-dd")) return
         // index.html#home should only light up on the home page itself
-        if (pageName(href) === current) link.classList.add("is-current")
+        if (pagePath(href) === current) link.classList.add("is-current")
     })
 
     // --- 0. the drawer itself -------------------------------------------

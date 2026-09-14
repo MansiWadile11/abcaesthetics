@@ -7,7 +7,12 @@ import handlebars from "vite-plugin-handlebars";
 export default defineConfig(({ mode }) => {
     const list = [];
 
-    if (mode === "production") { sync("src/*.html").forEach((file) => { list.push(file); }); }
+    // The Insights section lives at src/blog/<slug>/index.html so it is
+    // served as /blog/<slug>/ - so the glob has to reach past one level.
+    // Partials are not pages and must stay out of the input list.
+    if (mode === "production") {
+        sync("src/**/*.html", { ignore: "src/partials/**" }).forEach((file) => { list.push(file); });
+    }
 
     return {
         root: "src",
