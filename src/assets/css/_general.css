@@ -120,7 +120,7 @@ section[id],
     padding: 14px 26px;
 }
 
-/* logo.webp is cropped to its artwork (560x419), so this height is the mark's
+/* logo.webp is cropped to its artwork (560x367), so this height is the mark's
    real height - the old 92px box was mostly transparent padding and rendered a
    ~54px mark. These values are that visual size, scaled up ~15%. */
 .reference-logo-mark {
@@ -602,6 +602,90 @@ section[id],
     border-radius: 50%;
     background: var(--color-reference-gold);
 }
+
+/* ---- Treatments overview ---- */
+.tx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: clamp(16px, 2vw, 26px);
+}
+
+.tx-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-reference-card);
+    border: 1px solid var(--color-reference-hairline);
+    border-radius: 26px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.tx-card:hover {
+    box-shadow: var(--shadow-reference-nav);
+    transform: translateY(-3px);
+}
+
+.tx-card-media {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.tx-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.31, 1);
+}
+
+.tx-card:hover .tx-card-media img { transform: scale(1.05); }
+
+.tx-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: clamp(18px, 2vw, 24px);
+}
+
+.tx-card-no {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-reference-gold-ink);
+}
+
+.tx-card-title {
+    font-family: var(--font-heading);
+    font-size: clamp(19px, 1.7vw, 22px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-reference-cocoa);
+    margin-top: 6px;
+}
+
+.tx-card-copy {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--color-reference-muted);
+    margin-top: 10px;
+}
+
+.tx-card-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-reference-green);
+}
+
+.tx-card:hover .tx-card-more i { transform: translateX(3px); }
+.tx-card-more i { transition: transform 0.3s ease; }
 
 /* ---- Authorized manufacturer partners ----
    A credentials band, so it is deliberately quiet: the names carry it, and
