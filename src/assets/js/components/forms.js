@@ -136,7 +136,7 @@ function collect(form) {
     return raw
 }
 
-async function send(raw) {
+async function attempt(raw) {
     const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         // See the note at the top - this must NOT be application/json.
@@ -149,8 +149,9 @@ async function send(raw) {
     try {
         body = JSON.parse(await res.text())
     } catch {
-        // Apps Script served HTML - a sign-in or error page - rather than
-        // JSON. Almost always a deployment set to the wrong access level.
+        // Not JSON. Either Apps Script served a sign-in or error page (a
+        // deployment set to the wrong access level), or the redirect it hands
+        // the browser expired before we followed it.
         throw Object.assign(new Error(GENERIC_FAILURE), { unreadable: true })
     }
 
@@ -164,6 +165,34 @@ async function send(raw) {
     }
 
     return body
+}
+
+/**
+ * Send, and try once more if the ANSWER went missing.
+ *
+ * Apps Script runs the script and then redirects the browser to a one-time
+ * URL carrying the result. That second request intermittently fails - which
+ * means the enquiry was recorded and both emails went out, but the visitor is
+ * told it did not send. They then submit again, or give up, and the practice
+ * looks unresponsive for something it actually received.
+ *
+ * Retrying is safe precisely because the backend suppresses duplicates: an
+ * identical submission inside five minutes is not written twice and answers
+ * {ok:true, duplicate:true}. So the retry either gets the lost answer back or
+ * completes a send that genuinely had not happened.
+ *
+ * Only a missing answer is retried. A real reply saying the data is invalid,
+ * or that the rate limit was hit, is a decision - repeating it would be wrong.
+ */
+async function send(raw) {
+    try {
+        return await attempt(raw)
+    } catch (err) {
+        if (err.fromServer && !err.unreadable) throw err
+
+        await new Promise((r) => setTimeout(r, 1500))
+        return attempt(raw)
+    }
 }
 
 function setBusy(form, busy) {

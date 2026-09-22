@@ -43,7 +43,7 @@ const FORMS = [
 // ---------------------------------------------------------------------------
 
 let host = createHost()
-let mode = "live"          // "live" | "error" | "offline" | "slow" | "html"
+let mode = "live"          // live | error | offline | slow | html | lose-first
 let calls = 0
 
 function apiServer() {
@@ -58,6 +58,18 @@ function apiServer() {
             calls++
 
             if (mode === "slow") await sleep(1200)
+
+            // Apps Script sometimes runs the script and then fails to deliver
+            // the answer. The work IS done; only the reply is lost.
+            if (mode === "lose-first") {
+                let lost = {}
+                try { lost = JSON.parse(body) } catch { lost = {} }
+                host.post(lost)                 // the enquiry really is recorded
+                mode = "live"                   // the retry gets a real answer
+                res.writeHead(200, { "Content-Type": "text/html" })
+                res.end("<html><body>Sorry, unable to open the file at present.</body></html>")
+                return
+            }
 
             if (mode === "html") {
                 // What a wrongly-deployed script actually returns: a sign-in page.
@@ -292,7 +304,7 @@ async function main() {
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         await form.locator("[type=submit]").click()
-        await sleep(900)
+        await sleep(4000)   // a lost answer is retried once, 1.5s apart
         check(label + ": stays on the contact page", page.url().includes("contact"), page.url())
         check(label + ": explains it in plain words", /did not send|connection/i.test(
             await form.locator("[data-form-status]").textContent() || ""),
@@ -307,7 +319,7 @@ async function main() {
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         await form.locator("[type=submit]").click()
-        await sleep(900)
+        await sleep(4000)   // a lost answer is retried once, 1.5s apart
         check(label + ": treated as a failure, not a success", page.url().includes("contact"), page.url())
         check(label + ": the visitor gets a usable message", /did not send|call 971/i.test(
             await form.locator("[data-form-status]").textContent() || ""),
@@ -367,6 +379,33 @@ async function main() {
         check(label + ": the source page is recorded per form",
             new Set(host.dataRows().map((r) => r[7])).size === 3,
             JSON.stringify(host.dataRows().map((r) => r[7])))
+
+        console.log("\n10b. A LOST ANSWER IS RETRIED, NOT REPORTED AS FAILURE")
+        host = createHost()
+        mode = "lose-first"
+        calls = 0
+        await open(page, "/contact.html")
+        const lostForm = page.locator('form[data-form="contact"]')
+        await fill(lostForm, { email: "lostanswer." + label + "@example.com" })
+        await lostForm.locator("[type=submit]").click()
+        await page.waitForURL(/thank-you/, { timeout: 25000 }).catch(() => {})
+        check(label + ": a lost answer still reaches thank-you", /thank-you/.test(page.url()), page.url())
+        check(label + ": it was retried exactly once", calls === 2, "calls=" + calls)
+        check(label + ": the enquiry is recorded once, not twice",
+            host.dataRows().length === 1, "rows=" + host.dataRows().length)
+        check(label + ": and only one pair of emails went out",
+            host.state.inbox.length === 2, "sent=" + host.state.inbox.length)
+
+        // A real rejection must NOT be retried - it is an answer, not a loss.
+        mode = "error"
+        calls = 0
+        await open(page, "/contact.html")
+        const errForm = page.locator('form[data-form="contact"]')
+        await fill(errForm, { email: "realerror." + label + "@example.com" })
+        await errForm.locator("[type=submit]").click()
+        await sleep(2500)
+        check(label + ": a real error is not retried", calls === 1, "calls=" + calls)
+        check(label + ": and still keeps the visitor on the form", page.url().includes("contact"))
 
         console.log("\n11. THE THANK-YOU PAGE")
         await page.goto(BASE + "/thank-you", { waitUntil: "domcontentloaded" })
