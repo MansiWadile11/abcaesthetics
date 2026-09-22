@@ -83,18 +83,21 @@ textarea {
 /* The navbar sits in the document flow, so the first section no longer needs
    padding to clear a fixed bar — the template's pt-* on it was purely that
    offset. Reference gap between nav and the first row is 56px. */
-header ~ section:first-of-type {
+header ~ section:first-of-type,
+header ~ main > section:first-of-type {
     padding-top: 1.25rem;
 }
 
 @media (min-width: 768px) {
-    header ~ section:first-of-type {
+    header ~ section:first-of-type,
+header ~ main > section:first-of-type {
         padding-top: 2.5rem;
     }
 }
 
 @media (min-width: 1024px) {
-    header ~ section:first-of-type {
+    header ~ section:first-of-type,
+header ~ main > section:first-of-type {
         padding-top: 3.5rem;
     }
 }
