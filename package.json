@@ -10,7 +10,11 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "test": "node tests/apps-script.test.mjs",
+        "test:ui": "node tests/enquiry-ui.test.mjs",
+        "test:routes": "node tests/routes.test.mjs",
+        "test:clean": "node tests/kill-test-servers.mjs"
     },
     "devDependencies": {
         "@iconify/json": "^2.2.467",

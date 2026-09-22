@@ -835,6 +835,61 @@ section[id],
 .form-status:empty { display: none; }
 .form-status[data-state="warn"] { color: var(--color-reference-gold-ink); }
 .form-status[data-state="error"] { color: #b4442e; }
+.form-status[data-state="ok"] { color: var(--color-reference-green); }
+
+/* Validation feedback.
+   Added for the enquiry pipeline: these only ever appear once something is
+   actually wrong, so the forms look exactly as they did before. */
+.field-error {
+    margin-top: 6px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    font-weight: 500;
+    color: #b4442e;
+}
+
+/* Inside the consent row, which is a flex line. The row is only allowed to
+   wrap while it actually carries a message, so the layout is untouched
+   otherwise. */
+.field-error-row {
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 8px;
+}
+
+div:has(> .field-error-row) {
+    flex-wrap: wrap;
+}
+
+.is-invalid {
+    box-shadow: inset 0 0 0 1px #d4715c;
+}
+
+.is-invalid:focus {
+    box-shadow: inset 0 0 0 1px #b4442e;
+}
+
+input[type="checkbox"].is-invalid {
+    outline: 2px solid #d4715c;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+/* Submitting. The button keeps its own colours - only the pointer and the
+   dimming say that it is busy, so nothing shifts as the label changes. */
+[type="submit"][aria-busy="true"] {
+    opacity: 0.72;
+    cursor: progress;
+}
+
+form.is-sending {
+    /* the fields stay readable, but a second pass at them is pointless */
+    pointer-events: none;
+}
+
+form.is-sending [data-form-status] {
+    pointer-events: auto;
+}
 
 .reference-form-pad {
     padding: 48px clamp(24px, 4vw, 56px);

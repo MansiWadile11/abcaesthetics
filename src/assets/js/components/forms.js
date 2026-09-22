@@ -1,102 +1,261 @@
 /*
 File: Forms
-The appointment and contact forms post here, and on a successful send the
+The contact and appointment forms post here, and on a confirmed success the
 browser goes to the thank-you page.
 
 WHERE SUBMISSIONS GO
 --------------------
-ENDPOINT below is the one thing to fill in. It is deliberately empty until the
-practice picks a provider, because these forms carry patient enquiries - a
-free-text "how can we help" box included - and choosing who receives and
-stores that is a clinical/compliance decision, not a styling one. Until it is
-set, the form validates, refuses to pretend it sent anything, and tells the
-visitor to call instead.
+To a Google Apps Script Web App (apps-script/Code.gs), which writes the
+enquiry to a Google Sheet, emails the practice, and sends the patient a
+confirmation. There is no server of our own anywhere in the path, so the
+website can move hosts without touching any of it.
 
-Anything that accepts a POST of form fields and answers 2xx will work, e.g.
+Set the URL in ONE place: src/assets/js/site-config.js.
 
-  Formspree      https://formspree.io/f/<your-form-id>
-                 emails the practice and keeps submissions in a dashboard
-  FormSubmit     https://formsubmit.co/<the practice's email>
-                 emails the practice, no account, no stored archive
-  Your own       /api/enquiry on Vercel, writing to a database you control -
-                 the only option where the data never leaves your own stack
+TWO THINGS ABOUT TALKING TO APPS SCRIPT
+---------------------------------------
+1. The body is sent as text/plain, not application/json, even though it IS
+   JSON. A JSON content-type makes the browser send a CORS preflight, and
+   Apps Script cannot answer one - the request would fail before arriving.
+   text/plain is a "simple request" and goes straight through; Code.gs parses
+   the body itself.
 
-Set it once here; all three forms use it.
+2. Apps Script answers HTTP 200 to everything, including its own errors, so
+   the status code says nothing. Success is decided by `ok` in the body, and
+   that is what gates the redirect.
+
+VALIDATION
+----------
+The rules come from ../shared/validate.js so the browser can answer instantly.
+Apps Script validates again with a matching copy, because anything in a
+browser can be bypassed. If you change a rule, change it in both.
 */
 
-const ENDPOINT = ""
-const THANK_YOU = "thank-you.html"
-const PHONE = "971-978-7840"
+import { validate } from "../shared/validate.js"
+import { APPS_SCRIPT_URL, THANK_YOU_PATH, PRACTICE_PHONE, PRACTICE_EMAIL } from "../site-config.js"
 
-function setStatus(form, kind, text) {
-    const el = form.querySelector("[data-form-status]")
-    if (!el) return
-    el.textContent = text
-    el.dataset.state = kind
+// Fields the visitor can actually correct, in the order they appear, so focus
+// lands on the first thing that is wrong rather than the first rule that fired.
+const FIELD_ORDER = ["name", "email", "phone", "subject", "treatment", "contact_method",
+    "preferred_date", "preferred_time", "message", "consent"]
+
+const NOT_CONNECTED =
+    "Online enquiries are not connected yet. Please call " + PRACTICE_PHONE +
+    " or email " + PRACTICE_EMAIL + " and we will get straight back to you."
+
+const GENERIC_FAILURE =
+    "Sorry — that did not send. Please check your connection and try again, or call " +
+    PRACTICE_PHONE + "."
+
+function statusEl(form) {
+    return form.querySelector("[data-form-status]")
 }
 
-async function send(form) {
-    const data = new FormData(form)
+function setStatus(form, kind, text) {
+    const el = statusEl(form)
+    if (!el) return
+    el.textContent = text
+    el.dataset.state = kind || ""
+}
 
-    // the honeypot is invisible, so anything in it came from a bot. Accept the
-    // submission as far as the bot can tell and drop it.
-    if ((data.get("_honey") || "").toString().trim()) return true
-    data.delete("_honey")
+/** The input a given error belongs to. "subject" is collected as "treatment". */
+function inputFor(form, key) {
+    return form.querySelector(`[name="${key}"]`) ||
+        (key === "subject" ? form.querySelector('[name="treatment"]') : null)
+}
 
-    // context the practice needs in the notification but should not have to type
-    data.append("_form", form.dataset.form || "")
-    data.append("_subject", form.dataset.formTitle || "Website enquiry")
-    data.append("_page", location.pathname)
-
-    const res = await fetch(ENDPOINT, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+function clearErrors(form) {
+    form.querySelectorAll(".field-error").forEach((el) => el.remove())
+    form.querySelectorAll("[aria-invalid]").forEach((el) => {
+        el.removeAttribute("aria-invalid")
+        el.classList.remove("is-invalid")
     })
-    if (!res.ok) throw new Error("HTTP " + res.status)
-    return true
+}
+
+function showErrors(form, errors) {
+    clearErrors(form)
+    let first = null
+
+    FIELD_ORDER.forEach((key) => {
+        if (!errors[key]) return
+        const input = inputFor(form, key)
+        if (!input) return
+
+        input.setAttribute("aria-invalid", "true")
+        input.classList.add("is-invalid")
+
+        const msg = document.createElement("p")
+        msg.className = "field-error"
+        msg.textContent = errors[key]
+
+        // Beside the control it belongs to. The consent row is a flex line
+        // holding the box and its label, so the message is marked to take a
+        // full line of its own rather than becoming a third item beside them.
+        const row = input.type === "checkbox" ? input.closest("div") : input.parentElement
+        if (input.type === "checkbox") msg.classList.add("field-error-row")
+        ;(row || input.parentElement).appendChild(msg)
+
+        if (!first) first = input
+    })
+
+    // Anything with no field of its own still has to be said somewhere.
+    const orphan = Object.keys(errors).find((k) => !FIELD_ORDER.includes(k))
+    if (orphan) setStatus(form, "error", errors[orphan])
+    else setStatus(form, "error", "Please check the highlighted fields.")
+
+    if (first) {
+        first.focus({ preventScroll: true })
+        first.scrollIntoView({ block: "center", behavior: "smooth" })
+    }
+}
+
+function collect(form) {
+    const data = new FormData(form)
+    const raw = {}
+    data.forEach((value, key) => { raw[key] = typeof value === "string" ? value : "" })
+
+    raw._form = form.dataset.form || ""
+    raw._subject = form.dataset.formTitle || "Website enquiry"
+    raw._page = location.pathname + location.search
+    raw._origin = location.origin
+
+    // Only ask the backend to enforce consent where the form actually shows it.
+    const consent = form.querySelector('[name="consent"]')
+    if (consent && consent.required) raw._requireConsent = "yes"
+    raw.consent = consent ? (consent.checked ? "yes" : "") : ""
+
+    // Which fields THIS form marks required. Taking over submission turns off
+    // the browser's own enforcement, so the list travels with the submission
+    // and both sides check it - otherwise a required field nobody named in
+    // validate.js (the appointment date, say) silently becomes optional.
+    raw._required = Array.from(form.querySelectorAll("[required][name]"))
+        .map((el) => el.name)
+        .filter((n, i, all) => n && all.indexOf(n) === i)
+        .join(",")
+
+    return raw
+}
+
+async function send(raw) {
+    const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        // See the note at the top - this must NOT be application/json.
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(raw),
+        redirect: "follow",
+    })
+
+    let body = null
+    try {
+        body = JSON.parse(await res.text())
+    } catch {
+        // Apps Script served HTML - a sign-in or error page - rather than
+        // JSON. Almost always a deployment set to the wrong access level.
+        throw Object.assign(new Error(GENERIC_FAILURE), { unreadable: true })
+    }
+
+    // Apps Script answers 200 to everything, so `ok` in the body is the truth.
+    if (!body || body.ok !== true) {
+        throw Object.assign(new Error((body && body.error) || GENERIC_FAILURE), {
+            code: body && body.code,
+            errors: body && body.errors,
+            fromServer: true,
+        })
+    }
+
+    return body
+}
+
+function setBusy(form, busy) {
+    const btn = form.querySelector("[type=submit]")
+    if (!btn) return
+
+    if (busy) {
+        // Each form keeps its own wording ("Submit", "Book an appointment");
+        // only the busy state is shared.
+        if (btn.dataset.label == null) btn.dataset.label = btn.textContent.trim()
+        btn.disabled = true
+        btn.setAttribute("aria-busy", "true")
+        btn.textContent = "Sending…"
+    } else {
+        btn.disabled = false
+        btn.removeAttribute("aria-busy")
+        if (btn.dataset.label != null) btn.textContent = btn.dataset.label
+    }
+    form.classList.toggle("is-sending", !!busy)
 }
 
 function setup() {
-    document.querySelectorAll("form[data-form]").forEach((form) => {
+    const forms = document.querySelectorAll("form[data-form]")
+    if (!forms.length) return
+
+    forms.forEach((form) => {
+        // The browser's own bubbles are replaced, not removed: the messages
+        // shown instead are the same ones Apps Script would send back.
         form.setAttribute("novalidate", "")
+
+        // Clear an error as soon as the visitor starts fixing it.
+        form.addEventListener("input", (e) => {
+            const el = e.target
+            if (!el || !el.classList || !el.classList.contains("is-invalid")) return
+            el.classList.remove("is-invalid")
+            el.removeAttribute("aria-invalid")
+            const row = el.type === "checkbox" ? el.closest("div") : el.parentElement
+            const msg = row && row.querySelector(".field-error")
+            if (msg) msg.remove()
+        }, true)
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault()
 
-            // native validation still does the checking; this only takes over
-            // the reporting so the messages appear in one place
-            if (!form.checkValidity()) {
-                form.reportValidity()
+            // One in flight at a time. A double-click, a second Enter press or
+            // an impatient tap must not produce a second enquiry.
+            if (form.dataset.sending === "1") return
+
+            const raw = collect(form)
+            const { ok, errors } = validate(raw)
+            if (!ok) {
+                showErrors(form, errors)
                 return
             }
 
-            if (!ENDPOINT) {
-                setStatus(form, "warn",
-                    "Online booking is not connected yet. Please call " + PHONE +
-                    " or email abcaestheticsllc@gmail.com and we will get straight back to you.")
+            // Nothing configured yet: say so rather than pretending to send.
+            if (!APPS_SCRIPT_URL) {
+                setStatus(form, "warn", NOT_CONNECTED)
                 return
             }
 
-            const btn = form.querySelector("[type=submit]")
-            const label = btn && btn.textContent
-            if (btn) {
-                btn.disabled = true
-                btn.textContent = "Sending…"
-            }
+            clearErrors(form)
+            form.dataset.sending = "1"
+            setBusy(form, true)
             setStatus(form, "", "")
 
             try {
-                await send(form)
-                const ref = encodeURIComponent(form.dataset.form || "")
-                location.assign(THANK_YOU + (ref ? "?ref=" + ref : ""))
+                const result = await send(raw)
+
+                // Redirect ONLY once Apps Script has confirmed it has the enquiry.
+                const ref = encodeURIComponent(raw._form || "")
+                const target = (result.redirect || THANK_YOU_PATH) + (ref ? "?ref=" + ref : "")
+                setStatus(form, "ok", "Sent — taking you to the confirmation…")
+                location.assign(target)
+                return
             } catch (err) {
-                setStatus(form, "error",
-                    "Sorry — that did not send. Please try again, or call " + PHONE + ".")
-                if (btn) {
-                    btn.disabled = false
-                    btn.textContent = label
+                if (err.errors) {
+                    // Apps Script disagreed with us about the data; it wins.
+                    showErrors(form, err.errors)
+                } else {
+                    // Only wording that came from our own backend is shown. A
+                    // thrown fetch error says things like "Failed to fetch",
+                    // which tells a patient nothing and offers no way out.
+                    setStatus(form, "error",
+                        err.fromServer && !err.unreadable ? err.message : GENERIC_FAILURE)
+                    const el = statusEl(form)
+                    if (el) el.scrollIntoView({ block: "center", behavior: "smooth" })
                 }
+            } finally {
+                // The form stays usable unless the page is already navigating.
+                form.dataset.sending = "0"
+                setBusy(form, false)
             }
         })
     })
