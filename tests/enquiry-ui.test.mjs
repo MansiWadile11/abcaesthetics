@@ -359,13 +359,14 @@ async function main() {
         check(label + ": the sheet has the agreed columns",
             JSON.stringify(host.header()) === JSON.stringify([
                 "Submission Date & Time", "Name", "Email", "Phone",
-                "Subject", "Message", "Source/Page", "Status"]),
+                "Treatment of Interest", "Preferred Contact Method",
+                "Message", "Source/Page", "Status"]),
             JSON.stringify(host.header()))
         check(label + ": every row is marked New",
-            host.dataRows().every((r) => r[7] === "New"), JSON.stringify(host.dataRows().map((r) => r[7])))
+            host.dataRows().every((r) => r[8] === "New"), JSON.stringify(host.dataRows().map((r) => r[8])))
         check(label + ": the source page is recorded per form",
-            new Set(host.dataRows().map((r) => r[6])).size === 3,
-            JSON.stringify(host.dataRows().map((r) => r[6])))
+            new Set(host.dataRows().map((r) => r[7])).size === 3,
+            JSON.stringify(host.dataRows().map((r) => r[7])))
 
         console.log("\n11. THE THANK-YOU PAGE")
         await page.goto(BASE + "/thank-you", { waitUntil: "domcontentloaded" })

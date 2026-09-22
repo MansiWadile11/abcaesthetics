@@ -82,6 +82,7 @@ function makeRange(sheet, row, col, numRows, numCols) {
         setFontColor: () => api,
         setHorizontalAlignment: () => api,
         setWrap: () => api,
+        setNumberFormat: () => api,
     }
     return api
 }
@@ -93,9 +94,17 @@ function makeSheet(name) {
         getLastRow: () => sheet._rows.length,
         getMaxRows: () => Math.max(1000, sheet._rows.length),
         getRange: (r, c, nr = 1, nc = 1) => makeRange(sheet, r, c, nr, nc),
-        appendRow: (row) => { sheet._rows.push(row.slice()); return sheet },
+        appendRow: (row) => {
+            // Sheets treats a leading apostrophe as "this is text" and does
+            // not store it - reading the cell back gives the bare value.
+            // The stub must do the same or the escaping looks broken in tests.
+            sheet._rows.push(row.map((cell) =>
+                typeof cell === "string" && cell.charAt(0) === "'" ? cell.slice(1) : cell))
+            return sheet
+        },
         setFrozenRows: () => sheet,
         setColumnWidth: () => sheet,
+        getLastColumn: () => sheet._rows.reduce((w, r) => Math.max(w, r.length), 0),
     }
     return sheet
 }

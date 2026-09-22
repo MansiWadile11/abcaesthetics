@@ -21,8 +21,13 @@ function check(name, cond, detail) {
 
 const COLUMNS = [
     "Submission Date & Time", "Name", "Email", "Phone",
-    "Subject", "Message", "Source/Page", "Status",
+    "Treatment of Interest", "Preferred Contact Method",
+    "Message", "Source/Page", "Status",
 ]
+
+// Column positions, mirroring COL in Config.gs.
+const C = { SUBMITTED: 0, NAME: 1, EMAIL: 2, PHONE: 3, TREATMENT: 4,
+    CONTACT_METHOD: 5, MESSAGE: 6, PAGE: 7, STATUS: 8 }
 
 const GOOD = {
     name: "Jane Doe",
@@ -55,15 +60,16 @@ check("the tab was created with the agreed columns",
 check("exactly one enquiry row", h.dataRows().length === 1, "rows=" + h.dataRows().length)
 
 let row = h.dataRows()[0] || []
-check("col 1  date & time is readable", /\d{4}/.test(row[0]) && /(AM|PM)/.test(row[0]), row[0])
-check("col 2  name", row[1] === "Jane Doe", row[1])
-check("col 3  email, lower-cased", row[2] === "jane.doe@example.com", row[2])
-check("col 4  phone", row[3] === "(971) 978-7840", row[3])
-check("col 5  subject is the chosen treatment", row[4] === "Aesthetic Injectables", row[4])
-check("col 6  message", row[5] === GOOD.message, row[5])
-check("col 7  source page", row[6] === "/contact.html", row[6])
-check("col 8  status is New", row[7] === "New", row[7])
-check("the row is exactly 8 columns wide", row.length === 8, String(row.length))
+check("col 1  date & time is readable", /\d{4}/.test(row[C.SUBMITTED]) && /(AM|PM)/.test(row[C.SUBMITTED]), row[C.SUBMITTED])
+check("col 2  name", row[C.NAME] === "Jane Doe", row[C.NAME])
+check("col 3  email, lower-cased", row[C.EMAIL] === "jane.doe@example.com", row[C.EMAIL])
+check("col 4  phone kept as text", row[C.PHONE] === "(971) 978-7840", row[C.PHONE])
+check("col 5  treatment of interest", row[C.TREATMENT] === "Aesthetic Injectables", row[C.TREATMENT])
+check("col 6  preferred contact method", row[C.CONTACT_METHOD] === "Phone call", row[C.CONTACT_METHOD])
+check("col 7  message", row[C.MESSAGE] === GOOD.message, row[C.MESSAGE])
+check("col 8  source page", row[C.PAGE] === "/contact.html", row[C.PAGE])
+check("col 9  status is New", row[C.STATUS] === "New", row[C.STATUS])
+check("the row is exactly 9 columns wide", row.length === 9, String(row.length))
 check("a write lock was taken", h.state.lockWaits === 1, String(h.state.lockWaits))
 
 console.log("\n2. THE TWO EMAILS")
@@ -116,16 +122,16 @@ console.log("\n4. LONG MESSAGE AND SPECIAL CHARACTERS")
 h = createHost()
 h.post(sub({ message: "A".repeat(5000) }))
 check("a 5000-character message is capped at 2000",
-    (h.dataRows()[0][5] || "").length === 2000, String((h.dataRows()[0][5] || "").length))
+    (h.dataRows()[0][C.MESSAGE] || "").length === 2000, String((h.dataRows()[0][C.MESSAGE] || "").length))
 
 h = createHost()
 const NUL = String.fromCharCode(0), ZWSP = String.fromCharCode(0x200b)
 h.post(sub({ name: "Zoë  O'Brien" + NUL + ZWSP,
     message: "Cost? <script>alert(1)</script> & \"quotes\" — dash" }))
 row = h.dataRows()[0]
-check("accented and apostrophed names are kept", row[1] === "Zoë O'Brien", JSON.stringify(row[1]))
-check("control characters are stripped", row[1].indexOf(NUL) === -1 && row[1].indexOf(ZWSP) === -1, JSON.stringify(row[1]))
-check("angle brackets survive in the sheet as text", row[5].includes("<script>"), row[5])
+check("accented and apostrophed names are kept", row[C.NAME] === "Zoë O'Brien", JSON.stringify(row[C.NAME]))
+check("control characters are stripped", row[C.NAME].indexOf(NUL) === -1 && row[C.NAME].indexOf(ZWSP) === -1, JSON.stringify(row[C.NAME]))
+check("angle brackets survive in the sheet as text", row[C.MESSAGE].includes("<script>"), row[C.MESSAGE])
 check("the email escapes them instead of embedding markup",
     h.state.inbox[0].htmlBody.includes("&lt;script&gt;") &&
     !h.state.inbox[0].htmlBody.includes("<script>alert"))
@@ -136,11 +142,42 @@ h = createHost()
 // (section 6), which would hide whether the formula guard works.
 h.post(sub({ name: "=SUM(A1:A9)", message: "+1+1", email: "calc@example.com" }))
 row = h.dataRows()[0]
-check("a formula in the name is neutralised", row[1].startsWith("'="), JSON.stringify(row[1]))
-check("a leading + is neutralised", row[5].startsWith("'+"), JSON.stringify(row[5]))
+check("a formula in the name is neutralised", row[C.NAME] === "=SUM(A1:A9)", JSON.stringify(row[C.NAME]))
+check("a leading + is neutralised", row[C.MESSAGE] === "+1+1", JSON.stringify(row[C.MESSAGE]))
 h.post(sub({ name: "Jane Doe", message: "-5 degrees", email: "minus@example.com" }))
-check("a leading - is neutralised", h.dataRows()[1][5].startsWith("'-"), JSON.stringify(h.dataRows()[1][5]))
-check("ordinary text is left alone", h.dataRows()[1][1] === "Jane Doe", h.dataRows()[1][1])
+check("a leading - is neutralised", h.dataRows()[1][C.MESSAGE] === "-5 degrees", JSON.stringify(h.dataRows()[1][C.MESSAGE]))
+check("ordinary text is left alone", h.dataRows()[1][C.NAME] === "Jane Doe", h.dataRows()[1][C.NAME])
+
+// The stub strips the leading apostrophe exactly as Sheets does, so assert on
+// what is actually WRITTEN - otherwise this would still pass with the escaping
+// removed entirely.
+const rawEsc = h.sandbox.buildRow(
+    { name: "=SUM(A1:A9)", email: "x@example.com", phone: "08624861120",
+      subject: "+1", contactMethod: "@here", message: "-5", page: "/" },
+    "Sep 22, 2026 at 10:00 AM")
+check("the written cell really carries the escape", String(rawEsc[C.NAME]).charAt(0) === "'", JSON.stringify(rawEsc[C.NAME]))
+check("a leading @ is escaped too", String(rawEsc[C.CONTACT_METHOD]).charAt(0) === "'", JSON.stringify(rawEsc[C.CONTACT_METHOD]))
+
+console.log("\n5b. PHONE NUMBERS KEEP THEIR LEADING ZERO")
+// From a real sheet: "08624861120" had been stored as the NUMBER 8624861120,
+// losing the leading zero with no way to tell afterwards.
+h = createHost()
+h.post(sub({ phone: "08624861120", email: "zero@example.com" }))
+check("a leading zero survives", h.dataRows()[0][C.PHONE] === "08624861120",
+    JSON.stringify(h.dataRows()[0][C.PHONE]))
+check("...stored as text, not a number", typeof h.dataRows()[0][C.PHONE] === "string",
+    typeof h.dataRows()[0][C.PHONE])
+
+h = createHost()
+h.post(sub({ phone: "+1 (971) 978-7840", email: "plus@example.com" }))
+check("a leading + on a phone is not read as a formula",
+    h.dataRows()[0][C.PHONE] === "+1 (971) 978-7840", JSON.stringify(h.dataRows()[0][C.PHONE]))
+
+h = createHost()
+const rawPhone = h.sandbox.buildRow({ name: "A B", email: "a@example.com", phone: "08624861120",
+    subject: "s", contactMethod: "", message: "m", page: "/" }, "x")
+check("the phone cell is written with the text marker",
+    String(rawPhone[C.PHONE]).charAt(0) === "'", JSON.stringify(rawPhone[C.PHONE]))
 
 console.log("\n6. HONEYPOT AND SPAM")
 h = createHost()
@@ -288,7 +325,7 @@ const noTreatment = sub({ _required: "name,email,phone,consent" })
 delete noTreatment.treatment
 r = h.post(noTreatment)
 check("falls back to the form's title", r.ok === true, JSON.stringify(r))
-check("...and records it as the subject", h.dataRows()[0][4] === "Contact enquiry", h.dataRows()[0][4])
+check("...and records it as the subject", h.dataRows()[0][C.TREATMENT] === "Contact enquiry", h.dataRows()[0][C.TREATMENT])
 
 console.log("\n12. THE EDITOR TEST FUNCTIONS (Setup.gs)")
 h = createHost()
@@ -336,8 +373,8 @@ check("but the PATIENT never sees the word TEST",
     !/TEST/.test(h.state.inbox.find((m) => m.to === "envtest@example.com").htmlBody),
     h.state.inbox.find((m) => m.to === "envtest@example.com").subject)
 check("the sheet row is not polluted with a marker",
-    h.dataRows()[0][1] === "Jane Doe" && h.dataRows()[0][4] === "Aesthetic Injectables",
-    JSON.stringify(h.dataRows()[0].slice(1, 5)))
+    h.dataRows()[0][C.NAME] === "Jane Doe" && h.dataRows()[0][C.TREATMENT] === "Aesthetic Injectables",
+    JSON.stringify(h.dataRows()[0].slice(1, 6)))
 
 h = createHost()
 h.sandbox.CONFIG.ENVIRONMENT = "production"

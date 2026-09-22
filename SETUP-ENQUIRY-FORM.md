@@ -72,9 +72,17 @@ the frozen top row and the colouring by itself on the first submission.
 
 For reference, this is what it builds — a tab named `Enquiries`:
 
-| A | B | C | D | E | F | G | H |
-|---|---|---|---|---|---|---|---|
-| Submission Date & Time | Name | Email | Phone | Subject | Message | Source/Page | Status |
+| | Column | Comes from |
+|---|---|---|
+| A | Submission Date & Time | added automatically, in the practice's timezone |
+| B | Name | the form |
+| C | Email | the form |
+| D | Phone | the form &mdash; **stored as text**, so a leading zero survives |
+| E | Treatment of Interest | the form's dropdown |
+| F | Preferred Contact Method | the form's dropdown |
+| G | Message | "How we can help?" |
+| H | Source/Page | which page the enquiry came from |
+| I | Status | always starts as `New` |
 
 Every new enquiry is appended as a new row with **Status = `New`**. Nothing is
 ever overwritten. `Status` is yours to work in — change it to `Contacted`,
@@ -499,7 +507,7 @@ has made on purpose.
 ## Testing locally
 
 ```
-npm test           # the Apps Script backend, 192 checks
+npm test           # the Apps Script backend, 199 checks
 npm run test:ui    # the browser flow, desktop and mobile, 84 checks
 npm run test:routes # every URL serves its own page, 38 checks
 npm run dev        # the site at http://localhost:5173

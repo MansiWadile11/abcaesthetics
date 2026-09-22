@@ -63,9 +63,45 @@ function getSheet() {
     if (sheet.getLastRow() === 0) {
         sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]);
         dressHeaderRow(sheet);
+        return sheet;
     }
 
+    syncHeaderRow(sheet);
     return sheet;
+}
+
+/**
+ * Bring an existing sheet's heading row up to date.
+ *
+ * Adding or renaming a column would otherwise leave the headings describing
+ * an older layout while new rows are written to the new one - so column F
+ * would say "Message" while holding a contact method. Checked once per cold
+ * start, and it rewrites nothing when the headings already match.
+ *
+ * Rows written BEFORE a layout change keep their old shape, so after this
+ * runs those earlier rows no longer line up with the headings above them.
+ * That is called out in the log rather than silently patched, because only a
+ * person can say whether the old rows matter.
+ */
+function syncHeaderRow(sheet) {
+    try {
+        var width = Math.max(sheet.getLastColumn(), COLUMNS.length);
+        var current = sheet.getRange(1, 1, 1, width).getValues()[0];
+
+        var same = true;
+        for (var i = 0; i < COLUMNS.length; i++) {
+            if (String(current[i] || "") !== COLUMNS[i]) { same = false; break; }
+        }
+        if (same) return;
+
+        sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]);
+        dressHeaderRow(sheet);
+
+        log("sheet headings updated to the current layout. Rows written before " +
+            "this change still follow the old column order - check or delete them.");
+    } catch (err) {
+        log("heading sync skipped: " + err.message);
+    }
 }
 
 /** Cosmetic, but it is the difference between a log and a sheet someone works in. */
@@ -78,25 +114,49 @@ function dressHeaderRow(sheet) {
             .setHorizontalAlignment("left");
 
         sheet.setFrozenRows(1);
-        sheet.setColumnWidth(1, 170);   // date & time
-        sheet.setColumnWidth(6, 320);   // message
-        sheet.getRange(1, 6, sheet.getMaxRows(), 1).setWrap(true);
+        sheet.setColumnWidth(COL.SUBMITTED + 1, 170);
+        sheet.setColumnWidth(COL.PHONE + 1, 140);
+        sheet.setColumnWidth(COL.TREATMENT + 1, 200);
+        sheet.setColumnWidth(COL.CONTACT_METHOD + 1, 150);
+        sheet.setColumnWidth(COL.MESSAGE + 1, 320);
+        sheet.getRange(1, COL.MESSAGE + 1, sheet.getMaxRows(), 1).setWrap(true);
+
+        // Belt and braces alongside forceText(): tell Sheets this column is
+        // text, so a phone pasted in by hand keeps its leading zero too.
+        sheet.getRange(2, COL.PHONE + 1, sheet.getMaxRows() - 1, 1).setNumberFormat("@");
     } catch (err) {
         log("header formatting skipped: " + err.message);
     }
 }
 
+/**
+ * Keep a value as text no matter what it looks like.
+ *
+ * Sheets parses anything that resembles a number, so a phone typed as
+ * "08624861120" is stored as the NUMBER 8624861120 and the leading zero is
+ * gone for good - you cannot tell afterwards that it was ever there. A
+ * leading apostrophe forces text; Sheets does not display it.
+ */
+function forceText(value) {
+    var s = (value === null || value === undefined) ? "" : String(value);
+    if (!s) return "";
+    if (s.charAt(0) === "'") return s;
+    return "'" + s;
+}
+
 function buildRow(v, submittedAt) {
-    return [
-        submittedAt,
-        sanitizeForSheet(v.name),
-        sanitizeForSheet(v.email),
-        sanitizeForSheet(v.phone),
-        sanitizeForSheet(v.subject),
-        sanitizeForSheet(v.message),
-        sanitizeForSheet(v.page),
-        STATUS_NEW
-    ];
+    var row = [];
+    row[COL.SUBMITTED] = submittedAt;
+    row[COL.NAME] = sanitizeForSheet(v.name);
+    row[COL.EMAIL] = sanitizeForSheet(v.email);
+    // Phone is the one field that must never be treated as a number.
+    row[COL.PHONE] = forceText(v.phone);
+    row[COL.TREATMENT] = sanitizeForSheet(v.subject);
+    row[COL.CONTACT_METHOD] = sanitizeForSheet(v.contactMethod);
+    row[COL.MESSAGE] = sanitizeForSheet(v.message);
+    row[COL.PAGE] = sanitizeForSheet(v.page);
+    row[COL.STATUS] = STATUS_NEW;
+    return row;
 }
 
 function appendRow(v, submittedAt) {
@@ -133,9 +193,13 @@ function sheetHasRecently(v) {
         var rows = sheet.getRange(start, 1, last - start + 1, COLUMNS.length).getValues();
 
         for (var i = rows.length - 1; i >= 0; i--) {
-            if (String(rows[i][2]).toLowerCase() === v.email &&
-                String(rows[i][4]) === v.subject &&
-                String(rows[i][5]).replace(/^'/, "") === v.message) {
+            // Values written with a leading apostrophe come back without it,
+            // but strip defensively so this holds either way.
+            var cell = function (index) { return String(rows[i][index] || "").replace(/^'/, ""); };
+
+            if (cell(COL.EMAIL).toLowerCase() === v.email &&
+                cell(COL.TREATMENT) === v.subject &&
+                cell(COL.MESSAGE) === v.message) {
                 return true;
             }
         }

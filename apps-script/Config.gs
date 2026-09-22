@@ -145,11 +145,32 @@ var COLUMNS = [
     "Name",
     "Email",
     "Phone",
-    "Subject",
+    "Treatment of Interest",
+    "Preferred Contact Method",
     "Message",
     "Source/Page",
     "Status"
 ];
+
+/**
+ * Where each field sits, by name rather than by counting.
+ *
+ * The duplicate scan reads rows back out of the sheet, so inserting a column
+ * used to silently break it - it would compare a phone number against a
+ * message and never find a match again. Naming the positions means adding a
+ * column is one edit in COLUMNS and one here.
+ */
+var COL = {
+    SUBMITTED: 0,
+    NAME: 1,
+    EMAIL: 2,
+    PHONE: 3,
+    TREATMENT: 4,
+    CONTACT_METHOD: 5,
+    MESSAGE: 6,
+    PAGE: 7,
+    STATUS: 8
+};
 
 var STATUS_NEW = "New";
 
