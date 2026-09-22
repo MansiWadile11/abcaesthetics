@@ -51,8 +51,20 @@ function getSpreadsheet() {
     );
 }
 
-/** Returns the enquiries tab, creating it and its heading row if needed. */
+/**
+ * Returns the enquiries tab, creating it and its heading row if needed.
+ *
+ * Memoised for the life of one execution. A single submission asks for the
+ * sheet twice - once for the duplicate scan and once to append - and each
+ * lookup is a round trip to Google, plus the heading check on top. Apps
+ * Script gives every execution a fresh global scope, so this cannot go stale
+ * between requests.
+ */
+var _sheetForThisRun = null;
+
 function getSheet() {
+    if (_sheetForThisRun) return _sheetForThisRun;
+
     var ss = getSpreadsheet();
     var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
 
@@ -63,10 +75,12 @@ function getSheet() {
     if (sheet.getLastRow() === 0) {
         sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]);
         dressHeaderRow(sheet);
+        _sheetForThisRun = sheet;
         return sheet;
     }
 
     syncHeaderRow(sheet);
+    _sheetForThisRun = sheet;
     return sheet;
 }
 
@@ -189,13 +203,19 @@ function sheetHasRecently(v) {
         var last = sheet.getLastRow();
         if (last < 2) return false;
 
-        var start = Math.max(2, last - 19);
-        var rows = sheet.getRange(start, 1, last - start + 1, COLUMNS.length).getValues();
+        // Only the span from Email to Message is compared, and ten rows is
+        // more than a five-minute window can hold - reading all nine columns
+        // of twenty rows made every submission pay for data it never used.
+        var start = Math.max(2, last - 9);
+        var first = COL.EMAIL + 1;
+        var width = COL.MESSAGE - COL.EMAIL + 1;
+        var rows = sheet.getRange(start, first, last - start + 1, width).getValues();
 
         for (var i = rows.length - 1; i >= 0; i--) {
             // Values written with a leading apostrophe come back without it,
             // but strip defensively so this holds either way.
-            var cell = function (index) { return String(rows[i][index] || "").replace(/^'/, ""); };
+            // Indexes are relative to the narrowed range, which starts at Email.
+            var cell = function (col) { return String(rows[i][col - COL.EMAIL] || "").replace(/^'/, ""); };
 
             if (cell(COL.EMAIL).toLowerCase() === v.email &&
                 cell(COL.TREATMENT) === v.subject &&

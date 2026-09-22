@@ -141,6 +141,10 @@ function doGet() {
         // So you can tell at a glance which account a Web App URL belongs to.
         environment: CONFIG.ENVIRONMENT,
         owner: CONFIG.OWNER_ACCOUNT || "(not recorded)",
+        // The layout the DEPLOYED code is using. Editing a file is not the
+        // same as deploying it, and this is the quickest way to tell which
+        // version the live URL is actually serving.
+        columns: COLUMNS,
         flows: {
             sheet: CONFIG.FLOWS.SAVE_TO_SHEET !== false,
             adminEmail: CONFIG.FLOWS.NOTIFY_ADMIN !== false,

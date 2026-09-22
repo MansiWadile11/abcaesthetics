@@ -516,6 +516,31 @@ check("handles a bare address",
 check("no API key is hard-coded in any .gs file",
     !/MAIL_API_KEY\s*[:=]\s*["'][^"']+["']/.test(readProject()), "")
 
+console.log("\n15. DEPLOYED-VERSION VISIBILITY AND SHEET EFFICIENCY")
+h = createHost()
+const hc2 = h.get()
+check("the health check reports the deployed column layout",
+    JSON.stringify(hc2.columns) === JSON.stringify(COLUMNS), JSON.stringify(hc2.columns))
+check("...so an old deployment is identifiable from the URL alone",
+    hc2.columns.includes("Treatment of Interest") && hc2.columns.includes("Preferred Contact Method"))
+
+// One submission used to fetch the sheet twice over the network.
+h = createHost()
+let opens = 0
+const realGet = h.sandbox.SpreadsheetApp.getActiveSpreadsheet
+h.sandbox.SpreadsheetApp.getActiveSpreadsheet = function () { opens++; return realGet() }
+h.post(sub({ email: "efficiency@example.com" }))
+check("the sheet is looked up once per submission, not twice", opens === 1, "lookups=" + opens)
+check("...and the row still lands", h.dataRows().length === 1)
+
+// The duplicate scan must still work through the narrowed range.
+h = createHost()
+h.post(sub({ email: "narrow@example.com" }))
+h.clearCache()
+h.post(sub({ email: "narrow@example.com" }))
+check("duplicate detection survives the narrowed read", h.dataRows().length === 1,
+    "rows=" + h.dataRows().length)
+
 // ---------------------------------------------------------------------------
 console.log("\n" + "-".repeat(64))
 console.log(fail === 0 ? "ALL PASS" : "FAILURES", "  " + pass + " passed, " + fail + " failed")
