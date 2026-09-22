@@ -22,7 +22,7 @@ credentials stay inside Apps Script and never reach the browser.
 
 export const APPS_SCRIPT_URL =
     import.meta.env.VITE_APPS_SCRIPT_URL ||
-    "https://script.google.com/macros/s/AKfycbzRPyBHx0fjiREjc4h_vMaAjKufIxdIUBJv-Cw6YAktDP_HMVFQ157RJFNKnAP8Av2t/exec"
+    "https://script.google.com/macros/s/AKfycby_uKh0CQRZHmRDaB5Zy-CSMODddBpW2JHqDbzq0LreonsW2pUJsvh7gRrY8NR6nWRQ/exec"
 
 /*
 Where a successful submission lands.
