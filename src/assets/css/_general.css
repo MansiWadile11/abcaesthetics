@@ -4449,7 +4449,7 @@ html:has(.mobile-drawer.is-open) .book-dock {
     .article-layout { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); }
 }
 
-.article-body h3 {
+.article-body :is(h2, h3) {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: clamp(19px, 1.6vw, 23px);

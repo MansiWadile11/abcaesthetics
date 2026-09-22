@@ -9,6 +9,9 @@
 
     {{> navbar }}
 
+  <main id="main">
+
+
     <section class="md:pt-48 pt-30 lg:pb-50 md:pb-32.5 pb-25">
         <div class="container">
             <div class="text-center lg:mb-15 md:mb-12.5 mb-10">
@@ -46,9 +49,9 @@
                             <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
                         </div>
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Treatment of Interest*</label>
+                            <label for="appointment-treatment" class="text-sm font-medium text-primary-2 mb-2.5">Treatment of Interest*</label>
                             <div class="relative w-full">
-                                <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer" id="appointment-treatment">
                                     <option value="">Select</option>
                                     <option value="Aesthetic Injectables">Aesthetic Injectables</option>
                                     <option value="Advanced Skin &#39; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
@@ -335,9 +338,9 @@
             </div>
         </div>
     </section>
+  </main>
 
-
-    {{> footer }}
+  {{> footer }}
 
 </body>
 

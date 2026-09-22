@@ -1,6 +1,7 @@
 <!-- CTA bar. Service pages already close with their own full CTA block,
      so they pass hideCta=true rather than stacking two of them. -->
 {{#unless hideCta}}
+<aside aria-label="Book a consultation" class="reference-cta-aside">
 <div class="container reference-cta-wrap">
   <div class="reference-cta-bar">
     <div>
@@ -19,6 +20,7 @@
     </div>
   </div>
 </div>
+</aside>
 {{/unless}}
 
 <!-- Footer — four columns, per the client's reference: brand, Quick Links,

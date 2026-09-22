@@ -9,6 +9,9 @@
 
     {{> navbar }}
 
+  <main id="main">
+
+
     <!-- Contact Section -->
     <section class="band band-blush lg:pt-24 md:pt-20 pt-14">
         <div class="container">
@@ -45,8 +48,8 @@
                                     <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none">
                                 </div>
                                 <div>
-                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Treatment of Interest*</label>
-                                    <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                    <label for="contact-treatment" class="text-sm font-medium text-primary-2 mb-2.5 block">Treatment of Interest*</label>
+                                    <select name="treatment" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer" id="contact-treatment">
                                         <option value="">Select</option>
                                         <option value="Aesthetic Injectables">Aesthetic Injectables</option>
                                         <option value="Advanced Skin &amp; Energy-Based Treatments">Advanced Skin &amp; Energy-Based Treatments</option>
@@ -60,8 +63,8 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="text-sm font-medium text-primary-2 mb-2.5 block">Preferred Contact Method*</label>
-                                    <select name="contact_method" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer">
+                                    <label for="contact-contact_method" class="text-sm font-medium text-primary-2 mb-2.5 block">Preferred Contact Method*</label>
+                                    <select name="contact_method" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none appearance-none cursor-pointer" id="contact-contact_method">
                                         <option value="">Select</option>
                                         <option value="Phone call">Phone call</option>
                                         <option value="Text message">Text message</option>
@@ -317,8 +320,9 @@
             </div>
         </div>
     </section>
+  </main>
 
-    {{> footer }}
+  {{> footer }}
 
 </body>
 
