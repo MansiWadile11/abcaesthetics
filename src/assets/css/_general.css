@@ -786,13 +786,30 @@ section[id],
     margin-top: 14px;
 }
 
-/* the steps below read as a list, so they range left inside a centred card */
+/* The heading belongs to the centred card and sits centred with it. The steps
+   themselves keep their left edge - a numbered list centred line by line is
+   hard to read - but the block is narrowed and centred so it sits under the
+   heading rather than stretching the full width of the card. */
 .ty-next {
-    text-align: start;
+    text-align: center;
     margin-top: clamp(26px, 4vw, 40px);
     padding-top: clamp(24px, 4vw, 34px);
     border-top: 1px solid var(--color-reference-hairline);
 }
+
+.ty-next .contact-steps {
+    text-align: start;
+    max-width: 440px;
+    margin-inline: auto;
+    margin-top: 24px;
+    gap: 22px;
+}
+
+/* A little more room between the number and its text than the contact page
+   uses, since these lines run longer here. */
+.ty-next .contact-steps li { gap: 16px; }
+
+.ty-next .contact-steps p { margin-top: 4px; }
 
 .ty-urgent {
     margin-top: 26px;
