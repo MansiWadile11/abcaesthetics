@@ -4450,6 +4450,35 @@ html:has(.mobile-drawer.is-open) .book-dock {
 
 @media (min-width: 1024px) {
     .article-layout { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); }
+
+    /* The sidebar follows the reader down the article.
+       These pieces are 500-800 words, so by the time somebody has read enough
+       to be interested the related links and the booking card have long since
+       scrolled away - the moment they are most likely to act is the moment
+       there is nothing to act on.
+
+       align-self:start is what makes it work at all: a grid item stretches to
+       the row height by default, so the column was already as tall as the
+       article and had nothing left to stick to.
+
+       Measured at 540px of content against 675px of room on a 768px-tall
+       laptop, so it fits whole. The max-height is only a guard for a short
+       window or a longer rail later - it does nothing at normal sizes. */
+    .article-layout > aside {
+        position: sticky;
+        top: 113px;            /* the sticky header is 93px, plus a 20px gap */
+        align-self: start;
+        max-height: calc(100vh - 133px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+}
+
+/* Anyone who has asked for less movement gets the plain, non-following
+   version - a panel that tracks the scroll is exactly what that setting is
+   about. */
+@media (prefers-reduced-motion: reduce) {
+    .article-layout > aside { position: static; max-height: none; }
 }
 
 .article-body :is(h2, h3) {
