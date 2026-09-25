@@ -1,10 +1,21 @@
-{{!-- Per-page title and description.
+{{!-- Per-page title, description, canonical and social cards.
 
-     Every page passes its own title and description as partial parameters -
-     see any page's first line for the shape. (This block is a Handlebars
-     comment, not an HTML one: Handlebars does not respect HTML comments, so
-     an example partial call written inside <!-- --> is still executed, and a
-     partial that shows how to call itself recurses until the build dies.)
+     Every page passes its own title, description, path and image as partial
+     parameters - see any page's first line for the shape. (This block is a
+     Handlebars comment, not an HTML one: Handlebars does not respect HTML
+     comments, so an example partial call written inside <!-- --> is still
+     executed, and a partial that shows how to call itself recurses until the
+     build dies.)
+
+     Parameters
+       title        the WHOLE title. No brand suffix is added here - see 1.
+       description  one or two sentences about THIS page.
+       path         the page's own url, leading and trailing slash: "/about/".
+                    Used for the canonical and for og:url.
+       image        the page's lead image, site-root relative. Optional; the
+                    site default is used when a page has none of its own.
+       ogType       "article" for the blog posts, otherwise omitted.
+       robots       defaults to "index, follow".
 
      Three things to know before editing a page's values.
 
@@ -22,10 +33,14 @@
         description. Shorter is fine; past those points the rest is dropped
         from the search result, so anything load-bearing goes first.
 
-     robots is optional and defaults to "index, follow". Pages that exist to
-     be arrived at rather than found - the thank-you page, the 404 - pass
-     "noindex, follow" so they stay out of search while still passing link
-     equity onward. --}}
+     The absolute host comes from VITE_SITE_URL at build time (vite.config.js)
+     rather than being typed into every page, so moving off the temporary
+     Vercel address to the real domain is one environment variable, not 27
+     find-and-replaces.
+
+     There is deliberately no "keywords" tag. Google has ignored it since
+     2009, and the one that used to be here listed the same treatment terms on
+     all 27 pages including the privacy policy. --}}
 <title>{{title}}</title>
 
 <!-- Meta Tags -->
@@ -36,10 +51,32 @@
 
 <meta name="description" content="{{description}}" />
 
-<meta name="keywords" content="medical aesthetics Lake Oswego, aesthetic injectables Oregon, Botox Lake Oswego, dermal fillers Portland, SkinTyte, Sofwave, SkinPen microneedling, PRP PRF, hair restoration, hormone replacement therapy, GLP-1 weight management, ABC Aesthetics Wellness" />
-
-<meta name="author" content="ABC Aesthetics &amp; Wellness" />
+<meta name="author" content="ABC Aesthetics Medspa" />
 <meta name="robots" content="{{#if robots}}{{robots}}{{else}}index, follow{{/if}}" />
+
+<!-- One canonical address per page. Every page is served at a trailing-slash
+     url, and Vercel answers /about, /about.html and /About with a redirect to
+     /about/ - this states which of those is the real one. -->
+<link rel="canonical" href="{{siteUrl}}{{path}}" />
+
+<!-- Open Graph: how the page looks pasted into WhatsApp, Facebook, Instagram
+     DMs, iMessage, Slack. Without these, a shared link is a bare url. -->
+<meta property="og:site_name" content="ABC Aesthetics Medspa" />
+<meta property="og:type" content="{{#if ogType}}{{ogType}}{{else}}website{{/if}}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="{{siteUrl}}{{path}}" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:image" content="{{siteUrl}}{{#if image}}{{image}}{{else}}/images/hero/hero-image.webp{{/if}}" />
+<meta property="og:image:alt" content="{{title}}" />
+
+<!-- Twitter/X. summary_large_image is the wide card; without it X falls back
+     to a small square thumbnail. -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{title}}" />
+<meta name="twitter:description" content="{{description}}" />
+<meta name="twitter:image" content="{{siteUrl}}{{#if image}}{{image}}{{else}}/images/hero/hero-image.webp{{/if}}" />
+<meta name="twitter:image:alt" content="{{title}}" />
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="/images/favicon.png" />

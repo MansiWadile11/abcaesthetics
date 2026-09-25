@@ -12,10 +12,32 @@
 
 <meta name="description" content="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." />
 
-<meta name="keywords" content="medical aesthetics Lake Oswego, aesthetic injectables Oregon, Botox Lake Oswego, dermal fillers Portland, SkinTyte, Sofwave, SkinPen microneedling, PRP PRF, hair restoration, hormone replacement therapy, GLP-1 weight management, ABC Aesthetics Wellness" />
-
-<meta name="author" content="ABC Aesthetics &amp; Wellness" />
+<meta name="author" content="ABC Aesthetics Medspa" />
 <meta name="robots" content="index, follow" />
+
+<!-- One canonical address per page. Every page is served at a trailing-slash
+     url, and Vercel answers /about, /about.html and /About with a redirect to
+     /about/ - this states which of those is the real one. -->
+<link rel="canonical" href="https://abcaestheticsllc.com/" />
+
+<!-- Open Graph: how the page looks pasted into WhatsApp, Facebook, Instagram
+     DMs, iMessage, Slack. Without these, a shared link is a bare url. -->
+<meta property="og:site_name" content="ABC Aesthetics Medspa" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://abcaestheticsllc.com/" />
+<meta property="og:title" content="ABC Aesthetics &amp; Wellness | Lake Oswego, Oregon" />
+<meta property="og:description" content="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." />
+<meta property="og:image" content="https://abcaestheticsllc.com/images/hero/hero-image.webp" />
+<meta property="og:image:alt" content="ABC Aesthetics &amp; Wellness | Lake Oswego, Oregon" />
+
+<!-- Twitter/X. summary_large_image is the wide card; without it X falls back
+     to a small square thumbnail. -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ABC Aesthetics &amp; Wellness | Lake Oswego, Oregon" />
+<meta name="twitter:description" content="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." />
+<meta name="twitter:image" content="https://abcaestheticsllc.com/images/hero/hero-image.webp" />
+<meta name="twitter:image:alt" content="ABC Aesthetics &amp; Wellness | Lake Oswego, Oregon" />
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="/images/favicon.png" />
@@ -1974,23 +1996,33 @@
   </footer>
   
   <!-- Booking dock — phones only. Appears once the hero's own button has
-       scrolled away, and stands down over any section that already offers it. -->
-  <div class="book-dock" data-book-dock>
+       scrolled away, and stands down over any section that already offers it.
+  
+       <aside> rather than <div>: this sits after </footer>, so as a plain div it
+       belonged to no landmark at all and every page reported it as orphaned
+       content — content a screen-reader user can only reach by walking the whole
+       page, because landmark navigation skips straight past it. <aside> is a
+       complementary landmark and is the honest description: useful, but not the
+       page's main point. Every rule that styles this targets the class, so the
+       element name carries no appearance with it. -->
+  <aside class="book-dock" data-book-dock aria-label="Book an appointment">
     <a href="/#appointment" class="book-dock-btn">
       <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 brightness-0 invert" aria-hidden="true">
       Book Appointment
     </a>
-  </div>
+  </aside>
   
-  <!-- Floating actions -->
-  <div class="floating-actions" aria-label="Quick actions">
+  <!-- Floating actions — WhatsApp and back-to-top. <aside> for the same reason
+       as the dock above: aria-label on a <div> names nothing, because a div is
+       not a landmark and a label needs a role to attach to. -->
+  <aside class="floating-actions" aria-label="Quick actions">
     <a href="https://wa.me/19719787840" target="_blank" rel="noopener" class="floating-btn floating-whatsapp" aria-label="Message us on WhatsApp">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5-.17 0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.25-4.36c0-4.53 3.7-8.22 8.23-8.22 2.2 0 4.26.86 5.82 2.41a8.17 8.17 0 0 1 2.41 5.82c0 4.53-3.7 8.21-8.24 8.21z"/></svg>
     </a>
     <button type="button" class="floating-btn floating-top" id="back-to-top" aria-label="Back to top">
       <i class="iconify lucide--arrow-up size-5"></i>
     </button>
-  </div>
+  </aside>
 
 </body>
 

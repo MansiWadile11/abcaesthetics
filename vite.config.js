@@ -86,6 +86,15 @@ export default defineConfig(({ mode }) => {
     const configured = env.VITE_GA_ID ?? process.env.VITE_GA_ID;
     const gaId = (configured === undefined ? DEFAULT_GA_ID : configured).trim();
 
+    // The absolute host that canonical, og:url and og:image are built from.
+    // Social scrapers and rel=canonical both reject relative paths, so these
+    // have to be absolute somewhere - here, once, rather than typed into 27
+    // pages. Set VITE_SITE_URL to the Vercel address while reviewing there,
+    // or leave it for the live domain. A trailing slash would double up with
+    // the page path, so it is stripped.
+    const siteUrl = (env.VITE_SITE_URL || process.env.VITE_SITE_URL ||
+        "https://abcaestheticsllc.com").trim().replace(/\/+$/, "");
+
     // The Insights section lives at src/blog/<slug>/index.html so it is
     // served as /blog/<slug>/ - so the glob has to reach past one level.
     // Partials are not pages and must stay out of the input list.
@@ -106,7 +115,7 @@ export default defineConfig(({ mode }) => {
                 // Available to every page and partial. The analytics partial
                 // emits nothing at all when gaId is empty, so an unset
                 // variable simply means "no analytics on this build".
-                context: { gaId },
+                context: { gaId, siteUrl },
             }),
             cleanUrls(),
         ],

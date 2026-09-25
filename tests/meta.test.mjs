@@ -82,6 +82,52 @@ for (const f of files) {
     const want = NOINDEX.includes(f) ? "noindex" : "index"
     check(page + ": robots is " + want, (robots || "index, follow").startsWith(want), robots)
 
+    // ----- canonical, Open Graph, Twitter ------------------------------
+    const grab = (re) => (html.match(re) || [])[1]
+    const canonical = grab(/<link rel="canonical" href="([^"]*)"/)
+    const ogUrl = grab(/<meta property="og:url" content="([^"]*)"/)
+    const ogImage = grab(/<meta property="og:image" content="([^"]*)"/)
+    const ogTitle = grab(/<meta property="og:title" content="([^"]*)"/)
+    const ogDesc = grab(/<meta property="og:description" content="([^"]*)"/)
+    const ogSite = grab(/<meta property="og:site_name" content="([^"]*)"/)
+    const ogType = grab(/<meta property="og:type" content="([^"]*)"/)
+    const twCard = grab(/<meta name="twitter:card" content="([^"]*)"/)
+    const twImage = grab(/<meta name="twitter:image" content="([^"]*)"/)
+
+    // The url this file is actually published at, derived the same way the
+    // link checker derives it - so a canonical can never drift from reality.
+    const rel = f.slice("dist".length)
+    const publishedPath =
+        rel === "/index.html" ? "/"
+            : rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length)
+                : rel.replace(/\.html$/, "") + "/"
+
+    check(page + ": has a canonical", !!canonical)
+    check(page + ": canonical is absolute", /^https?:\/\//.test(canonical || ""), canonical)
+    check(page + ": canonical points at this page", (canonical || "").endsWith(publishedPath), canonical + " vs " + publishedPath)
+    check(page + ": og:url matches canonical", ogUrl === canonical, ogUrl)
+
+    check(page + ": og:site_name is the brand", ogSite === "ABC Aesthetics Medspa", ogSite)
+    check(page + ": og:title matches title", ogTitle === title, ogTitle)
+    check(page + ": og:description matches description", ogDesc === desc, ogDesc)
+    check(page + ": og:type is set", !!ogType, ogType)
+    check(page + ": blog posts are og:type article",
+        !(page.startsWith("blog/") && page !== "blog/index.html") || ogType === "article", ogType)
+
+    check(page + ": twitter:card is summary_large_image", twCard === "summary_large_image", twCard)
+    check(page + ": twitter:image matches og:image", twImage === ogImage, twImage)
+
+    // A share card pointing at a 404 shows no image at all, and the scrapers
+    // cache that result - so the file has to exist in the build, not just be
+    // spelled plausibly.
+    check(page + ": og:image is absolute", /^https?:\/\//.test(ogImage || ""), ogImage)
+    const imgPath = (ogImage || "").replace(/^https?:\/\/[^/]+/, "")
+    check(page + ": og:image exists in the build", imgPath && fs.existsSync("dist" + imgPath), imgPath)
+
+    // Removed deliberately: Google has ignored it since 2009 and the old one
+    // listed the same treatment terms on every page, privacy policy included.
+    check(page + ": no keywords tag", !/<meta name="keywords"/.test(html))
+
     if (titles.has(title)) problems.push("DUPLICATE TITLE: " + page + " and " + titles.get(title) + "  -> " + title)
     else { titles.set(title, page); pass++ }
 
