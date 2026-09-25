@@ -1,10 +1,10 @@
 /*
-Template Name: Dermato - Coworking Space Website Tailwind CSS 4 Template
-Version: 1.0.0
-Author: Unifato
-Website: https://unifato.com/
-Email: unifato.themes@gmail.com
-File: App js
+ABC Aesthetics Medspa
+Medical aesthetics and wellness - Lake Oswego, Oregon
+https://abcaestheticsllc.com
+
+File: App js - imports every behaviour module, then the two bits of
+navigation state that are small enough not to earn a file of their own.
 */
 
 // CSS is loaded by a render-blocking <link> in the head partial, not from

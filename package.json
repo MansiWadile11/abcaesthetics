@@ -1,12 +1,12 @@
 {
-  "name": "dermato",
+  "name": "abc-aesthetics",
   "version": "1.0.0",
-  "description": "Dermato - Dermatology & Aesthetic Clinic Tailwind CSS Template",
+  "description": "ABC Aesthetics Medspa - medical aesthetics and wellness, Lake Oswego, Oregon",
   "main": "index.js",
   "type": "module",
   "private": true,
-  "author": "Unifato",
-  "website": "https://unifato.com",
+  "author": "ABC Aesthetics Medspa",
+  "website": "https://abcaestheticsllc.com",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",

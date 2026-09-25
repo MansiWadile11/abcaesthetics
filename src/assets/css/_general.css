@@ -4934,8 +4934,7 @@ a.about-link:hover {
 /* ==========================================================================
    Alternating splits
    Consecutive sections that all lead with the photograph read as a column of
-   the same block. Flipping every other one gives the page a rhythm - the same
-   thing the Dermato reference about page does.
+   the same block. Flipping every other one gives the page a rhythm.
    ========================================================================== */
 @media (min-width: 768px) {
     .sd2-split-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
