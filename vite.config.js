@@ -1,24 +1,32 @@
 import fs from "node:fs";
 import { sync } from "glob";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import path, { resolve } from "path";
 import tailwindcss from '@tailwindcss/vite';
 import handlebars from "vite-plugin-handlebars";
 
 /**
- * Serves /thank-you (no extension) in dev, matching the rewrite in
- * vercel.json, so the redirect target is tested locally rather than
- * discovered after a deploy.
+ * Makes dev serve the same URLs production does.
  *
- * Two rules keep this narrow, and both matter:
+ * vercel.json sets cleanUrls + trailingSlash, so every page lives at a path
+ * like /about/ - the shape the old WordPress site used, which is what lets
+ * ten pages keep the exact URL they already rank for. Without this middleware
+ * those URLs only exist once deployed, and every local check would be testing
+ * a set of addresses the real site does not have.
  *
- *   - a path ending in "/" is a DIRECTORY and is left alone. /blog/ and
- *     /blog/<slug>/ resolve to their own index.html, and rewriting them to
- *     "/blog.html" makes Vite fall back to the home page - which looks for
- *     all the world like the blog was replaced by the home page;
- *   - the .html file must actually exist. Anything else falls through to
- *     Vite's own handling and a real 404, rather than being silently
- *     answered with the wrong page.
+ * Resolution order for "/about/":
+ *
+ *   1. src/about/index.html  - a real directory, which is how /blog/ and
+ *      /blog/<slug>/ are stored. Tried FIRST, because a directory must never
+ *      be answered by a same-named .html file;
+ *   2. src/about.html        - the ordinary page.
+ *
+ * "/about" (no slash) resolves too, so a stale link still lands somewhere
+ * sensible while developing. In production Vercel answers that one with a
+ * 308 to /about/ instead.
+ *
+ * Anything that matches neither falls through to Vite and a real 404, rather
+ * than being silently answered with the wrong page.
  */
 function cleanUrls() {
     return {
@@ -26,20 +34,26 @@ function cleanUrls() {
         apply: "serve",
         configureServer(server) {
             const root = resolve("./src");
+
+            const serve = (candidate) => {
+                const file = path.join(root, candidate);
+                return file.startsWith(root) && fs.existsSync(file) ? candidate : null;
+            };
+
             server.middlewares.use((req, _res, next) => {
                 const [pathname, query = ""] = req.url.split("?");
+                const suffix = query ? "?" + query : "";
+
                 if (
                     pathname !== "/" &&
-                    !pathname.endsWith("/") &&
                     !path.extname(pathname) &&
                     !pathname.startsWith("/@") &&
                     !pathname.startsWith("/api/") &&
                     !pathname.includes("..")
                 ) {
-                    const file = path.join(root, pathname + ".html");
-                    if (file.startsWith(root) && fs.existsSync(file)) {
-                        req.url = pathname + ".html" + (query ? "?" + query : "");
-                    }
+                    const bare = pathname.replace(/\/$/, "");
+                    const hit = serve(bare + "/index.html") || serve(bare + ".html");
+                    if (hit) req.url = hit + suffix;
                 }
                 next();
             });
@@ -49,6 +63,28 @@ function cleanUrls() {
 
 export default defineConfig(({ mode }) => {
     const list = [];
+
+    // The tag carried over from the old WordPress site, so the practice keeps
+    // one continuous history rather than starting an empty property on the
+    // day the new site goes live.
+    //
+    // Only the ID is carried over. The old snippet also set a Site Kit
+    // developer ID and installed a WordPress-specific event shim, neither of
+    // which means anything outside WordPress.
+    const DEFAULT_GA_ID = "GT-5TCZ3J3C";
+
+    // Reads .env files for local work. On Vercel the variable arrives in
+    // process.env instead, so both are checked - loadEnv alone would miss a
+    // value set only in the Vercel dashboard.
+    //
+    // Unset falls back to the tag above. Set-but-EMPTY is the off switch, so
+    // preview deployments can be excluded from the practice's reporting by
+    // adding VITE_GA_ID with no value to the Preview environment. That is why
+    // this tests for undefined rather than using || - an empty string has to
+    // mean "off", not "use the default".
+    const env = loadEnv(mode, process.cwd(), "");
+    const configured = env.VITE_GA_ID ?? process.env.VITE_GA_ID;
+    const gaId = (configured === undefined ? DEFAULT_GA_ID : configured).trim();
 
     // The Insights section lives at src/blog/<slug>/index.html so it is
     // served as /blog/<slug>/ - so the glob has to reach past one level.
@@ -66,6 +102,11 @@ export default defineConfig(({ mode }) => {
             tailwindcss(),
             handlebars({
                 partialDirectory: resolve("./src/partials"),
+
+                // Available to every page and partial. The analytics partial
+                // emits nothing at all when gaId is empty, so an unset
+                // variable simply means "no analytics on this build".
+                context: { gaId },
             }),
             cleanUrls(),
         ],

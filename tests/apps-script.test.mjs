@@ -41,7 +41,7 @@ const GOOD = {
     _required: "name,email,phone,treatment,contact_method,consent",
     _form: "contact",
     _subject: "Contact enquiry",
-    _page: "/contact.html",
+    _page: "/contact/",
 }
 
 const sub = (over = {}) => ({ ...GOOD, ...over })
@@ -53,7 +53,7 @@ let h = createHost()
 let res = h.post(sub())
 
 check("returns ok", res.ok === true, JSON.stringify(res))
-check("names the thank-you page", res.redirect === "/thank-you", res.redirect)
+check("names the thank-you page", res.redirect === "/thank-you/", res.redirect)
 
 check("the tab was created with the agreed columns",
     JSON.stringify(h.header()) === JSON.stringify(COLUMNS), JSON.stringify(h.header()))
@@ -67,7 +67,7 @@ check("col 4  phone kept as text", row[C.PHONE] === "(971) 978-7840", row[C.PHON
 check("col 5  treatment of interest", row[C.TREATMENT] === "Aesthetic Injectables", row[C.TREATMENT])
 check("col 6  preferred contact method", row[C.CONTACT_METHOD] === "Phone call", row[C.CONTACT_METHOD])
 check("col 7  message", row[C.MESSAGE] === GOOD.message, row[C.MESSAGE])
-check("col 8  source page", row[C.PAGE] === "/contact.html", row[C.PAGE])
+check("col 8  source page", row[C.PAGE] === "/contact/", row[C.PAGE])
 check("col 9  status is New", row[C.STATUS] === "New", row[C.STATUS])
 check("the row is exactly 9 columns wide", row.length === 9, String(row.length))
 check("a write lock was taken", h.state.lockWaits === 1, String(h.state.lockWaits))
@@ -82,7 +82,7 @@ check("subject is '[TEST] New Contact Form Enquiry - Jane Doe' on the test accou
     admin && admin.subject === "[TEST] New Contact Form Enquiry - Jane Doe", admin && admin.subject)
 check("Reply-To is the patient", admin && admin.replyTo === "jane.doe@example.com", admin && admin.replyTo)
 check("admin email lists every submitted field",
-    admin && ["Jane Doe", "971", "Aesthetic Injectables", "/contact.html"].every((s) => admin.htmlBody.includes(s)))
+    admin && ["Jane Doe", "971", "Aesthetic Injectables", "/contact/"].every((s) => admin.htmlBody.includes(s)))
 check("admin email carries a plain-text part", admin && admin.body && admin.body.includes("New contact form enquiry"))
 
 check("the patient gets a confirmation", !!cust)
@@ -300,7 +300,7 @@ check("doGet reports the flow switches",
 h = createHost()
 const probe = { name: "Jane Doe", email: "jane@example.com", phone: "971-978-7840",
     subject: "Injectables", message: "hello", contactMethod: "Email",
-    preferredDate: "", preferredTime: "", consent: "Yes", form: "contact", page: "/contact.html" }
+    preferredDate: "", preferredTime: "", consent: "Yes", form: "contact", page: "/contact/" }
 const builtAdmin = h.sandbox.buildAdminEmail(probe, "Sep 22, 2026 at 10:00 AM")
 const builtReply = h.sandbox.buildAutoReply(probe)
 check("flow 2's email can be built without sending",

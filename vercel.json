@@ -2,7 +2,168 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/thank-you", "destination": "/thank-you.html" }
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/dermal-fillers",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/dermal-fillers/",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/daxxify",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/daxxify/",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/sculptra",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/sculptra/",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/injectables-2",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/injectables-2/",
+      "destination": "/injectables/",
+      "permanent": true
+    },
+    {
+      "source": "/hormone-replacement-therapy",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/hormone-replacement-therapy/",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/hormone-replacement-therapy-hrt-new",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/hormone-replacement-therapy-hrt-new/",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/glp1-and-weight-loss-support",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/glp1-and-weight-loss-support/",
+      "destination": "/hormone-metabolic-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/skin-pen-microneedling",
+      "destination": "/skin-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/skin-pen-microneedling/",
+      "destination": "/skin-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/skin-pen-microneedling-new",
+      "destination": "/skin-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/skin-pen-microneedling-new/",
+      "destination": "/skin-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/prf-platelet-rich-fibrin",
+      "destination": "/regenerative-aesthetics/",
+      "permanent": true
+    },
+    {
+      "source": "/prf-platelet-rich-fibrin/",
+      "destination": "/regenerative-aesthetics/",
+      "permanent": true
+    },
+    {
+      "source": "/under-eye-rejuvenation",
+      "destination": "/regenerative-aesthetics/",
+      "permanent": true
+    },
+    {
+      "source": "/under-eye-rejuvenation/",
+      "destination": "/regenerative-aesthetics/",
+      "permanent": true
+    },
+    {
+      "source": "/o-shots-and-p-shots",
+      "destination": "/sexual-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/o-shots-and-p-shots/",
+      "destination": "/sexual-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/o-shot",
+      "destination": "/sexual-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/o-shot/",
+      "destination": "/sexual-wellness/",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/author/saritapositivelyamplified-com",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/author/saritapositivelyamplified-com/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/pricing/",
+      "destination": "/services/",
+      "permanent": true
+    }
   ]
 }

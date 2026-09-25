@@ -265,6 +265,23 @@ function setup() {
                 // Redirect ONLY once Apps Script has confirmed it has the enquiry.
                 const ref = encodeURIComponent(raw._form || "")
                 const target = (result.redirect || THANK_YOU_PATH) + (ref ? "?ref=" + ref : "")
+
+                // Count the enquiry, not the button press: this line is only
+                // reached after the backend has confirmed the row was stored,
+                // so the number in GA matches the number in the sheet.
+                //
+                // Only which form was used travels - "contact" or
+                // "appointment". Never the name, email, phone, treatment or
+                // message. Those are a patient's own details, they are not
+                // ours to hand to an analytics vendor, and Google's own terms
+                // forbid sending them.
+                //
+                // No-op when analytics is switched off, because gtag is then
+                // never defined.
+                if (typeof window.gtag === "function") {
+                    window.gtag("event", "generate_lead", { form_name: raw._form || "enquiry" })
+                }
+
                 setStatus(form, "ok", "Sent — taking you to the confirmation…")
                 location.assign(target)
                 return

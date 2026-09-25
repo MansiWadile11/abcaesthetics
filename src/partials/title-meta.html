@@ -1,17 +1,45 @@
-<title>{{title}} | ABC Aesthetics & Wellness</title>
+{{!-- Per-page title and description.
+
+     Every page passes its own title and description as partial parameters -
+     see any page's first line for the shape. (This block is a Handlebars
+     comment, not an HTML one: Handlebars does not respect HTML comments, so
+     an example partial call written inside <!-- --> is still executed, and a
+     partial that shows how to call itself recurses until the build dies.)
+
+     Three things to know before editing a page's values.
+
+     1. TITLE IS THE WHOLE TITLE. There is no brand suffix added here. A
+        suffix looks tidy but costs ~28 characters on every page, and Google
+        only shows roughly 60 - so on the pages that need the room most, the
+        words that would have earned the click are the ones cut off. Each
+        title carries the brand or the location only where it fits.
+
+     2. WRITE "&", NOT "&amp;". Handlebars escapes these values on output, so
+        an ampersand typed as &amp; here is escaped a second time and the tab
+        reads "Results &amp; Before / After". Type the character you mean.
+
+     3. LENGTH. Aim for 60 characters or fewer for a title and 150-160 for a
+        description. Shorter is fine; past those points the rest is dropped
+        from the search result, so anything load-bearing goes first.
+
+     robots is optional and defaults to "index, follow". Pages that exist to
+     be arrived at rather than found - the thank-you page, the 404 - pass
+     "noindex, follow" so they stay out of search while still passing link
+     equity onward. --}}
+<title>{{title}}</title>
 
 <!-- Meta Tags -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="title" content="ABC Aesthetics & Wellness - Lake Oswego, Oregon" />
+<meta name="title" content="{{title}}" />
 
-<meta name="description" content="ABC Aesthetics &amp; Wellness is a personalized medical aesthetics and wellness practice in Lake Oswego, Oregon, founded and led by Dr. Nawal M. Qneibi, DNP-BC. Aesthetic injectables, advanced skin rejuvenation, regenerative aesthetics, hair restoration, hormone and metabolic wellness." />
+<meta name="description" content="{{description}}" />
 
 <meta name="keywords" content="medical aesthetics Lake Oswego, aesthetic injectables Oregon, Botox Lake Oswego, dermal fillers Portland, SkinTyte, Sofwave, SkinPen microneedling, PRP PRF, hair restoration, hormone replacement therapy, GLP-1 weight management, ABC Aesthetics Wellness" />
 
 <meta name="author" content="ABC Aesthetics &amp; Wellness" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="{{#if robots}}{{robots}}{{else}}index, follow{{/if}}" />
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="/images/favicon.png" />

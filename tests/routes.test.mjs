@@ -24,8 +24,8 @@ function check(name, cond, detail) {
 
 // path -> a phrase that appears ONLY on the page that path should serve
 const ROUTES = [
-    ["/", "Home |"],
-    ["/index.html", "Home |"],
+    ["/", "Personalized aesthetics"],
+    ["/index.html", "Personalized aesthetics"],
 
     // The Insights section. Directory URLs, one level deep and two.
     ["/blog/", "Wellness Insights |"],
@@ -37,19 +37,34 @@ const ROUTES = [
     ["/blog/hair-restoration/", "hair"],
     ["/blog/hormone-wellness/", "hormone"],
 
-    ["/treatments.html", "Treatments |"],
-    ["/contact.html", "Contact |"],
-    ["/appointment.html", "Appointment"],
-    ["/about.html", "About"],
-    ["/results.html", "Results"],
+    // --- the ten URLs carried over from the old WordPress site ----------
+    // These are the whole point of the migration: each one is the address
+    // the old site ranked for, answered by the new page, with no redirect.
+    // If any of these stops resolving, the SEO value of the rebuild is gone
+    // and nothing else here would notice.
+    ["/about/", "About"],
+    ["/contact/", "Get in touch"],
+    ["/services/", "Treatments |"],
+    ["/book-appointment/", "Appointment"],
+    ["/injectables/", "Aesthetic Injectables"],
+    ["/hair-restoration/", "Hair Restoration"],
+    ["/privacy-policy/", "Privacy"],
+    ["/terms-of-service/", "Terms"],
+    ["/accessibility-statement/", "Accessibility"],
 
-    // The form's redirect target, with and without the extension.
-    ["/thank-you", "Thank-you |"],
-    ["/thank-you.html", "Thank-you |"],
+    // --- pages that kept a new slug -------------------------------------
+    ["/results/", "Results"],
+    ["/skin-energy/", "Energy-Based"],
+    ["/hormone-metabolic-wellness/", "Metabolic"],
+    ["/regenerative-aesthetics/", "Regenerative"],
+    ["/sexual-wellness/", "Sexual Wellness"],
+    ["/womens-wellness/", "Wellness"],
+    ["/mens-wellness/", "Wellness"],
+    ["/wellness-products/", "Wellness Products"],
 
-    ["/privacy-policy.html", "Privacy"],
-    ["/terms-conditions.html", "Terms"],
-    ["/accessibility.html", "Accessibility"],
+    // The form's redirect target.
+    ["/thank-you/", "we have your request"],
+    ["/thank-you.html", "we have your request"],
 ]
 
 async function main() {

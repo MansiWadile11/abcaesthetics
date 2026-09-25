@@ -12,3 +12,8 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 
 <script type="module" src="/assets/js/app.js"></script>
+
+<!-- Analytics. Included from here because every page in the site pulls in
+     this partial, so there is one place to add it and no page can be missed.
+     It emits nothing unless VITE_GA_ID is set - see partials/analytics.html. -->
+{{> analytics }}

@@ -32,7 +32,7 @@ function doPost(e) {
         var spam = spamSignal(raw);
         if (spam) {
             log("dropped as spam: " + spam);
-            return respond({ ok: true, redirect: "/thank-you", dropped: true });
+            return respond({ ok: true, redirect: "/thank-you/", dropped: true });
         }
 
         var result = validate(raw);
@@ -56,7 +56,7 @@ function doPost(e) {
         // practice, and an error here would only prompt a third attempt.
         if (isDuplicate(v)) {
             log("duplicate ignored for " + v.email);
-            return respond({ ok: true, redirect: "/thank-you", duplicate: true });
+            return respond({ ok: true, redirect: "/thank-you/", duplicate: true });
         }
 
         return runFlows(v);
@@ -118,7 +118,7 @@ function runFlows(v) {
 
     return respond({
         ok: true,
-        redirect: "/thank-you",
+        redirect: "/thank-you/",
         // Per-flow outcome, for the log and for testing. It carries no detail
         // a visitor could act on and nothing about why anything failed.
         flows: {

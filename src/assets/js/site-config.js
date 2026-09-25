@@ -27,11 +27,15 @@ export const APPS_SCRIPT_URL =
 /*
 Where a successful submission lands.
 
-"/thank-you" works on any host that serves extensionless URLs (Vercel does,
-via the rewrite in vercel.json). If the final host cannot, change this to
-"/thank-you.html" - the page itself is identical either way.
+Every page is served at a trailing-slash path (/about/, /contact/) so the ten
+URLs carried over from the old site match it exactly. vercel.json sets
+cleanUrls + trailingSlash to produce that shape, and the dev server does the
+same through the clean-urls plugin in vite.config.js.
+
+If the final host cannot serve that shape, change this to "/thank-you.html" -
+the page itself is identical either way.
 */
-export const THANK_YOU_PATH = "/thank-you"
+export const THANK_YOU_PATH = "/thank-you/"
 
 /* Shown to visitors whenever we cannot take the enquiry online. */
 export const PRACTICE_PHONE = "971-978-7840"

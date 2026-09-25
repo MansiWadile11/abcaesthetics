@@ -33,9 +33,9 @@ function check(name, cond, detail) {
 }
 
 const FORMS = [
-    { page: "/contact.html", name: "contact" },
-    { page: "/appointment.html", name: "appointment" },
-    { page: "/index.html", name: "appointment-home" },
+    { page: "/contact/", name: "contact" },
+    { page: "/book-appointment/", name: "appointment" },
+    { page: "/", name: "appointment-home" },
 ]
 
 // ---------------------------------------------------------------------------
@@ -180,7 +180,7 @@ async function main() {
     process.on("SIGTERM", () => { cleanup(); process.exit(143) })
     process.on("uncaughtException", (e) => { console.error(e); cleanup(); process.exit(1) })
 
-    const up = await waitForVite(BASE + "/contact.html")
+    const up = await waitForVite(BASE + "/contact/")
     if (!up) {
         console.error("Could not start Vite on port " + VITE_PORT)
         cleanup()
@@ -234,7 +234,7 @@ async function main() {
         calls = 0
 
         console.log("\n1. EMPTY REQUIRED FIELDS")
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         let form = page.locator('form[data-form="contact"]')
         await form.locator("[type=submit]").click()
         await sleep(400)
@@ -252,7 +252,7 @@ async function main() {
         check(label + ": preferred contact method", flaggedContact.includes("contact_method"), flaggedContact.join(","))
         check(label + ": consent", flaggedContact.includes("consent"), flaggedContact.join(","))
 
-        await open(page, "/appointment.html")
+        await open(page, "/book-appointment/")
         const appt = page.locator('form[data-form="appointment"]')
         await appt.locator("[type=submit]").click()
         await sleep(400)
@@ -262,7 +262,7 @@ async function main() {
         check(label + ": appointment time", flaggedAppt.includes("preferred_time"), flaggedAppt.join(","))
 
         console.log("\n3. INVALID EMAIL AND PHONE")
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form, { email: "jane@@example", phone: "12345" })
         await form.locator("[type=submit]").click()
@@ -285,7 +285,7 @@ async function main() {
 
         console.log("\n5. BACKEND ERROR -> NO REDIRECT")
         mode = "error"
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         await form.locator("[type=submit]").click()
@@ -300,7 +300,7 @@ async function main() {
         console.log("\n6. NETWORK FAILURE -> NO REDIRECT")
         mode = "offline"
         await page.route("**/exec", (route) => route.abort("failed"))
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         await form.locator("[type=submit]").click()
@@ -315,7 +315,7 @@ async function main() {
 
         console.log("\n7. A WRONGLY DEPLOYED SCRIPT (returns HTML, not JSON)")
         mode = "html"
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         await form.locator("[type=submit]").click()
@@ -327,7 +327,7 @@ async function main() {
 
         console.log("\n8. LOADING STATE")
         mode = "slow"
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form)
         const btn = form.locator("[type=submit]")
@@ -343,7 +343,7 @@ async function main() {
         console.log("\n9. RAPID REPEAT CLICKS SEND ONCE")
         mode = "slow"
         calls = 0
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         form = page.locator('form[data-form="contact"]')
         await fill(form, { email: "rapid." + label + "@example.com" })
         await form.locator("[type=submit]").click({ force: true })
@@ -384,7 +384,7 @@ async function main() {
         host = createHost()
         mode = "lose-first"
         calls = 0
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         const lostForm = page.locator('form[data-form="contact"]')
         await fill(lostForm, { email: "lostanswer." + label + "@example.com" })
         await lostForm.locator("[type=submit]").click()
@@ -399,7 +399,7 @@ async function main() {
         // A real rejection must NOT be retried - it is an answer, not a loss.
         mode = "error"
         calls = 0
-        await open(page, "/contact.html")
+        await open(page, "/contact/")
         const errForm = page.locator('form[data-form="contact"]')
         await fill(errForm, { email: "realerror." + label + "@example.com" })
         await errForm.locator("[type=submit]").click()
@@ -408,12 +408,12 @@ async function main() {
         check(label + ": and still keeps the visitor on the form", page.url().includes("contact"))
 
         console.log("\n11. THE THANK-YOU PAGE")
-        await page.goto(BASE + "/thank-you", { waitUntil: "domcontentloaded" })
+        await page.goto(BASE + "/thank-you/", { waitUntil: "domcontentloaded" })
         check(label + ": /thank-you resolves without the extension", await page.locator(".ty-title").count() === 1, page.url())
         check(label + ": it confirms and thanks", /thank you/i.test(await page.locator(".ty-title").textContent() || ""))
         check(label + ": it says the team will be in touch",
             /be in touch|get back/i.test(await page.locator(".ty-lead").textContent() || ""))
-        check(label + ": it offers a way home", await page.locator('.ty-actions a[href="/index.html"]').count() === 1)
+        check(label + ": it offers a way home", await page.locator('.ty-actions a[href="/"]').count() === 1)
         check(label + ": it carries the phone number", /971-978-7840/.test(await page.locator(".ty-urgent").textContent() || ""))
         check(label + ": it does not scroll sideways", await page.evaluate(
             () => document.documentElement.scrollWidth <= window.innerWidth + 1))

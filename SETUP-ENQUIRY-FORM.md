@@ -4,7 +4,7 @@
 Website form  →  Google Apps Script Web App  →  FLOW 1  Google Sheet
                                              →  FLOW 2  webmaster@codevelop.us
                                              →  FLOW 3  patient confirmation
-                                             →  /thank-you
+                                             →  /thank-you/
 ```
 
 There is no server, no serverless function and no database. The whole backend
@@ -255,7 +255,7 @@ Submit the contact form on the live site and confirm four things:
 2. `webmaster@codevelop.us` receives **New Contact Form Enquiry - [name]**,
    and hitting Reply goes to the patient, not to Google;
 3. the address you used receives a confirmation;
-4. you land on `/thank-you`.
+4. you land on `/thank-you/`.
 
 You can also open the Web App URL directly in a browser — it answers with a
 small health check showing the tab name and how many enquiries it holds.
@@ -465,7 +465,7 @@ belongs to:
 ### What does NOT need changing
 
 The eight `.gs` files, the website's form markup, the validation, the sheet
-column layout, and `/thank-you`. Only `Config.gs` and the one URL in
+column layout, and `/thank-you/`. Only `Config.gs` and the one URL in
 `site-config.js` are account-specific - there is a test asserting that no
 sheet ID or real email address is hard-coded anywhere else.
 
@@ -475,7 +475,7 @@ sheet ID or real email address is hard-coded anywhere else.
 
 Only two things are host-specific, and neither is the backend:
 
-1. **`/thank-you`** needs the host to serve `thank-you.html` at an
+1. **`/thank-you/`** needs the host to serve `thank-you.html` at an
    extensionless path. On Vercel that is the one rewrite in `vercel.json`. If
    the final host cannot do it, change `THANK_YOU_PATH` in
    `src/assets/js/site-config.js` to `"/thank-you.html"` — the page is
