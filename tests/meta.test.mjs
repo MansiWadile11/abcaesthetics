@@ -25,7 +25,7 @@ import { sync } from "glob"
 const files = sync("dist/**/*.html").map((f) => f.replace(/\\/g, "/"))
 
 // Reached by being sent there, so they are deliberately out of the index.
-const NOINDEX = ["dist/thank-you.html", "dist/404-error.html"]
+const NOINDEX = ["dist/thank-you.html", "dist/404.html"]
 
 let pass = 0
 const problems = []
