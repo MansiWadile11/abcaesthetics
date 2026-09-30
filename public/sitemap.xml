@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The 25 canonical public URLs, in the same trailing-slash form as the
+  rel=canonical on each page.
+
+  The host below is the production default. Builds resolve it from the same
+  VITE_SITE_URL that canonical and og:url come from (vite.config.js), so a
+  preview build cannot end up advertising production URLs, and the sitemap
+  can never disagree with the canonicals.
+
+  Deliberately absent: the error page and the form confirmation, which both
+  carry a noindex tag; the extension-suffixed alternate of every page, each
+  of which 301s to the clean URL above; and the 16 old WordPress paths that
+  redirect here. No path appears literally in this comment, so a tool that
+  greps the file rather than parsing it cannot mistake a note for an entry.
+
+  No lastmod: a build date would claim all 25 pages changed at once, which
+  is not true, and an invented date is worse than none. Real per-page dates
+  can be taken from git history once these changes are committed.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core -->
+  <url><loc>https://abcaestheticsllc.com/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/about/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/contact/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/services/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/book-appointment/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/results/</loc></url>
+
+  <!-- Treatments -->
+  <url><loc>https://abcaestheticsllc.com/injectables/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/skin-energy/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/regenerative-aesthetics/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/hair-restoration/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/hormone-metabolic-wellness/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/womens-wellness/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/mens-wellness/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/sexual-wellness/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/wellness-products/</loc></url>
+
+  <!-- Legal -->
+  <url><loc>https://abcaestheticsllc.com/privacy-policy/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/terms-of-service/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/accessibility-statement/</loc></url>
+
+  <!-- Insights -->
+  <url><loc>https://abcaestheticsllc.com/blog/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/injectables/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/skin-energy/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/skinpen/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/prp-prf/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/hair-restoration/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/hormone-wellness/</loc></url>
+
+</urlset>

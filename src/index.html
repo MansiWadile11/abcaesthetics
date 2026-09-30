@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="ABC Aesthetics & Wellness | Lake Oswego, Oregon" description="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." path="/" image="/images/hero/hero-image.webp" }} {{> head-css}}
+  {{> title-meta title="ABC Aesthetics Medspa | Lake Oswego, Oregon" description="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." path="/" image="/images/hero/hero-image.webp" }} {{> head-css}}
 </head>
 
 <body>
@@ -31,7 +31,7 @@
         <!-- Center -->
         <div class="hero-center-content text-center">
           <h1 class="text-reference-green font-semibold tracking-tight font-reference-heading">Personalized aesthetics &amp; wellness care</h1>
-          <p class="text-reference-muted font-normal mx-auto">Individualized aesthetic medicine, skin health, and wellness care from Dr. Nawal M. Qneibi, DNP-BC — founder of ABC Aesthetics &amp; Wellness.</p>
+          <p class="text-reference-muted font-normal mx-auto">Individualized aesthetic medicine, skin health, and wellness care from Dr. Nawal M. Qneibi, DNP-BC — founder of ABC Aesthetics Medspa.</p>
           <div class="md:hidden mt-7">
             <a href="/#appointment" class="reference-cta-btn btn-glow bg-reference-green hover:bg-reference-green-dark text-white">
               <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 brightness-0 invert" aria-hidden="true">
@@ -317,7 +317,11 @@
             <div class="md:col-span-5 bg-primary-5 rounded-3xl lg:p-7.5 p-5 relative overflow-hidden flex md:flex-row flex-col border border-primary-1/5">
               <div class="flex flex-col md:flex-1 z-10 h-full justify-between md:text-start text-center">
                 <div>
-                  <h3 class="text-3xl lg:text-[46px] font-medium text-[#2C463B] hs-accordion-active:text-white leading-none mb-4 tracking-tight">9</h3>
+                  <!-- A figure, not a section title, so it is a div rather than a
+                       heading. font-heading is explicit here because the h1-h6
+                       base rule in _general.css was what supplied Playfair
+                       Display; a plain div would have dropped to the body face. -->
+                  <div class="font-heading text-3xl lg:text-[46px] font-medium text-[#2C463B] hs-accordion-active:text-white leading-none mb-4 tracking-tight">9</div>
                   <p class="text-primary-2 hs-accordion-active:text-white/80 font-medium leading-snug">Treatment categories, under one roof</p>
                 </div>
                 <div class="flex flex-col gap-4 lg:mt-auto mt-4">
@@ -1074,7 +1078,7 @@
         <div class="flex-1 basis-95 min-w-75">
           <div class="reference-eyebrow uppercase" style="letter-spacing:3px;">Personalized aesthetic &amp; wellness care</div>
           <h2 class="reference-clinic-title mt-4">A practice committed to you</h2>
-          <p class="text-base text-reference-muted font-normal leading-[1.65] max-w-120 mt-5">Founded by Dr. Nawal M. Qneibi, DNP-BC in 2023, ABC Aesthetics &amp; Wellness combines a clinical healthcare background with aesthetic medicine experience since 2016 — individualized plans focused on education, safety, and natural-looking results.</p>
+          <p class="text-base text-reference-muted font-normal leading-[1.65] max-w-120 mt-5">Founded by Dr. Nawal M. Qneibi, DNP-BC in 2023, ABC Aesthetics Medspa combines a clinical healthcare background with aesthetic medicine experience since 2016 — individualized plans focused on education, safety, and natural-looking results.</p>
 
           <div class="flex flex-col gap-4.5 mt-7">
             <div class="flex items-center gap-3.5">
@@ -1290,7 +1294,7 @@
           <div class="reference-eyebrow uppercase">Company highlights</div>
           <h2 class="svc-h2 mt-3.5"><button type="button" class="cl-toggle">A practice built on clinical foundations<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h2>
           <div class="cl-panel"><div>
-          <p class="svc-p mt-5">ABC Aesthetics &amp; Wellness combines a strong clinical healthcare foundation with extensive experience in aesthetic medicine.</p>
+          <p class="svc-p mt-5">ABC Aesthetics Medspa combines a strong clinical healthcare foundation with extensive experience in aesthetic medicine.</p>
 
           <div class="home-highlight-grid lg:mt-8 mt-6">
           <div class="home-highlight">
@@ -1378,7 +1382,7 @@
         <!-- Featured Post -->
         <a href="/blog/skin-energy/" class="group flex-1 basis-105 min-w-75 bg-reference-insight rounded-[32px] p-5">
           <div class="insight-media rounded-[20px] overflow-hidden relative w-full h-85">
-            <img src="/images/abc/sofwave-device.webp" alt="The Sofwave device at ABC Aesthetics &amp; Wellness" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="/images/abc/sofwave-device.webp" alt="The Sofwave device at ABC Aesthetics Medspa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="flex flex-wrap items-center gap-2 mt-5 text-[13px] text-reference-subtle font-normal">
             <span class="reference-tag">Skin Health</span>
@@ -1451,9 +1455,9 @@
                 <i class="iconify lucide--phone size-4"></i>
                 <span>971-978-7840</span>
               </a>
-              <a href="mailto:abcaestheticsllc@gmail.com" class="flex items-center justify-center gap-2 hover:underline">
+              <a href="mailto:info@abcaestheticsllc.com" class="flex items-center justify-center gap-2 hover:underline">
                 <i class="iconify lucide--mail size-4"></i>
-                <span>abcaestheticsllc@gmail.com</span>
+                <span>info@abcaestheticsllc.com</span>
               </a>
             </div>
           </div>
@@ -1516,7 +1520,7 @@
             </div>
 
             <div class="flex flex-wrap items-center justify-between gap-3 mt-5.5">
-              <button type="submit" class="btn-glow bg-reference-green hover:bg-reference-green-dark text-white text-[15px] font-semibold rounded-full px-6.5 py-3.5 transition-colors">Book an appointment</button>
+              <button type="submit" class="btn-glow bg-reference-green hover:bg-reference-green-dark text-white text-[15px] font-semibold rounded-full px-6.5 py-3.5 transition-colors">Send Request</button>
               <span class="text-[13px] text-reference-subtle font-normal">We'll reply within 24–48h.</span>
             </div>
 

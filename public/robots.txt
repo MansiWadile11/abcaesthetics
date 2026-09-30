@@ -1,0 +1,14 @@
+# ABC Aesthetics Medspa
+#
+# Everything on this site is meant to be found. /404/ and /thank-you/ are the
+# only pages that should stay out of search, and both carry their own
+# noindex meta tag - which is the reliable way to do it. Disallowing them here
+# instead would stop crawlers reading that tag at all, so they are not listed.
+#
+# The host below is the production default. Builds resolve it from the same
+# VITE_SITE_URL that canonical and og:url come from (vite.config.js).
+
+User-agent: *
+Allow: /
+
+Sitemap: https://abcaestheticsllc.com/sitemap.xml

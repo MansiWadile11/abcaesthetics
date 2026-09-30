@@ -61,6 +61,42 @@ function cleanUrls() {
     };
 }
 
+const PRODUCTION_HOST = "https://abcaestheticsllc.com";
+
+/**
+ * Keep sitemap.xml and robots.txt on the same host as the canonical tags.
+ *
+ * Files in public/ are copied verbatim - Vite does no templating on them - so
+ * the host in those two is written out as the production default. That is
+ * right for a production build and wrong for every other one: a preview built
+ * with VITE_SITE_URL pointing at the Vercel address would otherwise ship a
+ * sitemap advertising the live domain, inviting Google to index a review
+ * deployment, while its own canonical tags said something different.
+ *
+ * So the host is rewritten here from the SAME siteUrl the canonicals use.
+ * When the two already agree - the normal case - this does nothing.
+ */
+function siteUrlInStaticFiles(siteUrl) {
+    return {
+        name: "site-url-in-static-files",
+        apply: "build",
+        closeBundle() {
+            if (siteUrl === PRODUCTION_HOST) return;
+
+            for (const name of ["sitemap.xml", "robots.txt"]) {
+                const file = path.resolve("dist", name);
+                if (!fs.existsSync(file)) continue;
+                const before = fs.readFileSync(file, "utf8");
+                const after = before.split(PRODUCTION_HOST).join(siteUrl);
+                if (after !== before) {
+                    fs.writeFileSync(file, after);
+                    console.log(`  ${name} host -> ${siteUrl}`);
+                }
+            }
+        },
+    };
+}
+
 export default defineConfig(({ mode }) => {
     const list = [];
 
@@ -118,6 +154,7 @@ export default defineConfig(({ mode }) => {
                 context: { gaId, siteUrl },
             }),
             cleanUrls(),
+            siteUrlInStaticFiles(siteUrl),
         ],
         resolve: {
             alias: {
