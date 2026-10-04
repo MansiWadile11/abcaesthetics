@@ -37,6 +37,24 @@ the page itself is identical either way.
 */
 export const THANK_YOU_PATH = "/thank-you/"
 
+/*
+Google reCAPTCHA v3 - PUBLIC site key only.
+
+The matching SECRET key is never here and never in this repository. It lives
+in the Apps Script project's Script Properties, which is where the token,
+hostname, action and score are actually checked. A score trusted in the
+browser protects nothing: a bot posts straight to the endpoint.
+
+v3 is invisible - there is no checkbox and no puzzle. A token is requested at
+the moment the visitor submits, and travels with the enquiry.
+
+Leave this empty and nothing is loaded and nothing is enforced; the honeypot,
+rate limiting, duplicate suppression and server-side validation already in
+place continue to do the work. See .env.example for the two-sided setup.
+*/
+export const RECAPTCHA_SITE_KEY =
+    import.meta.env.VITE_RECAPTCHA_SITE_KEY || ""
+
 /* Shown to visitors whenever we cannot take the enquiry online. */
 export const PRACTICE_PHONE = "971-978-7840"
 export const PRACTICE_EMAIL = "abcaestheticsllc@gmail.com"

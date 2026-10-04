@@ -31,6 +31,7 @@ const FILE_ORDER = [
     "Config.gs",
     "Validation.gs",
     "Guards.gs",
+    "Recaptcha.gs",
     "Mail.gs",
     "Flow1_Sheet.gs",
     "Flow2_AdminEmail.gs",

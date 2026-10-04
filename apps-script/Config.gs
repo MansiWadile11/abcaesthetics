@@ -61,8 +61,21 @@ var CONFIG = {
     // FLOW 2 - the email to the practice
     // -----------------------------------------------------------------
 
-    /** Who is notified of every new enquiry. */
-    ADMIN_EMAIL: "webmaster@codevelop.us",
+    /**
+     * Who is notified of every new enquiry.
+     *
+     * This MUST be an address the practice controls. It previously held the
+     * developer's address (webmaster@codevelop.us), which meant every patient
+     * enquiry went to the agency and no copy reached the clinic at all. That
+     * is not an acceptable production setting for medical enquiries.
+     *
+     * The address below is the one the client supplied as the practice's
+     * email when they asked for it to replace the old Gmail across the site.
+     * CONFIRM IT IS MONITORED before going live - nobody has yet stated in
+     * writing that this specific mailbox is where enquiry notifications
+     * should land, only that it is the practice's address.
+     */
+    ADMIN_EMAIL: "info@abcaestheticsllc.com",
 
     /**
      * How the two emails are sent.
@@ -100,7 +113,7 @@ var CONFIG = {
     // -----------------------------------------------------------------
 
     /** Patients are told to use these to reach the practice directly. */
-    PRACTICE_EMAIL: "abcaestheticsllc@gmail.com",
+    PRACTICE_EMAIL: "info@abcaestheticsllc.com",
     PRACTICE_PHONE: "971-978-7840",
 
     /** Optional. Adds a button to the patient's confirmation. "" omits it. */
@@ -125,6 +138,35 @@ var CONFIG = {
         SAVE_TO_SHEET: true,
         NOTIFY_ADMIN: true,
         AUTO_REPLY: true
+    },
+
+    /**
+     * Google reCAPTCHA v3.
+     *
+     * The SECRET key is NOT here - it lives in Script Properties as
+     * RECAPTCHA_SECRET (see Recaptcha.gs). Only the tuning lives here.
+     *
+     * MIN_SCORE is the one number worth revisiting once real traffic has been
+     * seen. reCAPTCHA scores 0.0 (bot) to 1.0 (human); 0.5 is Google's own
+     * suggested starting point. Raise it if spam still arrives, LOWER it if
+     * genuine patients are being turned away - and err towards lower, because
+     * a rejected patient enquiry costs the practice far more than a spam row.
+     * Every rejection is written to the Apps Script log with its score, so
+     * there is evidence to tune against rather than guesswork.
+     */
+    RECAPTCHA: {
+        MIN_SCORE: 0.5,
+
+        /**
+         * Hostnames a token may legitimately have been solved on. Leave the
+         * array empty to skip the check. localhost is here so the form can be
+         * exercised locally with a real key if that is ever wanted.
+         */
+        ALLOWED_HOSTNAMES: [
+            "abcaestheticsllc.com",
+            "www.abcaestheticsllc.com",
+            "localhost"
+        ]
     },
 
     /**

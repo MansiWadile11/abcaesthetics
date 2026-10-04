@@ -35,6 +35,17 @@ function doPost(e) {
             return respond({ ok: true, redirect: "/thank-you/", dropped: true });
         }
 
+        // CAPTCHA before validation: a bot that cannot clear reCAPTCHA should
+        // not be handed field-by-field feedback on what the form expects.
+        var captcha = verifyRecaptcha(raw);
+        if (!captcha.ok) {
+            log("reCAPTCHA rejected a submission (" + captcha.reason + ")");
+            return respond({
+                ok: false, code: "captcha",
+                error: friendly("We could not confirm you are a person. Please reload the page and try again")
+            });
+        }
+
         var result = validate(raw);
         if (!result.ok) {
             return respond({
@@ -145,6 +156,8 @@ function doGet() {
         // same as deploying it, and this is the quickest way to tell which
         // version the live URL is actually serving.
         columns: COLUMNS,
+        captcha: recaptchaStatusText(),
+        captchaState: recaptchaState(),
         flows: {
             sheet: CONFIG.FLOWS.SAVE_TO_SHEET !== false,
             adminEmail: CONFIG.FLOWS.NOTIFY_ADMIN !== false,

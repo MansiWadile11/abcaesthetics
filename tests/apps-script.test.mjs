@@ -74,10 +74,10 @@ check("a write lock was taken", h.state.lockWaits === 1, String(h.state.lockWait
 
 console.log("\n2. THE TWO EMAILS")
 check("two emails sent", h.state.inbox.length === 2, "sent=" + h.state.inbox.length)
-const admin = h.state.inbox.find((m) => m.to === "webmaster@codevelop.us")
+const admin = h.state.inbox.find((m) => m.to === "info@abcaestheticsllc.com")
 const cust = h.state.inbox.find((m) => m.to === "jane.doe@example.com")
 
-check("the practice is notified at webmaster@codevelop.us", !!admin)
+check("the practice is notified at info@abcaestheticsllc.com", !!admin)
 check("subject is '[TEST] New Contact Form Enquiry - Jane Doe' on the test account",
     admin && admin.subject === "[TEST] New Contact Form Enquiry - Jane Doe", admin && admin.subject)
 check("Reply-To is the patient", admin && admin.replyTo === "jane.doe@example.com", admin && admin.replyTo)
@@ -86,7 +86,7 @@ check("admin email lists every submitted field",
 check("admin email carries a plain-text part", admin && admin.body && admin.body.includes("New contact form enquiry"))
 
 check("the patient gets a confirmation", !!cust)
-check("its Reply-To is the practice", cust && cust.replyTo === "abcaestheticsllc@gmail.com", cust && cust.replyTo)
+check("its Reply-To is the practice", cust && cust.replyTo === "info@abcaestheticsllc.com", cust && cust.replyTo)
 check("it thanks them by name", cust && cust.htmlBody.includes("Thank you, Jane Doe"))
 check("it says the team will get back to them",
     cust && /get back to you/i.test(cust.htmlBody) && /review/i.test(cust.htmlBody))
@@ -271,7 +271,7 @@ r = h.post(sub({ email: "noreply@example.com" }))
 check("flow 3 off -> still succeeds", r.ok === true)
 check("flow 3 off -> row still written", h.dataRows().length === 1)
 check("flow 3 off -> only the practice is emailed",
-    h.state.inbox.length === 1 && h.state.inbox[0].to === "webmaster@codevelop.us",
+    h.state.inbox.length === 1 && h.state.inbox[0].to === "info@abcaestheticsllc.com",
     JSON.stringify(h.state.inbox.map((m) => m.to)))
 
 // Flow 1 FAILING (as opposed to switched off) must stop the emails.
@@ -304,7 +304,7 @@ const probe = { name: "Jane Doe", email: "jane@example.com", phone: "971-978-784
 const builtAdmin = h.sandbox.buildAdminEmail(probe, "Sep 22, 2026 at 10:00 AM")
 const builtReply = h.sandbox.buildAutoReply(probe)
 check("flow 2's email can be built without sending",
-    builtAdmin.to === "webmaster@codevelop.us" && /New Contact Form Enquiry/.test(builtAdmin.subject),
+    builtAdmin.to === "info@abcaestheticsllc.com" && /New Contact Form Enquiry/.test(builtAdmin.subject),
     builtAdmin.subject)
 check("flow 3's email can be built without sending",
     builtReply.to === "jane@example.com" && /We have your enquiry/.test(builtReply.subject),
@@ -336,7 +336,7 @@ check("testFlow1_Sheet sends no email", h.state.inbox.length === 0, "sent=" + h.
 h = createHost()
 h.sandbox.testFlow2_AdminEmail()
 check("testFlow2_AdminEmail emails the practice",
-    h.state.inbox.length === 1 && h.state.inbox[0].to === "webmaster@codevelop.us",
+    h.state.inbox.length === 1 && h.state.inbox[0].to === "info@abcaestheticsllc.com",
     JSON.stringify(h.state.inbox.map((m) => m.to)))
 check("testFlow2_AdminEmail writes nothing", h.dataRows().length === 0)
 
@@ -366,8 +366,8 @@ h = createHost()
 check("the test account is the default", h.sandbox.CONFIG.ENVIRONMENT === "test", h.sandbox.CONFIG.ENVIRONMENT)
 h.post(sub({ email: "envtest@example.com" }))
 check("a test enquiry is marked [TEST] to the practice",
-    h.state.inbox.find((m) => m.to === "webmaster@codevelop.us").subject.startsWith("[TEST] "),
-    h.state.inbox.find((m) => m.to === "webmaster@codevelop.us").subject)
+    h.state.inbox.find((m) => m.to === "info@abcaestheticsllc.com").subject.startsWith("[TEST] "),
+    h.state.inbox.find((m) => m.to === "info@abcaestheticsllc.com").subject)
 check("but the PATIENT never sees the word TEST",
     !/TEST/.test(h.state.inbox.find((m) => m.to === "envtest@example.com").subject) &&
     !/TEST/.test(h.state.inbox.find((m) => m.to === "envtest@example.com").htmlBody),
@@ -380,8 +380,8 @@ h = createHost()
 h.sandbox.CONFIG.ENVIRONMENT = "production"
 h.post(sub({ email: "prod@example.com" }))
 check("on production the prefix is gone",
-    h.state.inbox.find((m) => m.to === "webmaster@codevelop.us").subject === "New Contact Form Enquiry - Jane Doe",
-    h.state.inbox.find((m) => m.to === "webmaster@codevelop.us").subject)
+    h.state.inbox.find((m) => m.to === "info@abcaestheticsllc.com").subject === "New Contact Form Enquiry - Jane Doe",
+    h.state.inbox.find((m) => m.to === "info@abcaestheticsllc.com").subject)
 
 // The health check is how you tell two Web App URLs apart after migrating.
 h = createHost()
@@ -458,7 +458,7 @@ for (const [name, host, authHeader] of PROVIDERS) {
         ? r.options.payload : JSON.stringify(r.options.payload)).join(" ")
     check(name + ": sends from the verified address", sent.includes("noreply@abcaestheticsllc.com"), "")
     check(name + ": reaches both recipients",
-        sent.includes("webmaster@codevelop.us") && sent.includes("patient@example.com"), "")
+        sent.includes("info@abcaestheticsllc.com") && sent.includes("patient@example.com"), "")
     check(name + ": includes an HTML part", /Thank you, Jane Doe|New contact form enquiry/.test(sent), "")
     check(name + ": includes a plain-text part",
         sent.includes("Reply to this email") || sent.includes("we have your enquiry"), "")
@@ -540,6 +540,236 @@ h.clearCache()
 h.post(sub({ email: "narrow@example.com" }))
 check("duplicate detection survives the narrowed read", h.dataRows().length === 1,
     "rows=" + h.dataRows().length)
+
+console.log("\n16. GOOGLE reCAPTCHA v3 (server-side verification)")
+
+const GV = /recaptcha[/]api[/]siteverify/
+const reply = (o) => ({ code: 200, body: JSON.stringify(o) })
+const OKV = { success: true, score: 0.9, action: "submit_contact", hostname: "abcaestheticsllc.com" }
+
+// --- development fallback: not configured -------------------------------
+h = createHost()
+check("no secret -> reCAPTCHA is not enforced", h.sandbox.recaptchaEnabled() === false)
+r = h.post(sub({ email: "nocaptcha@example.com" }))
+check("no secret -> submission accepted (local dev still works)", r.ok === true, JSON.stringify(r).slice(0, 70))
+check("no secret -> Google is never contacted", !h.state.http.some((x) => GV.test(x.url)))
+check("no secret -> health check says so (development wording)",
+    h.get().captcha === "recaptcha not configured (development fallback)", h.get().captcha)
+
+// --- configured: a token is required ------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+check("secret present -> enforced", h.sandbox.recaptchaEnabled() === true)
+check("health check reports threshold",
+    /recaptcha v3 enforced, min score 0\.5/.test(h.get().captcha), h.get().captcha)
+
+r = h.post(sub({ email: "notoken@example.com" }))
+check("missing token -> refused", r.ok === false && r.code === "captcha", JSON.stringify(r).slice(0, 70))
+check("missing token -> NO sheet write", h.dataRows().length === 0, "rows=" + h.dataRows().length)
+check("missing token -> NO email", h.state.inbox.length === 0)
+check("missing token -> no redirect", !r.redirect)
+
+// --- a valid response ----------------------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply(OKV)
+r = h.post(sub({ email: "good@example.com", "g-recaptcha-response": "tok-good" }))
+check("valid response -> accepted", r.ok === true, JSON.stringify(r).slice(0, 70))
+check("valid response -> row written", h.dataRows().length === 1)
+const gcall = h.state.http.find((x) => GV.test(x.url))
+check("verification goes to Google siteverify", !!gcall, gcall && gcall.url)
+check("the SECRET is sent server-side", gcall && gcall.options.payload.secret === "test-secret")
+check("the visitor token is what gets verified", gcall && gcall.options.payload.response === "tok-good")
+
+// --- invalid / failed verification --------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ success: false, "error-codes": ["invalid-input-response"] })
+r = h.post(sub({ email: "bad@example.com", "g-recaptcha-response": "forged" }))
+check("success:false -> refused", r.ok === false && r.code === "captcha")
+check("success:false -> NO sheet write", h.dataRows().length === 0)
+check("success:false -> NO email", h.state.inbox.length === 0)
+check("success:false -> Google error code not leaked to the visitor",
+    !/invalid-input-response/.test(JSON.stringify(r)), JSON.stringify(r).slice(0, 70))
+check("success:false -> reason IS logged for the practice",
+    h.state.logs.some((l) => /invalid-input-response/.test(l)))
+
+// --- wrong hostname ------------------------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ ...OKV, hostname: "evil.example" })
+r = h.post(sub({ email: "host@example.com", "g-recaptcha-response": "tok" }))
+check("wrong hostname -> refused", r.ok === false && r.code === "captcha")
+check("wrong hostname -> NO sheet write", h.dataRows().length === 0)
+check("wrong hostname -> logged with the hostname",
+    h.state.logs.some((l) => /evil\.example/.test(l)))
+
+// --- wrong action --------------------------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ ...OKV, action: "submit_appointment" })
+r = h.post(sub({ email: "action@example.com", "g-recaptcha-response": "tok" }))
+check("action not matching the form -> refused", r.ok === false && r.code === "captcha")
+check("wrong action -> NO sheet write", h.dataRows().length === 0)
+check("wrong action -> expected action derived from the form, not the request",
+    h.state.logs.some((l) => /expected submit_contact/.test(l)),
+    h.state.logs.filter((l) => /action/.test(l)).join(" | ").slice(0, 90))
+
+// --- score below / above threshold ---------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ ...OKV, score: 0.1 })
+r = h.post(sub({ email: "lowscore@example.com", "g-recaptcha-response": "tok" }))
+check("score below threshold -> refused", r.ok === false && r.code === "captcha")
+check("score below threshold -> NO sheet write", h.dataRows().length === 0)
+check("score below threshold -> NO email", h.state.inbox.length === 0)
+check("the score and threshold are logged for tuning",
+    h.state.logs.some((l) => /score 0\.1 below threshold 0\.5/.test(l)),
+    h.state.logs.filter((l) => /score/.test(l)).join(" | ").slice(0, 80))
+
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ ...OKV, score: 0.5 })
+r = h.post(sub({ email: "atthreshold@example.com", "g-recaptcha-response": "tok" }))
+check("score exactly at the threshold -> accepted", r.ok === true, JSON.stringify(r).slice(0, 60))
+
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.state.httpReply = reply({ ...OKV, score: 0.95 })
+r = h.post(sub({ email: "highscore@example.com", "g-recaptcha-response": "tok" }))
+check("score above threshold -> accepted", r.ok === true)
+check("score above threshold -> row written", h.dataRows().length === 1)
+
+// --- the threshold is configurable, not hard-coded -----------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.sandbox.CONFIG.RECAPTCHA.MIN_SCORE = 0.9
+h.state.httpReply = reply({ ...OKV, score: 0.7 })
+r = h.post(sub({ email: "raised@example.com", "g-recaptcha-response": "tok" }))
+check("raising MIN_SCORE to 0.9 rejects a 0.7", r.ok === false && r.code === "captcha")
+check("the raised threshold is what gets reported",
+    /min score 0\.9/.test(h.get().captcha), h.get().captcha)
+
+// --- Google unreachable --------------------------------------------------
+h = createHost()
+h.state.props.RECAPTCHA_SECRET = "test-secret"
+h.sandbox.UrlFetchApp.fetch = () => { throw new Error("simulated outage") }
+r = h.post(sub({ email: "outage@example.com", "g-recaptcha-response": "tok" }))
+check("verifier unreachable -> enquiry still accepted", r.ok === true, JSON.stringify(r).slice(0, 60))
+check("verifier unreachable -> row still written", h.dataRows().length === 1)
+check("verifier unreachable -> the outage is logged",
+    h.state.logs.some((l) => /unreachable/i.test(l)))
+
+// --- the secret must never be in the source ------------------------------
+const gsSrc = readProject()
+check("no reCAPTCHA secret hard-coded in the backend",
+    !/RECAPTCHA_SECRET\s*[:=]\s*["'][^"']+["']/.test(gsSrc))
+check("the secret is read from Script Properties",
+    gsSrc.includes('getProperty("RECAPTCHA_SECRET")'))
+
+
+console.log("\n17. reCAPTCHA STATE: production vs development")
+
+const VERIFIED = { success: true, score: 0.9, action: "submit_contact", hostname: "abcaestheticsllc.com" }
+const asReply = (o) => ({ code: 200, body: JSON.stringify(o) })
+
+// --- STATE 1: production WITH a secret -> enforced -----------------------
+h = createHost()
+h.sandbox.CONFIG.ENVIRONMENT = "production"
+h.state.props.RECAPTCHA_SECRET = "prod-secret"
+check("production + secret -> state is 'enforced'", h.sandbox.recaptchaState() === "enforced",
+    h.sandbox.recaptchaState())
+check("production + secret -> health check says enforced",
+    /recaptcha v3 enforced, min score 0\.5/.test(h.get().captcha), h.get().captcha)
+check("production + secret -> captchaState field agrees", h.get().captchaState === "enforced")
+
+h.state.httpReply = asReply(VERIFIED)
+r = h.post(sub({ email: "prodgood@example.com", "g-recaptcha-response": "tok" }))
+check("production + secret + valid token -> accepted", r.ok === true, JSON.stringify(r).slice(0, 60))
+check("production + secret + valid token -> row written", h.dataRows().length === 1)
+
+// invalid, in production
+h = createHost()
+h.sandbox.CONFIG.ENVIRONMENT = "production"
+h.state.props.RECAPTCHA_SECRET = "prod-secret"
+h.state.httpReply = asReply({ success: false, "error-codes": ["timeout-or-duplicate"] })
+r = h.post(sub({ email: "prodbad@example.com", "g-recaptcha-response": "stale" }))
+check("production + invalid CAPTCHA -> rejected", r.ok === false && r.code === "captcha")
+check("production + invalid CAPTCHA -> NO sheet write", h.dataRows().length === 0, "rows=" + h.dataRows().length)
+check("production + invalid CAPTCHA -> NO email", h.state.inbox.length === 0, "sent=" + h.state.inbox.length)
+
+// missing token, in production
+h = createHost()
+h.sandbox.CONFIG.ENVIRONMENT = "production"
+h.state.props.RECAPTCHA_SECRET = "prod-secret"
+r = h.post(sub({ email: "prodnotoken@example.com" }))
+check("production + missing token -> rejected", r.ok === false && r.code === "captcha")
+check("production + missing token -> NO sheet write", h.dataRows().length === 0)
+check("production + missing token -> NO email", h.state.inbox.length === 0)
+
+// --- STATE 2: production WITHOUT a secret -> misconfigured ---------------
+h = createHost()
+h.sandbox.CONFIG.ENVIRONMENT = "production"
+check("production + NO secret -> state is 'misconfigured'",
+    h.sandbox.recaptchaState() === "misconfigured", h.sandbox.recaptchaState())
+check("production + NO secret -> health check NEVER says enforced",
+    !/enforced/i.test(h.get().captcha), h.get().captcha)
+check("production + NO secret -> health check says MISCONFIGURED",
+    /MISCONFIGURED/.test(h.get().captcha), h.get().captcha)
+check("production + NO secret -> health check names the missing property",
+    /RECAPTCHA_SECRET/.test(h.get().captcha))
+check("production + NO secret -> captchaState field agrees",
+    h.get().captchaState === "misconfigured", h.get().captchaState)
+
+r = h.post(sub({ email: "prodmisconfig@example.com" }))
+check("production + NO secret -> the enquiry is STILL accepted (fail open)",
+    r.ok === true, JSON.stringify(r).slice(0, 60))
+check("production + NO secret -> row still written", h.dataRows().length === 1)
+check("production + NO secret -> emails still sent", h.state.inbox.length === 2)
+check("production + NO secret -> a loud warning is logged on the submission",
+    h.state.logs.some((l) => /MISCONFIGURED/.test(l) && /WITHOUT any CAPTCHA check/.test(l)),
+    h.state.logs.filter((l) => /MISCONF/i.test(l)).join(" | ").slice(0, 90))
+check("production + NO secret -> no fake CAPTCHA success is recorded",
+    !h.state.logs.some((l) => /verified/i.test(l)))
+check("production + NO secret -> Google is never contacted",
+    !h.state.http.some((x) => /siteverify/.test(x.url)))
+
+// the warning repeats - it cannot be missed by looking at one execution only
+const before = h.state.logs.filter((l) => /MISCONFIGURED/.test(l)).length
+h.post(sub({ email: "prodmisconfig2@example.com" }))
+check("production + NO secret -> warned again on the NEXT submission",
+    h.state.logs.filter((l) => /MISCONFIGURED/.test(l)).length > before)
+
+// --- STATE 3: development without a secret -> quiet fallback -------------
+h = createHost()
+check("default ENVIRONMENT is not production", h.sandbox.CONFIG.ENVIRONMENT !== "production",
+    h.sandbox.CONFIG.ENVIRONMENT)
+check("development + NO secret -> state is 'development'",
+    h.sandbox.recaptchaState() === "development", h.sandbox.recaptchaState())
+check("development + NO secret -> health check says development fallback",
+    h.get().captcha === "recaptcha not configured (development fallback)", h.get().captcha)
+check("development + NO secret -> health check NEVER says enforced",
+    !/enforced/i.test(h.get().captcha))
+check("development + NO secret -> captchaState field agrees", h.get().captchaState === "development")
+
+r = h.post(sub({ email: "devfallback@example.com" }))
+check("development + NO secret -> submission accepted (local work unaffected)", r.ok === true)
+check("development + NO secret -> row written", h.dataRows().length === 1)
+check("development + NO secret -> NOT logged as a misconfiguration",
+    !h.state.logs.some((l) => /MISCONFIGURED/.test(l)))
+
+// --- the three states are mutually exclusive and exhaustive --------------
+const seen = []
+for (const [env, secret] of [["production", "s"], ["production", ""], ["test", ""], ["test", "s"]]) {
+    const hh = createHost()
+    hh.sandbox.CONFIG.ENVIRONMENT = env
+    if (secret) hh.state.props.RECAPTCHA_SECRET = secret
+    seen.push(hh.sandbox.recaptchaState())
+}
+check("states resolve correctly across all four combinations",
+    JSON.stringify(seen) === JSON.stringify(["enforced", "misconfigured", "development", "enforced"]),
+    JSON.stringify(seen))
+
 
 // ---------------------------------------------------------------------------
 console.log("\n" + "-".repeat(64))

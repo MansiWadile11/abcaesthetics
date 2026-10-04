@@ -32,7 +32,7 @@ browser can be bypassed. If you change a rule, change it in both.
 */
 
 import { validate } from "../shared/validate.js"
-import { APPS_SCRIPT_URL, THANK_YOU_PATH, PRACTICE_PHONE, PRACTICE_EMAIL } from "../site-config.js"
+import { APPS_SCRIPT_URL, THANK_YOU_PATH, PRACTICE_PHONE, PRACTICE_EMAIL, RECAPTCHA_SITE_KEY } from "../site-config.js"
 
 // Fields the visitor can actually correct, in the order they appear, so focus
 // lands on the first thing that is wrong rather than the first rule that fired.
@@ -106,6 +106,60 @@ function showErrors(form, errors) {
     if (first) {
         first.focus({ preventScroll: true })
         first.scrollIntoView({ block: "center", behavior: "smooth" })
+    }
+}
+
+/*
+GOOGLE reCAPTCHA v3
+-------------------
+Invisible: no checkbox, no puzzle, no element added to any form, so with or
+without a key the three forms are byte-for-byte what they were.
+
+A token is requested at the moment of submission rather than on page load,
+because a v3 token expires after about two minutes - one minted when the page
+opened would often be stale by the time somebody finished typing.
+
+Each form sends its own action name. The backend derives the action it
+EXPECTS from the form name and compares, so naming it here is a label, not a
+security claim.
+*/
+
+const RECAPTCHA_ACTIONS = {
+    "contact": "submit_contact",
+    "appointment": "submit_appointment",
+    "appointment-home": "submit_appointment_home",
+}
+
+function loadRecaptchaScript() {
+    if (!RECAPTCHA_SITE_KEY || document.querySelector("script[data-recaptcha]")) return
+    const s = document.createElement("script")
+    s.src = "https://www.google.com/recaptcha/api.js?render=" + encodeURIComponent(RECAPTCHA_SITE_KEY)
+    s.async = true
+    s.defer = true
+    s.dataset.recaptcha = "1"
+    document.head.appendChild(s)
+}
+
+/**
+ * A token for this submission, or "" when reCAPTCHA is not configured.
+ *
+ * Never throws and never blocks the enquiry: if Google's script failed to
+ * load or execute, the submission goes ahead without a token and the backend
+ * decides. Losing a patient enquiry to a third-party script failure would be
+ * a worse outcome than accepting one unscored submission.
+ */
+async function recaptchaToken(form) {
+    if (!RECAPTCHA_SITE_KEY) return ""
+    const action = RECAPTCHA_ACTIONS[form.dataset.form] || "submit_form"
+
+    try {
+        const grecaptcha = window.grecaptcha
+        if (!grecaptcha || !grecaptcha.ready) return ""
+
+        await new Promise((resolve) => grecaptcha.ready(resolve))
+        return await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action })
+    } catch (err) {
+        return ""
     }
 }
 
@@ -218,6 +272,8 @@ function setup() {
     const forms = document.querySelectorAll("form[data-form]")
     if (!forms.length) return
 
+    loadRecaptchaScript()
+
     forms.forEach((form) => {
         // The browser's own bubbles are replaced, not removed: the messages
         // shown instead are the same ones Apps Script would send back.
@@ -258,6 +314,10 @@ function setup() {
             form.dataset.sending = "1"
             setBusy(form, true)
             setStatus(form, "", "")
+
+            // Minted here, not on page load: a v3 token lasts about two
+            // minutes, and the button is already showing "Sending...".
+            raw["g-recaptcha-response"] = await recaptchaToken(form)
 
             try {
                 const result = await send(raw)

@@ -131,6 +131,14 @@ export default defineConfig(({ mode }) => {
     const siteUrl = (env.VITE_SITE_URL || process.env.VITE_SITE_URL ||
         "https://abcaestheticsllc.com").trim().replace(/\/+$/, "");
 
+    // The practice's Jane booking page. Every "Book an appointment" button on
+    // every page points here, so the address lives in ONE place: if the
+    // practice ever moves booking provider, this line changes and all 41 CTAs
+    // follow. VITE_JANE_URL overrides it per environment.
+    const janeUrl = (env.VITE_JANE_URL || process.env.VITE_JANE_URL ||
+        "https://abcaestheticsllc.janeapp.com").trim().replace(/\/+$/, "");
+
+
     // The Insights section lives at src/blog/<slug>/index.html so it is
     // served as /blog/<slug>/ - so the glob has to reach past one level.
     // Partials are not pages and must stay out of the input list.
@@ -151,7 +159,7 @@ export default defineConfig(({ mode }) => {
                 // Available to every page and partial. The analytics partial
                 // emits nothing at all when gaId is empty, so an unset
                 // variable simply means "no analytics on this build".
-                context: { gaId, siteUrl },
+                context: { gaId, siteUrl, janeUrl },
             }),
             cleanUrls(),
             siteUrlInStaticFiles(siteUrl),
