@@ -89,12 +89,25 @@
              both would hide the next, real failure. If Cherry ever wires that
              ref up, the error disappears on its own.
 
-             One change from the snippet as supplied: the two `||` operators in
-             the loader had been lost somewhere in copying, leaving
-             `w[o] = w[o]  function () {` and `w[o].q = w[o].q \n []`. That is a
-             syntax error - the browser would refuse the whole script and no
-             widget would ever appear. They are restored below. Everything else,
-             including the slug, is byte-for-byte as provided.
+             Two changes from the snippet as supplied.
+
+             First, the two `||` operators in the loader had been lost
+             somewhere in copying, leaving `w[o] = w[o]  function () {` and
+             `w[o].q = w[o].q \n []`. That is a syntax error - the browser
+             would refuse the whole script and no widget would ever appear.
+             They are restored below.
+
+             Second, `name` was "ABC Aesthetics & Wellness"; it is the approved
+             brand, "ABC Aesthetics Medspa", everywhere else on the site. The
+             widget interpolates this into its refund FAQ - "To request a
+             refund, please contact {{name}} directly" - so it was reaching
+             visitors three times over under the wrong name. It is display text
+             only: the business name on Cherry's own application page comes
+             from their account record, keyed by the slug, and nothing here can
+             change it.
+
+             The slug is byte-for-byte as provided and must stay that way until
+             Cherry confirms it - it is the merchant identifier, not a label.
         -->
         <script>
             (function (w, d, s, o, f, js, fjs) {
@@ -111,7 +124,7 @@
                 debug: false,
                 variables: {
                     slug: "abc-aesthetics-wellness",
-                    name: "ABC Aesthetics & Wellness",
+                    name: "ABC Aesthetics Medspa",
                     images: [37],
                     customLogo: "",
                     defaultPurchaseAmount: 1000,

@@ -15,8 +15,21 @@ Just run it:  npm run test:ui
 
 import http from "node:http"
 import { spawn, spawnSync } from "node:child_process"
+import { fileURLToPath } from "node:url"
 import { chromium } from "playwright"
 import { createHost } from "./apps-script-host.mjs"
+
+/* Vite is started through node and its own bin rather than through npx.
+
+   npx can sit indefinitely before it ever reaches Vite - on this machine it
+   hangs hard enough that `timeout 10` could not reap it - and since vite is a
+   local devDependency there is nothing for npx to resolve in the first place.
+   Going straight to the bin has the server answering in about two seconds.
+
+   It also makes the kill honest. Spawning node directly means child.pid IS
+   the Vite process, rather than a cmd.exe wrapper with the real server
+   somewhere underneath it. */
+const VITE_BIN = fileURLToPath(new URL("../node_modules/vite/bin/vite.js", import.meta.url))
 
 const API_PORT = 8795
 const VITE_PORT = 5176
@@ -124,11 +137,13 @@ async function portInUse(port) {
 /**
  * Kill the dev server AND everything it started.
  *
- * On Windows `spawn` with shell:true runs cmd.exe, which then runs npx, which
- * then runs node. child.kill() reaps only the cmd.exe wrapper and leaves the
- * actual Vite server listening - a page that looks like the site but whose
- * backend (the stand-in on API_PORT) died with the test, so every submission
- * fails with a connection error. taskkill /T takes the whole tree.
+ * child.pid is the Vite process itself now that it is spawned through node
+ * rather than a cmd.exe -> npx -> node chain, so a plain kill would mostly
+ * do. taskkill /T stays because it also takes anything Vite started under
+ * itself: a server left listening is worse than it sounds, because it keeps
+ * serving a site whose backend (the stand-in on API_PORT) died with the test,
+ * so the pages look completely normal and every submission fails with a
+ * connection error.
  */
 function stopVite(child) {
     if (!child || child.killed || child.exitCode !== null) return
@@ -163,12 +178,11 @@ async function main() {
     await listen(api, API_PORT)
 
     const vite = spawn(
-        process.platform === "win32" ? "npx.cmd" : "npx",
-        ["vite", "--port", String(VITE_PORT), "--strictPort"],
+        process.execPath,
+        [VITE_BIN, "--port", String(VITE_PORT), "--strictPort"],
         {
             env: { ...process.env, VITE_APPS_SCRIPT_URL: ENDPOINT, BROWSER: "none" },
             stdio: "ignore",
-            shell: process.platform === "win32",
         }
     )
 

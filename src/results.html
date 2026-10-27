@@ -31,8 +31,15 @@
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="band band-cream">
+  <!-- Gallery
+
+       id is the landing point for the treatment pages' "View all results"
+       links. Four of them arrive with a category in the hash - #hair,
+       #regenerative, #skin-energy, #injectables - and gallery.js reads that
+       and applies the matching chip. The id is what gives the scroll
+       somewhere to land, and section[id] is what keeps the heading clear of
+       the sticky header when it does. -->
+  <section class="band band-cream" id="results-gallery">
     <div class="container">
       <div class="max-w-2xl">
         <div class="reference-eyebrow uppercase">Before &amp; after</div>
@@ -243,8 +250,15 @@
     </div>
   </section>
 
-  <!-- Categories still awaiting photography -->
-  <section class="band band-gold">
+  <!-- Categories still awaiting photography
+
+       id="wellness" because this is exactly where the five wellness pages
+       are asking to go. Hormone & Metabolic, Women's, Men's, Sexual and
+       Wellness Products all link to /results/#wellness, and all five are
+       listed in this panel - they are the treatments with no authorized
+       photographs yet, so there is nothing of theirs in the gallery above.
+       Landing here answers the question their "View all results" link asks. -->
+  <section class="band band-gold" id="wellness">
     <div class="container">
       <div class="cl-item" data-collapse-solo>
         <div class="reference-eyebrow uppercase">Also offered</div>

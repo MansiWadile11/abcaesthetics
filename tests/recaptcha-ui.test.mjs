@@ -17,8 +17,21 @@ the production sheet is untouched.
 */
 import http from "node:http"
 import { spawn, spawnSync } from "node:child_process"
+import { fileURLToPath } from "node:url"
 import { chromium } from "playwright"
 import { createHost } from "./apps-script-host.mjs"
+
+/* Vite is started through node and its own bin rather than through npx.
+
+   npx can sit indefinitely before it ever reaches Vite - on this machine it
+   hangs hard enough that `timeout 10` could not reap it - and since vite is a
+   local devDependency there is nothing for npx to resolve in the first place.
+   Going straight to the bin has the server answering in about two seconds.
+
+   It also makes the kill honest. Spawning node directly means child.pid IS
+   the Vite process, rather than a cmd.exe wrapper with the real server
+   somewhere underneath it. */
+const VITE_BIN = fileURLToPath(new URL("../node_modules/vite/bin/vite.js", import.meta.url))
 
 const API = 8805, VP = 5185
 const KEY = "test-site-key-local-only"
@@ -50,8 +63,8 @@ const api = http.createServer((req, res) => {
 await new Promise((r) => api.listen(API, "127.0.0.1", r))
 
 function startVite(siteKey) {
-    return spawn(process.platform === "win32" ? "npx.cmd" : "npx",
-        ["vite", "--port", String(VP), "--strictPort"], {
+    return spawn(process.execPath,
+        [VITE_BIN, "--port", String(VP), "--strictPort"], {
             env: {
                 ...process.env,
                 VITE_RECAPTCHA_SITE_KEY: siteKey,
@@ -59,7 +72,6 @@ function startVite(siteKey) {
                 BROWSER: "none",
             },
             stdio: "ignore",
-            shell: process.platform === "win32",
         })
 }
 

@@ -104,7 +104,13 @@ function measure() {
             ["right", Math.round(b.right - 8)],
         ].map(([where, x]) => {
             const top = document.elementFromPoint(x, y)
-            const own = top && (top === cta.el || document.getElementById("hero").contains(top))
+            // The CTA itself, or anything inside it - Cherry renders a bare
+            // <button> today, but a label wrapped in a <span> would still be
+            // the CTA answering the click. This used to ask #hero instead,
+            // left over from when the button lived in that section; with hero
+            // dropped from the allow-list getElementById returned null and the
+            // whole check rode on the left-hand branch short-circuiting.
+            const own = !!top && (top === cta.el || cta.el.contains(top))
             return { where, own, got: top ? top.tagName + (top.className && typeof top.className === "string" ? "." + top.className.trim().split(/\s+/)[0] : "") : "null" }
         })
     }

@@ -120,6 +120,23 @@
       <a href="/results/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Results</a>
       <a href="/contact/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Contact</a>
       <a href="/payment-plans/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Pay Later</a>
+
+      <!-- Booking lives at the end of the drawer, after Pay Later, so the
+           order reads the same as the bar above: pay later, or book now.
+
+           It has to be here. Opening the drawer retracts the fixed booking
+           dock (see html:has(.mobile-drawer.is-open) .book-dock), and the
+           bar's own Book Appointment button is hidden below md - so without
+           this the one screen a visitor opens to go somewhere was the one
+           screen with no way to book, and they had to close the menu first.
+
+           Borrowing .book-dock-btn rather than adding a class: it is already
+           the site's mobile booking button, full width with the green pill
+           and the blossom, and the drawer wants exactly that. -->
+      <a href="{{janeUrl}}" class="book-dock-btn mt-2">
+        <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 brightness-0 invert" aria-hidden="true">
+        Book Appointment
+      </a>
     </div>
   </div>
 </header>

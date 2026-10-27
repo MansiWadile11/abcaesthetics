@@ -1761,22 +1761,6 @@ button.hover\:border-primary-1:hover {
     color: #fff;
 }
 
-/* ---- Two-column shell ---- */
-.svc-detail-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-    gap: 40px;
-    align-items: start;
-}
-
-.svc-sidebar {
-    position: sticky;
-    top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 /* ---- Prose blocks in the main column ---- */
 .svc-h2 {
     font-family: var(--font-heading);
@@ -1990,17 +1974,6 @@ button.hover\:border-primary-1:hover {
     font-size: 14.5px;
     line-height: 1.7;
     color: var(--color-reference-nav-ink);
-}
-
-@media (max-width: 1023px) {
-    .svc-detail-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 44px;
-    }
-
-    .svc-sidebar {
-        position: static;
-    }
 }
 
 @media (max-width: 767px) {
@@ -5025,9 +4998,12 @@ a.about-link:hover {
     transform: translateY(-2px);
 }
 
-/* the anchors land under the sticky navbar without it covering the heading */
-.results-nav-band ~ section[id] { scroll-margin-top: 104px; }
-[id="hair"], [id="wellness"], [id="skin-energy-cat"] { scroll-margin-top: 104px; }
+/* The anchors the treatment pages aim at - #wellness, and the gallery the
+   category hashes scroll to - are both <section id="...">, so the
+   section[id] rule further up already clears them of the sticky header at
+   the same 104px. Two rules naming them individually used to sit here;
+   they named ids that were never added (#hair, #skin-energy-cat) and a
+   .results-nav-band that does not exist on any page. */
 
 .results-back {
     font-size: 14.5px;

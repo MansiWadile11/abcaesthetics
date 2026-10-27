@@ -15,7 +15,13 @@ Three separate failures are possible and they are not the same problem:
               path, or a missing trailing slash. Vercel would answer these
               with a 308 rather than a 404, so they are survivable, but an
               internal link should never spend a redirect;
-  - DUPLICATE two source files would be published at the same url.
+  - DUPLICATE two source files would be published at the same url;
+  - FRAGMENT  the page exists but the "#part" after it does not. This is the
+              quietest of the lot: the browser serves the page and simply
+              ignores the hash, so the link looks like it works and just
+              lands in the wrong place. Nine of them shipped that way -
+              every treatment page's "View all results" - before anything
+              checked.
 */
 
 import fs from "node:fs"
@@ -50,7 +56,43 @@ for (const f of files) {
 // ---------------------------------------------------------------------------
 const broken = []
 const stale = []
+const fragments = []
 let checked = 0
+
+/* Ids published on each page, read once per page and remembered. */
+const idCache = new Map()
+function idsFor(url) {
+    if (idCache.has(url)) return idCache.get(url)
+    const set = new Set()
+    const file = published.get(url)
+    if (file) {
+        for (const m of fs.readFileSync(file, "utf8").matchAll(/\sid="([^"#]+)"/g)) set.add(m[1])
+    }
+    idCache.set(url, set)
+    return set
+}
+
+/* Not every fragment is an id. The results gallery takes the category out of
+   the hash and applies the matching filter chip instead, so #hair and friends
+   are not id attributes anywhere. Those still have to be real: either an id
+   on the page, or a hash the gallery declares it handles. Never neither.
+
+   WHICH hashes those are is read from the component's own map rather than
+   pattern-matched out of the bundle. Minification does not treat them alike -
+   "hair" survives as a quoted string because it is also a value, while
+   "regenerative" and "injectables" come through as bare object keys - and a
+   regex loose enough to catch a bare key is loose enough to match almost
+   anything in 200KB of minified javascript. That cuts both ways: it waves
+   through names it should not, and it would have masked a real id going
+   missing, because "contact" happens to appear in the bundle too.
+
+   So: names from the source map, then each one confirmed present in the
+   build, so a map that never shipped cannot satisfy this either. */
+const galleryJs = fs.readFileSync("src/assets/js/components/gallery.js", "utf8")
+const declared = (galleryJs.match(/HASH_FILTERS\s*=\s*\{([^}]*)\}/) || [])[1] || ""
+const scriptHashes = new Set([...declared.matchAll(/["'`]?([A-Za-z0-9_-]+)["'`]?\s*:/g)].map((m) => m[1]))
+const bundles = sync(DIST + "/assets/**/*.js").map((f) => fs.readFileSync(f, "utf8")).join("\n")
+const scriptHandles = (frag) => scriptHashes.has(frag) && bundles.includes(frag)
 
 for (const f of files) {
     const html = fs.readFileSync(f, "utf8")
@@ -74,6 +116,15 @@ for (const f of files) {
         }
         if (!published.has(target)) {
             broken.push([from, raw, "no page is published at this url"])
+            continue
+        }
+
+        const frag = raw.includes("#") ? raw.slice(raw.indexOf("#") + 1).split("?")[0] : ""
+        if (frag) {
+            checked++
+            if (!idsFor(target).has(frag) && !scriptHandles(frag)) {
+                fragments.push([from, raw, 'nothing on ' + target + ' answers to "#' + frag + '"'])
+            }
         }
     }
 
@@ -102,6 +153,7 @@ console.log("\nINTERNAL LINKS  (" + published.size + " published urls, " + check
 fail("broken links", broken)
 fail("links that are not the final url", stale)
 fail("two files publish to the same url", duplicates)
+fail("links whose #fragment has no target", fragments)
 
 console.log("\n" + "-".repeat(64))
 if (failed) {

@@ -44,6 +44,57 @@ function setup() {
 
     chips.forEach((c) => c.addEventListener("click", () => filter(c.dataset.filter)))
 
+    /* Arriving from a treatment page.
+
+       Every treatment page ends with "View all results" pointing at
+       /results/ with its own category in the hash. The hashes were written
+       before these chips existed and do not all match them, so the mapping
+       is spelled out rather than guessed at:
+
+         #hair          -> hair    (1 photograph)
+         #regenerative  -> regen   (1)
+         #skin-energy   -> skin    (3)
+         #injectables   -> null    - the injectables page covers
+                                     neuromodulators, fillers AND lips, and
+                                     filtering to any one of the three would
+                                     hide the other two. It lands on the
+                                     unfiltered grid, which is what "view all
+                                     results" says anyway.
+
+       /results/#wellness is deliberately absent: those five treatments have
+       no published photographs, so there is nothing here to filter to. That
+       hash is a real section id further down the page and the browser
+       handles it without us.
+
+       Anything else in the hash is left alone. Other pages anchor into
+       sections by id and this must not interfere with them. */
+    const HASH_FILTERS = { hair: "hair", regenerative: "regen", "skin-energy": "skin", injectables: null }
+
+    const fromHash = () => {
+        /* decodeURIComponent throws URIError on a malformed escape, and a
+           bare "%" is enough to do it - /results/#100% would be sufficient.
+           This runs during setup, before the lightbox is wired below, so an
+           exception here does not just skip the filter: it takes the whole
+           gallery with it and every photograph stops opening. Decode when we
+           can, fall back to the raw hash when we cannot. */
+        let key = location.hash.replace(/^#/, "")
+        try { key = decodeURIComponent(key) } catch { /* malformed - use it as it came */ }
+        key = key.toLowerCase()
+        if (!(key in HASH_FILTERS)) return
+        // null means "no single chip fits" - which still has to say "all"
+        // out loud rather than fall through. This also runs on hashchange,
+        // and moving between two hashes on this page does not reload it, so
+        // leaving the filter untouched would show the previous category's
+        // photographs under the new heading.
+        filter(HASH_FILTERS[key] || "all")
+        // scroll-margin-top on section[id] keeps this clear of the sticky header
+        const target = grid.closest("section[id]") || grid
+        target.scrollIntoView({ block: "start" })
+    }
+
+    fromHash()
+    window.addEventListener("hashchange", fromHash)
+
     // ---- lightbox ------------------------------------------------------
     const show = (i) => {
         if (!shown.length) return
