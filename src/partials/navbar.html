@@ -54,10 +54,18 @@
           </span>
         </a>
 
-        <!-- Right Button — ms-auto keeps it right-aligned below lg, where the
+        <!-- Right cluster — ms-auto keeps it right-aligned below lg, where the
              nav links are display:none and justify-between would otherwise
-             pull the only in-flow child to the left. -->
+             pull the only in-flow child to the left.
+
+             Pay Later sits here rather than with the links on the left so it
+             reads as the pair to Book Appointment: pay now, or pay later. It
+             keeps the lg breakpoint the left-hand links use, so below that the
+             drawer still carries it. It stays a plain link deliberately — the
+             green pill is the booking CTA, and only one thing on the bar
+             should carry that weight. -->
         <div class="flex items-center gap-4 z-10 ms-auto">
+          <a href="/payment-plans/" class="reference-nav-link text-reference-nav-ink hover:text-reference-green transition-colors hidden lg:flex items-center">Pay Later</a>
           <a href="{{janeUrl}}" class="reference-nav-cta btn-glow hidden md:flex items-center gap-2 bg-reference-green hover:bg-reference-green-dark text-white transition-colors rounded-full group font-reference-body">
             <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 brightness-0 invert transition-transform duration-300 group-hover:rotate-180" aria-hidden="true">
             Book Appointment
@@ -111,6 +119,7 @@
       </div>
       <a href="/results/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Results</a>
       <a href="/contact/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Contact</a>
+      <a href="/payment-plans/" class="hover:text-reference-green text-base font-medium w-full transition-colors">Pay Later</a>
     </div>
   </div>
 </header>

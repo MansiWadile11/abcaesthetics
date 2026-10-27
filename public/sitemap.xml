@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  The 25 canonical public URLs, in the same trailing-slash form as the
+  The 26 canonical public URLs, in the same trailing-slash form as the
   rel=canonical on each page.
 
   The host below is the production default. Builds resolve it from the same
@@ -14,7 +14,7 @@
   redirect here. No path appears literally in this comment, so a tool that
   greps the file rather than parsing it cannot mistake a note for an entry.
 
-  No lastmod: a build date would claim all 25 pages changed at once, which
+  No lastmod: a build date would claim all 26 pages changed at once, which
   is not true, and an invented date is worse than none. Real per-page dates
   can be taken from git history once these changes are committed.
 -->
@@ -27,6 +27,7 @@
   <url><loc>https://abcaestheticsllc.com/services/</loc></url>
   <url><loc>https://abcaestheticsllc.com/book-appointment/</loc></url>
   <url><loc>https://abcaestheticsllc.com/results/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/payment-plans/</loc></url>
 
   <!-- Treatments -->
   <url><loc>https://abcaestheticsllc.com/injectables/</loc></url>

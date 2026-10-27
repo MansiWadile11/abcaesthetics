@@ -54,6 +54,7 @@ const ROUTES = [
 
     // --- pages that kept a new slug -------------------------------------
     ["/results/", "Results"],
+    ["/payment-plans/", "Payment plans"],
     ["/skin-energy/", "Energy-Based"],
     ["/hormone-metabolic-wellness/", "Metabolic"],
     ["/regenerative-aesthetics/", "Regenerative"],

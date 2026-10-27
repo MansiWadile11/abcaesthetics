@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {{> title-meta title="Payment Plans | ABC Aesthetics Medspa" description="Explore Cherry financing options at ABC Aesthetics Medspa. Learn how payment plans may help spread the cost of your treatment over time." path="/payment-plans/" }} {{> head-css}}
+
+    <!-- Cherry supplies its own typefaces for the widget. Loaded only on this
+         page, because nothing else on the site uses them. -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Slabo+27px&family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100..900&family=Montserrat:wght@100..900&family=Oswald:wght@200..700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100..900&family=Source+Sans+3:wght@200..900&family=PT+Sans:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+</head>
+
+<body class="cherry-page">
+
+    {{> navbar }}
+
+    <main id="main">
+
+        <section class="lg:pt-50 md:pt-44 pt-30 pb-16">
+            <div class="container">
+                <div class="text-center mb-10">
+
+                    <!-- Title -->
+                    <h1 class="text-[42px] md:text-7xl lg:text-[90px] font-heading font-medium text-primary-3 tracking-tight leading-[1.1] md:mb-6 mb-4">
+                        Payment plans
+                    </h1>
+
+                    <p class="text-primary-2 text-sm md:text-base max-w-2xl mx-auto">
+                        Spread the cost of your treatment over time with Cherry. Explore
+                        available financing options and find a payment plan that works for you.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHERRY WIDGET BEGIN
+             Supplied by Cherry. The ids below and the styles block are theirs,
+             not ours - their theming, not this site's stylesheet.
+
+             THE SECTION LIST IS DELIBERATE. The last argument to _hw("init")
+             is Cherry's own allow-list: in their renderer each section is
+             gated on o.includes(<name>). Two are left out on purpose, and
+             neither may be added back without the practice's sign-off:
+
+               "testimony" - six testimonials hardcoded in Cherry's bundle
+                 (Bryana, Alex, Marie, ...), each with rate:5 and a stock
+                 photo from Cherry's S3, shown under the fixed heading "What
+                 Our Customers Say". They are not this practice's patients.
+                 Cherry exposes no config key for testimonial content, so the
+                 only way to not misattribute them is to omit the section.
+
+               "hero" - prints "Up to $50,000 approvals" from Ji(a ?? 5e4),
+                 where a is maxPurchaseAmount from Cherry's API. A loading
+                 flag clears after a 3-second timeout, so when the API is slow
+                 or unreachable the hardcoded 50,000 is shown as fact. It is
+                 not this account's limit, and Cherry's own marketing says
+                 65,000. There is no config key to pin or hide it.
+
+             Dropping "hero" also drops "See if you qualify"; the calculator
+             carries its own application CTA, "Get personalized options", so
+             the page still converts. Cherry's legal disclosures - NMLS,
+             lending partners, the Iowa cap, accessibility - render from the
+             remaining sections and are untouched.
+
+             Expect the divs below to sit empty, with display:none on all but
+             one. That is Cherry's doing and it is correct: when more than one
+             section is requested their script renders them together into a
+             single "shared layout" and hides the others itself. Please do not
+             delete the empty divs; the script still looks them up by id.
+
+             Their script throws one IntersectionObserver TypeError as it
+             starts up, and it is theirs to fix, not ours. In widget.js the
+             "How it works" component calls useRef(null), hands that ref to a
+             visibility hook that calls observe(ref.current) on mount, and then
+             never attaches the ref to anything it renders - there is no ref:
+             prop anywhere in the component. So the ref is always null and the
+             call always throws, on every site that embeds the widget. The two
+             sibling components using the same hook do attach their refs, and
+             they do not throw.
+
+             The only thing that hook feeds is an analytics call,
+             trackEvent({eventName: loaded}), so the cost is one Cherry-side
+             "widget loaded" ping that never fires. The throw happens in an
+             effect after paint: every requested section renders, all three
+             How-it-works steps included. Nothing a visitor sees or clicks
+             depends on it.
+
+             Left alone deliberately. Patching around vendor code would mean
+             either editing their script or swallowing errors globally, and
+             both would hide the next, real failure. If Cherry ever wires that
+             ref up, the error disappears on its own.
+
+             One change from the snippet as supplied: the two `||` operators in
+             the loader had been lost somewhere in copying, leaving
+             `w[o] = w[o]  function () {` and `w[o].q = w[o].q \n []`. That is a
+             syntax error - the browser would refuse the whole script and no
+             widget would ever appear. They are restored below. Everything else,
+             including the slug, is byte-for-byte as provided.
+        -->
+        <script>
+            (function (w, d, s, o, f, js, fjs) {
+                w[o] = w[o] || function () {
+                    (w[o].q = w[o].q || []).push(arguments);
+                };
+                (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+                js.id = o;
+                js.src = f;
+                js.async = 1;
+                fjs.parentNode.insertBefore(js, fjs);
+            })(window, document, "script", "_hw", "https://files.withcherry.com/widgets/widget.js");
+            _hw("init", {
+                debug: false,
+                variables: {
+                    slug: "abc-aesthetics-wellness",
+                    name: "ABC Aesthetics & Wellness",
+                    images: [37],
+                    customLogo: "",
+                    defaultPurchaseAmount: 1000,
+                    customImage: "",
+                    imageCategory: "medspa",
+                    language: "en",
+                },
+                styles: {
+                    primaryColor: "#7a6f9b",
+                    secondaryColor: "#7a6f9b10",
+                    fontFamily: "Montserrat",
+                    headerFontFamily: "Montserrat",
+                }
+            }, ["calculator","howitworks","faq"]);
+        </script>
+
+        <div id="all"></div>
+        <div id="calculator"></div>
+        <div id="howitworks"></div>
+        <div id="faq"></div>
+        <!-- CHERRY WIDGET END -->
+
+    </main>
+
+    {{> footer }}
+
+</body>
+
+</html>

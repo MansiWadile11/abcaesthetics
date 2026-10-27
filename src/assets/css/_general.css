@@ -4222,9 +4222,63 @@ html:has(.mobile-drawer.is-open) .book-dock {
     .floating-actions { gap: 10px; }
 }
 
+/* Payment Plans only. Cherry's calls to action run the full width of their
+   card, and below Cherry's own 870px breakpoint the card goes edge to edge,
+   so the right end of every one of them - "See if you qualify" first among
+   them - passes under this stack. Measured, it is a 20px bite at 390px and
+   30px at 800px, across five controls.
+
+   There is no offset that clears it. The stack already sits as close to the
+   edge as a 44px tap target allows, and moving it to the other corner only
+   changes which end of a full-width button it covers. Narrowing Cherry's
+   card enough to make room costs more width than the overlap does.
+
+   So on this page, at these widths, the stack stands down. The booking dock
+   keeps the bottom of the screen useful, and WhatsApp is untouched
+   everywhere else on the site - including this page from 870px up, where
+   Cherry caps its own width and the two no longer meet. */
+@media (max-width: 869px) {
+    .cherry-page .floating-actions { display: none; }
+}
+
+/* Payment Plans only. Cherry builds the widget as a flex row - the photograph
+   first, then the card - and from 870px up the two stand side by side. The
+   card runs 650-980px taller than the photograph depending on the width, so
+   the photograph reaches the foot of its column long before the reader
+   reaches the foot of theirs, and from there it is a hole in the layout.
+
+   order moves it to the far side; sticky keeps it with the reader. Both hang
+   off Cherry's own 870px threshold rather than a round number of ours: below
+   it their layout is a single column and the photograph collapses to 0x0, so
+   there is no second side to move to and nothing to stick.
+
+   align-items is already flex-start on Cherry's row, which is the only reason
+   sticky works here at all - a stretched flex child is as tall as its row and
+   has no travel left. align-self restates it so the rule does not quietly
+   stop working if Cherry ever changes that.
+
+   The selectors match the readable half of Cherry's CSS-module class names
+   (heroImage-image_container-2JyLP), because the hash on the end is rebuilt
+   every time they ship. The readable half comes from their source filenames
+   and has held so far, but this is still vendor markup: if the photograph
+   ever stops moving, this selector is the first thing to check. */
+@media (min-width: 870px) {
+    .cherry-page [class*="image_container"] {
+        order: 2;
+        position: sticky;
+        top: 113px;            /* the sticky header is 93px, plus a 20px gap */
+        align-self: flex-start;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .floating-btn,
     .reference-nav-shell { transition: none; }
+
+    /* Anyone who has asked for less movement keeps the photograph on the far
+       side but loses the tracking - a panel that follows the scroll is what
+       that setting is about. Same treatment as .article-layout > aside. */
+    .cherry-page [class*="image_container"] { position: static; }
 }
 
 /* ==========================================================================
