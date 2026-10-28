@@ -26,17 +26,14 @@
     "@tailwindcss/vite": "^4.2.4",
     "axe-core": "^4.13.0",
     "glob": "^13.0.3",
-    "path": "^0.12.7",
-    "postcss": "^8.5.12",
+    "playwright": "^1.62.1",
+    "tailwindcss": "^4.2.4",
     "vite": "^8.0.10",
     "vite-plugin-handlebars": "^2.0.3"
   },
   "dependencies": {
-    "gumshoejs": "^5.1.2",
-    "playwright": "^1.62.1",
     "preline": "4.0.1",
     "smoothscroll-for-websites": "^1.5.1",
-    "swiper": "^12.1.1",
-    "tailwindcss": "^4.2.4"
+    "swiper": "^12.1.1"
   }
 }
