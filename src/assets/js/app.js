@@ -14,7 +14,6 @@ navigation state that are small enough not to earn a file of their own.
 // Preline Plugin File Import
 import "preline";
 
-import './components/gallary';
 import './components/animation';
 import './components/swiper';
 import './components/services-accordion';

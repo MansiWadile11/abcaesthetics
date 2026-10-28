@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "gumshoejs": "^5.1.2",
-    "lightgallery": "^2.9.0",
     "playwright": "^1.62.1",
     "preline": "4.0.1",
     "smoothscroll-for-websites": "^1.5.1",
