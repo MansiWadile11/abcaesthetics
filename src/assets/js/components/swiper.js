@@ -1,13 +1,29 @@
 /**
 * Swiper Slider
-* Enables carousels and sliders
-* Requires swiper-bundle.min.js
+* Enables the two carousels that have markup: testimonials and the
+* before/after comparison on the service pages.
+*
+* Modular, not swiper/bundle. The bundle is 150 KB of the build and ships
+* every module - zoom, pagination, scrollbar, virtual, thumbs, every effect -
+* for two carousels that need three. The stylesheet import in
+* assets/css/style.css is split the same way.
+*
+* A11y is NOT optional here. It injects the .swiper-notification live region
+* and the role/aria-label on each slide and aria-live on each wrapper that
+* the bundle gave us for free; dropping it silently removes the carousels'
+* screen-reader support. swiper/css/a11y is what keeps that notification
+* visually hidden.
+*
+* Any carousel added later must list its own modules in `modules`, or its
+* navigation and autoplay will quietly do nothing.
 */
 
-import Swiper from 'swiper/bundle';
+import Swiper from 'swiper';
+import { Navigation, Autoplay, A11y } from 'swiper/modules';
 
 // Testimonial Slider
 const testimonialSwiper = new Swiper(".testimonialSwiper", {
+    modules: [Navigation, Autoplay, A11y],
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
@@ -59,6 +75,7 @@ document.querySelectorAll(".testimonial-prev").forEach(button => {
 // Autoplay figures are taken from the reference's own Swiper config: it steps
 // one slide every 3s over 300ms and keeps going after you interact with it.
 new Swiper(".compareSwiper", {
+    modules: [Navigation, Autoplay, A11y],
     slidesPerView: 1.15,
     spaceBetween: 20,
     // NOT loop. Swiper refuses to build the duplicate slides that loop needs

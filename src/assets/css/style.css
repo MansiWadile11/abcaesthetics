@@ -16,7 +16,8 @@ needing !important on every rule.
 @source "preline/dist/*.js";
 
 /* Plugin CSS */
-@import "swiper/swiper-bundle.css";
+@import "swiper/css";
+@import "swiper/css/a11y";
 /* @import "aos/dist/aos.css"; */
 
 /* Tailwind Plugin */
