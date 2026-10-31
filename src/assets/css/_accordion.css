@@ -1,0 +1,55 @@
+/*
+Accordion variant.
+
+This is Preline's `hs-accordion-active` custom variant, lifted verbatim from
+preline/src/plugins/accordion/variants.css so the 76 `hs-accordion-active:`
+utilities in the markup - 59 of them the chevron's rotate-135 - keep resolving
+to exactly the same selectors they already did.
+
+It lives here because the site no longer imports preline/variants.css: that
+file pulled in variants for the dropdown, tooltip, tree-view, collapse, tabs,
+overlay and remove-element plugins as well, none of which this site uses. Only
+the accordion half is kept, and only the one variant the markup actually uses.
+
+Copied, not rewritten, on purpose. The seven selector permutations below cover
+the toggle itself, descendants of the toggle, and the heading-wrapped form;
+reimplementing them by hand would be a way to silently lose one.
+*/
+
+@custom-variant hs-accordion-active {
+  &.hs-accordion.active {
+    @slot;
+  }
+
+  .hs-accordion.active>& {
+    @slot;
+  }
+
+  .hs-accordion.active>.hs-accordion-toggle & {
+    @slot;
+  }
+
+  .hs-accordion.active>.hs-accordion-heading>.hs-accordion-toggle & {
+    @slot;
+  }
+
+  &.hs-accordion-toggle {
+
+    .hs-accordion.active>& {
+      @slot;
+    }
+  }
+
+  &.hs-accordion-toggle {
+
+    .hs-accordion.active>.hs-accordion-heading>& {
+      @slot;
+    }
+  }
+
+  &.hs-accordion-force-active {
+    .hs-accordion.active & {
+      @slot;
+    }
+  }
+}

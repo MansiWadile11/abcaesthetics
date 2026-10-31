@@ -2,7 +2,6 @@
   "name": "abc-aesthetics",
   "version": "1.0.0",
   "description": "ABC Aesthetics Medspa - medical aesthetics and wellness, Lake Oswego, Oregon",
-  "main": "index.js",
   "type": "module",
   "private": true,
   "author": "ABC Aesthetics Medspa",
@@ -16,23 +15,25 @@
     "test:routes": "node tests/routes.test.mjs",
     "test:clean": "node tests/kill-test-servers.mjs",
     "test:links": "node tests/links.test.mjs",
-    "test:meta": "node tests/meta.test.mjs"
+    "test:meta": "node tests/meta.test.mjs",
+    "test:analytics": "node tests/analytics.test.mjs",
+    "test:payment-plans": "node tests/payment-plans-ui.test.mjs",
+    "test:recaptcha": "node tests/recaptcha-ui.test.mjs",
+    "test:results": "node tests/results-anchors.test.mjs"
   },
   "devDependencies": {
     "@iconify-json/lucide": "1.2.105",
     "@iconify-json/tabler": "1.2.33",
     "@iconify/tailwind4": "^1.2.3",
     "@tailwindcss/forms": "^0.5.11",
-    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
-    "glob": "^13.0.3",
+    "glob": "^14.0.3",
     "playwright": "^1.62.1",
     "tailwindcss": "^4.2.4",
     "vite": "^8.0.10",
     "vite-plugin-handlebars": "^2.0.3"
   },
   "dependencies": {
-    "preline": "4.0.1",
     "smoothscroll-for-websites": "^1.5.1",
     "swiper": "^12.1.1"
   }

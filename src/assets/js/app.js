@@ -11,23 +11,16 @@ navigation state that are small enough not to earn a file of their own.
 // here - importing it via JS delayed styling until the module executed and
 // caused a flash of unstyled content on every page load.
 
-// Preline, accordion only.
+// The FAQ accordion is ours now - see components/accordion.js. It replaces
+// Preline's HSAccordion, which was the only plugin of the 24 this site ever
+// used and which dragged 21 packages (~19 MB) into every install, apexcharts
+// and jQuery among them, none of which reached the bundle. The markup and
+// class names are unchanged; the Tailwind variant moved to css/_accordion.css.
 //
-// The whole library is 275 KB of the bundle and the site uses exactly one of
-// its 24 plugins: the FAQ accordion (hs-accordion*, on 11 pages). Preline
-// declares no "sideEffects" field, so importing the package entry pulls every
-// plugin in - and with them vanilla-calendar-pro and @floating-ui, which only
-// the datepicker and dropdown need. Importing the one plugin directly drops
-// all of it. The plugin self-initialises on window load and sets
-// window.HSAccordion itself, so there is nothing to call here.
-//
-// Two consequences, deliberate: this is a deep path into Preline's source,
-// which resolves because 4.0.1 ships no "exports" map - hence the exact
-// version pin in package.json, and a build-time error rather than a silent
-// failure if that ever changes. And window.HSOverlay / HSSelect /
-// HSStaticMethods no longer exist, so adding markup for any OTHER Preline
-// component means importing its plugin here too.
-import "preline/src/plugins/accordion";
+// Nothing now sets window.HSAccordion or window.$hsAccordionCollection, and
+// adding markup for any other Preline component would mean writing that
+// component rather than importing it.
+import './components/accordion';
 
 import './components/animation';
 import './components/swiper';
