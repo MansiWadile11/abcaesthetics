@@ -69,7 +69,7 @@ Script; the values below are public by design and are set per environment.
 | Variable | Default | Purpose |
 |---|---|---|
 | `VITE_SITE_URL` | `https://abcaestheticsllc.com` | absolute host for canonical and Open Graph tags |
-| `VITE_GA_ID` | `GT-5TCZ3J3C` | Google Analytics tag. **Set it to empty to switch analytics off** — do that for Vercel Preview so review traffic stays out of the practice's reporting |
+| `VITE_GA_ID` | `GT-5TCZ3J3C` | Google Analytics tag. **An empty value, or the word `DISABLED`, switches analytics off.** Use `DISABLED` for Vercel Preview — the dashboard will not save an empty value — so review traffic stays out of the practice's reporting |
 | `VITE_APPS_SCRIPT_URL` | see `src/assets/js/site-config.js` | the enquiry form's backend |
 
 Copy `.env.example` to `.env` for local work. On Vercel these go in

@@ -97,30 +97,59 @@ function siteUrlInStaticFiles(siteUrl) {
     };
 }
 
+// The tag carried over from the old WordPress site, so the practice keeps one
+// continuous history rather than starting an empty property on the day the new
+// site goes live.
+//
+// Only the ID is carried over. The old snippet also set a Site Kit developer ID
+// and installed a WordPress-specific event shim, neither of which means
+// anything outside WordPress.
+const DEFAULT_GA_ID = "GT-5TCZ3J3C";
+
+// The word that switches analytics off where an empty value cannot be used.
+//
+// An empty string has always been the off switch and still is - that is what a
+// local .env uses. But Vercel's dashboard refuses to save a variable with no
+// value, so the one environment that most needs analytics off had no way to
+// ask for it. This is that way: set VITE_GA_ID=DISABLED on the Preview
+// environment and the analytics partial emits nothing at all.
+//
+// Matched case-insensitively on purpose. A dashboard value typed "disabled"
+// would otherwise be treated as a measurement ID and quietly turn analytics
+// ON - the one failure direction that matters here, because it would put
+// review traffic into the practice's live property. No real Google tag can
+// collide with the word: they are all G-, GT-, UA-, AW- or GTM- prefixed.
+const GA_DISABLED = "DISABLED";
+
+/**
+ * Resolves what the analytics partial receives, from the raw variable.
+ *
+ *   undefined (set nowhere)   ->  DEFAULT_GA_ID, the practice's live tag
+ *   "DISABLED", any casing    ->  "", so the partial emits nothing
+ *   "" or whitespace          ->  "", the same
+ *   anything else             ->  itself, trimmed
+ *
+ * Exported for tests/analytics.test.mjs. Vite reads the default export only,
+ * so this is invisible to the build.
+ */
+export function resolveGaId(configured) {
+    if (configured === undefined) return DEFAULT_GA_ID;
+
+    const value = configured.trim();
+    return value.toUpperCase() === GA_DISABLED ? "" : value;
+}
+
 export default defineConfig(({ mode }) => {
     const list = [];
-
-    // The tag carried over from the old WordPress site, so the practice keeps
-    // one continuous history rather than starting an empty property on the
-    // day the new site goes live.
-    //
-    // Only the ID is carried over. The old snippet also set a Site Kit
-    // developer ID and installed a WordPress-specific event shim, neither of
-    // which means anything outside WordPress.
-    const DEFAULT_GA_ID = "GT-5TCZ3J3C";
 
     // Reads .env files for local work. On Vercel the variable arrives in
     // process.env instead, so both are checked - loadEnv alone would miss a
     // value set only in the Vercel dashboard.
     //
-    // Unset falls back to the tag above. Set-but-EMPTY is the off switch, so
-    // preview deployments can be excluded from the practice's reporting by
-    // adding VITE_GA_ID with no value to the Preview environment. That is why
-    // this tests for undefined rather than using || - an empty string has to
-    // mean "off", not "use the default".
+    // ?? and not ||, because an empty string has to reach resolveGaId AS an
+    // empty string and mean "off", rather than falling through to the default.
     const env = loadEnv(mode, process.cwd(), "");
-    const configured = env.VITE_GA_ID ?? process.env.VITE_GA_ID;
-    const gaId = (configured === undefined ? DEFAULT_GA_ID : configured).trim();
+    const gaId = resolveGaId(env.VITE_GA_ID ?? process.env.VITE_GA_ID);
 
     // The absolute host that canonical, og:url and og:image are built from.
     // Social scrapers and rel=canonical both reject relative paths, so these
