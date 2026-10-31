@@ -199,12 +199,18 @@ export default defineConfig(({ mode }) => {
             rollupOptions: {
                 input: [...list],
 
-                // Optional: Keeps original file names (no hashing) in dist
-                output: {
-                    entryFileNames: 'assets/[name].js',
-                    chunkFileNames: 'assets/[name].js',
-                    assetFileNames: 'assets/[name][extname]',
-                },
+                // No output.* overrides here on purpose: Vite's defaults put a
+                // content hash in every bundled filename, and vercel.json caches
+                // /assets/* as immutable for a year on the strength of it. The
+                // two go together. Pinning these names back to app.js/app.css
+                // would leave that header promising a year of immutability for a
+                // URL whose contents change on every deploy - every visitor and
+                // every edge node would hold a stale bundle. Change one and the
+                // other has to change with it.
+                //
+                // The <link> and <script> in partials/head-css.html point at the
+                // unhashed source paths; Vite rewrites both to the hashed names
+                // at build time, so nothing in the markup needs to know.
             }
         },
     };
