@@ -193,12 +193,6 @@ export default defineConfig(({ mode }) => {
             cleanUrls(),
             siteUrlInStaticFiles(siteUrl),
         ],
-        resolve: {
-            alias: {
-                "@/*": path.resolve("./*"),
-                "@css": path.resolve("./src/assets/css/"),
-            },
-        },
         build: {
             outDir: "../dist",
             emptyOutDir: true,
