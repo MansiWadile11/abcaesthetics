@@ -11,8 +11,16 @@ navigation state that are small enough not to earn a file of their own.
 // here - importing it via JS delayed styling until the module executed and
 // caused a flash of unstyled content on every page load.
 
-// Preline Plugin File Import
-import "preline";
+// The FAQ accordion is ours now - see components/accordion.js. It replaces
+// Preline's HSAccordion, which was the only plugin of the 24 this site ever
+// used and which dragged 21 packages (~19 MB) into every install, apexcharts
+// and jQuery among them, none of which reached the bundle. The markup and
+// class names are unchanged; the Tailwind variant moved to css/_accordion.css.
+//
+// Nothing now sets window.HSAccordion or window.$hsAccordionCollection, and
+// adding markup for any other Preline component would mean writing that
+// component rather than importing it.
+import './components/accordion';
 
 import './components/animation';
 import './components/swiper';

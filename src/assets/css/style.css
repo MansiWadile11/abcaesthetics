@@ -11,16 +11,15 @@ needing !important on every rule.
 /* TailwindCSS */
 @import "tailwindcss";
 
-/* Preline UI */
-@import "preline/variants.css";
-@source "preline/dist/*.js";
+/* Accordion variant (was preline/variants.css - see _accordion.css) */
+@import "./_accordion.css";
 
 /* Plugin CSS */
-@import "swiper/swiper-bundle.css";
+@import "swiper/css";
+@import "swiper/css/a11y";
 /* @import "aos/dist/aos.css"; */
 
 /* Tailwind Plugin */
-@plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
 
