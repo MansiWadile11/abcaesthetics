@@ -35,6 +35,7 @@ import './components/gallery';
 import './components/forms';
 import './components/faq-fit';
 import './components/book-dock';
+import './components/video-lazy';
 
 var stickyNav = document.querySelector(".nav-sticky")
 

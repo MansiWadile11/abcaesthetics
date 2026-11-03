@@ -1,6 +1,23 @@
 <!-- Google Font Link (https://fonts.google.com/) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{!-- The page's LCP image, if it has one worth announcing early.
+      Opt-in per page: pass preloadImage to this partial. A page that does not
+      pass it emits nothing, so no page ever preloads another page's hero.
+
+      Why it is needed: an <img> inside the markup is only discovered once the
+      stylesheet has parsed, because the element is positioned by CSS. On a
+      throttled phone that put the homepage hero behind every other byte on the
+      page and left LCP at ~15s. Preloading it starts the fetch with the HTML.
+
+      fetchpriority="high" on the preload AND on the <img> itself - the hint has
+      to be on both, or the preload is queued at default priority.
+
+      Written as a Handlebars comment rather than an HTML one: an HTML comment
+      here would ship to all 28 pages, including the 27 that emit no preload. --}}
+{{#if preloadImage}}
+<link rel="preload" as="image" href="{{preloadImage}}" fetchpriority="high">
+{{/if}}
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!-- Stylesheet.

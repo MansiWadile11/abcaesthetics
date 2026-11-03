@@ -1506,11 +1506,23 @@ button.hover\:border-primary-1:hover {
     100% { box-shadow: 0 0 0 0 rgba(46, 90, 75, 0); }
 }
 
+/* The sweep moves with `transform`, not `inset-inline-start`.
+   Animating an inset is animating a layout property: on a 2.4s infinite loop
+   it made the browser re-lay-out the pseudo-element on almost every frame, and
+   each of those registered as a layout shift. The homepage collected 384 shift
+   entries that way - harmless to the eye, but it burns main-thread time on
+   forced reflow and inflates any naive CLS sum.
+
+   `transform` is composited, so the same sweep costs no layout at all.
+   The element keeps `inset-inline-start: -75%; width: 50%`, so translating by
+   410% of its own width reproduces the old -75% -> 130% travel exactly.
+   skewX has to live in the keyframes too: a `transform` here would otherwise
+   replace the static one on the rule. */
 @keyframes btn-shimmer {
-    0%   { inset-inline-start: -75%; opacity: 0; }
+    0%   { transform: translateX(0) skewX(-20deg); opacity: 0; }
     25%  { opacity: 1; }
-    55%  { inset-inline-start: 130%; opacity: 0; }
-    100% { inset-inline-start: 130%; opacity: 0; }
+    55%  { transform: translateX(410%) skewX(-20deg); opacity: 0; }
+    100% { transform: translateX(410%) skewX(-20deg); opacity: 0; }
 }
 
 /* Light buttons on the cream ground need a warmer ring and a darker sweep */

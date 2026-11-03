@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="ABC Aesthetics Medspa | Lake Oswego, Oregon" description="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." path="/" image="/images/hero/hero-image.webp" }} {{> head-css}}
+  {{> title-meta title="ABC Aesthetics Medspa | Lake Oswego, Oregon" description="Personalized medical aesthetics and wellness care in Lake Oswego, Oregon from Dr. Nawal M. Qneibi, DNP-BC - injectables, skin, hair and hormone care." path="/" image="/images/hero/hero-image.webp" }} {{> head-css preloadImage="/images/hero/hero-image.webp"}}
 </head>
 
 <body>
@@ -54,7 +54,10 @@
     <div class="relative lg:mt-12 md:mt-10 mt-8 lg:px-12.5 md:px-5 px-0">
       <div class="hero-portrait relative w-full overflow-hidden flex flex-col items-center justify-end">
         <!-- Background Image -->
-        <img src="/images/hero/hero-image.webp" class="absolute inset-0 w-full h-full object-cover" alt="Close-up profile portrait of a woman&rsquo;s face, neck and shoulder">
+        <!-- The LCP element. fetchpriority="high" matches the preload emitted
+             by head-css; width/height carry the intrinsic ratio only, since the
+             box is fixed by `absolute inset-0 w-full h-full`. Never lazy. -->
+        <img src="/images/hero/hero-image.webp" width="1906" height="825" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Close-up profile portrait of a woman&rsquo;s face, neck and shoulder">
 
         <div class="absolute -bottom-30 lg:-bottom-20 inset-s-1/2 pointer-events-none hero-avatar-wheel z-20 flex items-center justify-center">
           <!-- 18 pills spaced by 20 degrees -->
@@ -239,8 +242,8 @@
           <!-- Before/After Slider Card -->
           <div class="relative w-full h-[420px] md:h-[400px] lg:h-auto flex-1 rounded-3xl overflow-hidden group shadow-sm bg-primary-5 p-6 lg:p-8 flex flex-col justify-end" style="--pos: 50%;">
             <!-- Slider implementation -->
-            <img src="/images/abc/wipe-after.webp" alt="A patient of the practice after treatment" class="absolute inset-0 w-full h-full object-cover">
-            <img src="/images/abc/wipe-before.webp" alt="The same patient before treatment" class="absolute inset-0 w-full h-full object-cover" style="clip-path: polygon(0 0, var(--pos) 0, var(--pos) 100%, 0 100%);">
+            <img loading="lazy" src="/images/abc/wipe-after.webp" width="900" height="1350" alt="A patient of the practice after treatment" class="absolute inset-0 w-full h-full object-cover">
+            <img loading="lazy" src="/images/abc/wipe-before.webp" width="900" height="1350" alt="The same patient before treatment" class="absolute inset-0 w-full h-full object-cover" style="clip-path: polygon(0 0, var(--pos) 0, var(--pos) 100%, 0 100%);">
 
             <!-- Badges -->
             <div class="absolute top-6 inset-s-6 bg-white/40 backdrop-blur-sm text-default-800 font-medium text-sm px-4 py-1.5 rounded-md z-10 shadow-sm pointer-events-none">Before</div>
@@ -307,8 +310,8 @@
             <!-- Card: Seamless Client Experience -->
             <div class="md:col-span-7 bg-primary-5 rounded-3xl lg:p-7.5 p-5 relative overflow-hidden flex flex-col border border-primary-1/5">
               <h3 class="text-2xl md:text-3xl leading-tight font-medium text-[#2C463B] hs-accordion-active:text-white z-10 max-w-[220px] lg:mx-6">Seamless client experience</h3>
-              <img src="/images/about/left-hand.webp" class="absolute bottom-14 inset-s-0 w-[48%] object-contain" alt="Illustration of a cupped hand" aria-hidden="true">
-              <img src="/images/about/right-hand.webp" class="absolute -bottom-2 -inset-e-4.5 w-[58%] object-contain translate-x-2" alt="Illustration of a cupped hand" aria-hidden="true">
+              <img loading="lazy" src="/images/about/left-hand.webp" width="3457" height="1601" class="absolute bottom-14 inset-s-0 w-[48%] object-contain" alt="Illustration of a cupped hand" aria-hidden="true">
+              <img loading="lazy" src="/images/about/right-hand.webp" width="3923" height="1473" class="absolute -bottom-2 -inset-e-4.5 w-[58%] object-contain translate-x-2" alt="Illustration of a cupped hand" aria-hidden="true">
             </div>
 
             <!-- Card: breadth of care. The dates and the DNP-BC credential all
@@ -335,9 +338,9 @@
               </div>
               <!-- Stacked circular avatars -->
               <div class="relative isolate shrink-0 flex md:flex-col flex-row items-center justify-center md:-space-y-6 md:-mx-0 -mx-4 md:mt-0 mt-5">
-                <img src="/images/abc/lip-filler-after.webp" class="lg:size-24.5 md:size-22 size-12.5 rounded-full border border-primary-5 object-cover z-30 relative" alt="A patient of the practice" aria-hidden="true">
-                <img src="/images/abc/hijab-after.webp" class="lg:size-32.5 md:size-27.5 size-17.5 rounded-full border border-primary-5 object-cover z-50 relative" alt="A patient of the practice" aria-hidden="true">
-                <img src="/images/abc/rha-after.webp" class="lg:size-24.5 md:size-22 size-12.5 rounded-full border border-primary-5 object-cover z-10 relative" alt="A patient of the practice" aria-hidden="true">
+                <img loading="lazy" src="/images/abc/lip-filler-after.webp" width="1290" height="2214" class="lg:size-24.5 md:size-22 size-12.5 rounded-full border border-primary-5 object-cover z-30 relative" alt="A patient of the practice" aria-hidden="true">
+                <img loading="lazy" src="/images/abc/hijab-after.webp" width="922" height="2000" class="lg:size-32.5 md:size-27.5 size-17.5 rounded-full border border-primary-5 object-cover z-50 relative" alt="A patient of the practice" aria-hidden="true">
+                <img loading="lazy" src="/images/abc/rha-after.webp" width="824" height="1100" class="lg:size-24.5 md:size-22 size-12.5 rounded-full border border-primary-5 object-cover z-10 relative" alt="A patient of the practice" aria-hidden="true">
               </div>
             </div>
           </div>
@@ -357,7 +360,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(0deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(0deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/chin-filler-treatment.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="Lip and chin filler being injected" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/chin-filler-treatment.webp" width="872" height="1889" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="Lip and chin filler being injected" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -366,7 +369,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(45deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-45deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/hand-treatment.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A patient&rsquo;s hand resting on a drape during treatment" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/hand-treatment.webp" width="1290" height="1612" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A patient&rsquo;s hand resting on a drape during treatment" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -375,7 +378,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(90deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-90deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/injection-body.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A gloved provider giving an injection into a patient&rsquo;s knee" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/injection-body.webp" width="2000" height="1500" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A gloved provider giving an injection into a patient&rsquo;s knee" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -384,7 +387,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(135deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-135deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/cheek-injection.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A gloved provider injecting filler into a patient&rsquo;s cheek" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/cheek-injection.webp" width="851" height="900" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A gloved provider injecting filler into a patient&rsquo;s cheek" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -393,7 +396,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(180deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-180deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/syringes.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="Two prepared syringes on a gold-framed tray" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/syringes.webp" width="922" height="2000" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="Two prepared syringes on a gold-framed tray" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -402,7 +405,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(225deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-225deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/neck-treatment.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A fine injection being given into a patient&rsquo;s neck" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/neck-treatment.webp" width="922" height="2000" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A fine injection being given into a patient&rsquo;s neck" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -411,7 +414,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(270deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-270deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/lip-filler-treatment.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A provider injecting lip filler" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/lip-filler-treatment.webp" width="1125" height="2000" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A provider injecting lip filler" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -420,7 +423,7 @@
                     <div class="absolute top-1/2 inset-s-1/2" style="transform: rotate(315deg) translateY(-220px);">
                       <div class="absolute -top-10 -inset-s-10 w-[80px] h-[80px]" style="transform: rotate(-315deg);">
                         <div class="animate-counter-revolve w-full h-full">
-                          <img src="/images/abc/traptox.webp" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A neuromodulator injection into the trapezius, at the base of the neck" aria-hidden="true">
+                          <img loading="lazy" src="/images/abc/traptox.webp" width="1200" height="900" class="w-full h-full rounded-2xl object-cover shadow-sm border border-black/5 max-w-none" alt="A neuromodulator injection into the trapezius, at the base of the neck" aria-hidden="true">
                         </div>
                       </div>
                     </div>
@@ -435,7 +438,16 @@
 
               <!-- Card: Advanced technology (Video) -->
               <div class="rounded-3xl overflow-hidden relative group flex items-end p-6 lg:h-68 md:h-50 h-60 shrink-0 shadow-sm border border-white/20">
-                <video src="/videos/bg-vd.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0"></video>
+                <!-- Decorative card video, below the fold on every viewport.
+                     `autoplay` with a src downloaded all 1.42 MB of it during
+                     the initial page load, on phones too, where it competed
+                     with the hero for a 1.6 Mbps link. The src now lives in
+                     data-src and components/video-lazy.js attaches it - only on
+                     >=768px, and only as the card nears the viewport. Phones
+                     keep the poster and transfer no video bytes at all.
+                     The poster is a frame of this same clip, so the card looks
+                     the same before playback starts. -->
+                <video data-src="/videos/bg-vd.mp4" data-lazy-video poster="/images/hero/video-poster.webp" preload="none" loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0"></video>
                 <div class="absolute inset-s-0 -bottom-6 bg-primary-1 z-10 h-25 w-full blur-xl"></div>
 
                 <div class="relative z-20 text-center w-full">
@@ -677,7 +689,7 @@
 
           <div class="svc-body" id="svc-body-1">
             <div class="svc-body-media">
-              <img src="/images/abc/dermal-filler-procedure.webp" alt="Injectable treatment" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/dermal-filler-procedure.webp" width="800" height="1200" alt="Injectable treatment" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -720,7 +732,7 @@
 
           <div class="svc-body" id="svc-body-2">
             <div class="svc-body-media">
-              <img src="/images/abc/skinpen-microneedling.webp" alt="Energy-based skin treatment" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/skinpen-microneedling.webp" width="1024" height="983" alt="Energy-based skin treatment" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -767,7 +779,7 @@
 
           <div class="svc-body" id="svc-body-3">
             <div class="svc-body-media">
-              <img src="/images/abc/prp-tubes.webp" alt="Tubes showing blood separated into platelet-rich plasma after centrifugation" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/prp-tubes.webp" width="1125" height="2000" alt="Tubes showing blood separated into platelet-rich plasma after centrifugation" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -810,7 +822,7 @@
 
           <div class="svc-body" id="svc-body-4">
             <div class="svc-body-media">
-              <img src="/images/abc/hair-scalp.webp" alt="Hair restoration result" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/hair-scalp.webp" width="1024" height="624" alt="Hair restoration result" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -853,7 +865,7 @@
 
           <div class="svc-body" id="svc-body-5">
             <div class="svc-body-media">
-              <img src="/images/abc/weight-management.webp" alt="Wellness patient" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/weight-management.webp" width="740" height="660" alt="Wellness patient" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -896,7 +908,7 @@
 
           <div class="svc-body" id="svc-body-6">
             <div class="svc-body-media">
-              <img src="/images/abc/womens-wellness.webp" alt="Women&rsquo;s wellness care" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/womens-wellness.webp" width="820" height="879" alt="Women&rsquo;s wellness care" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -939,7 +951,7 @@
 
           <div class="svc-body" id="svc-body-7">
             <div class="svc-body-media">
-              <img src="/images/abc/provider-consult.webp" alt="Men&rsquo;s wellness consultation" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/provider-consult.webp" width="2000" height="1500" alt="Men&rsquo;s wellness consultation" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -982,7 +994,7 @@
 
           <div class="svc-body" id="svc-body-8">
             <div class="svc-body-media">
-              <img src="/images/abc/couple-wellness.webp" alt="A private treatment room" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/couple-wellness.webp" width="1500" height="1000" alt="A private treatment room" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -1025,7 +1037,7 @@
 
           <div class="svc-body" id="svc-body-9">
             <div class="svc-body-media">
-              <img src="/images/abc/vitti-pure.webp" alt="Wellness products" class="absolute inset-0 w-full h-full object-cover">
+              <img loading="lazy" src="/images/abc/vitti-pure.webp" width="692" height="864" alt="Wellness products" class="absolute inset-0 w-full h-full object-cover">
               <a href="{{janeUrl}}" class="absolute inset-x-4 bottom-4 flex items-center justify-center gap-2 bg-reference-card rounded-full px-5 py-3.5">
                 <img src="/images/icons/icon-1.svg" alt="Blossom motif" class="size-3.5 shrink-0" aria-hidden="true">
                 <span class="text-sm font-semibold text-reference-cocoa whitespace-nowrap">Book an appointment</span>
@@ -1067,7 +1079,7 @@
 
         <div class="flex-1 basis-95 min-w-75">
           <div class="reference-clinic-portrait">
-            <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover">
+            <img loading="lazy" src="/images/about/dr-nawal.webp" width="593" height="890" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover">
             <div class="reference-clinic-caption absolute inset-x-6 bottom-6 px-6 py-4.5">
               <div class="font-reference-heading font-semibold text-[19px] text-reference-cocoa">Dr. Nawal Qneibi</div>
               <div class="text-[13px] text-reference-subtle font-normal mt-0.5">Founder &amp; Provider, DNP-BC</div>
@@ -1255,7 +1267,7 @@
 
         <!-- Right: rating portrait -->
         <div class="reference-rating-card flex-1 basis-85 grow-0 min-w-55">
-          <img src="/images/about/testimonial-portrait.webp" alt="Patient" class="absolute inset-0 w-full h-full object-cover">
+          <img loading="lazy" src="/images/about/testimonial-portrait.webp" width="510" height="680" alt="Patient" class="absolute inset-0 w-full h-full object-cover">
           <div class="reference-rating-scrim absolute inset-0 pointer-events-none"></div>
 
           <div class="absolute inset-x-0 bottom-8 text-center text-white z-10">
@@ -1272,10 +1284,10 @@
                  decorative and are not portraits of the four named reviewers -
                  the review cards keep their own initials for that. -->
             <div class="flex items-center justify-center -space-x-2.5 mt-4">
-              <img src="/images/abc/mature-after.webp" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
-              <img src="/images/abc/mature-before.webp" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
-              <img src="/images/abc/patient-after-side.webp" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
-              <img src="/images/abc/hijab-before.webp" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
+              <img src="/images/abc/mature-after.webp" width="1500" height="2000" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
+              <img src="/images/abc/mature-before.webp" width="1500" height="2000" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
+              <img src="/images/abc/patient-after-side.webp" width="900" height="1200" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
+              <img src="/images/abc/hijab-before.webp" width="922" height="1999" alt="A patient of the practice" loading="lazy" class="size-12 shrink-0 rounded-full object-cover border-2 border-white" aria-hidden="true">
             </div>
           </div>
         </div>
@@ -1382,7 +1394,7 @@
         <!-- Featured Post -->
         <a href="/blog/skin-energy/" class="group flex-1 basis-105 min-w-75 bg-reference-insight rounded-[32px] p-5">
           <div class="insight-media rounded-[20px] overflow-hidden relative w-full h-85">
-            <img src="/images/abc/sofwave-device.webp" alt="The Sofwave device at ABC Aesthetics Medspa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img loading="lazy" src="/images/abc/sofwave-device.webp" width="732" height="1600" alt="The Sofwave device at ABC Aesthetics Medspa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="flex flex-wrap items-center gap-2 mt-5 text-[13px] text-reference-subtle font-normal">
             <span class="reference-tag">Skin Health</span>
@@ -1396,7 +1408,7 @@
           <!-- Post 1 -->
           <a href="/blog/injectables/" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/injectables-treatment.webp" alt="What to know before your first Botox&reg;" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
+              <img loading="lazy" src="/images/abc/injectables-treatment.webp" width="692" height="1024" alt="What to know before your first Botox&reg;" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
@@ -1409,7 +1421,7 @@
           <!-- Post 2 -->
           <a href="/blog/skinpen/" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/skinpen-device.webp" alt="What SkinPen&reg;" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
+              <img loading="lazy" src="/images/abc/skinpen-device.webp" width="2000" height="1500" alt="What SkinPen&reg;" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
@@ -1422,7 +1434,7 @@
           <!-- Post 3 -->
           <a href="/blog/prp-prf/" class="group flex items-center gap-5">
             <div class="insight-media w-30 h-27.5 shrink-0 rounded-[18px] overflow-hidden relative">
-              <img src="/images/abc/prf-injection.webp" alt="PRP &amp; PRF: regenerative options for skin and hair" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
+              <img loading="lazy" src="/images/abc/prf-injection.webp" width="1400" height="1050" alt="PRP &amp; PRF: regenerative options for skin and hair" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" aria-hidden="true">
             </div>
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 text-[13px] text-reference-subtle font-normal">
@@ -1444,7 +1456,7 @@
 
         <!-- Image - sits right on desktop so it alternates with the section above -->
         <div class="flex-1 basis-105 min-w-75 min-h-130 relative">
-          <img src="/images/about/appointment.webp" alt="Treatment in progress" class="absolute inset-0 w-full h-full object-cover">
+          <img loading="lazy" src="/images/about/appointment.webp" width="870" height="835" alt="Treatment in progress" class="absolute inset-0 w-full h-full object-cover">
 
           <!-- Overlay Card -->
           <div class="reference-inquiry-card absolute inset-x-6 bottom-6 p-5.5 rounded-[20px] text-center text-white">
@@ -1548,7 +1560,7 @@
           <h2 class="reference-clinic-title mt-4.5">Frequently asked<br class="hidden sm:block"> questions</h2>
 
           <div class="relative w-full h-65 rounded-3xl overflow-hidden mt-12">
-            <img src="/images/services/service-15.webp" alt="Patient consultation" class="absolute inset-0 w-full h-full object-cover">
+            <img loading="lazy" src="/images/services/service-15.webp" width="1587" height="991" alt="Patient consultation" class="absolute inset-0 w-full h-full object-cover">
 
             <!-- Overlay Card -->
             <div class="reference-faq-card absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 rounded-[18px] px-5 py-4.5 text-white">
