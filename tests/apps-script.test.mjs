@@ -90,7 +90,7 @@ check("its Reply-To is the practice", cust && cust.replyTo === "info@abcaestheti
 check("it thanks them by name", cust && cust.htmlBody.includes("Thank you, Jane Doe"))
 check("it says the team will get back to them",
     cust && /get back to you/i.test(cust.htmlBody) && /review/i.test(cust.htmlBody))
-check("it is branded as the practice", cust && cust.name === "ABC Aesthetics & Wellness", cust && cust.name)
+check("it is branded as the practice", cust && cust.name === "ABC Aesthetics Medspa", cust && cust.name)
 check("it carries a plain-text part", cust && cust.body && cust.body.includes("Thank you, Jane Doe"))
 
 console.log("\n3. EMPTY AND INVALID INPUT")

@@ -1,5 +1,5 @@
 /**
- * ABC Aesthetics & Wellness - contact form backend
+ * ABC Aesthetics Medspa - contact form backend
  * CONFIG - the only file you have to edit.
  * =========================================================================
  *
@@ -124,8 +124,8 @@ var CONFIG = {
     // Shared
     // -----------------------------------------------------------------
 
-    /** Used in both emails and in the sheet's own formatting. */
-    WEBSITE_NAME: "ABC Aesthetics & Wellness",
+    /** Used in both emails and in the public health check. */
+    WEBSITE_NAME: "ABC Aesthetics Medspa",
 
     /**
      * Turn individual flows off without deleting anything.
