@@ -33,7 +33,7 @@ const ROUTES = [
     ["/blog/skinpen/", "SkinPen"],
     ["/blog/prp-prf/", "PRP and PRF"],
     ["/blog/injectables/", "Botox"],
-    ["/blog/skin-energy/", "SkinTyte"],
+    ["/blog/skin-energy/", "SkinSmooth"],
     ["/blog/hair-restoration/", "hair"],
     ["/blog/hormone-wellness/", "hormone"],
 
