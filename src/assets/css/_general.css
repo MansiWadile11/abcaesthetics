@@ -1388,15 +1388,15 @@ button.hover\:border-primary-1:hover {
 
 /* Keeping the treatment labels the right way up.
    Each pill points outward from a hub, so its label turns with the wheel and
-   spends half of every revolution upside down. The markup flipped nine of the
-   eighteen, which is correct only at the instant the page loads - once the
-   wheel turns, those nine drift into the half where they read the wrong way
-   and the other nine drift out of it, which is the "half up, half down" you
+   spends half of every revolution upside down. The markup flipped half of the
+   seventeen, which is correct only at the instant the page loads - once the
+   wheel turns, those drift into the half where they read the wrong way
+   and the others drift out of it, which is the "half up, half down" you
    see at any given moment.
 
    So the flip has to follow the rotation rather than the markup order. This
    runs on the wheel's own 60s period, and each label carries a negative
-   animation-delay matching its arm angle, so all eighteen flip at the point in
+   animation-delay matching its arm angle, so all seventeen flip at the point in
    the turn where they cross the bottom - below the photo, out of sight. */
 @keyframes hero-label-flip {
     0%,   49.999% { rotate: 180deg; }
