@@ -153,7 +153,7 @@ SHEET_NAME:     "Enquiries",                   // the tab name
 ADMIN_EMAIL:    "webmaster@codevelop.us",      // who gets every enquiry
 WEBSITE_NAME:   "ABC Aesthetics & Wellness",   // used in both emails
 WEBSITE_URL:    "https://abcaestheticsllc.com",// optional button in the confirmation
-PRACTICE_EMAIL: "abcaestheticsllc@gmail.com",  // shown to patients
+PRACTICE_EMAIL: "info@abcaestheticsllc.com",   // shown to patients
 PRACTICE_PHONE: "971-978-7840",
 ```
 
