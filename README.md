@@ -1,4 +1,4 @@
-# ABC Aesthetics Medspa
+# ABC Aesthetics & Wellness
 
 Website for **ABC Aesthetics & Wellness** — medical aesthetics and wellness care in
 Lake Oswego, Oregon, led by Dr. Nawal M. Qneibi, DNP-BC.

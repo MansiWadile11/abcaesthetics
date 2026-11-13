@@ -1,5 +1,5 @@
 /*
-ABC Aesthetics Medspa
+ABC Aesthetics & Wellness
 Medical aesthetics and wellness - Lake Oswego, Oregon
 https://abcaestheticsllc.com
 
