@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    {{> title-meta title="Payment Plans | ABC Aesthetics Medspa" description="Explore Cherry financing options at ABC Aesthetics Medspa. Learn how payment plans may help spread the cost of your treatment over time." path="/payment-plans/" }} {{> head-css}}
+    {{> title-meta title="Payment Plans | ABC Aesthetics & Wellness" description="Explore Cherry financing options at ABC Aesthetics & Wellness. Learn how payment plans may help spread the cost of your treatment over time." path="/payment-plans/" }} {{> head-css}}
 
     <!-- Cherry supplies its own typefaces for the widget. Loaded only on this
          page, because nothing else on the site uses them. -->
@@ -97,8 +97,8 @@
              would refuse the whole script and no widget would ever appear.
              They are restored below.
 
-             Second, `name` was "ABC Aesthetics & Wellness"; it is the approved
-             brand, "ABC Aesthetics Medspa", everywhere else on the site. The
+             Second, `name` is set to the approved public brand, "ABC Aesthetics
+             & Wellness", to match the rest of the site. The
              widget interpolates this into its refund FAQ - "To request a
              refund, please contact {{name}} directly" - so it was reaching
              visitors three times over under the wrong name. It is display text
@@ -124,7 +124,7 @@
                 debug: false,
                 variables: {
                     slug: "abc-aesthetics-wellness",
-                    name: "ABC Aesthetics Medspa",
+                    name: "ABC Aesthetics & Wellness",
                     images: [37],
                     customLogo: "",
                     defaultPurchaseAmount: 1000,

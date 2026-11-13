@@ -107,7 +107,7 @@ for (const f of files) {
     check(page + ": canonical points at this page", (canonical || "").endsWith(publishedPath), canonical + " vs " + publishedPath)
     check(page + ": og:url matches canonical", ogUrl === canonical, ogUrl)
 
-    check(page + ": og:site_name is the brand", ogSite === "ABC Aesthetics Medspa", ogSite)
+    check(page + ": og:site_name is the brand", decode(ogSite) === "ABC Aesthetics & Wellness", ogSite)
     check(page + ": og:title matches title", ogTitle === title, ogTitle)
     check(page + ": og:description matches description", ogDesc === desc, ogDesc)
     check(page + ": og:type is set", !!ogType, ogType)

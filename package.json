@@ -1,10 +1,10 @@
 {
   "name": "abc-aesthetics",
   "version": "1.0.0",
-  "description": "ABC Aesthetics Medspa - medical aesthetics and wellness, Lake Oswego, Oregon",
+  "description": "ABC Aesthetics & Wellness - medical aesthetics and wellness, Lake Oswego, Oregon",
   "type": "module",
   "private": true,
-  "author": "ABC Aesthetics Medspa",
+  "author": "ABC Aesthetics & Wellness",
   "website": "https://abcaestheticsllc.com",
   "scripts": {
     "dev": "vite",
