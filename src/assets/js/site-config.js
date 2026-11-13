@@ -57,4 +57,4 @@ export const RECAPTCHA_SITE_KEY =
 
 /* Shown to visitors whenever we cannot take the enquiry online. */
 export const PRACTICE_PHONE = "971-978-7840"
-export const PRACTICE_EMAIL = "abcaestheticsllc@gmail.com"
+export const PRACTICE_EMAIL = "info@abcaestheticsllc.com"
