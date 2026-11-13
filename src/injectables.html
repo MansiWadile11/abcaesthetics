@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="Aesthetic Injectables | Botox, Fillers & Biostimulators" description="Neuromodulators, dermal fillers and biostimulators selected by treatment area, facial anatomy and your own goals following consultation. Lake Oswego." path="/injectables/" image="/images/abc/injectables-hero.webp" }} {{> head-css}}
+  {{> title-meta title="Aesthetic Injectables | Botox, Fillers & Biostimulators" description="Neuromodulators, dermal fillers and biostimulators selected by treatment area, facial anatomy and your own goals following consultation. Lake Oswego." path="/injectables/" image="/images/abc/injectables-hero.webp" }} {{> head-css preloadImage="/images/abc/injectables-hero.webp"}}
 </head>
 
 <body class="svc-page">
@@ -16,7 +16,7 @@
   <section class="sd2-hero-band">
     <div class="sd2-hero">
       <div class="sd2-hero-media">
-        <img src="/images/abc/injectables-hero.webp" alt="Aesthetic injectable treatment">
+        <img src="/images/abc/injectables-hero.webp" fetchpriority="high" alt="Aesthetic injectable treatment">
       </div>
 
       <div class="container sd2-hero-inner">
@@ -79,7 +79,7 @@
 
         <div class="flex-1 basis-95 min-w-75">
           <div class="reference-clinic-portrait">
-            <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover">
+            <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="reference-clinic-caption absolute inset-x-6 bottom-6 px-6 py-4.5">
               <div class="font-reference-heading font-semibold text-[19px] text-reference-cocoa">Dr. Nawal Qneibi</div>
               <div class="text-[13px] text-reference-subtle font-normal mt-0.5">Founder &amp; Provider, DNP-BC</div>
@@ -161,7 +161,7 @@
       <div class="lg:mt-10 mt-8" data-collapse="closed">
         <div class="cl-item">
         <button type="button" class="svc-group-head mt-9 cl-toggle">
-          <span class="svc-group-head-media"><img src="/images/abc/injectables-treatment.webp" alt="Neuromodulators" aria-hidden="true"></span>
+          <span class="svc-group-head-media"><img src="/images/abc/injectables-treatment.webp" alt="Neuromodulators" aria-hidden="true" loading="lazy"></span>
           <div class="svc-subhead">Neuromodulators</div><span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span>
         </button>
         <div class="cl-panel"><div>
@@ -206,7 +206,7 @@
         </div>
         <div class="cl-item">
         <button type="button" class="svc-group-head mt-9 cl-toggle">
-          <span class="svc-group-head-media"><img src="/images/abc/dermal-filler-procedure.webp" alt="Dermal Fillers &amp; Biostimulators" aria-hidden="true"></span>
+          <span class="svc-group-head-media"><img src="/images/abc/dermal-filler-procedure.webp" alt="Dermal Fillers &amp; Biostimulators" aria-hidden="true" loading="lazy"></span>
           <div class="svc-subhead">Dermal Fillers &amp; Biostimulators</div><span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span>
         </button>
         <div class="cl-panel"><div>
@@ -611,7 +611,7 @@
     <div class="container">
       <div class="sd2-cta">
         <div class="sd2-cta-media">
-          <img src="/images/services/service-16.webp" alt="A woman washing her face with a foaming cleanser">
+          <img src="/images/services/service-16.webp" alt="A woman washing her face with a foaming cleanser" loading="lazy">
         </div>
         <div class="sd2-cta-body cl-item" data-collapse-solo>
           <h2 class="svc-h2"><button type="button" class="cl-toggle">Ready to begin? Book your injectable consultation today<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h2>

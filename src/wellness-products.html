@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="Wellness Products | Medical-Grade Support, Lake Oswego" description="Medical-grade wellness products selected as part of an individualized plan to support recovery, energy, immunity and skin health. Ask at consultation." path="/wellness-products/" image="/images/services/service-8.webp" }} {{> head-css}}
+  {{> title-meta title="Wellness Products | Medical-Grade Support, Lake Oswego" description="Medical-grade wellness products selected as part of an individualized plan to support recovery, energy, immunity and skin health. Ask at consultation." path="/wellness-products/" image="/images/services/service-8.webp" }} {{> head-css preloadImage="/images/services/service-8.webp"}}
 </head>
 
 <body class="svc-page">
@@ -16,7 +16,7 @@
   <section class="sd2-hero-band">
     <div class="sd2-hero">
       <div class="sd2-hero-media">
-        <img src="/images/services/service-8.webp" alt="Wellness products in use">
+        <img src="/images/services/service-8.webp" fetchpriority="high" alt="Wellness products in use">
       </div>
 
       <div class="container sd2-hero-inner">
@@ -79,7 +79,7 @@
 
         <div class="flex-1 basis-95 min-w-75">
           <div class="reference-clinic-portrait">
-            <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover">
+            <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal Qneibi, DNP-BC" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="reference-clinic-caption absolute inset-x-6 bottom-6 px-6 py-4.5">
               <div class="font-reference-heading font-semibold text-[19px] text-reference-cocoa">Dr. Nawal Qneibi</div>
               <div class="text-[13px] text-reference-subtle font-normal mt-0.5">Founder &amp; Provider, DNP-BC</div>
@@ -506,7 +506,7 @@
     <div class="container">
       <div class="sd2-cta">
         <div class="sd2-cta-media">
-          <img src="/images/services/service-1.webp" alt="A woman with acne-prone skin on her cheek and jaw, eyes closed">
+          <img src="/images/services/service-1.webp" alt="A woman with acne-prone skin on her cheek and jaw, eyes closed" loading="lazy">
         </div>
         <div class="sd2-cta-body cl-item" data-collapse-solo>
           <h2 class="svc-h2"><button type="button" class="cl-toggle">Want to schedule an appointment?<span class="cl-icon"><i class="iconify lucide--plus size-3.5"></i></span></button></h2>

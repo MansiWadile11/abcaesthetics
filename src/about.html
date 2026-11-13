@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="Dr. Nawal M. Qneibi, DNP-BC | ABC Aesthetics & Wellness" description="Founded in 2023 by Dr. Nawal M. Qneibi, DNP-BC, combining a clinical healthcare background with aesthetic medicine since 2016. Lake Oswego, Oregon." path="/about/" image="/images/abc/provider-jaw-treatment.webp" }} {{> head-css}}
+  {{> title-meta title="Dr. Nawal M. Qneibi, DNP-BC | ABC Aesthetics & Wellness" description="Founded in 2023 by Dr. Nawal M. Qneibi, DNP-BC, combining a clinical healthcare background with aesthetic medicine since 2016. Lake Oswego, Oregon." path="/about/" image="/images/abc/provider-jaw-treatment.webp" }} {{> head-css preloadImage="/images/abc/provider-jaw-treatment.webp"}}
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <section class="lg:pt-6 pt-4 lg:pb-16 md:pb-12 pb-10">
     <div class="container">
       <div class="svc-banner">
-        <img src="/images/abc/provider-jaw-treatment.webp" alt="Dr. Nawal M. Qneibi treating a patient" class="absolute inset-0 w-full h-full object-cover" style="object-position:50% 30%;">
+        <img src="/images/abc/provider-jaw-treatment.webp" fetchpriority="high" alt="Dr. Nawal M. Qneibi treating a patient" class="absolute inset-0 w-full h-full object-cover" style="object-position:50% 30%;">
         <div class="svc-banner-scrim"></div>
         <div class="relative z-10 w-full lg:p-12 md:p-9 p-6">
           <nav aria-label="Breadcrumb" class="svc-crumb flex flex-wrap items-center gap-2">
@@ -80,7 +80,7 @@
     <div class="container">
       <div class="sd2-split sd2-split-flip">
         <div class="sd2-split-media">
-          <img src="/images/abc/room-1.webp" alt="A treatment room at ABC Aesthetics &amp; Wellness">
+          <img src="/images/abc/room-1.webp" alt="A treatment room at ABC Aesthetics &amp; Wellness" loading="lazy">
         </div>
 
         <div class="min-w-0">
@@ -102,7 +102,7 @@
 
       <div class="about-founder lg:mt-10 mt-8">
         <div class="about-founder-media">
-          <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal M. Qneibi, DNP-BC">
+          <img src="/images/about/dr-nawal.webp" alt="Dr. Nawal M. Qneibi, DNP-BC" loading="lazy">
           <div class="about-founder-badge">
             <div class="about-founder-name">Dr. Nawal M. Qneibi</div>
             <div class="about-founder-role">Founder &amp; Provider, DNP-BC</div>
@@ -205,7 +205,7 @@
 
       <div class="sd2-split sd2-split-even lg:mt-10 mt-8">
         <div class="sd2-split-media">
-          <img src="/images/abc/provider-consult.webp" alt="Dr. Nawal M. Qneibi treating a patient">
+          <img src="/images/abc/provider-consult.webp" alt="Dr. Nawal M. Qneibi treating a patient" loading="lazy">
         </div>
         <ul class="svc-benefit-list min-w-0">
         <li>
