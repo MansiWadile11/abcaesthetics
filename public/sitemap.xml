@@ -14,44 +14,52 @@
   redirect here. No path appears literally in this comment, so a tool that
   greps the file rather than parsing it cannot mistake a note for an entry.
 
-  No lastmod: a build date would claim all 26 pages changed at once, which
-  is not true, and an invented date is worse than none. Real per-page dates
-  can be taken from git history once these changes are committed.
+  lastmod is per page, not per build. Each date is the day of the last
+  commit that changed THAT page's own source file, read from git history -
+  so the dates differ, and a page that has not changed does not claim it
+  has. A single build date across all 26 would be a lie Google learns to
+  ignore.
+
+  These are written out rather than generated at build time because the
+  generator would need full git history in the build environment; a shallow
+  clone would silently collapse every date onto one, which is the exact
+  failure this avoids. The cost is that a content change must update the
+  date here too.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Core -->
-  <url><loc>https://abcaestheticsllc.com/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/about/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/contact/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/services/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/book-appointment/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/results/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/payment-plans/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/about/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/contact/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/services/</loc><lastmod>2026-09-25</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/book-appointment/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/results/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/payment-plans/</loc><lastmod>2026-11-13</lastmod></url>
 
   <!-- Treatments -->
-  <url><loc>https://abcaestheticsllc.com/injectables/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/skin-energy/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/regenerative-aesthetics/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/hair-restoration/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/hormone-metabolic-wellness/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/womens-wellness/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/mens-wellness/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/sexual-wellness/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/wellness-products/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/injectables/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/skin-energy/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/regenerative-aesthetics/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/hair-restoration/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/hormone-metabolic-wellness/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/womens-wellness/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/mens-wellness/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/sexual-wellness/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/wellness-products/</loc><lastmod>2026-11-13</lastmod></url>
 
   <!-- Legal -->
-  <url><loc>https://abcaestheticsllc.com/privacy-policy/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/terms-of-service/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/accessibility-statement/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/privacy-policy/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/terms-of-service/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/accessibility-statement/</loc><lastmod>2026-11-13</lastmod></url>
 
   <!-- Insights -->
-  <url><loc>https://abcaestheticsllc.com/blog/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/injectables/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/skin-energy/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/skinpen/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/prp-prf/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/hair-restoration/</loc></url>
-  <url><loc>https://abcaestheticsllc.com/blog/hormone-wellness/</loc></url>
+  <url><loc>https://abcaestheticsllc.com/blog/</loc><lastmod>2026-11-13</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/injectables/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/skin-energy/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/skinpen/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/prp-prf/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/hair-restoration/</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://abcaestheticsllc.com/blog/hormone-wellness/</loc><lastmod>2026-11-04</lastmod></url>
 
 </urlset>

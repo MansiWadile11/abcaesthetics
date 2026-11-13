@@ -169,7 +169,12 @@ section[id],
     height: 40px;
 }
 
-.hero-certification h6 {
+/* The badge headline is a paragraph, not a heading: it labels a decorative
+   credential chip and never belonged in the document outline. The size is
+   bound to this class rather than to a tag so it cannot be lost again by a
+   markup change - and it has to outrank the `.hero-certification p` rule
+   below, which two classes do. */
+.hero-certification .hero-certification-title {
     font-size: 15px;
     white-space: nowrap;
 }
