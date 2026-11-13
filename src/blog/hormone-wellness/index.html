@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  {{> title-meta title="How a Hormone & Metabolic Wellness Plan Is Built" description="Hormone therapy and medical weight management are medical programmes, not treatments booked off a list. Here is what a first appointment is really for." path="/blog/hormone-wellness/" image="/images/abc/hrt-panel.webp" ogType="article" }} {{> head-css}}
+  {{> title-meta title="How a Hormone & Metabolic Wellness Plan Is Built" description="Hormone therapy and medical weight management are medical programmes, not treatments booked off a list. Here is what a first appointment is really for." path="/blog/hormone-wellness/" image="/images/abc/hrt-panel.webp" ogType="article" }} {{> head-css preloadImage="/images/abc/hrt-panel.webp"}}
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <section class="lg:pt-6 pt-4 lg:pb-16 md:pb-12 pb-10">
     <div class="container">
       <div class="svc-banner">
-        <img src="/images/abc/hrt-panel.webp" alt="How a hormone and metabolic wellness plan is built" class="absolute inset-0 w-full h-full object-cover">
+        <img src="/images/abc/hrt-panel.webp" fetchpriority="high" alt="How a hormone and metabolic wellness plan is built" class="absolute inset-0 w-full h-full object-cover">
         <div class="svc-banner-scrim"></div>
         <div class="relative z-10 w-full lg:p-12 md:p-9 p-6">
           <nav aria-label="Breadcrumb" class="svc-crumb flex flex-wrap items-center gap-2">
