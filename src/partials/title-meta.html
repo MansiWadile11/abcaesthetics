@@ -80,3 +80,11 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="/images/favicon.png" />
+
+{{!-- Structured data. Called from here rather than from each page so that it
+      cannot disagree with the canonical and og:url above: it reads the same
+      path, description and image this partial was given. Pages that have a
+      visible breadcrumb or are blog posts pass a few more parameters - see
+      src/partials/schema.html for the list and for what is deliberately not
+      emitted. --}}
+{{> schema }}
