@@ -33,20 +33,20 @@
                     <!-- Row 1 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Name*</label>
-                            <input type="text" name="name" placeholder="Your name" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <label for="appointment-name" class="text-sm font-medium text-primary-2 mb-2.5">Name*</label>
+                            <input type="text" name="name" placeholder="Your name" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3" autocomplete="name" id="appointment-name">
                         </div>
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Email*</label>
-                            <input type="email" name="email" placeholder="Email address" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <label for="appointment-email" class="text-sm font-medium text-primary-2 mb-2.5">Email*</label>
+                            <input type="email" name="email" placeholder="Email address" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3" autocomplete="email" inputmode="email" id="appointment-email">
                         </div>
                     </div>
 
                     <!-- Row 2 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Phone*</label>
-                            <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <label for="appointment-phone" class="text-sm font-medium text-primary-2 mb-2.5">Phone*</label>
+                            <input type="tel" name="phone" placeholder="Phone number" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3" autocomplete="tel" inputmode="tel" id="appointment-phone">
                         </div>
                         <div class="flex flex-col">
                             <label for="appointment-treatment" class="text-sm font-medium text-primary-2 mb-2.5">Treatment of Interest*</label>
@@ -70,25 +70,25 @@
                     <!-- Row 3 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Date*</label>
-                            <input type="date" name="preferred_date" placeholder="Date" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <label for="appointment-date" class="text-sm font-medium text-primary-2 mb-2.5">Date*</label>
+                            <input type="date" name="preferred_date" placeholder="Date" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3" id="appointment-date">
                         </div>
                         <div class="flex flex-col">
-                            <label class="text-sm font-medium text-primary-2 mb-2.5">Time*</label>
-                            <input type="time" name="preferred_time" placeholder="--:--" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3">
+                            <label for="appointment-time" class="text-sm font-medium text-primary-2 mb-2.5">Time*</label>
+                            <input type="time" name="preferred_time" placeholder="--:--" required class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none text-primary-3" id="appointment-time">
                         </div>
                     </div>
 
                     <!-- Row 4 -->
                     <div class="flex flex-col mb-5">
-                        <label class="text-sm font-medium text-primary-2 mb-2.5">Notes</label>
-                        <textarea name="message" placeholder="Additional notes" rows="4" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none resize-none text-primary-3"></textarea>
+                        <label for="appointment-message" class="text-sm font-medium text-primary-2 mb-2.5">Notes</label>
+                        <textarea name="message" placeholder="Additional notes" rows="4" class="w-full bg-primary-4 border-0 rounded-lg p-3 text-base placeholder:text-primary-3 focus:ring-1 focus:ring-primary-1 outline-none resize-none text-primary-3" id="appointment-message"></textarea>
                     </div>
 
                     <!-- Checkbox -->
-                    <div class="flex items-center gap-3 mb-5">
+                    <div class="flex items-center gap-3 mb-5 min-h-11">
                         <input type="checkbox" id="agree" name="consent" value="yes" required class="rounded border border-primary-2/30 text-reference-green focus:ring-reference-green size-5 cursor-pointer mt-0.5">
-                        <label for="agree" class="text-xs md:text-sm text-primary-2 cursor-pointer select-none font-medium leading-tight">
+                        <label for="agree" class="text-xs md:text-sm text-primary-2 cursor-pointer select-none font-medium leading-tight flex-1 self-stretch flex items-center">
                             I agree to allow the clinic to contact me regarding my appointment.
                         </label>
                     </div>
@@ -127,7 +127,7 @@
                         <!-- Card 1 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -149,7 +149,7 @@
                         <!-- Card 2 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -171,7 +171,7 @@
                         <!-- Card 3 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -193,7 +193,7 @@
                         <!-- Card 4 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -218,7 +218,7 @@
                         <!-- Card 1 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -240,7 +240,7 @@
                         <!-- Card 2 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -262,7 +262,7 @@
                         <!-- Card 3 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
@@ -284,7 +284,7 @@
                         <!-- Card 4 -->
                         <div class="w-72 sm:w-80 md:w-96 lg:w-100 bg-white rounded-2xl p-7.5 flex flex-col justify-between shadow-sm border border-primary-5/30 shrink-0">
                             <div class="md:mb-19 mb-12">
-                                <div class="flex items-center mb-1.5 text-primary-1">
+                                <div class="flex items-center mb-1.5 text-primary-1" role="img" aria-label="5 out of 5 stars">
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
                                     <i class="iconify tabler--star-filled size-4"></i>
