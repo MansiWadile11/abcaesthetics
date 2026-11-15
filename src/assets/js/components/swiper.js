@@ -32,6 +32,14 @@ const testimonialSwiper = new Swiper(".testimonialSwiper", {
         nextEl: ".testimonial-next",
         prevEl: ".testimonial-prev",
     },
+    // The A11y module relabels whichever prev/next pair it binds with its
+    // own generic defaults, discarding the aria-label in the markup. These
+    // restore the authored wording so every arrow on all ten routes that
+    // carry reviews announces the same thing at every width.
+    a11y: {
+        prevSlideMessage: "Previous review",
+        nextSlideMessage: "Next review",
+    },
     autoplay: {
         delay: 4000,
         disableOnInteraction: false,
