@@ -1,0 +1,131 @@
+{{!-- JSON-LD for the whole site, emitted once per page from title-meta.
+
+     One @graph per page. Organization and WebSite appear on every page and are
+     referenced elsewhere by @id, so nothing is ever stated twice in the same
+     document. BreadcrumbList and Article are emitted only when the page passes
+     the parameters for them.
+
+     THE RULE HERE IS THAT EVERY VALUE IS ALREADY VISIBLE ON THE SITE. Schema
+     that says more than the page says is the kind that earns a manual action,
+     and for a medical practice it is also a claim nobody has signed off. So:
+
+       name, logo, phone, email        in the footer of all 28 pages
+       legalName                       privacy policy, terms, partners
+       foundingDate, founder           "Founded in 2023 by Dr. Nawal M.
+                                       Qneibi, DNP-BC" on /about/
+       sameAs                          the Instagram link in the footer
+       breadcrumb names                the visible <nav aria-label="Breadcrumb">
+       headline, datePublished,        the <h1>, the printed date and the
+       articleSection                  category tag on each post
+
+     DELIBERATELY ABSENT, and none of these is an oversight:
+
+       postalAddress / LocalBusiness / MedicalBusiness
+         The site publishes "16240 Parker Road, Lake Oswego, Oregon" with no
+         postcode anywhere on any page. A LocalBusiness whose address cannot be
+         completed is worse than none: it competes with the Google Business
+         Profile entry that does have one, and half an address is how NAP
+         consistency breaks. Hours and phone are confirmed and ready; this is
+         waiting on the postcode alone.
+
+       Review / AggregateRating
+         The 26 patient reviews on the site are real but nobody has authorised
+         republishing them as markup, and review snippets for a medical
+         practice are a compliance question, not a technical one.
+
+       SearchAction on WebSite
+         There is no site search. Declaring one invents a feature.
+
+       dateModified on Article
+         Every post has a visible publication date, which is a fact. The last
+         commit that touched each file was a sitewide brand rename, which is
+         not the day the article changed, so there is no honest value to use.
+
+     Writing values: triple-stash, always. {{description}} would HTML-escape
+     the ampersand in "Hormone & Metabolic Wellness" to &amp; inside a JSON
+     string, which is not what the string says. --}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{siteUrl}}/#organization",
+      "name": "ABC Aesthetics & Wellness",
+      "legalName": "ABC Aesthetics LLC",
+      "url": "{{siteUrl}}/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "{{siteUrl}}/#logo",
+        "url": "{{siteUrl}}/images/logo.svg",
+        "contentUrl": "{{siteUrl}}/images/logo.svg",
+        "caption": "ABC Aesthetics & Wellness"
+      },
+      "image": { "@id": "{{siteUrl}}/#logo" },
+      "telephone": "+1-971-978-7840",
+      "email": "info@abcaestheticsllc.com",
+      "foundingDate": "2023",
+      "founder": {
+        "@type": "Person",
+        "name": "Nawal M. Qneibi",
+        "honorificPrefix": "Dr.",
+        "honorificSuffix": "DNP-BC"
+      },
+      "sameAs": [
+        "https://www.instagram.com/abcaestheticsllc/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{siteUrl}}/#website",
+      "url": "{{siteUrl}}/",
+      "name": "ABC Aesthetics & Wellness",
+      "publisher": { "@id": "{{siteUrl}}/#organization" },
+      "inLanguage": "en-US"
+    }{{#if crumb}},
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{siteUrl}}{{path}}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        },{{#if crumbParent}}
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{{crumbParent}}}",
+          "item": "{{siteUrl}}{{crumbParentPath}}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{{crumb}}}",
+          "item": "{{siteUrl}}{{path}}"
+        }{{else}}
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{{crumb}}}",
+          "item": "{{siteUrl}}{{path}}"
+        }{{/if}}
+      ]
+    }{{/if}}{{#if articleDate}},
+    {
+      "@type": "Article",
+      "@id": "{{siteUrl}}{{path}}#article",
+      "mainEntityOfPage": "{{siteUrl}}{{path}}",
+      "headline": "{{{headline}}}",
+      "description": "{{{description}}}",
+      "image": "{{siteUrl}}{{image}}",
+      "datePublished": "{{articleDate}}",
+      "articleSection": "{{{section}}}",
+      "author": { "@id": "{{siteUrl}}/#organization" },
+      "publisher": { "@id": "{{siteUrl}}/#organization" },
+      "inLanguage": "en-US"
+    }{{/if}}
+  ]
+}
+</script>

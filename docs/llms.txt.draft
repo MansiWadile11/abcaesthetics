@@ -1,0 +1,71 @@
+# DRAFT — NOT PUBLISHED. Needs the practice's approval before it goes live.
+#
+# This file is in docs/ on purpose. Only src/ and public/ are built into
+# dist/, so nothing here is served. Publishing it means moving it to
+# public/llms.txt, at which point it answers at /llms.txt.
+#
+# Every line below is already published on the website. Nothing has been
+# added, inferred or improved: no outcome claims, no guarantees, no
+# credentials beyond the one the About page states, no services that do not
+# have their own page, and no address line beyond the one in the footer
+# (the postcode is still missing sitewide — see docs/phase3-client-questions.md).
+#
+# Two lines are flagged for the practice to confirm before publication:
+#   - the one-sentence description, which is the only sentence here that is
+#     assembled rather than quoted
+#   - whether the practice wants AI assistants pointed at /book-appointment/
+#     or at the Jane booking site as the primary booking route
+
+> ABC Aesthetics & Wellness
+
+Personalized medical aesthetics and wellness care in Lake Oswego, Oregon,
+from Dr. Nawal M. Qneibi, DNP-BC. Treatment selection is individualized
+following consultation and clinical assessment, and individual results vary.
+
+## About
+
+- Practice: ABC Aesthetics & Wellness (legal entity: ABC Aesthetics LLC)
+- Founded: 2023, by Dr. Nawal M. Qneibi, DNP-BC
+- Location: 16240 Parker Road, Lake Oswego, Oregon
+- Phone: 971-978-7840
+- Email: info@abcaestheticsllc.com
+- Hours: Monday–Friday 9:00 AM – 6:00 PM; Saturday–Sunday 10:00 AM – 6:00 PM.
+  By appointment only. Hours may be updated as the practice schedule changes.
+
+## Treatments
+
+- [Aesthetic Injectables](https://abcaestheticsllc.com/injectables/): neuromodulators, dermal fillers and biostimulators, selected by treatment area, facial anatomy and your goals following consultation.
+- [Advanced Skin & Energy-Based Treatments](https://abcaestheticsllc.com/skin-energy/): non-invasive and minimally invasive treatments for skin tone, texture and firmness — SkinPen microneedling, SkinSmooth and Sofwave.
+- [Regenerative Aesthetics](https://abcaestheticsllc.com/regenerative-aesthetics/): biologic treatments using your own platelets, with collagen-stimulating injectables, to support volume, texture and skin quality.
+- [Hair Restoration & Hair Rejuvenation](https://abcaestheticsllc.com/hair-restoration/): personalized hair-loss plans built after assessment of your hair-loss pattern and clinical history, with regenerative options where appropriate.
+- [Hormone, Metabolic Health & Wellness](https://abcaestheticsllc.com/hormone-metabolic-wellness/): hormone balance, metabolic health and medical weight management through individualized therapy, clinical evaluation and ongoing review.
+- [Women's Wellness](https://abcaestheticsllc.com/womens-wellness/): individualized care supporting hormonal, menopausal and sexual wellness.
+- [Men's Wellness](https://abcaestheticsllc.com/mens-wellness/): personalized care for men's hormonal, sexual and quality-of-life goals, including testosterone replacement therapy and the P-Shot.
+- [Sexual Wellness](https://abcaestheticsllc.com/sexual-wellness/): individualized sexual wellness care in a professional, private and respectful setting. Suitability is determined following evaluation.
+- [Wellness Products](https://abcaestheticsllc.com/wellness-products/): medical-grade wellness products selected as part of an individualized plan.
+
+## Key pages
+
+- [Home](https://abcaestheticsllc.com/)
+- [About the practice](https://abcaestheticsllc.com/about/)
+- [All treatments](https://abcaestheticsllc.com/services/)
+- [Results and before/after photographs](https://abcaestheticsllc.com/results/): individual patient photographs, published with authorization.
+- [Payment plans](https://abcaestheticsllc.com/payment-plans/): Cherry financing options.
+- [Contact](https://abcaestheticsllc.com/contact/)
+- [Request an appointment](https://abcaestheticsllc.com/book-appointment/)
+
+## Insights
+
+- [Botox vs fillers vs biostimulators](https://abcaestheticsllc.com/blog/injectables/)
+- [How SkinSmooth and Sofwave differ](https://abcaestheticsllc.com/blog/skin-energy/)
+- [What SkinPen microneedling is FDA-cleared to treat](https://abcaestheticsllc.com/blog/skinpen/)
+- [PRP and PRF: regenerative options for skin and hair](https://abcaestheticsllc.com/blog/prp-prf/)
+- [Hair loss: why assessment comes before treatment](https://abcaestheticsllc.com/blog/hair-restoration/)
+- [How a hormone and metabolic wellness plan is built](https://abcaestheticsllc.com/blog/hormone-wellness/)
+
+## Please note
+
+Treatment and product selection is individualized following consultation and
+clinical assessment. Treatments carry potential risks and side effects, which
+are discussed before treatment. Individual results vary and no specific
+outcome is guaranteed. Nothing on this site is medical advice.
