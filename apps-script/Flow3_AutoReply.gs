@@ -123,7 +123,7 @@ function buildAutoReply(v) {
 
         '<tr><td style="background:' + BRAND.page + ';padding:18px 28px;text-align:center;font-size:12px;color:' +
         BRAND.muted + ';line-height:1.6;">' +
-        escapeHtml(CONFIG.WEBSITE_NAME) + ' &middot; 16240 Parker Road, Lake Oswego, Oregon<br>' +
+        escapeHtml(CONFIG.WEBSITE_NAME) + ' &middot; 17437 SW Boones Ferry Rd #100, Lake Oswego, OR 97035<br>' +
         'This is an automated confirmation &mdash; please do not send clinical details by reply.' +
         '</td></tr></table></div>';
 
@@ -141,7 +141,7 @@ function buildAutoReply(v) {
         "are individualized following consultation and assessment. Results vary by individual, and no specific " +
         "outcome is guaranteed.\n\n" +
         "Need us sooner? Call " + CONFIG.PRACTICE_PHONE + " or email " + CONFIG.PRACTICE_EMAIL + ".\n\n" +
-        CONFIG.WEBSITE_NAME + ", 16240 Parker Road, Lake Oswego, Oregon\n" +
+        CONFIG.WEBSITE_NAME + ", 17437 SW Boones Ferry Rd #100, Lake Oswego, OR 97035\n" +
         "This is an automated confirmation - please do not send clinical details by reply.\n";
 
     return {
